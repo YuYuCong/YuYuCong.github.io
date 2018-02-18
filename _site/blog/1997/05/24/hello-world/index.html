@@ -13,28 +13,29 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <!-- Begin Jekyll SEO tag v2.4.0 -->
-<title>Hello World! | Simple Texture</title>
+<title>Hello World! | Yu`s Blog</title>
 <meta name="generator" content="Jekyll v3.5.2" />
 <meta property="og:title" content="Hello World!" />
+<meta name="author" content="William Yu" />
 <meta property="og:locale" content="en" />
 <meta name="description" content="The first &#39;Hello world&#39; post for Simple Texture theme." />
 <meta property="og:description" content="The first &#39;Hello world&#39; post for Simple Texture theme." />
-<link rel="canonical" href="http://localhost:4000/blog/2013/04/22/hello-world/" />
-<meta property="og:url" content="http://localhost:4000/blog/2013/04/22/hello-world/" />
-<meta property="og:site_name" content="Simple Texture" />
+<link rel="canonical" href="http://localhost:4000/blog/1997/05/24/hello-world/" />
+<meta property="og:url" content="http://localhost:4000/blog/1997/05/24/hello-world/" />
+<meta property="og:site_name" content="Yu`s Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2013-04-22T00:00:00+08:00" />
+<meta property="article:published_time" content="1997-05-24T00:00:00+08:00" />
 <script type="application/ld+json">
-{"description":"The first &#39;Hello world&#39; post for Simple Texture theme.","@type":"BlogPosting","url":"http://localhost:4000/blog/2013/04/22/hello-world/","headline":"Hello World!","dateModified":"2013-04-22T00:00:00+08:00","datePublished":"2013-04-22T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2013/04/22/hello-world/"},"@context":"http://schema.org"}</script>
+{"description":"The first &#39;Hello world&#39; post for Simple Texture theme.","author":{"@type":"Person","name":"William Yu"},"@type":"BlogPosting","url":"http://localhost:4000/blog/1997/05/24/hello-world/","headline":"Hello World!","dateModified":"1997-05-24T00:00:00+08:00","datePublished":"1997-05-24T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/1997/05/24/hello-world/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
-<meta name="keywords" content="random,jekyll" />
+<meta name="keywords" content="demo" />
 
 
 
 
 
-<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Simple Texture" />
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Yu`s Blog" />
     <link href='/assets/stylesheets/blog.css' rel="stylesheet" type="text/css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 <script>window.Modernizr || document.write('<script src="/assets/javascripts/modernizr-2.8.3.min.js"><\/script>')</script>
@@ -91,7 +92,7 @@
                 <ul>
                     <li class="logo nav-link">
                         <button class="btn-menu" title="Menu"></button>
-                        <a href="/blog/">Simple Texture</a>
+                        <a href="/blog/">Yu`s Blog</a>
                         <!--[if !IE]> -->
                         <button class="btn-search" title="Search"></button>
                         <!-- <![endif]-->
@@ -128,11 +129,11 @@
                         <p class="date-publish">
                             Published:
                             <time itemprop="datePublished" class="date-pub updated"
-                                title="2013-04-22T00:00:00+08:00" datetime="2013-04-22T00:00:00+08:00">April 22, 2013 </time>
+                                title="1997-05-24T00:00:00+08:00" datetime="1997-05-24T00:00:00+08:00">May 24, 1997 </time>
                             by
                             <a class="author" href="/" rel="author" title="Show Author">
                                 <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-                                    <span itemprop="name"></span>
+                                    <span itemprop="name">William Yu</span>
                                 </span>
                             </a>
                             
@@ -147,8 +148,8 @@
                              
      
         <li>
-            <a href="/blog/categories/#uncategorized" title="uncategorized">
-            uncategorized <span>1</span></a>
+            <a href="/blog/categories/#demo" title="demo">
+            demo <span>3</span></a>
         </li>
     
 
@@ -161,12 +162,7 @@
     
         
         <li>
-            <a href="/blog/tags/#jekyll" title="jekyll">jekyll <span>3</span></a>
-        </li>
-    
-        
-        <li>
-            <a href="/blog/tags/#random" title="random">random <span>1</span></a>
+            <a href="/blog/tags/#demo" title="demo">demo <span>3</span></a>
         </li>
     
 
@@ -176,7 +172,7 @@
                         </ul>
                     </div>
                     <div itemprop="articleBody">
-                        <p>Hello World! This is the beginning of this theme.</p>
+                        <p>Hello World! This is the beginning of this blog.</p>
 
                     </div>
                 </div>
@@ -197,6 +193,48 @@
             </footer>
             <div class="misc-content">
                 
+                    <script>
+    $(document).ready(function () {
+        var disqusPublicKey = "";
+        var disqusShortname = "Will";
+        var threadUrl = 'link:' + $('.comments .show-hidden').attr('data-disqus-url');
+
+        $.ajax({
+            type: 'GET',
+            url: '//disqus.com/api/3.0/threads/set.jsonp',
+            data: {
+                api_key: disqusPublicKey,
+                forum: disqusShortname,
+                thread: threadUrl
+            },
+            cache: false,
+            dataType: 'jsonp',
+            success: function (result) {
+                if (result.response.length === 1) {
+                    btnText = 'Show Comments (' + result.response[0].posts + ')';
+                    $('.comments .show-hidden').html(btnText);
+                }
+            }
+        });
+
+        $('.comments .show-hidden').on('click', function () {
+            $.ajaxSetup({cache: true});
+            $.getScript('//' + disqusShortname + '.disqus.com/embed.js');
+            $.ajaxSetup({cache: false});
+            $(this).remove();
+        });
+
+        if (/\#comments/.test(location.hash)) {
+            $('.comments .show-hidden').trigger('click');
+        }
+    });
+</script>
+
+                    <div class="comments">
+                        <button class="center-block show-hidden" title="Show Comments" data-disqus-url="http://localhost:4000/blog/1997/05/24/hello-world/">Show Comments</button>
+                        <div id="disqus_thread"></div>
+                    </div>
+                
             </div>
         </div>
     </div>
@@ -213,18 +251,20 @@
                 <div class="about">
                     <h4><a href="/">About</a></h4>
                     
-                        <p>A gem-based responsive simple texture styled <a href="http://jekyllrb.com/">Jekyll</a> theme.</p>
+                        <p>William Yu, a student from <a href="http://www.hust.edu.cn">HUST</a>.</p>
                     
-                    <p><small>Theme <a href="https://github.com/yizeng/jekyll-theme-simple-texture" target="_blank">Simple Texture</a> developed by <a href="http://yizeng.me" target="_blank">Yi Zeng</a>, powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>.</small></p>
+                    <p><small>Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> and <a href="https://github.com/yizeng/jekyll-theme-simple-texture" target="_blank">Github Demo</a>, &copy; 2018 William Yu.</small></p>
                 </div>
                 <div class="social-links">
+                    
+                        <a class="ico-gmail" href="mailto:windmillyucong@163.com" rel="me" target="_blank" title="email"></a>
                     
                     <a class="ico-rss" href="/feed.xml" rel="me" target="_blank" title="feed"></a>
                     
                         
                     
                         
-                            <a class="ico-github" href="https://github.com/yizeng/jekyll-theme-simple-texture" rel="me" target="_blank" title="github"></a>
+                            <a class="ico-github" href="https://github.com/yuyucong" rel="me" target="_blank" title="github"></a>
                         
                     
                         

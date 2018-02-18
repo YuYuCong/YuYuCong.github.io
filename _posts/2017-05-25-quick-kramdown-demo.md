@@ -3,12 +3,12 @@ layout: post
 title: "Quick kramdown demo"
 description: "A quick demo post to some kramdown features."
 categories: [demo]
-tags: [demo, jekyll]
+tags: [demo]
 redirect_from:
   - /2017/05/25/
 ---
 
-> This is [kramdown][kramdown] formatting test page for [Simple Texture][Simple Texture] theme.
+> This is **<u>kramdown</u>** formatting test page for **<u>Simple Texture</u>** theme.
 
 * Kramdown table of contents
 {:toc .toc}
@@ -17,8 +17,8 @@ redirect_from:
 
 This is a normal paragraph.
 
-This is [a link](http://yizeng.me) to my homepage.
-A [link](http://yizeng.me/blog "Yi Zeng's Blog") can also have a title.
+This is [a link](http://williamyu.top) to my homepage.
+A [link](http://williamyu.top/blog "Yi Zeng's Blog") can also have a title.
 
 This is a ***text with light and strong emphasis***.
 
@@ -85,13 +85,13 @@ This tag will let you <strike>strikeout text</strike>.
 * Table 1
 
     |-----------------+------------+-----------------+----------------|
-    | Default aligned |Left aligned| Center aligned  | Right aligned  |
-    |-----------------|:-----------|:---------------:|---------------:|
-    | First body part |Second cell | Third cell      | fourth cell    |
-    | Second line     |foo         | **strong**      | baz            |
-    | Third line      |quux        | baz             | bar            |
-    | Footer row      |            |                 |                |
-    |-----------------+------------+-----------------+----------------|
+    | Default aligned                          | Left aligned | Center aligned | Right aligned |
+    | ---------------------------------------- | :----------- | :------------: | ------------: |
+    | First body part                          | Second cell  |   Third cell   |   fourth cell |
+    | Second line                              | foo          |   **strong**   |           baz |
+    | Third line                               | quux         |      baz       |           bar |
+    | Footer row                               |              |                |               |
+    | -----------------+------------+-----------------+---------------- |              |                |               |
 
 * Table 2
 
@@ -109,7 +109,7 @@ This tag will let you <strike>strikeout text</strike>.
 
 ---
 
-  _  _  _  _
+_  _  _  _
 
 ---------------
 

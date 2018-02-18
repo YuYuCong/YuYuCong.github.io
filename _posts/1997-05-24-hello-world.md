@@ -2,9 +2,9 @@
 layout: post
 title: "Hello World!"
 description: "The first 'Hello world' post for Simple Texture theme."
-categories: [uncategorized]
-tags: [random, jekyll]
+categories: [demo]
+tags: [demo]
 redirect_from:
-  - /2013/04/22/
+  - /1997/05/24/
 ---
-Hello World! This is the beginning of this theme.
+Hello World! This is the beginning of this blog.

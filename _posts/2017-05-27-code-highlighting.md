@@ -3,12 +3,12 @@ layout: post
 title: "A quick demo of Simple Texture theme's code highlighting features"
 description: "A quick demo of Simple Texture theme's code highlighting features"
 categories: [demo]
-tags: [demo, jekyll]
+tags: [demo]
 redirect_from:
   - /2017/05/27/
 ---
 
-> This is code blocks and highlighting test page for [Simple Texture][Simple Texture] theme.
+> This is code blocks and highlighting test page for **<u>Simple Texture</u>** theme.
 
 * Kramdown table of contents
 {:toc .toc}
@@ -23,10 +23,10 @@ And here is a Ruby code fragment `x = Class.new`{:.language-ruby}
 # Fenced Code Blocks
 
 ~~~~~~~~~~~~
-~~~~~~~
+​~~~~~~~
 code with tildes
-~~~~~~~~
-~~~~~~~~~~~~~~~~~~
+​~~~~~~~~
+​~~~~~~~~~~~~~~~~~~
 
 # Simple codeblock with long lines
 
@@ -36,11 +36,11 @@ code with tildes
 
 # Language of Code Blocks
 
-~~~ ruby
+​~~~ ruby
 def what?
   42
 end
-~~~
+​~~~
 
 # Highlighted
 
@@ -78,3 +78,4 @@ function myFunction() {
 
 [kramdown]: https://kramdown.gettalong.org/
 [Simple Texture]: https://github.com/yizeng/jekyll-theme-simple-texture
+~~~~~~~~~~~~
