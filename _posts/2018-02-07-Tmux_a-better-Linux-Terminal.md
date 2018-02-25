@@ -16,7 +16,7 @@ redirect_from:
 
 ------
 
-##### 前情提要
+##### 前言
 
 src：[https://lukaszwrobel.pl/blog/tmux-tutorial-split-terminal-windows-easily/](https://lukaszwrobel.pl/blog/tmux-tutorial-split-terminal-windows-easily/)
 
