@@ -262,7 +262,7 @@ cpp将c预处理，将宏定义之类的东西替换回去，gcc将c文件转换
 
 ```shell
 vim main.c  
-#然后ｖｉｍ中写一个main.c
+#然后vim中写一个main.c,然后编译
 gcc ./main.c
 ./a.out
 ```
@@ -285,7 +285,7 @@ Reading symbols from ./test_debug...done.
 
 ```
 
-输入命令并回车（所有命令http://users.ece.utexas.edu/~adnan/gdb-refcard.pdf）
+输入gdb命令并回车（所有gdb子命令http://users.ece.utexas.edu/~adnan/gdb-refcard.pdf）
 
 r运行
 
@@ -421,9 +421,9 @@ tar工具打包和gzip工具压缩。
 
 ### 6.Config登场（关于软件发布）
 
-configure的作用：你的程序要与别人交流，需要先确认别人系统的环境，是不是缺东西。
+src:http://www.cppblog.com/gezidan/archive/2011/08/08/152772.html
 
-configure脚本运行后，根据系统情况生成Makefile。
+configure的作用：你的程序要与别人交流，需要先确认别人系统的环境，是不是缺东西。configure脚本运行后，根据系统情况生成Makefile。
 
 autoconf其实包含aclocal autoconf automake	autoscan(用来自动生成configure和makefile)
 
@@ -432,38 +432,121 @@ autoconf其实包含aclocal autoconf automake	autoscan(用来自动生成configu
 [1]autoscan将c文件预处理成configure.scan，
 
 ```shell
-直接autoscan？？？
+$ autoscan
 ```
 
-你要手动修改configure.scan，并且别把名字改成configure.in
+[2]你要把configure.scan名字改成configure.in，并且做手动修改，
 
-只有几句话有用：第二行填项目名称，版本号
-
-第三行意思是最终的configure要检查C语言编译器是否正常
+**configure.in**的内容：
 
 ```shell
-????这么多年了是否有改变??
-AC_INIT(main.c)
-AM_INIT_AUTOMAKE(all_in_one,1.0)
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.69])
+AC_INIT([FULL-PACKAGE-NAME], [VERSION], [BUG-REPORT-ADDRESS])
+AC_CONFIG_SRCDIR([add.c])
+AC_CONFIG_HEADERS([config.h])
+
+# Checks for programs.
 AC_PROG_CC
-AC_OUTPUT(Makefile)
+
+# Checks for libraries.
+
+# Checks for header files.
+
+# Checks for typedefs, structures, and compiler characteristics.
+
+# Checks for library functions.
+
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
 ```
 
-[2]aclocal根据configure.in生成aclocal.m4
+**解读以上的文件：**
 
+```shell
+# -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+# AC_PREREQ:
+# 确保使用的是足够新的Autoconf版本。如果用于创建configure的Autoconf的版
+# 本比version 要早，就在标准错误输出打印一条错误消息并不会创建configure。
+AC_PREREQ([2.61])
+# 初始化,定义软件的基本信息,包括设置包的全称,版本号以及报告BUG时需要用的邮箱地址
+AC_INIT(FULL-PACKAGE-NAME, VERSION, BUG-REPORT-ADDRESS)
+# 用来侦测所指定的源码文件是否存在，来确定源码目录的有效性
+AC_CONFIG_SRCDIR([main.c])
+# 用于生成config.h文件，以便autoheader使用
+AC_CONFIG_HEADER([config.h])
+# Checks for programs.
+AC_PROG_CC
+# Checks for libraries.
+# Checks for header files.
+# Checks for typedefs, structures, and compiler characteristics.
+# Checks for library functions.
+# 创建输出文件。在`configure.in'的末尾调用本宏一次。
+AC_OUTPUT
 ```
-？？？？这个地方说是需要一个.ac文件
+
+**修改动作:**
+
+```shell
+1.修改AC_INIT里面的参数: AC_INIT(automake_test, 1.0, windmillyucong@163.com)
+
+2.添加宏AM_INIT_AUTOMAKE, 它是automake所必备的宏，也同前面一样，PACKAGE是所要产生软件套件的名称，VERSION是版本编号:
+AM_INIT_AUTOMAKE(automake_test, 1.0)
+
+3.在AC_OUTPUT后添加输出文件Makefile: AC_OUTPUT([Makefile])
 ```
 
-[3]autoconf将configure.in aclocal.m4 生成configure脚本
+**修改后的结果:**
 
+```shell
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.69])
+AC_INIT(automake_test, 1.0, windmillyucong@163.com)
+AC_CONFIG_SRCDIR([add.c])
+AC_CONFIG_HEADERS([config.h])
+AM_INIT_AUTOMAKE(automake_test, 1.0)
+
+# Checks for programs.
+AC_PROG_CC
+
+# Checks for libraries.
+
+# Checks for header files.
+
+# Checks for typedefs, structures, and compiler characteristics.
+
+# Checks for library functions.
+
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT([Makefile])
 ```
-？？？？具体实现
+
+[3]aclocal根据configure.in生成aclocal.m4
+
+```shell
+$ aclocal
 ```
 
-[4]你要先写个草稿叫做Makefile.am，
+[4]autoconf将configure.in aclocal.m4 生成configure脚本
 
-Makefile.am的写法
+```shell
+$ autoconf
+```
+
+[5]运行 **autoheader**，它负责生成config.h.in文件。该工具通常会从“acconfig.h”文件中复制用户附加的符号定义，因此此处没有附加符号定义，所以不需要创建“acconfig.h”文件。
+
+```shell
+$ autoheader
+```
+
+[6]下面即将运行 **automake**, 但在此之前你要先写个草稿叫做Makefile.am，
+
+Makefile.am的**写法**
 
 ```shell
 AUTOMAKE_OPTIONS=foreign
@@ -471,23 +554,38 @@ bin_PROGRAMS=all_in_one
 all_in_one_SOURCES=main.c add.c
 ```
 
-然后用automake将Makefile.am生成Makefile.in
+**内容解释**
 
 ```shell
-？？
+1.其中的AUTOMAKE_OPTIONS为设置automake的选项。由于GNU（在第1章中已经有所介绍）对自己发布的软件有严格的规范，比如必须附 带许可证声明文件COPYING等，否则automake执行时会报错。automake提供了三种软件等级：foreign、gnu和gnits，让用 户选择采用，默认等级为gnu。在本例使用foreign等级，它只检测必须的文件。
+
+2.bin_PROGRAMS定义要产生的执行文件名。如果要产生多个执行文件，每个文件名用空格隔开。
+
+3.main_SOURCES定义“main”这个执行程序所需要的原始文件。如果”main”这个程序是由多个原始文件所产生的，则必须把它所用到的所有原 始文件都列出来，并用空格隔开。例如：若目标体“main”需要“main.c”、“sunq.c”、“main.h”三个依赖文件，则定义 main_SOURCES=main.c sunq.c main.h。要注意的是，如果要定义多个执行文件，则对每个执行程序都要定义相应的file_SOURCES。
 ```
+
+[7]然后用automake将Makefile.am生成Makefile.in
+
+```shell
+$ automake --add-missing
+```
+
+在这里使用选项“—adding-missing”可以让automake自动添加有一些必需的脚本文件。
 
 需要的东西就备齐了：configure脚本和Makefile.in
 
-把这一包东西压缩到一起，发给用户，拿到软件包之后，即可安装：
+[8]把这一包东西压缩到一起，发给用户，拿到软件包之后，即可安装：
 
 ```shell
 ./configure
 make
+#运行程序
+./all_in_one
+#或者安装程序
 make install
 ```
 
-`$:./configure`的时候如果别人的系统不缺东西就可以生成Makefie。
+运行命令`$:./configure`的时候如果别人的系统不缺东西就可以生成Makefie。
 
 ## Chapter6
 
