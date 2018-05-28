@@ -14,10 +14,12 @@ redirect_from:
 {:toc .toc}
 # Bookmarks
 
-William Yu  2018.05.26  update
+William Yu  2018.05.28  update
 
-## Course
+## Coursera
 
+> [codecademy](https://www.codecademy.com)
+>
 > [W3school](http://www.w3school.com.cn/index.html)
 >
 > [RUNOOB.COM](http://www.runoob.com/)
@@ -28,11 +30,17 @@ William Yu  2018.05.26  update
 >
 > [中国大学Mooc](https://www.icourse163.org/)
 >
+> [coursera](https://www.coursera.org)
+>
 > [网易公开课](https://open.163.com/)
+>
+> - 斯坦福大学--吴恩达--机器学习
 >
 > [KHAN academy](https://www.khanacademy.org/)
 >
 > MIT
+>
+> [深度学习](https://www.deeplearning.ai/)
 
 -----
 
@@ -52,9 +60,11 @@ William Yu  2018.05.26  update
 
 
 
-##Idea
+##Idea / News
 
 > [TED](https://www.ted.com/)   Ideas worth spreading
+>
+> [computerworld](https://www.computerworld.com/)
 
 ----
 
@@ -62,11 +72,11 @@ William Yu  2018.05.26  update
 
 ## Leisure 
 
-- ###videos
+###videos
 
 >[BiliBili](https://www.bilibili.com)
 
-- ####Graphic Design / Photography
+###Graphic Design / Photography
 
 > [canva](https://www.canva.com/create-a-design)  
 >
@@ -88,7 +98,7 @@ William Yu  2018.05.26  update
 >
 > [Wikipedia](https://www.wikipedia.org/)
 >
-> [Wolfram|Alpha](http://www.wolframalpha.com/)       **Making the world’s knowledge computable**
+> [WolframAlpha](http://www.wolframalpha.com/)       **Making the world’s knowledge computable**
 >
 > [百度学术](http://xueshu.baidu.com/)
 
