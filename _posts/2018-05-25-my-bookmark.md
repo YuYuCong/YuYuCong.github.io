@@ -14,7 +14,7 @@ redirect_from:
 {:toc .toc}
 # Bookmarks
 
-William Yu  2018.05.30  update
+William Yu  2018.06.03  update
 
 ## Coursera
 
@@ -65,6 +65,8 @@ William Yu  2018.05.30  update
 > [TED](https://www.ted.com/)   Ideas worth spreading
 >
 > [computerworld](https://www.computerworld.com/)
+>
+> [乔布斯-斯坦福大学毕业典礼致辞](https://open.163.com/movie/2006/8/3/8/M7BC8JMHJ_M7BC8PA38.html)
 
 ----
 
@@ -82,9 +84,17 @@ William Yu  2018.05.30  update
 >
 > [LOFTER](http://www.lofter.com)  轻博客
 >
-> http://wild.as.s3-website.eu-central-1.amazonaws.com/
+> http://wild.as.s3-website.eu-central-1.amazonaws.com/  一个超级棒的网站前端设计
 
-------
+-----
+
+
+
+##Office tools
+
+>[ECHARTS](http://echarts.baidu.com/)  数据可视化
+
+----
 
 
 
