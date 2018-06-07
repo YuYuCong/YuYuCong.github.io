@@ -14,7 +14,7 @@ redirect_from:
 {:toc .toc}
 # Bookmarks
 
-William Yu  2018.06.03  update
+William Yu  2018.06.06  update
 
 ## Coursera
 
@@ -24,9 +24,9 @@ William Yu  2018.06.03  update
 >
 > [RUNOOB.COM](http://www.runoob.com/)
 >
-> [创客智造](https://www.ncnynl.com/)
+> [创客智造](https://www.ncnynl.com/) 关于ros和slamss
 >
-> [ROS仿真](http://rosclub.cn/cate-12.html)
+> [rosclub](http://rosclub.cn/cate-12.html) ros仿真
 >
 > [中国大学Mooc](https://www.icourse163.org/)
 >
@@ -34,13 +34,14 @@ William Yu  2018.06.03  update
 >
 > [网易公开课](https://open.163.com/)
 >
-> - 斯坦福大学--吴恩达--机器学习
+> - 斯坦福大学公开课
+> - 吴恩达--机器学习人工智能系列课程
 >
 > [KHAN academy](https://www.khanacademy.org/)
 >
 > MIT
 >
-> [深度学习](https://www.deeplearning.ai/)
+> [深度学习](https://www.deeplearning.ai/) deeplearning.ai
 
 -----
 
@@ -66,7 +67,7 @@ William Yu  2018.06.03  update
 >
 > [computerworld](https://www.computerworld.com/)
 >
-> [乔布斯-斯坦福大学毕业典礼致辞](https://open.163.com/movie/2006/8/3/8/M7BC8JMHJ_M7BC8PA38.html)
+> [乔布斯-斯坦福大学毕业典礼致辞](https://open.163.com/movie/2006/8/3/8/M7BC8JMHJ_M7BC8PA38.html)  科技+艺术
 
 ----
 
@@ -80,9 +81,13 @@ William Yu  2018.06.03  update
 
 ###Graphic Design / Photography
 
-> [canva](https://www.canva.com/create-a-design)  
+> [canva](https://www.canva.com/create-a-design)  在线平面设计
 >
-> [LOFTER](http://www.lofter.com)  轻博客
+> [WordArt](https://wordart.com)  在线字云
+>
+> [艺术字体在线生成](http://www.qt86.com/)
+>
+> [LOFTER](http://www.lofter.com)  轻博客，寻找创意和灵感
 >
 > http://wild.as.s3-website.eu-central-1.amazonaws.com/  一个超级棒的网站前端设计
 
@@ -112,7 +117,7 @@ William Yu  2018.06.03  update
 >
 > [百度学术](http://xueshu.baidu.com/)
 >
-> [GYCC](http://www.gycc.com)
+> [GYCC](http://www.gycc.com)  学术论文集锦
 
 ----
 
