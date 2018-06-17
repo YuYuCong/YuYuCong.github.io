@@ -14,19 +14,23 @@ redirect_from:
 {:toc .toc}
 # Bookmarks
 
-William Yu  2018.06.06  update
+William Yu  2018.06.14  update
 
 ## Coursera
 
 > [codecademy](https://www.codecademy.com)
 >
+> - [Python](https://www.codecademy.com/learn/learn-python)
+>
 > [W3school](http://www.w3school.com.cn/index.html)
 >
 > [RUNOOB.COM](http://www.runoob.com/)
 >
-> [创客智造](https://www.ncnynl.com/) 关于ros和slamss
+> [创客智造](https://www.ncnynl.com/) 关于ros和slam
 >
-> [rosclub](http://rosclub.cn/cate-12.html) ros仿真
+> [turtlebot](http://learn.turtlebot.com)
+>
+> [rosclub](http://rosclub.cn/cate-12.html) 
 >
 > [中国大学Mooc](https://www.icourse163.org/)
 >
@@ -65,7 +69,7 @@ William Yu  2018.06.06  update
 
 > [TED](https://www.ted.com/)   Ideas worth spreading
 >
-> [computerworld](https://www.computerworld.com/)
+> [Computer World](https://www.computerworld.com/)
 >
 > [乔布斯-斯坦福大学毕业典礼致辞](https://open.163.com/movie/2006/8/3/8/M7BC8JMHJ_M7BC8PA38.html)  科技+艺术
 
