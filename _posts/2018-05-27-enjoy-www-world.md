@@ -1,0 +1,53 @@
+---
+layout: post
+title: "Leisure Bookmark"
+description: ""
+categories: [study]
+tags: [code]
+redirect_from:
+  - /2018/05/25/
+---
+
+> 个人收藏的网站
+
+* Kramdown table of contents
+{:toc .toc}
+# Leisure Bookmarks
+
+Created 2018.05.25 by William Yu; Last modified: 2018.06.30-V1.0.8
+
+Contact :[windmillyucong@163.com](mailto:windmillyucong@163.com)
+
+Copyright ©2018 WilliamYu. All Rights Reserved.  
+
+----
+
+##Graphic Design / Photography
+
+- siteinspire https://www.siteinspire.com/  前端设计网站
+- squarespace https://www.squarespace.com
+- Adobe color cc  https://color.adobe.com/ 配色网站
+
+##技术——前端
+
+- [Hux Blog](http://huangxuan.me/)   一生想做浪漫极客
+- [I code it](http://icodeit.org/)   Code and Life
+
+----
+
+
+
+## Contributing / Contact
+
+Have anything in mind that you think is awesome and would fit in this list? Feel free to send a pull request.
+
+Feel free to [contact me](mailto:windmillyucong@163.com) anytime for anything.
+
+-----
+
+
+
+## License
+
+[![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png)](http://creativecommons.org/publicdomain/zero/1.0/)
+

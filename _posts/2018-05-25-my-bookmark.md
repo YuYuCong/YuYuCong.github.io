@@ -14,7 +14,13 @@ redirect_from:
 {:toc .toc}
 # Bookmarks
 
-William Yu  2018.06.14  update
+Created 2018.05.25 by William Yu; Last modified: 2018.06.30-V1.0.3
+
+Contact :[windmillyucong@163.com](mailto:windmillyucong@163.com)
+
+Copyright ©2018 WilliamYu. All Rights Reserved.  
+
+---
 
 ## Coursera
 
