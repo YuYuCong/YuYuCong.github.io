@@ -71,7 +71,7 @@ Copyright ©2018 WilliamYu. All Rights Reserved.
 
 
 
-##Idea / News
+## Idea / News
 
 > [TED](https://www.ted.com/)   Ideas worth spreading
 >
@@ -85,11 +85,11 @@ Copyright ©2018 WilliamYu. All Rights Reserved.
 
 ## Leisure 
 
-###videos
+### videos
 
 >[BiliBili](https://www.bilibili.com)
 
-###Graphic Design / Photography
+### Graphic Design / Photography
 
 > [canva](https://www.canva.com/create-a-design)  在线平面设计
 >
@@ -105,7 +105,7 @@ Copyright ©2018 WilliamYu. All Rights Reserved.
 
 
 
-##Office tools
+## Office tools
 
 >[ECHARTS](http://echarts.baidu.com/)  数据可视化
 

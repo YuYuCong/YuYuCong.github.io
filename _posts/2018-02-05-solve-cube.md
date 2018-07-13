@@ -12,7 +12,7 @@ redirect_from:
 
 * Kramdown table of contents
 {:toc .toc}
-#三阶魔方还原的13种程序实现
+# 三阶魔方还原的13种程序实现
 
 ---
 
@@ -26,7 +26,7 @@ Copyright © 2018 本文遵从创作公用约定（署名-非商业作品-保持
 
 ---
 
-##简介
+## 简介
 
 冠军是来自于Ann Arbor, Michigan的Tomas Sirgedas，他提供了一种非常切实可行的并且只有874个C++字符的程序！对于我设定的魔方状态，这套程序的平均解决步数是16.03步，并且平均每种耗时仅仅64毫秒。他的总成绩是非常不可思议的7901；[这份程序](http://tomas.rokicki.com/cubecontest/tomas.txt) 是十分可信的。
 
@@ -36,11 +36,11 @@ Copyright © 2018 本文遵从创作公用约定（署名-非商业作品-保持
 
 第三名是来自Gennevilliers, France的Antony Boucher ，他使用了四步连续的IDA*搜索算法来复原所有的十字到特定状态，如果失败了，就 复原顶部十字，然后复原剩下的棱块儿，接着用预先设定好的算法复原角块儿。他用C语言编写的[程序](http://tomas.rokicki.com/cubecontest/boucher.txt)使用了1628个字符，获得了惊人的平均22毫秒得出结果的成绩，对于我设定的数据，平均29.49步复原模仿，并且最终得分25,061分。
 
-##Data set
+## Data set
 
 我设置的[实验数据](http://tomas.rokicki.com/cubecontest/testdata.txt)包括了所有的单步转动魔方状态，18种两步转动混乱魔方，18种3步，和46种随机混乱状态。
 
-##源码
+## Code
 
 按最终成绩排列的最高分记录如下（附下载链接）：
 
