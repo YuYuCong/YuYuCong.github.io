@@ -14,44 +14,46 @@ redirect_from:
 {:toc .toc}
 # Bookmarks
 
-Created 2018.05.25 by William Yu; Last modified: 2018.06.30-V1.0.3
+Created 2018.05.25 by William Yu; Last modified: 2018.07.16-V1.0.4
 
 Contact :[windmillyucong@163.com](mailto:windmillyucong@163.com)
 
-Copyright ©2018 WilliamYu. All Rights Reserved.  
+Copyright ©2018 William Yu. All Rights Reserved.  
 
 ---
 
 ## Coursera
 
-> [codecademy](https://www.codecademy.com)
->
-> - [Python](https://www.codecademy.com/learn/learn-python)
->
-> [W3school](http://www.w3school.com.cn/index.html)
->
-> [RUNOOB.COM](http://www.runoob.com/)
->
-> [创客智造](https://www.ncnynl.com/) 关于ros和slam
->
-> [turtlebot](http://learn.turtlebot.com)
->
-> [rosclub](http://rosclub.cn/cate-12.html) 
->
-> [中国大学Mooc](https://www.icourse163.org/)
->
-> [coursera](https://www.coursera.org)
->
-> [网易公开课](https://open.163.com/)
->
-> - 斯坦福大学公开课
-> - 吴恩达--机器学习人工智能系列课程
->
-> [KHAN academy](https://www.khanacademy.org/)
->
-> MIT
->
-> [深度学习](https://www.deeplearning.ai/) deeplearning.ai
+[codecademy](https://www.codecademy.com)
+
+- [Python](https://www.codecademy.com/learn/learn-python)
+
+[W3school](http://www.w3school.com.cn/index.html)
+
+[RUNOOB.COM](http://www.runoob.com/)
+
+[创客智造](https://www.ncnynl.com/) 关于ros和slam
+
+[turtlebot](http://learn.turtlebot.com) 关于ros和slam
+
+[rosclub](http://rosclub.cn/cate-12.html) 关于ros和slam
+
+[中国大学Mooc](https://www.icourse163.org/)
+
+[coursera](https://www.coursera.org)
+
+[网易公开课](https://open.163.com/)
+
+- 斯坦福大学公开课
+
+
+- 吴恩达--机器学习人工智能系列课程
+
+[KHAN academy](https://www.khanacademy.org/)
+
+MIT
+
+[深度学习](https://www.deeplearning.ai/) deeplearning.ai
 
 -----
 
@@ -59,25 +61,21 @@ Copyright ©2018 WilliamYu. All Rights Reserved.
 
 ## User's Guide / Reference  / Documentation / Foundation / Library / Tutorial
 
-> [C++](http://www.cplusplus.com/reference/)
->
-> [OpenCV](https://docs.opencv.org/3.3.1/index.html)
->
-> [Linux](http://www.runoob.com/linux/linux-command-manual.html)
->
-> [ROS](http://wiki.ros.org/)
+[C++](http://www.cplusplus.com/reference/)
+
+[OpenCV](https://docs.opencv.org/3.3.1/index.html)
+
+[Linux](http://www.runoob.com/linux/linux-command-manual.html)
+
+[ROS](http://wiki.ros.org/)
 
 ------
 
 
 
-## Idea / News
+## Workspace
 
-> [TED](https://www.ted.com/)   Ideas worth spreading
->
-> [Computer World](https://www.computerworld.com/)
->
-> [乔布斯-斯坦福大学毕业典礼致辞](https://open.163.com/movie/2006/8/3/8/M7BC8JMHJ_M7BC8PA38.html)  科技+艺术
+百度API开放平台 http://ai.baidu.com/
 
 ----
 
@@ -87,27 +85,35 @@ Copyright ©2018 WilliamYu. All Rights Reserved.
 
 ### videos
 
->[BiliBili](https://www.bilibili.com)
+[BiliBili](https://www.bilibili.com)
 
 ### Graphic Design / Photography
 
-> [canva](https://www.canva.com/create-a-design)  在线平面设计
->
-> [WordArt](https://wordart.com)  在线字云
->
-> [艺术字体在线生成](http://www.qt86.com/)
->
-> [LOFTER](http://www.lofter.com)  轻博客，寻找创意和灵感
->
-> http://wild.as.s3-website.eu-central-1.amazonaws.com/  一个超级棒的网站前端设计
+[canva](https://www.canva.com/create-a-design)  在线平面设计
 
------
+[WordArt](https://wordart.com)  在线字云
+
+[艺术字体在线生成](http://www.qt86.com/)
+
+[LOFTER](http://www.lofter.com)  轻博客，寻找创意和灵感
+
+http://wild.as.s3-website.eu-central-1.amazonaws.com/  一个超级棒的网站前端设计
+
+###Idea / News
+
+[TED](https://www.ted.com/)   Ideas worth spreading
+
+[Computer World](https://www.computerworld.com/)
+
+[乔布斯-斯坦福大学毕业典礼致辞](https://open.163.com/movie/2006/8/3/8/M7BC8JMHJ_M7BC8PA38.html)  科技+艺术
+
+------
 
 
 
 ## Office tools
 
->[ECHARTS](http://echarts.baidu.com/)  数据可视化
+[ECHARTS](http://echarts.baidu.com/)  数据可视化
 
 ----
 
@@ -117,17 +123,23 @@ Copyright ©2018 WilliamYu. All Rights Reserved.
 
 -------
 
-> [Bing](https://cn.bing.com/)
->
-> GOOGLE
->
-> [Wikipedia](https://www.wikipedia.org/)
->
-> [WolframAlpha](http://www.wolframalpha.com/)       **Making the world’s knowledge computable**
->
-> [百度学术](http://xueshu.baidu.com/)
->
-> [GYCC](http://www.gycc.com)  学术论文集锦
+[Bing](https://cn.bing.com/)
+
+GOOGLE 
+
+[Wikipedia](https://www.wikipedia.org/)
+
+[WolframAlpha](http://www.wolframalpha.com/)       **Making the world’s knowledge computable**
+
+[百度学术](http://xueshu.baidu.com/)
+
+[GYCC](http://www.gycc.com)  学术论文集锦，非常棒的论文下载站点
+
+中国知网 [http://cnki.net](http://cnki.net/)
+
+万方数据 http://www.wanfangdata.com.cn/index.html
+
+喵咪论文 https://lunwen.im/
 
 ----
 
