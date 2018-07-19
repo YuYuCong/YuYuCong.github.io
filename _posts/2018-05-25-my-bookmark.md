@@ -81,36 +81,6 @@ MIT
 
 
 
-## Leisure 
-
-### videos
-
-[BiliBili](https://www.bilibili.com)
-
-### Graphic Design / Photography
-
-[canva](https://www.canva.com/create-a-design)  在线平面设计
-
-[WordArt](https://wordart.com)  在线字云
-
-[艺术字体在线生成](http://www.qt86.com/)
-
-[LOFTER](http://www.lofter.com)  轻博客，寻找创意和灵感
-
-http://wild.as.s3-website.eu-central-1.amazonaws.com/  一个超级棒的网站前端设计
-
-###Idea / News
-
-[TED](https://www.ted.com/)   Ideas worth spreading
-
-[Computer World](https://www.computerworld.com/)
-
-[乔布斯-斯坦福大学毕业典礼致辞](https://open.163.com/movie/2006/8/3/8/M7BC8JMHJ_M7BC8PA38.html)  科技+艺术
-
-------
-
-
-
 ## Office tools
 
 [ECHARTS](http://echarts.baidu.com/)  数据可视化
@@ -135,11 +105,11 @@ GOOGLE
 
 [GYCC](http://www.gycc.com)  学术论文集锦，非常棒的论文下载站点
 
-中国知网 [http://cnki.net](http://cnki.net/)
+中国知网 <[http://cnki.net](http://cnki.net/)>
 
-万方数据 http://www.wanfangdata.com.cn/index.html
+万方数据 <http://www.wanfangdata.com.cn/index.html>
 
-喵咪论文 https://lunwen.im/
+喵咪论文 <https://lunwen.im/>
 
 ----
 
