@@ -75,7 +75,7 @@ MIT
 
 ## Workspace
 
-百度API开放平台 http://ai.baidu.com/
+百度API开放平台 <http://ai.baidu.com/>
 
 ----
 
@@ -105,7 +105,7 @@ GOOGLE
 
 [GYCC](http://www.gycc.com)  学术论文集锦，非常棒的论文下载站点
 
-中国知网 <[http://cnki.net](http://cnki.net/)>
+中国知网 <http://cnki.net](http://cnki.net/>
 
 万方数据 <http://www.wanfangdata.com.cn/index.html>
 
