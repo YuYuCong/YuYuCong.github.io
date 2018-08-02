@@ -62,4 +62,10 @@ Copyright © 2018 本文遵从创作公用约定（署名-非商业作品-保持
 
 -----
 
+## Reference
+
+http://www.zunny.com/RUBIK.HTM
+
+http://tomas.rokicki.com/cubecontest/winners.html
+
 2018.02.07 William Yu 
