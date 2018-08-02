@@ -73,9 +73,11 @@ MIT
 
 
 
-## Workspace
+## Workspace/API
 
 百度API开放平台 <http://ai.baidu.com/>
+
+Face++ <https://www.faceplusplus.com.cn/>
 
 ----
 
