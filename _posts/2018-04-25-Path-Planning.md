@@ -48,7 +48,7 @@ Nothing here.
 
 <https://www.microsoft.com/en-us/research/publication/customizable-route-planning/?from=http%3A%2F%2Fresearch.microsoft.com%2Fpubs%2F145688%2Fcrp-sea.pdf>
 
-<<http://algo2.iti.kit.edu/documents/routeplanning/esa06HwyHierarchies.pdf>
+<http://algo2.iti.kit.edu/documents/routeplanning/esa06HwyHierarchies.pdf>
 
 <http://algo2.iti.kit.edu/schultes/hwy/contract.pdf>
 
@@ -76,7 +76,7 @@ Nothing here.
 
 
 
-##Books
+## Books
 
 数学之美-吴军
 
