@@ -18,17 +18,17 @@ redirect_from:
 
 William Yu  2018.02.07  update
 
-原文地址：http://tomas.rokicki.com/cubecontest/winners.html
+原文地址：<http://tomas.rokicki.com/cubecontest/winners.html>
 
 Copyright © 2018 本文遵从创作公用约定（署名-非商业作品-保持一致）条款。欢迎转载、散布，但希望附带本条并注明出处。
 
-不足之处，万望指正，邮箱windmillyucong@163.com
+不足之处，万望指正，邮箱[windmillyucong@163.com](mailto:windmillyucong@163.com)
 
 ---
 
 ## 简介
 
-冠军是来自于Ann Arbor, Michigan的Tomas Sirgedas，他提供了一种非常切实可行的并且只有874个C++字符的程序！对于我设定的魔方状态，这套程序的平均解决步数是16.03步，并且平均每种耗时仅仅64毫秒。他的总成绩是非常不可思议的7901；[这份程序](http://tomas.rokicki.com/cubecontest/tomas.txt) 是十分可信的。
+冠军是来自于Ann Arbor, Michigan的Tomas Sirgedas，他提供了一种非常切实可行的并且只有874个C++字符的程序！对于我设定的魔方状态，这套程序的平均解决步数是16.03步，并且平均每种耗时仅仅64毫秒。他的总成绩是非常不可思议的7901；[这份程序](http://tomas.rokicki.com/cubecontest/tomas.txt)是十分可信的。
 
 第二名是来自Darmstadt, Germany的 Stefan Pochmann，他用C++实现了Thistlethwaite's algorithm算法，他的程序总得分为15,278，总计1311个字符，平均197毫秒得出结果，每个魔方基本上在16.72步还原。即便[这个程序](http://tomas.rokicki.com/cubecontest/stefan1.txt)还不够好的话他也很可能会获得第二名（？），由于所有提交者中Perl提供了只有528个字符的[最短的程序](http://tomas.rokicki.com/cubecontest/stefan2.txt)，平均占用15毫秒得出结果，并且平均327,63步复原一个魔方。
 
@@ -64,8 +64,8 @@ Copyright © 2018 本文遵从创作公用约定（署名-非商业作品-保持
 
 ## Reference
 
-<http://www.zunny.com/RUBIK.HTM>
-
 <http://tomas.rokicki.com/cubecontest/winners.html>
 
-2018.02.07 William Yu 
+## See also
+
+<http://www.zunny.com/RUBIK.HTM>
