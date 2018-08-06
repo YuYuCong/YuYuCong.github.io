@@ -59,7 +59,7 @@ MIT
 
 
 
-## User's Guide / Reference  / Documentation / Foundation / Library / Tutorial
+## User's Guide / References / Documentation / Foundation / Library / Tutorial
 
 [C++](http://www.cplusplus.com/reference/)
 
@@ -73,7 +73,7 @@ MIT
 
 
 
-## Workspace/API
+## Workspace / API
 
 百度API开放平台 <http://ai.baidu.com/>
 
