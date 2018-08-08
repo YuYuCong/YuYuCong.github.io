@@ -1,14 +1,14 @@
 ---
 layout: post
 title: "My Bookmark"
-description: ""
+description: "featured Website"
 categories: [study]
 tags: [Website]
 redirect_from:
   - /2018/05/25/
 ---
 
-> 个人收藏的网站
+> 个人收藏的工作区网站
 
 * Kramdown table of contents
 {:toc .toc}
@@ -101,7 +101,7 @@ GOOGLE
 
 [Wikipedia](https://www.wikipedia.org/)
 
-[WolframAlpha](http://www.wolframalpha.com/)       **Making the world’s knowledge computable**
+[WolframAlpha](http://www.wolframalpha.com/)       *Making the world’s knowledge computable*  搜索引擎，甚至可以计算积分
 
 [百度学术](http://xueshu.baidu.com/)
 
