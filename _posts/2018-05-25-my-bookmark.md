@@ -55,6 +55,10 @@ MIT
 
 [深度学习](https://www.deeplearning.ai/) deeplearning.ai
 
+[bilibili](https://www.bilibili.com/)
+
+- [斯坦福大学--深度学习与计算机视觉](https://www.bilibili.com/video/av17741845?from=search&seid=13062275868033210870)
+
 -----
 
 
