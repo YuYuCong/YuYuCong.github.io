@@ -16,9 +16,9 @@ redirect_from:
 
 Created 2018.05.25 by William Yu; Last modified: 2018.07.16-V1.0.4
 
-Contact :[windmillyucong@163.com](mailto:windmillyucong@163.com)
+Contact: [windmillyucong@163.com](mailto:windmillyucong@163.com)
 
-Copyright ©2018 William Yu. All Rights Reserved.  
+Copyleft! 2018 William Yu. Some rights reserved.
 
 ---
 

@@ -7,6 +7,5 @@ The site is built with [Jekyll](http://jekyllrb.com/) using open source theme [S
 ## License
 
 - [Creative Commons BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/) - All blog posts
-- [MIT License](https://raw.github.com/yuyucong/yuyucong.github.io/master/LICENSE) - Code written by me
-
+- [MIT License](https://raw.github.com/yuyucong/yuyucong.github.io/master/LICENSE) - Code written by  [yizeng](https://github.com/yizeng/).
 
