@@ -105,7 +105,7 @@ fi
 shutter -s -e -o '~/Pictures/blogimg/%y%m%d-%T.png'
 
 filename=`ls -t |awk 'NR==1 {print $NF}'`
-imgurl=${github_repositories_url%.git}/blob/master/${filename}
+imgurl="!["$filename"]("${github_repositories_url%.git}/blob/master/${filename}"?raw=true)"
 echo $imgurl |xsel -i -b
 
 git add -A
@@ -127,6 +127,7 @@ EOF
 
 - [x] 完成图片链接返回
 - [ ] 完成交互中步骤查错
+- [x] ![180816-18:30:21.png](https://github.com/YuYuCong/BlogImg/blob/master/180816-18:30:21.png?raw=true)
 
 ## Changelog 更新记录
 
@@ -224,6 +225,16 @@ expect1.1>
 ##### shutter安装
 
 https://blog.csdn.net/u014577061/article/details/79129976
+
+##### Notice
+
+注意如果要使用`shutter --web`命令需要安装插件gnome-web-photo
+
+`sudo apt install gnome-web-photo`
+
+另外一个warning: Image::ExifTool is missing --> writing ExifTool information willl be disabled!
+
+`sudo apt install libimage-exiftool-perl `
 
 ##### shutter - Linux man page
 
