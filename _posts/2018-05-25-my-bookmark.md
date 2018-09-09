@@ -14,7 +14,7 @@ redirect_from:
 {:toc .toc}
 # Bookmarks
 
-Created 2018.05.25 by William Yu; Last modified: 2018.08.16-V1.0.5
+Created 2018.05.25 by William Yu; Last modified: 2018.08.12-V1.0.4
 
 Contact: [windmillyucong@163.com](mailto:windmillyucong@163.com)
 
@@ -39,8 +39,6 @@ Copyleft! 2018 William Yu. Some rights reserved.
 [rosclub](http://rosclub.cn/cate-12.html) 关于ros和slam
 
 [中国大学Mooc](https://www.icourse163.org/)
-
-[Mooc课程获取](http://www.feemic.cn/mooc)
 
 [coursera](https://www.coursera.org)
 

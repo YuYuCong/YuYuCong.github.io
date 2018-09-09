@@ -59,7 +59,8 @@ $ sudo apt-get install xsel
 $ git clone https://github.com/YuYuCong/Scripts.git
 $ cd ./Scripts/shell/
 
-#配置脚本 Add your github username and password and branch url to script in  line 2,3,4 
+#配置脚本 
+#添加你的github username and password and branch url 到脚本 
 
 #检查环境变量，是否包含路径 ~/bin 或者 /home/你的用户名/bin
 $ echo $PATH
@@ -126,24 +127,27 @@ EOF
 ## Improve 改进
 
 - [x] 完成图片链接返回
+- [ ] 尚未考虑到git已经配置了ssh的用户
 - [ ] 完成交互中步骤查错
-- [x] ![180816-18:30:21.png](https://github.com/YuYuCong/BlogImg/blob/master/180816-18:30:21.png?raw=true)
+- [x] 修正了返回链接，添加md语法的前后缀![180816-18:30:21.png](https://github.com/YuYuCong/BlogImg/blob/master/180816-18:30:21.png?raw=true)
 
 ## Changelog 更新记录
 
 blogimgshot.sh_v1.0.0_2018.08.14
 
+blogimgshot.sh_v1.0.1_2018.08.16
 
+- 修正了返回链接
 
 ## References
 
-- https://www.cnblogs.com/stefanking/articles/5061390.html
-- https://blog.csdn.net/DuinoDu/article/details/54836890
-- https://www.jb51.net/article/62349.htm
-- https://blog.csdn.net/lufubo/article/details/7627393
-- 字符串截取 https://blog.csdn.net/lizhidefengzi/article/details/76762059
-- xsel使用https://blog.csdn.net/diamondxiao/article/details/53428204
-- https://www.jianshu.com/p/83a22e1eda6a
+- <https://www.cnblogs.com/stefanking/articles/5061390.html>
+- <https://blog.csdn.net/DuinoDu/article/details/54836890>
+- <https://www.jb51.net/article/62349.htm>
+- <https://blog.csdn.net/lufubo/article/details/7627393>
+- 字符串截取 <https://blog.csdn.net/lizhidefengzi/article/details/76762059>
+- xsel使用 <https://blog.csdn.net/diamondxiao/article/details/53428204>
+- <https://www.jianshu.com/p/83a22e1eda6a>
 
 
 
@@ -153,11 +157,11 @@ blogimgshot.sh_v1.0.0_2018.08.14
 
 ##### expect使用说明书
 
-https://blog.csdn.net/jacky0922/article/details/45071817
+<https://blog.csdn.net/jacky0922/article/details/45071817>
 
 ##### expect的安装
 
-https://www.cnblogs.com/kevingrace/p/5900303.html
+<https://www.cnblogs.com/kevingrace/p/5900303.html>
 
 ```shell
 下载解压
@@ -212,7 +216,7 @@ expect1.1>
 
 ##### 解决方案
 
-#####【小笔记】-`whereis`命令
+#####【小笔记】`whereis`命令
 
 使用where名字查找安装路径`$ whereis expect`
 
@@ -236,7 +240,7 @@ https://blog.csdn.net/u014577061/article/details/79129976
 
 `sudo apt install libimage-exiftool-perl `
 
-##### shutter - Linux man page
+##### 备份说明书 shutter - Linux man page
 
 User Contributed Perl Documentation
 
@@ -413,7 +417,7 @@ perl v5.14.2                                 2013-08-25                         
 
 xsel - Linux man page
 
-http://manpages.ubuntu.com/manpages/xenial/en/man1/xsel.1x.html
+<http://manpages.ubuntu.com/manpages/xenial/en/man1/xsel.1x.html>
 
 -----
 

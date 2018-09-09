@@ -14,11 +14,11 @@ redirect_from:
 {:toc .toc}
 # Path Planning
 
-Created 2018.04.25 by William Yu; Last modified: 2018.07.20-V1.0.5
+Created 2018.04.25 by William Yu; Last modified: 2018.07.20-V1.0.6
 
 Contact: [windmillyucong@163.com](mailto:windmillyucong@163.com)
 
-Copyright ©2018 William Yu. All rights reserved.
+Copyleft ! 2018 William Yu. Some rights reserved.
 
 ----
 
@@ -86,7 +86,7 @@ Nothing here.
 
 ## Researchers  
 
-
+Nothing here.
 
 ----
 
