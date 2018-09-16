@@ -51,7 +51,7 @@ Created 2018.07.16 by William Yu; Last modified: 2018.08.12-V1.2.2
 
 ----
 
-想法四十三：【爱情】钱钟书与杨绛—— <http://windmillyu.lofter.com/post/1d060b0b_ef3a7921>
+想法四十三：【爱情】钱钟书与杨绛—— <http://williambook.lofter.com/post/1f887348_12a4024f2>
 
 ----
 

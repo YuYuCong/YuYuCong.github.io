@@ -1,28 +1,8 @@
-<!doctype html>
-<html>
-<head>
-<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
-<title></title></head>
-<body><p></p>
-<pre><code class='language-c++' lang='c++'>#include&lt;iostream&gt;
-
-using namespace std;
-
-int main( int argc, const char** argv )
-
-{
-
-  cout&lt;&lt;&quot;Sorry, nothing left here!&quot;&lt;&lt;endl;
-
-  return 0;
-
-}
-
-</code></pre>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-</body>
-</html>
+---
+layout: page
+title : All Posts
+header : All Posts
+group: navigation
+---
+{% assign posts_collate = site.posts %}
+{% include helpers/posts_collate %}
