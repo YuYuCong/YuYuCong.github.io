@@ -1,8 +1,8 @@
 # 余聪
   - 手机：+86 153 4226 2086
   - 邮箱：[windmillyucong@163.com](mailto::windmillyucong@163.com)
-  - 主页：[williamyu.top](williamyu.top)
-  - Github: [github.com/YuYuCong](github.com/YuYuCong)
+  - 主页：[williamyu.top](http://williamyu.top/)
+  - Github: [github.com/YuYuCong](https://github.com/yuyucong/)
 
 ------
 
@@ -13,12 +13,12 @@
 
 ----
 
-
+ 
 
 ## 教育背景
-2015.09-至今                                                    **学士**                                                                 华中科技大学 机械学院
+2015.09-至今                                                    **学士**                                                                     华中科技大学 机械学院
 
-主修：数字图像处理，机器视觉，数据结构，C++语言程序设计，机器人学：建模控制与视觉，数字电路模拟电路，机械设计制造等课程
+主修：数字图像处理，机器视觉，数据结构，C++程序设计，机器人学：建模控制与视觉，数字电路模拟电路，机械设计制造等课程
 
 ---
 
@@ -79,7 +79,7 @@
 - 全国智能制造创新创业大赛华东赛区决赛入围奖                                                                                               2017
 - 数字制造装备与技术DMET国家重点实验室FOCUS团队年度最佳优秀代表               　　　         　　　　  2017
 - 社会实践课题 “赴重庆调查滴滴出行运营过程中存在的问题及改进措施” 获社会实践优秀团队                     2016
-- 湖北高校科学营优秀志愿者                                                                                                                                  2016
+- 湖北高校科学营美术组优秀志愿者                                                                                                                      2016
 - 武汉地铁义工优秀志愿者                                                                                                                                      2016
 - 华中科技大学广播台2016年度最佳设计师                                                                                                          2016
 - “萨顿杯”智能车大赛8强                                                                                                                                        2016
@@ -92,16 +92,15 @@
 ## 兴趣爱好
 * 平面设计
 
-  - [作品集](http://www.lofter.com/collection/windmillyu/?op=collectionDetail&collectionId=81051)
+  - [Lofter博客作品集](http://www.lofter.com/collection/windmillyu/?op=collectionDetail&collectionId=81051)
   - 曾任华中科技大学广播台美术组组长
-
-
   - 精通PS AI Canca 等各种设计软件
+
 
 * 视屏剪辑
   - 掌握PR AE Prezi Focusky等软件
 
-* 滑板/摄影/吉他/台球等
+* 滑板/摄影/吉他/台球/魔方等
 
 ------
 
