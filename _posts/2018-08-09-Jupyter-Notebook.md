@@ -14,7 +14,7 @@ redirect_from:
 {:toc .toc}
 # Jupyter Notebook——Python编程利器
 
-Created 2018.08.09 by William Yu; Last modified: 2018.08.10-V1.0.2
+Created 2018.08.09 by William Yu; Last modified: 2018.11.05-V1.0.3
 
 Contact: [windmillyucong@163.com](mailto:windmillyucong@163.com)
 
@@ -26,19 +26,27 @@ Copyleft! 2018 William Yu. Some rights reserved.
 
 ## 安装与运行
 
-`pip install jupyter`
+安装
+
+```shell
+$ sudo pip3 install jupyter
+```
 
 运行
 
 ```shell
 $ jupyter notebook
-```
-
-```
 浏览器访问本地服务器 http://localhost:8888/
 ```
 
+部署共存的python2和python3 
 
+<https://www.cnblogs.com/v5captain/p/6688494.html>
+
+```shell
+$ sudo pip install jupyter  #python2
+$ sudo pip3 install jupyter  #python3
+```
 
 ## Matplotlib
 

@@ -63,7 +63,7 @@ MIT
 
 
 
-## User's Guide / References / Documentation / Foundation / Library / Tutorial
+## User's Guide / Tutorial
 
 [C++](http://www.cplusplus.com/reference/)
 
@@ -80,6 +80,8 @@ MIT
 ## Workspace / API
 
 百度API开放平台 <http://ai.baidu.com/>
+
+百度开源框架paddlepaddle <http://www.paddlepaddle.org/zh>
 
 Face++ <https://www.faceplusplus.com.cn/>
 
@@ -101,27 +103,39 @@ Face++ <https://www.faceplusplus.com.cn/>
 
 ## Search Engines
 
--------
+> <u>一些重要的论文查询站点</u>
 
 [Bing](https://cn.bing.com/)
 
-GOOGLE 
+Google
 
-[Wikipedia](https://www.wikipedia.org/)
+[Wikipedi](https://www.wikipedia.org/)
 
-[WolframAlpha](http://www.wolframalpha.com/)       *Making the world’s knowledge computable*  搜索引擎，甚至可以计算积分
+[WolframAlpha](http://www.wolframalpha.com/) *Making the world’s knowledge computable*  数学搜索引擎，甚至可以计算积分
 
-![WolframAlpha](https://github.com/YuYuCong/BlogImg/blob/master/180816-12:23:05.png?raw=true)
+百度学术 <http://xueshu.baidu.com/>
 
-[百度学术](http://xueshu.baidu.com/)
+CNKI学术 <http://scholar.cnki.net/>
 
-[GYCC](http://www.gycc.com)  学术论文集锦，非常棒的论文下载站点
+GYCC <http://www.gycc.com>  学术论文集锦，非常棒的论文下载站点，有详细的学科分类
 
-中国知网 <http://cnki.net](http://cnki.net/>
+中国知网 <http://cnki.net/>
 
 万方数据 <http://www.wanfangdata.com.cn/index.html>
 
 喵咪论文 <https://lunwen.im/>
+
+IEEE <https://ieeexplore.ieee.org>
+
+Springer <https://www.springer.com>      <https://link.springer.com>
+
+OALib论文搜索引擎 <http://www.oalib.com/>
+
+FindArticles论文站点 <http://findarticles.com/>
+
+Intechopen <https://www.intechopen.com/>
+
+全国图书馆论文搜索网 <http://www.ucdrs.superlib.net/>
 
 ----
 
