@@ -137,6 +137,8 @@ Intechopen <https://www.intechopen.com/>
 
 全国图书馆论文搜索网 <http://www.ucdrs.superlib.net/>
 
+mdpi <https://www.mdpi.com/journal/sensors>
+
 ----
 
 
