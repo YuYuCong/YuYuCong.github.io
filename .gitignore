@@ -1,0 +1,11 @@
+.idea/
+.vscode
+
+.jekyll-cache
+_site
+
+*.log
+**.lock
+**-lock
+
+**_backup/
