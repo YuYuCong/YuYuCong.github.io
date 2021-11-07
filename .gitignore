@@ -9,3 +9,5 @@ _site
 **-lock
 
 **_backup/
+
+**.DS_Store
