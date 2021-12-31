@@ -11,7 +11,7 @@ redirect_from:
 > 
 
 * Kramdown table of contents
-  {:toc .toc}
+{:toc .toc}
 
 # Learning High-Speed Flight in the Wild
 
@@ -121,7 +121,7 @@ Quadrotors, Autonomously fly
 
 - To do so, it samples from a probability distribution P that encodes <u>1.distance from obstacles</u> and <u>2.proximity to the reference trajectory</u>.  如何生成？两方面1.与障碍物的距离；2. 与设定参考轨迹的接近程度。
 
-- Specifically, the distribution of collision-free trajectories $P(τ | τ_{ref}, C)$ is conditioned on the reference trajectory $τ_{ref}$ and the structure of the environment in the form of a point cloud $C ∈ R^{n×3}$.    输入：参考轨迹，环境点云。
+- Specifically, the distribution of collision-free trajectories $P(τ \| τ_{ref}, C)$ is conditioned on the reference trajectory $τ_{ref}$ and the structure of the environment in the form of a point cloud $C ∈ R^{n×3}$.    输入：参考轨迹，环境点云。
 
 - According to $P$, the probability of a trajectory τ is large if far from obstacles and close to the reference $τ_{ref}$.    设计思路：越贴合目标轨迹P越大，越远离障碍物P越大。
 
