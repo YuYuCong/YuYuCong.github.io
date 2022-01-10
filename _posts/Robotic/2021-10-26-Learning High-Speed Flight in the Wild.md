@@ -8,8 +8,6 @@ redirect_from:
 - /2021/10/26/
 ---
 
-> 
-
 * Kramdown table of contents
 {:toc .toc}
 
@@ -19,9 +17,9 @@ University of Zurich and Intel
 
 #### refitem:
 
-- project page: http://rpg.ifi.uzh.ch/AgileAutonomy.html
-- code: https://github.com/uzh-rpg/agile_autonomy
-- paper: http://rpg.ifi.uzh.ch/docs/Loquercio21_Science.pdf
+- project page: [http://rpg.ifi.uzh.ch/AgileAutonomy.html](http://rpg.ifi.uzh.ch/AgileAutonomy.html)
+- code: [https://github.com/uzh-rpg/agile_autonomy](https://github.com/uzh-rpg/agile_autonomy)
+- paper: [http://rpg.ifi.uzh.ch/docs/Loquercio21_Science.pdf](http://rpg.ifi.uzh.ch/docs/Loquercio21_Science.pdf)
 
 ### KeyWords
 
@@ -151,17 +149,17 @@ Quadrotors, Autonomously fly
 
   - To approximate the density P, the expert uses <u>random sampling</u>. 随机抽样，离散化。
 
-  - ==M-H algorithm==
+  - **M-H algorithm**
 
     - We point the interested reader to the Supplementary Materials (section S6), for an overview of the M-H algorithm and its convergence criteria.
 
-      文章内的附录  http://rpg.ifi.uzh.ch/docs/Loquercio21_Science.pdf#page=20&zoom=100,420,654  section S6.
+      文章内的附录  [http://rpg.ifi.uzh.ch/docs/Loquercio21_Science.pdf#page=20&zoom=100,420,654%20%20section%20S6](http://rpg.ifi.uzh.ch/docs/Loquercio21_Science.pdf#page=20&zoom=100,420,654%20%20section%20S6)
 
     - refitem: 
 
-      - https://www.youtube.com/watch?v=0lpT-yveuIA
+      - [https://www.youtube.com/watch?v=0lpT-yveuIA](https://www.youtube.com/watch?v=0lpT-yveuIA)
     
-  - To approximate the density P, the expert uses random sampling. We generate samples with the M-H algorithm [41] as it provides asymptotic convergence guarantees to the true distribution. To estimate P, the M-H algorithm requires a target score function s(τ) ∝ P(τ | τref, C). We define s(τ) = exp(−c(τ, τref, C)), where c(·) is the cost of the trajectory τ. It is easy to show that this definition satisfies the conditions for the M-H algorithm to asymptotically estimate the target distribution P. Hence, the trajectories sampled with M-H will asymptotically cover all of the different modes of P. We point the interested reader to the Supplementary Materials (section S6), for an overview of the M-H algorithm and its convergence criteria.
+  - To approximate the density P, the expert uses random sampling. We generate samples with the M-H algorithm [41] as it provides asymptotic convergence guarantees to the true distribution. To estimate P, the M-H algorithm requires a target score function $ s(τ) ∝ P(τ \| τref, C) $. We define s(τ) = exp(−c(τ, τref, C)), where c(·) is the cost of the trajectory τ. It is easy to show that this definition satisfies the conditions for the M-H algorithm to asymptotically estimate the target distribution P. Hence, the trajectories sampled with M-H will asymptotically cover all of the different modes of P. We point the interested reader to the Supplementary Materials (section S6), for an overview of the M-H algorithm and its convergence criteria.
   
 - 对应的代码详见函数`TrajSampler::computeLabelBSplineSamplin()` 里面关键字 `main loop for Metropolis-Hastings`.
 
