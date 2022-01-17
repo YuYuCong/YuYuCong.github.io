@@ -14,8 +14,8 @@ future: true
 # SNS settings
 RSS: false
 #weibo_username:     windmill
-zhihu_username:     windmillyu
-github_username:    YuYuCong
+zhihu_username: windmillyu
+github_username: YuYuCong
 #twitter_username:   windmill
 #facebook_username:  windmill
 #linkedin_username:  firstname-lastname-idxxxx
@@ -27,7 +27,7 @@ github_username:    YuYuCong
 highlighter: rouge
 permalink: pretty
 paginate: 10
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
+exclude: [ "less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md" ]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 # If you have timezone issue (e.g. #68) in China, uncomment to use this:
 #timezone: CN  
@@ -38,7 +38,7 @@ anchorjs: true                          # if you want to customize anchor. check
 # from PR#40, to support local preview for Jekyll 3.0
 # make sure you have this gem installed
 # `$ gem install jekyll-paginate`
-plugins: [jekyll-paginate]
+plugins: [ jekyll-paginate ]
 
 
 
@@ -102,6 +102,17 @@ page-mathjax: true
 
 # Friends
 friends: [
+  {
+    title: "HUST Robot",
+    href: "https://hustrobot.github.io/"
+  },{
+    title: "Example Friends",
+    href: "#"
+  }
+]
+
+# Sub_blogs
+sub_blogs: [
   {
     title: "HUST Robot",
     href: "https://hustrobot.github.io/"
