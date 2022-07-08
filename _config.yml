@@ -114,10 +114,10 @@ friends: [
 # Sub_blogs
 sub_blogs: [
   {
-    title: "HUST Robot",
-    href: "https://hustrobot.github.io/"
+    title: "Lofter",
+    href: "https://windmill-book.lofter.com/"
   },{
-    title: "Example Friends",
-    href: "#"
+    title: "EasyNet",
+    href: "https://music.163.com/#/user/home?id=274166156"
   }
 ]
