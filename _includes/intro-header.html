@@ -58,7 +58,7 @@
         overflow: hidden;
     }
     header.intro-header .container{
-        visibility: hidden; 
+        visibility: hidden;
     }
     header iframe{
         width: 100%;
@@ -103,6 +103,16 @@
           <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
           <span class="subheading">{{ page.description }}</span>
         </div>
+          <!-- Link to sub blog -->
+          {% if site.sub_blogs %}
+          <hr>
+          <h4>Other Pages</h4>
+          <ul class="list-inline">
+            {% for sub_blog in site.sub_blogs %}
+            <li><a href="{{sub_blog.href}}">{{sub_blog.title}}</a></li>
+            {% endfor %}
+          </ul>
+          {% endif %}
       </div>
     </div>
   </div>
