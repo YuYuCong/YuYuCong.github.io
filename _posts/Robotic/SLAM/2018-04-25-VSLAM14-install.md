@@ -81,6 +81,9 @@ Copyleft! 2019 William Yu. Some rights reserved.
    cmake ..
    make -j4
    sudo make install 
+   
+   =====潜在的问题=====
+   https://blog.csdn.net/limhsysu/article/details/84959736
    ```
 
 
@@ -102,7 +105,7 @@ Copyleft! 2019 William Yu. Some rights reserved.
    # Sophus 
    find_package( Sophus REQUIRED )
    include_directories( ${Sophus_INCLUDE_DIRS} )
-
+   
    #然而我的Sophus安装在/home/will/src/Sophus/路径下，find_package找不到
    #-------------------解决方案-------------------#
    改为：
@@ -187,14 +190,14 @@ Copyleft! 2019 William Yu. Some rights reserved.
 6. P99 安装PCL点云库
    ```shell
    书中的安装或许有问题，请参照下列方法
-
+   
    1、下载PCL源代码
    $ git clone https://github.com/PointCloudLibrary/pcl.git 
    或者直接去https://github.com/PointCloudLibrary/pcl.git网页下载。
-
+   
    2、安装依赖库
    $ apt-get install cmake g++   libboost1.58-all-dev libeigen3-dev libflann-dev python libusb-1.0-0-dev libudev-dev freeglut3-dev doxygen graphviz libpng12-dev libgtest-dev libxmu-dev libxi-dev libpcap-dev libqhull-dev libvtk5-qt4-dev python-vtk libvtk-java
-
+   
    3、编译安装
    编译时间非常长，可能1小时内结束不了，编译前请考虑清楚。线程数根据情况选择
    $ cd pcl
@@ -259,11 +262,11 @@ Copyleft! 2019 William Yu. Some rights reserved.
 
    ```shell
    sudo apt-get install libqt4-dev qt4-qmake libqglviewer-dev libsuitesparse-dev libcxsparse3.1.4 libcholmod3.0.6
-
+   
    * 安装g2o点云库,下载g2o源代码
    git clone https://github.com/RainerKuemmerle/g2o.git
    或者可以使用3rdparty/文件夹下的g2o库，建议使用书中的版本，原因：版本不匹配易造成Error
-
+   
    cd <path_to_g2o>
    mkdir build
    cd build
@@ -325,10 +328,10 @@ Copyleft! 2019 William Yu. Some rights reserved.
 
     ```shell
     sudo apt-get install doxygen
-
+    
     cd ~/src
     git clone https://github.com/Octomap/octomap.git
-
+    
     cd octomap
     mkdir build
     cd build
@@ -350,7 +353,7 @@ Copyleft! 2019 William Yu. Some rights reserved.
     因为libqglviewer-dev-qt4和libqglviewer-dev只能存在一个，但libqglviewer-dev-qt4并不能支持g2o。安装回libqglviewer-dev是不会影响octovis的使用的，因为它影响的只是OctoMap的编译安装。
     #-------------------参考-------------------#
     http://www.cnblogs.com/hitlrk/p/6667253.html
-
+    
     上述方法依旧无法解决！
     =======================unsolved===============================
     ```

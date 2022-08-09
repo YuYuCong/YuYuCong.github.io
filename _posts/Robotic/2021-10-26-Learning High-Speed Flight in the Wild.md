@@ -2,14 +2,27 @@
 layout: post
 title: "paper:Learning High-Speed Flight in the Wild"
 subtitle: "Learning High-Speed Flight in the Wild - University of Zurich and Intel"
-categories: [DeepLearning]
+categories: [DeepLearning, Robotic]
 tags: [paper,path plan,quadrotor,autonomously fly]
 redirect_from:
-- /2021/10/26/
+  - /2021/10/26/
 ---
+
+> Learning High-Speed Flight in the Wild.
 
 * Kramdown table of contents
 {:toc .toc}
+
+----
+
+Created 2021.10.26 by William Yu; Last modified: 2022.08.09-V1.2.2
+
+Contact: [windmillyucong@163.com](mailto:windmillyucong@163.com)
+
+Copyleft! 2022 William Yu. Some rights reserved.
+
+----
+
 
 # Learning High-Speed Flight in the Wild
 
