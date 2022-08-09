@@ -1,6 +1,6 @@
 # www.windmillyu.top
 
-This repository hosts the source code of my personal website and blog [williamyu.top](https://williamyu.top).
+This repository hosts the source code of my personal website and blog [www.windmillyu.top](https://www.windmillyu.top).
 
 The site is built with [Jekyll](http://jekyllrb.com/) using [open source theme](https://github.com/huxpro/huxblog-boilerplate) created by [Hux](https://github.com/Huxpro).
 
