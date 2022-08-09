@@ -1,44 +1,43 @@
 ---
 layout: post
 title: "Google Test"
-subtitle: "Google Test 简单笔记"
+description: "GTest"
 categories: [c++]
 tags: [code,c++,gtest,googletest]
 redirect_from:
   - /2020/08/10/
 ---
 
-> 写代码不测试，bug满天飞。
+> Goolgle Test
 
 * Kramdown table of contents
 {:toc .toc}
 
+
 # Google Test
 
-<center style="font-size:26px;color:darkorange;text-align:left;">References</center> 
+<center style="font-size:26px;color:;text-align:left;">References</center> 
 
-- [https://www.cnblogs.com/coderzh/archive/2009/04/06/1426755.html](https://www.cnblogs.com/coderzh/archive/2009/04/06/1426755.html)
-- 《Google Test Tutorials》
-  - [https://github.com/google/googletest/tree/master/docs](https://github.com/google/googletest/tree/master/docs)
-  - [https://github.com/google/googletest/blob/master/docs/primer.md](https://github.com/google/googletest/blob/master/docs/primer.md)
-  - [https://github.com/google/googletest/blob/master/docs/advanced.md](https://github.com/google/googletest/blob/master/docs/advanced.md)
-  - [https://www.jianshu.com/nb/43089576](https://www.jianshu.com/nb/43089576)
-- [https://raymii.org/s/tutorials/Cpp_project_setup_with_cmake_and_unit_tests.html#toc_1](https://raymii.org/s/tutorials/Cpp_project_setup_with_cmake_and_unit_tests.html#toc_1)
+> - https://www.cnblogs.com/coderzh/archive/2009/04/06/1426755.html
+> - 《Google Test Tutorials》
+>   - https://github.com/google/googletest/tree/master/docs
+>     - https://github.com/google/googletest/blob/master/docs/primer.md
+>     - https://github.com/google/googletest/blob/master/docs/advanced.md
+>   - https://www.jianshu.com/nb/43089576
+> - https://raymii.org/s/tutorials/Cpp_project_setup_with_cmake_and_unit_tests.html#toc_1
 
 ## 1. Install & hello test
 
-refitem:
+> - https://blog.csdn.net/qq_35976351/article/details/79634857
+>- https://www.cnblogs.com/jessica-jie/p/6704388.html
 
-- [https://blog.csdn.net/qq_35976351/article/details/79634857](https://blog.csdn.net/qq_35976351/article/details/79634857)
-- [https://www.cnblogs.com/jessica-jie/p/6704388.html](https://www.cnblogs.com/jessica-jie/p/6704388.html)
-
-### 1.1. Install
+#### Install
 
 ```shell
 $ sudo apt-get install libgtest-dev
 ```
 
-### 1.2. hello_test.cpp
+#### hello_test.cpp
 
 > code example --> 1.hello_gtest
 
@@ -66,15 +65,15 @@ int main(int argc, char **argv) {
 
 - 写一个TEST()函数即可生成测试对象，在测试对象使用断言语句
 
-### 1.3. 编译
+### 编译
 
-#### 1.3.1. g++ 编译gtest
+#### g++ 编译gtest
 
 ```shell
 g++ test.cpp /usr/local/lib/libgtest.a -lpthread -o test
 ```
 
-#### 1.3.2. CMake编译gtest 项目
+#### CMake编译gtest 项目
 
 > code example -->   4.cmake_project
 
