@@ -1,251 +1,27 @@
 ---
 layout: post
-title: "C++并发编程2-数据共享与同步"
-description: "c++ 并发编程"
-categories: [code]
-tags: [code,c++,多线程]
+title: "C++并发编程系列4-同步并发"
+subtitle: "C++并发编程系列笔记，ch4笔记"
+categories: [c++]
+tags: [c++,多线程,thread]
+header-img: "img/in-post/post-cpp/"
 redirect_from:
-  - /2021/02/02/
+  - /2021/02/04/
 ---
 
->  c++ 并发编程笔记
+>  C++ 并发编程系列笔记，ch4笔记
 
 * Kramdown table of contents
 {:toc .toc}
 # C++ 并发笔记
 
-Created 2021.02.01 by William Yu; Last modified: 2021.02.01-V1.0.0
+Created 2021.02.04 by William Yu; Last modified: 2022.09.15-v1.1.0
 
 Contact: [windmillyucong@163.com](mailto:windmillyucong@163.com)
 
-Copyleft! 2021 William Yu. Some rights reserved.
+Copyleft! 2022 William Yu. Some rights reserved.
 
 ---
-
-
-
-
-
-<center style="font-size:72px;color:;text-align:center;">CH3</center> 
-
-
-
-
-
-## Chapter Three: 数据共享
-
-<p style="font-size:20px;color:;text-align:;">Reference</p> 
-
-- https://www.kancloud.cn/jxm_zn/cpp_concurrency_in_action/264954
-
-### 3.1 KeyWords & Sentence
-
-- 不变量
-
-- 条件竞争
-
-- 互斥量
-
-- 无锁编程
-
-- 锁
-
-- 死锁
-
-  
-### 3.2 共享数据
-
-- 共享数据如果是只读的，不会产生问题
-- 共享数据存在同时被读被写，或同时被读，可能出现问题，称为 __条件竞争（rare condition）__
-
-##### 条件竞争
-
-- 每个线程抢着执行自己的任务，大多数情况下执行顺序的先后影响不大，为良性竞争
-- 良性竞争中，系统提供的不变量保持不变
-- 当不变量被破坏时，发生条件竞争
-- 条件竞争时间敏感，难以排查
-
-##### 恶性条件竞争的避免
-
-3种方案
-
-- 对数据采取保护机制
-  - 对数据进行保护，确保只有进行修改的线程才能看到不变量被破坏时的中间状态
-  - 从其他访问线程的角度来看，只存在两种状态，修改前的数据，或者修改完成后的数据
-  - 互斥量 就是一种数据保护机制
-- 无锁编程 （lock-free programming）
-  - 对数据结构和不变量的设计进行修改，修改成什么样子呢？
-  - 修改完的结构必须能完成一系列不可分割的变化 ，变化一旦触发就必须进行下去
-  - 也就是保证每个不变量保持稳定的状态
-- 事务 （transacting）
-  - STM 软件事务内存
-  - 所需的数据存取都作为一种请求存储在事务日志中
-  - 然后由管理员将相关操作合并，提交，执行
-
-### 3.3 互斥量 mutex
-
-<center style="font-size:30px;color:#CD5C5C;text-align:right;">std::mutex</center> 
-
-- 某线程访问共享数据时，使用互斥量将数据锁住，访问结束之后再解锁
-
-- 当数据被锁时，其他线程若想访问，必须等到之前的线程对数据解锁之后，才能访问
-
-- 思考一个问题：
-
-  这样的处理方法，就相当于保证每次只能有一个线程访问共享数据，即便在所有线程都只访问而不修改数据的情况下。事实上，锁只需要在有线程要修改数据时上锁即可。读者-写者锁（reader-writer mutex）（详见后文）     
-
-- 互斥量并不保险：死锁（详见后文）
-
-- 潜在问题：当成员函数返回的是保护数据的指针或者引用，会破坏对数据保护。指针或者引用可以访问或者修改被保护的数据，而不会被互斥锁限制。所以成员函数的接口设计必须相当谨慎
-
-### 3.4 死锁 deadlock
-
-##### 产生原因
-
-举例：
-
-​	两个线程，两个互斥量。线程1访问数据A时，将互斥量A上锁，然后开始操作，后面的某些操作中需要用到数据B，会尝试获取B的锁；与此同时，线程2在访问数据B时，将互斥量B上锁，然后开始操作，某些操作中需要用到数据A，会尝试获取A的锁。这种情况下，线程1在等待互斥量B的锁被释放，而线程2在等待互斥量A的锁被释放。产生死锁。
-
-##### 避免的措施
-
-- `std::lock()`： c++标准提供的解决方案。可以一次锁住多个互斥量，没有死锁风险
-- 无死锁的代码风格  deadlock-free:
-  - 建议互斥量总是以相同的顺序上锁。（上面的例子中，线程1和2都先锁互斥量A，再锁互斥量B） -- 但这种方法并不总是奏效:slightly_smiling_face:
-  - 一个线程只持有一个锁，当已经持有一个锁时，不要再去获取第二把锁
-  - 使用分层互斥锁
-
-### 3.5 lock()    unlock()    try_lock()
-
-互斥量的成员方法
-
-<center style="font-size:30px;color:#CD5C5C;text-align:right;">.lock()</center> 
-
-```c++
-std::vector<long> some_list;  // 共享的数据
-std::mutex some_mutex;  // 互斥量
-void some_thread_function(){
-	some_mutex.lock();
-    // 一些操作
-    some_mutex.unlock();
-}
-```
-
-<center style="font-size:30px;color:#CD5C5C;text-align:right;">.try_lock()</center> 
-
-```c++
-std::vector<long> some_list;  // 共享的数据
-std::mutex some_mutex;  // 互斥量
-void some_thread_function(){
-	if (!some_mutex.try_lock()){
-        return false;
-    };
-    // 一些操作
-    some_mutex.unlock();
-}
-```
-
-### 3.6 std::lock_ground<>
-
-<center style="font-size:30px;color:#CD5C5C;text-align:right;">std::lock_ground()</center> 
-
-自动的锁
-
-- 自动上锁，自动解锁
-- 而对不变量的lock()和unlock()需要手动调用
-- 构造时自动上锁
-- 离开局部作用域，析构函数自动解锁
-
-```c++
-std::vector<long> some_list;  // 共享的数据
-std::mutex some_mutex;  // 互斥量
-void some_thread_function(){
-	std::lock_guard<std::mutex> guard(some_mutex);    // 修改数据之前上锁
-    // 一些操作
-}
-```
-
-```c++
-#include <mutex>   // 头文件
-
-std::vector<long> some_list;  // 共享的数据
-std::mutex some_mutex;  // 互斥量
-
-void add_to_list(int new_value) {
-  std::lock_guard<std::mutex> guard(some_mutex);    // 修改数据之前上锁
-  some_list.push_back(new_value);
-}
-
-bool list_contains(int value_to_find) {
-  std::lock_guard<std::mutex> guard(some_mutex);    // 访问数据之前上锁
-  return std::find(some_list.begin(),some_list.end(),value_to_find) != some_list.end();
-}
-```
-
-### 3.7 std::unique_lock
-
-<center style="font-size:30px;color:#CD5C5C;text-align:right;">std::unique_lock()</center> 
-
-轻度灵活锁
-
-- 可以提供两种第二参数：
-
-  1. `std::adopt_lock`
-
-     - 用于管理互斥量
-
-     ```c++
-     std::unique_lock<std::mutex> some_lock(some_mutex, std::adopt_lock);
-     ```
-
-  2. `std::defer_lock`
-
-     - 表示在构造锁的时候并不上锁，使互斥量保持在解锁状态
-     - `std::uniquelock`锁对象可以传给`lock()`对象作为参数
-
-     ```c++
-     std::unique_lock<std::mutex> some_lock(some_mutex, std::defer_lock);
-     std::lock(some_lock);
-     some_lock.lock();
-     some_lock.unlock();
-     some_lock.try_lock();
-     ```
-  
-- 如果不提供第二参数，表示构造时同时也上锁，需要手动解锁
-
-  ```c++
-  std::unique_lock<std::mutex> some_lock(some_mutex);
-  // do something
-  some_lock.unlock();
-  ```
-
-
-- `std::unique_lock` 比 `std::lock_guard`体积大，所以后者如果够用，建议优先使用后者
-
-  
-
-### 3.9 锁的粒度
-
-- 良好的代码：在锁住互斥量的同时，只进行共享数据的处理。锁外数据的处理在上锁前就做好准备工作。锁内共享数据的访问结束就立即释放锁
-- 
-
-### 3.10 保护很少更新的数据
-
-读者-写者锁（reader-writer mutex）     
-
-- 只有在更新发生时，即有线程写入数据时，才上锁
-- 在没有写操作发生时，允许多个线程同时读取数据
-
-### 3.11 嵌套锁
-
-// todo(congyu)
-
-
-
----
-
-
-
-
 
 
 
@@ -253,18 +29,14 @@ bool list_contains(int value_to_find) {
 
 
 
-
-
-
-
 ## Chapter Four: 同步并发
 
-==条件变量==(==*condition variables*==)和==期望==(==*futures*==)
+**条件变量(condition variables)**和**期望(futures)**
 
 <p style="font-size:20px;color:;text-align:;">Reference</p> 
 
-- https://www.kancloud.cn/jxm_zn/cpp_concurrency_in_action/264955
-- https://paul.pub/cpp-concurrency/
+- [https://www.kancloud.cn/jxm_zn/cpp_concurrency_in_action/264955](https://www.kancloud.cn/jxm_zn/cpp_concurrency_in_action/264955)
+- [https://paul.pub/cpp-concurrency/](https://paul.pub/cpp-concurrency/)
 
 ### 4.0 线程同步操作
 
@@ -295,13 +67,13 @@ void wait_for_flag() {
 
 ##### 好的解决方案：条件变量
 
-注册某种唤醒机制：==条件变量==
+- 注册某种唤醒机制：**条件变量**
 
 ### 4.1 条件变量  std::condition_variable
 
 <center style="font-size:30px;color:#CD5C5C;text-align:right;">std::condition_variable</center> 
 
-- https://my.oschina.net/u/1538135/blog/3163229
+- [https://my.oschina.net/u/1538135/blog/3163229](https://my.oschina.net/u/1538135/blog/3163229)
 
 ##### 头文件
 
@@ -432,8 +204,8 @@ void data_processing_thread() {
 
 ### 4.2 期望  future
 
-- https://www.kancloud.cn/jxm_zn/cpp_concurrency_in_action/264955#42__300
-- https://paul.pub/cpp-concurrency/#id-future
+- [https://www.kancloud.cn/jxm_zn/cpp_concurrency_in_action/264955#42__300](https://www.kancloud.cn/jxm_zn/cpp_concurrency_in_action/264955#42__300)
+- [https://paul.pub/cpp-concurrency/#id-future](https://paul.pub/cpp-concurrency/#id-future)
 
 ##### 4.2.0 future
 
@@ -468,7 +240,7 @@ void data_processing_thread() {
 <p style="font-size:30px;color:#CD5C5C;text-align:right;">std::async()</p>
 
 - `std::thread`不提供直接接收返回值的机制
-- `std::async` 提供返回值机制 
+- `std::async` 提供返回值机制
 
 - 使用async创建子线程
 - async会返回`std::future`对象
@@ -528,7 +300,7 @@ int main() {
 
 以对象的方法来指定异步任务：
 
-```
+```c++
 class Worker {
  public:
   Worker() {}
@@ -545,11 +317,15 @@ Worker w; // 创建对象
 auto f3 = async(&Worker::work, &w); // 传入类的方法，以及具体对象
 ```
 
-##### 4.2.2 packaged_task   线程池 // todo(congyu)
+##### 4.2.2 packaged_task   线程池 
 
-##### 4.2.3 promise   // todo(congyu)
+// todo(congyu)
 
-- https://paul.pub/cpp-concurrency/#id-promise%E4%B8%8Efuture
+##### 4.2.3 promise 
+
+// todo(congyu)
+
+- [https://paul.pub/cpp-concurrency/#id-promise%E4%B8%8Efuture](https://paul.pub/cpp-concurrency/#id-promise%E4%B8%8Efuture)
 
 ### 4.3 时间限定  std::chrono
 
@@ -568,7 +344,9 @@ wait()方法等各种阻塞调用，可以提供线程等待功能，等待某�
 
 <table border="1"><tbody><tr><td>类型/命名空间</td><td>函数</td><td>返回值</td></tr><tr><td rowspan="2"> std::this_thread[namespace] </td><td> sleep_for(duration) </td><td rowspan="2">N/A</td></tr><tr><td>sleep_until(time_point)</td></tr><tr><td rowspan="2">std::condition_variable 或 std::condition_variable_any</td><td>wait_for(lock, duration)</td><td rowspan="2">std::cv_status::time_out 或 std::cv_status::no_timeout</td></tr><tr><td>wait_until(lock, time_point)</td></tr><tr><td rowspan="2"> </td><td> wait_for(lock, duration, predicate)</td><td rowspan="2">bool —— 当唤醒时，返回谓词的结果</td></tr><tr><td>wait_until(lock, duration, predicate)</td></tr><tr><td rowspan="2">std::timed_mutex 或 std::recursive_timed_mutex</td><td>try_lock_for(duration)</td><td rowspan="2"> bool —— 获取锁时返回true，否则返回fasle</td></tr><tr><td>try_lock_until(time_point)</td></tr><tr><td rowspan="2">std::unique_lock&lt;TimedLockable&gt;</td><td>unique_lock(lockable, duration)</td><td>N/A —— 对新构建的对象调用owns_lock();</td></tr><tr><td>unique_lock(lockable, time_point)</td><td>当获取锁时返回true，否则返回false</td></tr><tr><td rowspan="2"></td><td>try_lock_for(duration)</td><td rowspan="2">bool —— 当获取锁时返回true，否则返回false</td></tr><tr><td>try_lock_until(time_point)</td></tr><tr><td rowspan="3">std::future&lt;ValueType&gt;或std::shared_future&lt;ValueType&gt;</td><td>wait_for(duration)</td><td>当等待超时，返回std::future_status::timeout</td></tr><tr><td rowspan="2">wait_until(time_point)</td><td>当“期望”准备就绪时，返回std::future_status::ready</td></tr><tr><td>当“期望”持有一个为启动的延迟函数，返回std::future_status::deferred</td></tr></tbody></table>
 
-  ##### 4.3.1 时钟 // todo(congyu)
+  ##### 4.3.1 时钟 
+
+// todo(congyu)
 
 - 获取现在时间，系统时钟
 
@@ -578,11 +356,11 @@ std::chrono::system_clock::now();
 
 ##### 4.3.2 时延
 
-
+// todo(congyu)
 
 ##### 4.3.3 时间点
 
- 
+// todo(congyu) 
 
  
 
