@@ -1,0 +1,198 @@
+{
+  "main": {
+    "id": "92d5b3bba9de0805",
+    "type": "split",
+    "children": [
+      {
+        "id": "936c2a3f34196cdc",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "project_list.md",
+            "mode": "source",
+            "backlinks": true,
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "1493990731c8c945",
+    "type": "split",
+    "children": [
+      {
+        "id": "43015bc0855438cd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2ecc83e7ddb9238a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "863a76fd281ee7f4",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "project_list.md"
+              }
+            }
+          },
+          {
+            "id": "a3ad6bc3ebeecae9",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "d6b342391d9a7828",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          },
+          {
+            "id": "cd85504070794296",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "2f49115779c34fb0",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 190.5,
+    "collapsed": true
+  },
+  "right": {
+    "id": "38c5da0cd4ef1f18",
+    "type": "split",
+    "children": [
+      {
+        "id": "b42f121dc7c92cd8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8741a9075e5b5e53",
+            "type": "leaf",
+            "state": {
+              "type": "localgraph",
+              "state": {
+                "file": "project_list.md",
+                "options": {
+                  "collapse-filter": true,
+                  "search": "",
+                  "localJumps": 1,
+                  "localBacklinks": true,
+                  "localForelinks": true,
+                  "localInterlinks": false,
+                  "showTags": false,
+                  "showAttachments": false,
+                  "hideUnresolved": false,
+                  "collapse-color-groups": true,
+                  "colorGroups": [],
+                  "collapse-display": true,
+                  "showArrow": false,
+                  "textFadeMultiplier": 0,
+                  "nodeSizeMultiplier": 1,
+                  "lineSizeMultiplier": 1,
+                  "collapse-forces": true,
+                  "centerStrength": 0.518713248970312,
+                  "repelStrength": 10,
+                  "linkStrength": 1,
+                  "linkDistance": 250,
+                  "scale": 2.04689025162868,
+                  "close": false
+                }
+              }
+            }
+          },
+          {
+            "id": "3e915b088cb564e8",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "project_list.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "6f2e1c06bf36f28f",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "project_list.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "5d289adea42c87d4",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 506.5,
+    "collapsed": true
+  },
+  "active": "2ecc83e7ddb9238a",
+  "lastOpenFiles": [
+    "cv/2020-11-13-cv-svm.md",
+    "45.md",
+    "cv/2020-11-09-detect.md",
+    "cv/2020-10-14-highgui.md",
+    "1997-05-24-hello-world.md",
+    "Pasted image 20220921191729.png",
+    "cv/2020-07-13-CalibCamera.md",
+    "cv/2018-09-19-kinectv1.md",
+    "project_list.md",
+    "Robotic/SLAM/2018-04-25-VSLAM14-install.md"
+  ]
+}
