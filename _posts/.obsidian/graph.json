@@ -1,0 +1,51 @@
+{
+  "collapse-filter": false,
+  "search": "",
+  "showTags": true,
+  "showAttachments": false,
+  "hideUnresolved": true,
+  "showOrphans": true,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "tag:#Math",
+      "color": {
+        "a": 1,
+        "rgb": 14701138
+      }
+    },
+    {
+      "query": "tag:#filter",
+      "color": {
+        "a": 1,
+        "rgb": 65297
+      }
+    },
+    {
+      "query": "tag:#c++",
+      "color": {
+        "a": 1,
+        "rgb": 16056377
+      }
+    },
+    {
+      "query": "tag:#opencv",
+      "color": {
+        "a": 1,
+        "rgb": 673791
+      }
+    }
+  ],
+  "collapse-display": false,
+  "showArrow": true,
+  "textFadeMultiplier": -1.5,
+  "nodeSizeMultiplier": 3.03862359550562,
+  "lineSizeMultiplier": 1.99255617977528,
+  "collapse-forces": false,
+  "centerStrength": 0.651685393258427,
+  "repelStrength": 16.685393258427,
+  "linkStrength": 0.657303370786517,
+  "linkDistance": 323,
+  "scale": 0.3185403680344578,
+  "close": true
+}
