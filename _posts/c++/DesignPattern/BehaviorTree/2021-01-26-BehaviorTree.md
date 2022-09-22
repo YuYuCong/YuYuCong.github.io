@@ -1,21 +1,23 @@
 ---
 layout: post
-title: "Behavior Tree"
-description: "Behavior Tree"
-categories: [Behavior Tree, Design Pattern, c++, state machine]
-tags: [Behavior Tree, Design Pattern, c++, state machine]
-redirect_from:
-  - /2021/02/26/
+title: "BehaviorTree(行为树)入门"
+subtitle: "使用行为树模式，让机器人实现复杂任务决策"
+categories: [DesignPattern]
+tags: [BehaviorTree, Design Pattern, c++, state machine, ros]
+header-img: "img/in-post/post-cpp/bg_behavior_tree.drawio.png"
+date: 2021.01.26
 ---
 
->  Behavior Tree
+>  Behavior Tree 与有限状态机是两种常用于游戏以及机器人复杂任务决策的框架，而行为树有着有限状态机所不具备的扩展性，ROS2的`Navigation2`中也引入了行为树来组织机器人的工作流程和动作执行。本文主要介绍行为树的基本概念与抽象模型，并记录BehaviorTree.CPP API的学习与笔记。
 
 * Kramdown table of contents
 {:toc .toc}
 
+
+
 ----
 
-Created 2021.01.26 by William Yu; Last modified: 2022.07.12-V1.2.2
+Created 2021.01.26 by William Yu; Last modified: 2022.07.12-V1.2.4
 
 Contact: [windmillyucong@163.com](mailto:windmillyucong@163.com)
 
@@ -23,34 +25,38 @@ Copyleft! 2022 William Yu. Some rights reserved.
 
 ----
 
+# Behavior Tree  
 
-# Behavior Tree     <img src="https://d33wubrfki0l68.cloudfront.net/a43d326da904f13fe1f6b8f4421aa90f2aaffcde/91af4/images/bt.png" alt="bt" style="zoom:25%;" />
+<img src="https://d33wubrfki0l68.cloudfront.net/a43d326da904f13fe1f6b8f4421aa90f2aaffcde/91af4/images/bt.png" alt="bt" style="zoom:25%;" />
 
-B Tree
+<p style="font-size:20px;color:#176;text-align:left;">References</p> 
 
-##### [reference]
-
-- https://www.behaviortree.dev/
-- https://blog.csdn.net/goodeveningbaby/article/details/42213149?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control
-- https://arxiv.org/pdf/1709.00084.pdf
-- https://github.com/miccol/Behavior-Tree/
-- https://github.com/BehaviorTree/BehaviorTree.CPP/
-
-
-
-##　Ch1. 基本概念
-
-<img src="/home/trifo/code/sync/DevelopmentNotes/img/btree-node.png" alt="btree-node" style="zoom:40%;" />
+- API **BehaviorTree.CPP** [https://www.behaviortree.dev](https://www.behaviortree.dev)
+- github [https://github.com/BehaviorTree/BehaviorTree.CPP/](https://github.com/BehaviorTree/BehaviorTree.CPP/)
+- post: ROS2中的行为树 [https://www.guyuehome.com/38442](https://www.guyuehome.com/38442)
+- paper: [Behavior Trees in Robotics and AI](https://arxiv.org/pdf/1709.00084.pdf)
+  - 该文详细介绍了行为树，并且对比了行为树和状态机之间的优劣。
 
 
 
-### 0. Basic Concept
+
+## Ch1. 基本概念
+
+<img src="/img/in-post/post-cpp/behavior_tree.drawio.png" alt="img" style="zoom:50%;" align='center' text ="behavior_tree.drawio.png"/>
+
+<small class="img-hint">Fig1. Btree</small>
+
+
+
+### 0. Basic Concepts
 
 ##### keywords
 
 - Root 根节点
 
 - Control Node 控制节点（父节点）
+
+- Condition Node 条件节点
 
 - Action Node 行为节点（叶子节点）
 
@@ -59,7 +65,6 @@ B Tree
   - 内在前提 和节点类静态绑定
   - 外在前提 和节点动态绑定
 
-  
 
 ##### sentence
 
@@ -69,34 +74,30 @@ B Tree
 
   - 根节点
 
-  - 逻辑控制节点
-    - 选择 Priority / Selector / Fallback_node / Fallback_star_node 
-
-      > 流程：从begin到end迭代执行自己的Child Node：如遇到一个Child Node执行后返回True，那停止迭代，本Node向自己的Parent Node也返回True；否则所有Child Node都返回False，那本Node向自己的Parent Node返回False。
-
-    - 并行 Parallel Node
-
-      > 流程：从头到尾，平行执行所有的节点。
-      >
-      > > Parallel Selector Node: 有一个子节点True返回True，否则返回False。
-      > > Parallel Sequence Node: 有一个子节点False返回False，否则返回True。
-      > > Parallel Fall On All Node: 所有子节点False才返回False，否则返回True。
-      > > Parallel Succeed On All Node: 所有子节点True才返回True，否则返回False。
-      > > Parallel Hybird Node: 指定数量的子节点返回True或False后，才决定结果。
-
-    - 序列 Sequence Node / Sequence Star Node
-
-      > 流程：从头到尾，按顺序执行每一个子节点，遇到False停止。
-
+  - 逻辑控制类节点(Control Node)
+    - 选择节点 Priority / Selector / Fallback_node / Fallback_star_node 
+      - 规则：从begin到end迭代执行自己的Child Node：如遇到一个Child Node执行后返回True，那停止迭代，本Node向自己的Parent Node也返回True；否则所有Child Node都返回False，那本Node向自己的Parent Node返回False。
+      
+    - 并行节点 Parallel Node
+    
+      - 规则：从头到尾，平行执行所有的节点。
+        - Parallel Selector Node: 有一个子节点True返回True，否则返回False。
+          Parallel Sequence Node: 有一个子节点False返回False，否则返回True。
+          Parallel Fall On All Node: 所有子节点False才返回False，否则返回True。
+          Parallel Succeed On All Node: 所有子节点True才返回True，否则返回False。
+          Parallel Hybrid Node: 指定数量的子节点返回True或False后，才决定结果。
+    
+    - 序列节点 Sequence Node / Sequence Star Node
+      - 规则：从头到尾，按顺序执行每一个子节点，遇到False停止。
+    
   - 行为节点
-
-  - 装饰节点
-
-    - > 装饰节点 一般用来作为额外的附加条件，包括间隔控制，次数控制，频率控制等
-      >
-      > - 反转
-      > - Retry
-
+  
+  - 条件节点
+  
+    - 条件装饰节点 一般用来作为额外的附加条件，包括间隔控制，次数控制，频率控制等
+    - 反转
+    - Retry
+  
 - 对于有限状态机FSM，每个节点表示一个状态，而对于BT，每个节点表示一个行为。
 
 - 每个行为节点有4种运行状态：
@@ -117,11 +118,13 @@ Example
 
 
 
-### 2. 控制节点 Control Node (重点)
+### 2. 控制类节点 Control Node (重点)
 
-##### 1. 序列节点
+控制类节点划分为 序列节点，并行节点，选择节点。
 
-- https://www.behaviortree.dev/sequencenode/
+##### 2.1 序列节点
+
+- [https://www.behaviortree.dev/sequencenode/](https://www.behaviortree.dev/sequencenode/)
 
 e.g.
 
@@ -144,16 +147,16 @@ e.g.
 
 - 三种序列节点的区别
 
-  | Type of ControlNode | Child returns FAILURE | Child returns RUNNING |
-  | :------------------ | --------------------- | --------------------- |
-  | Sequence            | Restart               | Tick again            |
-  | ReactiveSequence    | Restart               | Restart               |
-  | SequenceStar        | Tick again            | Tick again            |
+ | Type of ControlNode | Child returns FAILURE | Child returns RUNNING |
+ | ------------------- | --------------------- | --------------------- |
+ | Sequence            | Restart               | Tick again            |
+ | ReactiveSequence    | Restart               | Restart               |
+ | SequenceStar        | Tick again            | Tick again            |
 
   - "**Restart**" means that the entire sequence is restarted from the first child of the list. （个人理解为：比如对于SequenceNode，当一个子节点返回失败的时候，会触发Restart，这个restart的意思是，下一次调用这个SequenceNode的时候会从头开始执行每一个子节点，所以个人认为，上述原文描述再加几句："**Restart**" means that the entire sequence <u>will be</u> restarted from the first child of the list, <u>when the next time this sequence is ticked</u>.）   
   - "**Tick again**" means that the next time the sequence is ticked, the same child is ticked again. Previous sibling, which returned SUCCESS already, are not ticked again.
 
-###### 1.1 Sequence Node
+###### 2.1.1 Sequence Node
 
 ![SequenceNode](https://d33wubrfki0l68.cloudfront.net/e2959ca111872777e48b0838ef94ab61b82d747a/06947/images/sequencenode.png)
 
@@ -185,7 +188,7 @@ BT::NodeStatus Sequence() {
 }
 ```
 
-###### 1.2 ReactiveSequence
+###### 2.1.2 ReactiveSequence
 
 ![ReactiveSequence](https://d33wubrfki0l68.cloudfront.net/65527bf6239cc40f28656c361a2394c66657c314/5f443/images/reactivesequence.png)
 
@@ -212,7 +215,7 @@ BT::NodeStatus ReactiveSequence() {
 }
 ```
 
-###### 1.3 SequenceStar
+###### 2.1.3 SequenceStar
 
 ![SequenceStar](https://d33wubrfki0l68.cloudfront.net/c0e72e483eb3e4e71fc86063aebd8293abf55b73/8c908/images/sequencestar.png)
 
@@ -242,7 +245,7 @@ BT::NodeStatus SequenceStar() {
 }
 ```
 
-###### 总结
+###### 2.1.4 总结
 
 如上三种Node之间的区别就已经比较明确了：
 
@@ -251,12 +254,12 @@ BT::NodeStatus SequenceStar() {
   - Sequence 每一次被调用，都是去执行标记的节点
   - 这个标记 指向 RUNNING状态的节点
     - 如果RUNNING子节点返回FAILURE，标记清空，下一次被调用时从头再来
-    - 如果RUNNING子节点返回SUCESS，标记后移，指向下一个子节点
+    - 如果RUNNING子节点返回SUCCESS，标记后移，指向下一个子节点
 - SequenceStar 有一个全局静态标记
   - SequenceStar 每一次被调用，都是去执行标记的节点
   - 这个标记 指向 RUNNING 状态的节点
     - 如果RUNNING子节点返回FAILURE，标记并不会清空，还指向当前子节点，下一次被调用时从失败的地方继续
-    - 如果RUNNING子节点返回SUCESS，标记后移，指向下一个子节点
+    - 如果RUNNING子节点返回SUCCESS，标记后移，指向下一个子节点
 
 从游戏的角度举例理解，非常有趣（再一次感受到，行为树所尝试的事情，是抽象现实世界的行为）
 
@@ -272,13 +275,13 @@ BT::NodeStatus SequenceStar() {
 
 
 
-##### 2. 并行节点 Paraller Node 
+##### 2.2 并行节点 Parallel Node 
 
-- 
+// todo(congyu)
 
-##### 3. 选择节点 Fallback / ReactiveFallback Node 
+##### 2.3 选择节点 Fallback / ReactiveFallback Node 
 
-- https://www.behaviortree.dev/fallbacknode/
+- [https://www.behaviortree.dev/fallbacknode/](https://www.behaviortree.dev/fallbacknode/)
 - 又称为 "Selector" or "Priority"
 
 e.g. 
@@ -303,11 +306,9 @@ e.g.
 
 
 
-
-
 ### 3. 装饰器节点 Decorator Node  
 
-##### 用处
+##### 3.1 用处
 
 - 转接子节点接收的结果，可以取反
 - 终止子节点
@@ -319,16 +320,18 @@ e.g.
 
 ### 4. 行为节点 Action Node 
 
-#### 四种状态
+行为节点又细分为 异步节点，同步节点，和协程节点。
+
+#### 4.1 四种状态
 
 - 空闲 Idle
 - 运行中 Running
 - 完成 Success
 - 失败 Failure
 
-#### 三种**行为节点**  (重点)
+#### 4.2 三种**行为节点**  (重点)
 
-##### 1. AsyncActionNode  异步节点
+##### 4.1.1 AsyncActionNode  异步节点
 
 - 被触发时, 返回running
 - 会在另外一个线程中执行，不阻塞父节点所在的线程
@@ -337,12 +340,12 @@ e.g.
   - 可以停止
   - 可以返回“running”
 
-##### 2. SyncActionNode  同步节点
+##### 4.1.2 SyncActionNode  同步节点
 
 - 不可能返回running
 - 在父节点所在的线程内执行，会阻塞父节点所在的线程
 
-##### 3. CoroActionNode  协程节点
+##### 4.1.3 CoroActionNode  协程节点
 
 - coroutine node 
 - 可能返回running，也可能不反悔running
@@ -355,7 +358,7 @@ e.g.
 - 条件满足，返回成功
 - 条件不满足，返回失败
 
-### 6. BlackBoard
+### 6. Blackboard
 
 - https://blog.csdn.net/Travis_X/article/details/87772326?utm_medium=distribute.pc_relevant.none-task-blog-searchFromBaidu-18.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-searchFromBaidu-18.control
 
@@ -368,15 +371,14 @@ e.g.
 
 ### 7. 子树
 
-可以在不改变现有代码的情况下面扩展子树，非常有效的开发代码
+可以在不改变现有代码的情况下面扩展子树，非常有效地开发代码
 
 ![CrossDoorSubtree](https://behaviortree.github.io/BehaviorTree.CPP/images/CrossDoorSubtree.png)
 
 ### 8. XML格式
 
-- https://www.behaviortree.dev/xml_format/
-
-
+- [https://www.behaviortree.dev/xml_format/](https://www.behaviortree.dev/xml_format/)
+- todo(congyu)
 
 
 
@@ -386,7 +388,7 @@ e.g.
 
 本章简单介绍Btree.cpp库的安装与使用，以创建一个简单的Btree结构为例。
 
-### 1. Lib Install & Uage
+### 1. Lib Install & Usage
 
 BehaviorTree.CPP库的安装和使用
 
@@ -634,7 +636,7 @@ class SaySomething : public BT::SyncActionNode {
 };
   ```
 
-####### 注意：
+注意：
 
 - 最好只在tick中调用 getInput 方法
 
@@ -802,7 +804,7 @@ class PrintTarget : public SyncActionNode {
     printf("Target positions: [ %.1f, %.1f ]\n", target.x, target.y);
     return NodeStatus::SUCCESS;
   }
-};。
+};
 ```
 
 使用getInput方法获取输入，此时自动调用convertFromString，按照规则将字符串转换为用户自定义类型，使用.value()方法获取最终数据。

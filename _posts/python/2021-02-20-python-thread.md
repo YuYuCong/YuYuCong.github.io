@@ -5,7 +5,8 @@ subtitle: "Python多线程编程简单笔记"
 categories: [python]
 tags: [多线程,thread,python]
 header-img: "img/in-post/post-python/"
-date: 2021-02-21
+header-style: text
+date: 2021.02.22
 ---
 
 >  本文主要记录Python多线程编程相关的一些笔记。包括threading模块，Thread类，以及5种线程锁（互斥锁，重入锁，信号，事件，条件）等。
@@ -458,7 +459,7 @@ if __name__ == '__main__':
     线程A开始执行...
     num当前为： 1
     num当前为： 2
-
+    
     ---------------------------------------------------------------------------
     
     RuntimeError                              Traceback (most recent call last)

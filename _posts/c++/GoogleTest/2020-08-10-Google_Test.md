@@ -8,7 +8,7 @@ redirect_from:
   - /2020/08/10/
 ---
 
-> Goolgle Test
+> Google Test
 
 * Kramdown table of contents
 {:toc .toc}
@@ -16,7 +16,7 @@ redirect_from:
 
 # Google Test
 
-<center style="font-size:26px;color:;text-align:left;">References</center> 
+<center style="font-size:26px;color:#176;text-align:left;">References</center> 
 
 > - https://www.cnblogs.com/coderzh/archive/2009/04/06/1426755.html
 > - 《Google Test Tutorials》
@@ -166,34 +166,34 @@ g++ test.cpp /usr/local/lib/libgtest.a -lpthread -o test
 ### 1. bool 值检查
 
 | **Fatal assertion**            | **Nonfatal assertion**         | **Verifies**         |
-| ------------------------------ | ------------------------------ | -------------------- |
+|--------------------------------|--------------------------------|----------------------|
 | `ASSERT_TRUE(`*condition*`)`;  | `EXPECT_TRUE(`*condition*`)`;  | *condition* is true  |
 | `ASSERT_FALSE(`*condition*`)`; | `EXPECT_FALSE(`*condition*`)`; | *condition* is false |
 
 ### 2. 数值型数据检查
 
-| **Fatal assertion**                                     | **Nonfatal assertion**                 | **Verifies**             |
-| ------------------------------------------------------- | -------------------------------------- | ------------------------ |
+| **Fatal assertion**                                 | **Nonfatal assertion**                 | **Verifies**             |
+|-----------------------------------------------------|----------------------------------------|--------------------------|
 | `ASSERT_EQ(`*expected*`, `*actual*`);` expected写在前面 | `EXPECT_EQ(`*expected*`, `*actual*`);` | *expected* `==` *actual* |
-| `ASSERT_NE(`*val1*`, `*val2*`);`                        | `EXPECT_NE(`*val1*`, `*val2*`);`       | *val1* `!=` *val2*       |
-| `ASSERT_LT(`*val1*`, `*val2*`);`                        | `EXPECT_LT(`*val1*`, `*val2*`);`       | *val1* `<` *val2*        |
-| `ASSERT_LE(`*val1*`, `*val2*`);`                        | `EXPECT_LE(`*val1*`, `*val2*`);`       | *val1* `<=` *val2*       |
-| `ASSERT_GT(`*val1*`, `*val2*`);`                        | `EXPECT_GT(`*val1*`, `*val2*`);`       | *val1* `>` *val2*        |
-| `ASSERT_GE(`*val1*`, `*val2*`);`                        | `EXPECT_GE(`*val1*`, `*val2*`);`       | *val1* `>=` *val2*       |
+| `ASSERT_NE(`*val1*`, `*val2*`);`                    | `EXPECT_NE(`*val1*`, `*val2*`);`       | *val1* `!=` *val2*       |
+| `ASSERT_LT(`*val1*`, `*val2*`);`                    | `EXPECT_LT(`*val1*`, `*val2*`);`       | *val1* `<` *val2*        |
+| `ASSERT_LE(`*val1*`, `*val2*`);`                    | `EXPECT_LE(`*val1*`, `*val2*`);`       | *val1* `<=` *val2*       |
+| `ASSERT_GT(`*val1*`, `*val2*`);`                    | `EXPECT_GT(`*val1*`, `*val2*`);`       | *val1* `>` *val2*        |
+| `ASSERT_GE(`*val1*`, `*val2*`);`                    | `EXPECT_GE(`*val1*`, `*val2*`);`       | *val1* `>=` *val2*       |
 
 ### 3. 浮点型检查（可含误差）
 
 无误差
 
 | **Fatal assertion**                       | **Nonfatal assertion**                    | **Verifies**                             |
-| ----------------------------------------- | ----------------------------------------- | ---------------------------------------- |
+|-------------------------------------------|-------------------------------------------|------------------------------------------|
 | `ASSERT_FLOAT_EQ(`*expected, actual*`);`  | `EXPECT_FLOAT_EQ(`*expected, actual*`);`  | the two `float` values are almost equal  |
 | `ASSERT_DOUBLE_EQ(`*expected, actual*`);` | `EXPECT_DOUBLE_EQ(`*expected, actual*`);` | the two `double` values are almost equal |
 
 含误差（对相近的两个数比较）：
 
-| **Fatal assertion**                       | **Nonfatal assertion**                    | **Verifies**                                                 |
-| ----------------------------------------- | ----------------------------------------- | ------------------------------------------------------------ |
+| **Fatal assertion**                       | **Nonfatal assertion**                    | **Verifies**                                                                     |
+|-------------------------------------------|-------------------------------------------|----------------------------------------------------------------------------------|
 | `ASSERT_NEAR(`*val1, val2, abs_error*`);` | `EXPECT_NEAR`*(val1, val2, abs_error*`);` | the difference between *val1* and *val2* doesn't exceed the given absolute error |
 
   同时，还可以使用：
@@ -206,7 +206,7 @@ EXPECT_PRED_FORMAT2(testing::DoubleLE, val1, val2);
 ### 4. 字符串检查  
 
 | **Fatal assertion**                                   | **Nonfatal assertion**                                | **Verifies**                                                 |
-| ----------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------ |
+|-------------------------------------------------------|-------------------------------------------------------|--------------------------------------------------------------|
 | `ASSERT_STREQ(`*expected_str*`, `*actual_str*`);`     | `EXPECT_STREQ(`*expected_str*`, `*actual_str*`);`     | the two C strings have the same content                      |
 | `ASSERT_STRNE(`*str1*`, `*str2*`);`                   | `EXPECT_STRNE(`*str1*`, `*str2*`);`                   | the two C strings have different content                     |
 | `ASSERT_STRCASEEQ(`*expected_str*`, `*actual_str*`);` | `EXPECT_STRCASEEQ(`*expected_str*`, `*actual_str*`);` | the two C strings have the same content, ignoring case 忽略大小写 |
@@ -223,13 +223,13 @@ EXPECT_PRED_FORMAT2(testing::DoubleLE, val1, val2);
 返回失败：
 
 | **Fatal assertion** | **Nonfatal assertion** |
-| ------------------- | ---------------------- |
-| ```FAIL();```       | ```ADD_FAILURE();`     |
+|---------------------|------------------------|
+| ```FAIL();```       | ```ADD_FAILURE();```   |
 
 ### 6. 异常检查
 
-| **Fatal assertion**                              | **Nonfatal assertion**                           | **Verifies**                                      |
-| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------- |
+| **Fatal assertion**                              | **Nonfatal assertion**                           | **Verifies**              |
+|--------------------------------------------------|--------------------------------------------------|---------------------------------------------------|
 | `ASSERT_THROW(`*statement*, *exception_type*`);` | `EXPECT_THROW(`*statement*, *exception_type*`);` | *statement* throws an exception of the given type |
 | `ASSERT_ANY_THROW(`*statement*`);`               | `EXPECT_ANY_THROW(`*statement*`);`               | *statement* throws an exception of any type       |
 | `ASSERT_NO_THROW(`*statement*`);`                | `EXPECT_NO_THROW(`*statement*`);`                | *statement* doesn't throw any exception           |
@@ -237,7 +237,7 @@ EXPECT_PRED_FORMAT2(testing::DoubleLE, val1, val2);
 ### 7. Predicate Assertions
 
 | **Fatal assertion**                    | **Nonfatal assertion**                 | **Verifies**                     |
-| -------------------------------------- | -------------------------------------- | -------------------------------- |
+|----------------------------------------|----------------------------------------|----------------------------------|
 | `ASSERT_PRED1(`*pred1, val1*`);`       | `EXPECT_PRED1(`*pred1, val1*`);`       | *pred1(val1)* returns true       |
 | `ASSERT_PRED2(`*pred2, val1, val2*`);` | `EXPECT_PRED2(`*pred2, val1, val2*`);` | *pred2(val1, val2)* returns true |
 | ...                                    | ...                                    | ...                              |
@@ -245,9 +245,9 @@ EXPECT_PRED_FORMAT2(testing::DoubleLE, val1, val2);
 还可以自定义输出格式，通过如下：
 
 | **Fatal assertion**                                  | **Nonfatal assertion**                             | **Verifies**                             |
-| ---------------------------------------------------- | -------------------------------------------------- | ---------------------------------------- |
-| `ASSERT_PRED_FORMAT1(`*pred_format1, val1*);`        | `EXPECT_PRED_FORMAT1(`*pred_format1, val1*);       | *pred_format1(val1)* is successful       |
-| `ASSERT_PRED_FORMAT2(`*pred_format2, val1, val2*`);` | `EXPECT_PRED_FORMAT2(`*pred_format2, val1, val2*); | *pred_format2(val1, val2)* is successful |
+|------------------------------------------------------|----------------------------------------------------|------------------------------------------|
+| `ASSERT_PRED_FORMAT1(*pred_format1, val1*);`        | `EXPECT_PRED_FORMAT1(*pred_format1, val1*);`       | *pred_format1(val1)* is successful       |
+| `ASSERT_PRED_FORMAT2(*pred_format2, val1, val2*);` | `EXPECT_PRED_FORMAT2(*pred_format2, val1, val2*);` | *pred_format2(val1, val2)* is successful |
 | ...                                                  | ...                                                |                                          |
 
 ### 8. 类型检查
@@ -324,7 +324,7 @@ eg:
 int add(int a, int b) { return a + b; }
 
 TEST(TestCase, test) {
-  for (float i = 0.9; i < 1.2; i += 0.1) {
+  for (float i = 0.9; i < 1.2; i += 0.1) { // 注意：这份代码只是举个例子，实际写作过程中一定避免使用float的循环，只对整形for循环，以避免出错
     EXPECT_EQ(1 + i, add(1, i))
         << "current value: i = " << i;  // 直接<< 就可以输出自定义信息
   }
@@ -337,7 +337,7 @@ int main(int argc, char** argv) {
 
 ```
 
-如果出错的报错信息将是这样的，你根本不知道出错时 i 等于几：
+在不添加自定义输出信息时，如果出错的话，报错信息将是这样的，你根本不知道出错时 i 等于几，非常不方便debug：
 
 ```shell
 g:\myproject\c++\gtestdemo\gtestdemo\gtestdemo.cpp(25): error: Value of: y[i]
@@ -456,13 +456,13 @@ INSTANTIATE_TEST_CASE_P(TrueReturn, IsOddParamTest, testing::Values(3, 5, 11, 23
 
 ##### 4. 参数产生器
 
-| 句柄                    | 意义                 |
-| ------------------------------------------------ | ------------------------------------------------------------ |
-| `Range(begin, end[, step])`  | 范围在begin~end之间，步长为step，不包括end                   |
-| `Values(v1, v2, ..., vN)`| v1,v2到vN的值                                                |
-| `ValuesIn(container)` and `ValuesIn(begin, end)` | 从一个C类型的数组或是STL容器，或是迭代器中取值 |
-| `Bool()`| 取`false 和 true 两个值`                                     |
-| `Combine(g1, g2, ..., gN)`| 这个比较强悍，它将g1,g2,...gN进行排列组合，g1,g2,...gN本身是一个参数生成器，每次分别从g1,g2,..gN中各取出一个值，组合成一个元组(Tuple)作为一个参数。说明：这个功能只在提供了`<tr1/tuple>头的系统中有效。gtest会自动去判断是否支持tr/tuple，如果你的系统确实支持，而`gtest判断错误的话，你可以重新定义宏`GTEST_HAS_TR1_TUPLE=1`。 |
+| 句柄                                               | 意义                                                                                                                                                                                                             |
+|--------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Range(begin, end[, step])`                      | 范围在begin~end之间，步长为step，不包括end                                                                                                                                                                                  |
+| `Values(v1, v2, ..., vN)`                        | v1,v2到vN的值                                                                                                                                                                                                     |
+| `ValuesIn(container)` and `ValuesIn(begin, end)` | 从一个C类型的数组或是STL容器，或是迭代器中取值                                                                                                                                                                                      |
+| `Bool()`                                         | 取`false 和 true 两个值`                                                                                                                                                                                            |
+| `Combine(g1, g2, ..., gN)`                       | 这个比较强悍，它将g1,g2,...gN进行排列组合，g1,g2,...gN本身是一个参数生成器，每次分别从g1,g2,..gN中各取出一个值，组合成一个元组(Tuple)作为一个参数。说明：这个功能只在提供了`<tr1/tuple>头的系统中有效。gtest会自动去判断是否支持tr/tuple，如果你的系统确实支持，而`gtest判断错误的话，你可以重新定义宏`GTEST_HAS_TR1_TUPLE=1`。 |
 
 ### 6.2. 类型参数化 TYPED_TEST
 

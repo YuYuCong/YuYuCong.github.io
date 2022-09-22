@@ -5,6 +5,7 @@ subtitle: "C++并发编程系列笔记，ch1笔记"
 categories: [c++]
 tags: [c++,多线程,thread]
 header-img: "img/in-post/post-cpp/"
+header-style: text
 redirect_from:
   - /2021/02/01/
 ---
