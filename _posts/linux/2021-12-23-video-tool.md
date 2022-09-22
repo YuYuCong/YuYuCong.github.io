@@ -5,6 +5,7 @@ subtitle: "视频文件相关的小工具"
 categories: [linux]
 tags: [tool, linux, video]
 header-img: "img/"
+header-style: text
 redirect_from:
   - /2021/12/23/
 ---
