@@ -3,7 +3,7 @@ layout: post
 title: "Effective C++笔记"
 description: "Effective C++学习笔记"
 categories: [c++]
-tags: [code,c++]
+tags: [c++]
 redirect_from:
   - /2021/02/20/
 ---
@@ -44,7 +44,7 @@ Copyleft! 2021 William Yu. Some rights reserved.
 
 - 尽量少用预编译期，多用编译器
 
-- 使用const, enum, inline 替换 #define
+- 使用const, enum, inline 替换 `#define`
 
   - 对于常量，使用const, enum替换#define
   - 对于形似函数的宏，使用inline函数替换#define

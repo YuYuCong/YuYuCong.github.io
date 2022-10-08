@@ -1,14 +1,14 @@
 ---
 layout: post
-title: "Google Test"
-description: "GTest"
+title: "Google Test使用方法总结"
+description: "写代码不测试，bug满天飞。"
 categories: [c++]
-tags: [code,c++,gtest,googletest]
+tags: [c++,gtest,unit-test]
 redirect_from:
   - /2020/08/10/
 ---
 
-> Google Test
+> Gtest 使用方法总结。写代码不测试，bug满天飞。
 
 * Kramdown table of contents
 {:toc .toc}
@@ -461,8 +461,8 @@ INSTANTIATE_TEST_CASE_P(TrueReturn, IsOddParamTest, testing::Values(3, 5, 11, 23
 | `Range(begin, end[, step])`                      | 范围在begin~end之间，步长为step，不包括end                                                                                                                                                                                  |
 | `Values(v1, v2, ..., vN)`                        | v1,v2到vN的值                                                                                                                                                                                                     |
 | `ValuesIn(container)` and `ValuesIn(begin, end)` | 从一个C类型的数组或是STL容器，或是迭代器中取值                                                                                                                                                                                      |
-| `Bool()`                                         | 取`false 和 true 两个值`                                                                                                                                                                                            |
-| `Combine(g1, g2, ..., gN)`                       | 这个比较强悍，它将g1,g2,...gN进行排列组合，g1,g2,...gN本身是一个参数生成器，每次分别从g1,g2,..gN中各取出一个值，组合成一个元组(Tuple)作为一个参数。说明：这个功能只在提供了`<tr1/tuple>头的系统中有效。gtest会自动去判断是否支持tr/tuple，如果你的系统确实支持，而`gtest判断错误的话，你可以重新定义宏`GTEST_HAS_TR1_TUPLE=1`。 |
+| `Bool()`                                         | 取`false` 和 `true` 两个值                                                                                                                                                                                            |
+| `Combine(g1, g2, ..., gN)`                       | 这个比较强悍，它将g1,g2,...gN进行排列组合，g1,g2,...gN本身是一个参数生成器，每次分别从g1,g2,..gN中各取出一个值，组合成一个元组(Tuple)作为一个参数。说明：这个功能只在提供了`<tr1/tuple>`头的系统中有效。gtest会自动去判断是否支持tr/tuple，如果你的系统确实支持，而gtest判断错误的话，你可以重新定义宏`GTEST_HAS_TR1_TUPLE=1`。 |
 
 ### 6.2. 类型参数化 TYPED_TEST
 

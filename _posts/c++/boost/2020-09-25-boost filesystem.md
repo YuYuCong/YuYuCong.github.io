@@ -3,7 +3,7 @@ layout: post
 title: "Boost filesystem"
 description: "boost filesystem"
 categories: [c++]
-tags: [code,boost,c++]
+tags: [boost,c++]
 redirect_from:
   - /2020/09/25/
 ---
