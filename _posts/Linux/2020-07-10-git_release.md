@@ -3,7 +3,7 @@ layout: post
 title: "git 项目开发流程"
 subtitle: "git 项目开发流程与版本发布流程"
 categories: [git]
-tags: [git]
+tags: [git, Linux]
 header-img: "img/in-post/post-git/branching-illustration@2x.png"
 redirect_from:
   - /2020/07/10/

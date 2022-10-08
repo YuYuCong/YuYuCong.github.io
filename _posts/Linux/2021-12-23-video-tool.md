@@ -2,8 +2,8 @@
 layout: post
 title: "Video Tool"
 subtitle: "视频文件相关的小工具"
-categories: [linux]
-tags: [tool, linux, video]
+categories: [Linux]
+tags: [tool, Linux, video]
 header-img: "img/"
 header-style: text
 redirect_from:
@@ -71,11 +71,72 @@ ffmpeg -i input.mp4 -vcodec libx264 -preset ultrafast -b:v 2000k output.mp4
 - https://github.com/4dvn/untrunc-1
 
 
+## 图片文件压缩
+
+##### Jpegoptim
+
+安装
+
+```shell
+sudo apt-get install jpegoptim
+```
+
+jpegoptim 支持以下格式的文件：
+
+-   jpeg
+-   jpg
+-   jfif
+
+##### OptiPNG 
+
+支持格式：png
+
+```shell
+sudo apt-get install optipng
+```
+
+```shell
+optipng -o5 ./test.png
+```
+
+参数
+
+-o5 使用5级压缩，总共1-7，7级为最大级别压缩，非常慢！
+
+注意：只会无损压缩图片不会改变图片尺寸
+
+##### convert命令
+
+convert命令是ubuntu里面自带的一个命令，这个命令功能很强大：转换图片格式（支持JPG, BMP, PCX, GIF, PNG, TIFF, XPM和XWD等类型）；改变图像尺寸大小；旋转图像；还可以在图像中添加文字等等。
+
+将png转换成jpg
+
+convert filename.png filename.jpg
+
+将gif转换成png
+
+convert filename.gif filename.jpg
+
+改变图像尺寸（注意400和300之间是小写的x）
+
+convert -resize 400x300 filename.jpg   filename1.jpg
+
+上面这个不是很好用，宽度会变成400，长度会根据原图像等比例约束结果
+
+比例缩放图片（长宽都变为原图的一半）
+
+convert -sample 50%x50%  filename.jpg   filename1.jpg
+
+**旋转图像**
+
+顺时针旋转90度
+
+convert -rotate 90 filename.jpg   filename1.jpg
+
+
+
 
 ----
-
-
-
 ## Contact
 
 Feel free to contact me [windmillyucong@163.com](mailto:windmillyucong@163.com) anytime for anything.

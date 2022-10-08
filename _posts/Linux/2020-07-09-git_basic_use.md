@@ -2,8 +2,8 @@
 layout: post
 title: "git 笔记"
 description: "git 使用笔记"
-categories: [linux]
-tags: [code,git,linux]
+categories: [Linux]
+tags: [git,Linux]
 redirect_from:
   - /2018/05/13/
 ---
@@ -394,19 +394,6 @@ git diff [branch]或者[commit-id]
 
 
 
-### git submodule
-
-git 子模块的工作方式
-
-https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97
-
-```shell
-git submodule init
-git submodule update
-```
-
-
-
 ### git 远程工作
 
 由远程仓库创建一个本地仓库
@@ -421,6 +408,17 @@ git checkout -b feature/multiple_maps_save_load origin/feature/improve_map_manag
 git push origin HEAD:feature/improve_map_management 
 ```
 
+##### git 查看远程仓库地址
+
+```shell
+git remote -v
+```
+
+##### git 设置远程仓库地址
+
+```shell
+git remote set-url origin <url>
+```
 
 
 ## ch2. git 项目开发流程
@@ -477,7 +475,26 @@ git push
 ## ch3. git submodule
 
 - refitem: https://git-scm.com/book/en/v2/Git-Tools-Submodules
+- refitem: https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97
 
+##### 添加submodule
+
+```shell
+git add submodule add url
+```
+
+在 .gitmodules 文件中会找到submodule记录
+
+##### 初始化
+
+在别的地方pull完父仓库之后，进入子仓库，发现子仓库是空的，可以使用
+
+```shell
+git submodule init
+git submodule update
+```
+
+##### 删除submodule
 
 
 

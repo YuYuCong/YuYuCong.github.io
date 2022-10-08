@@ -3,7 +3,7 @@ layout: post
 title: "paper:OctoMap"
 subtitle: "OctoMap: An Efficient Probabilistic 3D Mapping Framework Based on Octrees"
 categories: [SLAM]
-tags: [Algorithm, SLAM, Mapping, Navigation, OctoMap]
+tags: [algorithm, SLAM, mapping, octomap, tree, paper]
 redirect_from:
   - /2022/07/14/
 ---

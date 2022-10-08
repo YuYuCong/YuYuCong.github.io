@@ -2,8 +2,8 @@
 layout: post
 title: "Kalman Filter"
 description: "Kalman Filter"
-categories: [Kalman Filter, filter, Math]
-tags: [Kalman Filter, filter, Math]
+categories: [Kalman-Filter, filter, Math]
+tags: [Kalman-Filter, filter, Math]
 redirect_from:
   - /2021/05/16/
 ---

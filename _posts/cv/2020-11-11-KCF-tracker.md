@@ -2,8 +2,8 @@
 layout: post
 title: "KCF Tracker"
 subtitle: "KCF Tracker原理简析"
-categories: [opencv]
-tags: [opencv, KCF, tracker]
+categories: [OpenCV]
+tags: [OpenCV, KCF, tracker]
 header-img: "img/in-post/post-cv/"
 redirect_from:
   - /2020/11/11/

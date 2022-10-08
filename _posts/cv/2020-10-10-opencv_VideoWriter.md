@@ -2,8 +2,8 @@
 layout: post
 title: "Video IO"
 subtitle: "OpenCV 视频文件读写的一些方法与细节"
-categories: [opencv]
-tags: [opencv, video]
+categories: [OpenCV]
+tags: [OpenCV, video]
 header-img: "img/in-post/post-cv/bg_opencv_video.png"
 redirect_from:
   - /2020/10/10/
@@ -18,7 +18,7 @@ redirect_from:
 
 ---
 
-Created 2020.10.10 by Cong Yu; Last modified: 2022.09.01-v1.1.0
+Created 2020.10.10 by Cong Yu; Last modified: 2022.09.01-v1.2.0
 
 Contact: [windmillyucong@163.com](mailto:windmillyucong@163.com)
 
@@ -145,6 +145,56 @@ int main(int argc, char *argv[]) {
 
 ```
 
+
+## 3. VideoCapture
+
+### 构造
+
+可以通过url，或video path，或camera id构造。
+
+
+### 3.1 设置摄像头参数
+
+设置相机的分辨率
+```c++
+capture.set(CV_CAP_PROP_FRAME_WIDTH, 1080);  //宽度  
+capture.set(CV_CAP_PROP_FRAME_HEIGHT, 960);  //高度  
+capture.set(CV_CAP_PROP_FPS, 30);            //帧率 帧/秒  
+capture.set(CV_CAP_PROP_BRIGHTNESS, 0.3);      //亮度 1  
+capture.set(CV_CAP_PROP_CONTRAST, 0.5);       //对比度 40  
+capture.set(CV_CAP_PROP_SATURATION, 0.5);     //饱和度 50  
+capture.set(CV_CAP_PROP_HUE, 0.5);            //色调 50  
+capture.set(CV_CAP_PROP_EXPOSURE, 0.2);       //曝光 50
+```
+
+不一样的相机支持不一样的参数设定，有的可以设置焦距
+
+```c++
+capture.set(CV_CAP_PROP_AUTOFOCUS, 0); // 自动对焦
+capture.set(CV_CAP_PROP_FOCUS, 0.0);        // 相机焦距
+```
+
+### 3.2 获取摄像头参数
+
+```c++
+capture.get(CV_CAP_PROP_FRAME_WIDTH);   // 宽度  
+capture.get(CV_CAP_PROP_FRAME_HEIGHT);  // 高度  
+capture.get(CV_CAP_PROP_FPS);           // 帧率  
+capture.get(CV_CAP_PROP_BRIGHTNESS);    //亮度  
+capture.get(CV_CAP_PROP_CONTRAST);      // 对比度  
+capture.get(CV_CAP_PROP_SATURATION);    // 饱和度  
+capture.get(CV_CAP_PROP_HUE);           // 色调  
+capture.get(CV_CAP_PROP_EXPOSURE);      // 曝光
+```
+
+
+### 3.3 获取视频参数
+
+```c++
+capture.get(CV_CAP_PROP_FRAME_COUNT);//视频帧数
+```
+
+
 ## Q: 支持的视频格式
 
 一个平台所安装的依赖支持哪些格式的Video呢？
@@ -197,16 +247,53 @@ Q3: 不同帧率对视频文件大小的影响
 
 
 
-### 注：如何查看插入的 usb camera的序号
+## 注：如何查看插入的 usb camera的序号
 ```c++
 lsusb
+
+v4l2-ctl --list-devices
 ```
+
+
+## 注：多摄像头使用
+
+- https://blog.csdn.net/waynebuaa/article/details/41786281
+
+考虑不同传感器时间戳同步问题
+
+放一个queue, 在queue里面处理。
+
+
+
+## 注：1080p
+
+解析度(DPI)又稱圖像的"像素"或 "圖像分辨率"，常見的解析度的規格如： 
+
+-   720P 是指解析度 1280*720 畫素， 1280 x 720 = 921600 像素，就是在攝像鏡頭規格俗稱的百萬像素，也就是 720p 或 720i。
+-   960P 是指解析度 1280*960 畫素， 1280 x 960 = 1228800 像素，也就是 960p 或 960i 為 130萬像素。
+-   1080P 是指解析度 1920*1080 畫素， 1920 x 1080 = 2073600 像素，也就是 1080p 或 1080i 為 200 萬像素。
+
+最近比較成熟的 4K，指的是 3840*2160 畫素，也就是 2160p、2160i 約 360萬畫素，大家都稱為 4K。
+
+
+
+参数i 是什么？ 比如 1080i
+
+i表示各行扫描
+
+清晰度排名为 1080P>1080I>720P>720I
+
+
+## 注：减小延时
+
+提高读取帧率。把采集线程和处理线程分开。
+
+
+
 
 
 
 ----
-
-
 
 ## Contact
 

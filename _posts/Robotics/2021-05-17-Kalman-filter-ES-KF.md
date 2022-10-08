@@ -2,8 +2,8 @@
 layout: post
 title: "Error-State Kalman Filter"
 description: "Error-State Kalman Filter"
-categories: [Kalman Filter, filter, Math, ESKF]
-tags: [Kalman Filter, filter, Math, ESKF]
+categories: [Kalman-Filter, filter, Math, ESKF]
+tags: [Kalman-Filter, filter, Math, ESKF]
 redirect_from:
   - /2021/05/16/
 ---

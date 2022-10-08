@@ -2,8 +2,8 @@
 layout: post
 title: "WeChatORCode二维码识别"
 subtitle: "关于OpenCV中cv::wechat_qrcode的一些简单笔记"
-categories: [opencv]
-tags: [opencv]
+categories: [OpenCV]
+tags: [OpenCV]
 header-img: "img/in-post/post-cv/"
 redirect_from:
   - /2020/10/10/

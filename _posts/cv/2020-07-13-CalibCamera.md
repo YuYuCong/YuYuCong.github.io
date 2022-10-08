@@ -2,11 +2,11 @@
 layout: post
 title: "Camera Calibrate"
 subtitle: "相机畸变校准原理与工具代码"
-categories: [opencv]
-tags: [opencv, camera, calibrate]
+categories: [OpenCV]
+tags: [OpenCV, camera, calibrate]
 header-img: "img/in-post/post-cv/bg_marker2.png"
-redirect_from:
-  - /2020/07/13/
+header-style: img
+date: 2020.07.13
 ---
 
 >  相机的内外参标定原理，与棋盘格标定方法，以及OpenCV提供库方法的简单笔记。 Camera internal and external parameter calibration.
@@ -69,8 +69,9 @@ where
 - and $s$ is the projective transformation's arbitrary scaling and not part of the camera model. 影射变换的尺度部分，与相机模型无关
 
 ![pinhole_camera_model.png](https://docs.opencv.org/4.x/pinhole_camera_model.png)
-
 <small class="img-hint">Fig1.  **Pinhole camera model**</small>
+
+注意：相机坐标系的方向规定为：假设你的眼睛是相机，右手方向为x，脚的方向为y，目光直视方向（正前方）为z。得到的图像视野为左上方到右下方。横宽竖窄。
 
 世界坐标系转相机坐标系
 $$
@@ -134,7 +135,9 @@ Real lenses usually have some distortion, mostly radial distortion, and slight t
 
 #### 畸变模型
 
-畸变作用于相机归一化坐标系 $P_c^{\`}$ ，畸变后记为 $P^{\`\`}_c$ 。畸变模型为：
+- 畸变作用于相机归一化坐标系 $P_c^`$ ，
+- 畸变后记为 $P^{``}_c$ 。
+- 畸变模型为：
 $$
 \begin{bmatrix} x^{``} \\ y^{``} \end{bmatrix} = 
 \begin{bmatrix} 
@@ -146,12 +149,9 @@ y^{`}
 \end{bmatrix} \tag 6
 $$
 其中
-
-
 $$
 r^2 = x^2 + y^2
 $$
-
 
 k1, k2, k3, k4, k5, k6 p1, p2, s1, s2, s3, and s4是畸变参数
 
@@ -174,7 +174,7 @@ The distortion parameters：
 
 ## 2. 校准步骤
 
-### 2.1 生成 ChArUco 标定板
+### 2.1 <mark style="background: #ADCCFFA6;">生成 ChArUco 标定板</mark>
 
 Create a ChArUco board image.
 
@@ -182,8 +182,10 @@ Create a ChArUco board image.
 
 - https://github.com/opencv/opencv_contrib/blob/master/modules/aruco/samples/create_board_charuco.cpp
 
+示例：
+
 ```shell
-./bin/tool/create_board_charuco ./marker_charuco.png -w=13 -h=8 -sl=200 -ml=160 -d=10 -bb=1 -si=1
+./create_board_charuco ./marker_charuco.png -w=13 -h=8 -sl=200 -ml=160 -d=10 -bb=1 -si=1
 ```
 
 参数：
@@ -207,7 +209,6 @@ const char* keys =
     "(squareLength-markerLength) }"
     "{bb       | 1     | Number of bits in marker borders }"
     "{si       | false | show generated image }";
-}  // namespace
 ```
 
 - w: x方向的格子数
@@ -250,16 +251,17 @@ cv.aruco.CharucoBoard_create(	squaresX, squaresY, squareLength, markerLength, di
 | markerLength   | marker side length (same unit than squareLength)   | marker的长度(单位：m) |
 
 
-
-### 2.2. 内参标定
+### 2.2. <mark style="background: #ADCCFFA6;">内参标定</mark>
 
 #### OpenCV例程
 
 - [**Calibration with ArUco and ChArUco**](https://docs.opencv.org/4.x/da/d13/tutorial_aruco_calibration.html)
 - code https://github.com/opencv/opencv_contrib/blob/master/modules/aruco/samples/calibrate_camera_charuco.cpp
 
+示例：
+
 ```c++
-./bin/tool/calibrate_camera_charuco ./calibrate_result.txt -w=13 -h=8 -sl=0.0310 -ml=0.0248 -d=10 -ci=4
+./calibrate_camera_charuco ./calibrate_result.txt -w=13 -h=8 -sl=0.0310 -ml=0.0248 -d=10 -ci=4
 ```
 
 参数：
@@ -283,13 +285,16 @@ const char* keys  =
         "{a        |       | Fix aspect ratio (fx/fy) to this value }"
         "{pc       | false | Fix the principal point at the center }"
         "{sc       | false | Show detected chessboard corners after calibration }";
-}
 ```
 
-- sl: 方格大小，注意单位m，需要自己测量
+- sl: 方格大小，注意单位m，需要自己测量。
 - ml: marker的大小，单位m
 - v: 读取video
 - ci: 或者直接读取camera 端口号
+
+注意：一个小技巧，tool_create_charuco运行后直接在显示屏上显示标定板，不要打印出来，那么同一个显示屏配置下，显示出来的实际物理尺寸大小也是确定的！！！ 不需要每次都重新测量。
+
+![calibrate](/img/in-post/post-cv/calibrate.png)
 
 #### 主要函数 : [calibrateCameraCharuco()](https://docs.opencv.org/4.x/d9/d6a/group__aruco.html#gaa7357017aa9da857b487e447c7b13f11)
 
@@ -318,7 +323,7 @@ cv.aruco.calibrateCameraCharuco(	charucoCorners, charucoIds, board, imageSize, c
 
 - charucoCorners: vector of detected charuco corners per frame
 - charucoIds: list of identifiers for each corner in charucoCorners per frame
-- board: 标定板
+- board: 标定板对象
 - imageSize: 输入图像的大小
 - cameraMatrix: Output 相机内参矩阵$A$
 
@@ -330,8 +335,11 @@ f_x & 0 & c_x \\
 \end{bmatrix}
 $$
 
-- distCoeffs: Output 相机畸变参数 vector of distortion coefficients (k1,k2,p1,p2[,k3[,k4,k5,k6],[s1,s2,s3,s4]]) of 4, 5, 8 or 12 elements
-- rvecs: Output vector of rotation vectors (see Rodrigues 罗德里格斯) estimated for each board view (e.g. std::vector<cv::Mat>>). That is, each k-th rotation vector together with the corresponding k-th translation vector (see the next output parameter description) brings the board pattern from the model coordinate space (in which object points are specified) to the world coordinate space, that is, a real position of the board pattern in the k-th pattern view (k=0.. *M* -1). 相机的rt姿态
+- distCoeffs: Output 相机畸变参数 vector of distortion coefficients
+	- (k1,k2,p1,p2[,k3[,k4,k5,k6],[s1,s2,s3,s4]]) of 4, 5, 8 or 12 elements
+- rvecs: Output vector of rotation vectors (see [cv::Rodrigues](https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#ga61585db663d9da06b68e70cfbf6a1eac) 罗德里格斯) estimated for each board view (e.g. std::vector<cv::Mat>>).  每个标定板的外参的姿态，由旋转向量表达。
+	- That is, each k-th rotation vector together with the corresponding k-th translation vector (see the next output parameter description) brings the board pattern from the model coordinate space (in which object points are specified) to the world coordinate space, that is, a real position of the board pattern in the k-th pattern view (k=0.. *M* -1). 相机的rt姿态
+	- [cv::Rodrigues](https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#ga61585db663d9da06b68e70cfbf6a1eac) 罗德里格斯。
 - tvecs: Output vector of translation vectors estimated for each pattern view. 相机的rt姿态
 - stdDeviationsIntrinsics:  Output vector of standard deviations estimated for intrinsic parameters. Order of deviations values: (fx,fy,cx,cy,k1,k2,p1,p2,k3,k4,k5,k6,s1,s2,s3,s4,τx,τy) If one of parameters is not estimated, it's deviation is equals to zero. 内参估计的标准差
 - stdDeviationsExtrinsics: Output vector of standard deviations estimated for extrinsic parameters. Order of deviations values: (R1,T1,…,RM,TM) where M is number of pattern views, Ri,Ti are concatenated 1x3 vectors.外参估计的标准差
@@ -339,13 +347,15 @@ $$
 - flags: todo(congyu)
 - criteria: todo(congyu)
 
-返回
+返回值
 
 - The function returns the final re-projection error. 返回最终的重投影误差。
 
-#### saveCameraParams()
+#### 校准参数文件的IO
 
-保存相机参数到文件
+##### 保存参数文件
+
+可以实现一个saveCameraParams()方法保存相机参数到文件。
 
 ```c++
 static bool saveCameraParams(const string &filename, Size imageSize,
@@ -387,6 +397,7 @@ static bool saveCameraParams(const string &filename, Size imageSize,
 }
 ```
 
+调用时，如下即可：
 ```c++
 bool saveOk =
     saveCameraParams(outputFile, imgSize, aspectRatio, calibrationFlags,
@@ -418,9 +429,35 @@ avg_reprojection_error: 3.2079151333906419e-01
 
 ```
 
+##### 读取参数文件
+
+可以实现一个 readCameraParameters()方法读取上文保存的相机参数文件。
+
+```c++
+inline static bool readCameraParameters(std::string filename,  
+                                        cv::Mat &camMatrix,  
+                                        cv::Mat &distCoeffs) {  
+  cv::FileStorage fs(filename, cv::FileStorage::READ);  
+  if (!fs.isOpened()) return false;  
+  fs["camera_matrix"] >> camMatrix;  
+  fs["distortion_coefficients"] >> distCoeffs;  
+  return true;}
+```
+
+调用时，如下即可：
+```c++
+Mat camMatrix, distCoeffs;
+bool readOk =  
+    readCameraParameters(parser.get<string>("c"), camMatrix, distCoeffs);  
+if (!readOk) {  
+  cerr << "Invalid camera file" << endl;  
+  return 0;  
+}
+```
 
 
-## 3. 校准参数的使用
+
+## 3. <mark style="background: #ADCCFFA6;">校准参数的使用</mark>
 
 #### 主要函数：[undistort()](https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#ga69f2545a8b62a6b0fc2ee060dc30559d)
 
@@ -439,7 +476,7 @@ InputArray 	newCameraMatrix = noArray()
 cv.undistort(	src, cameraMatrix, distCoeffs[, dst[, newCameraMatrix]]	) ->	dst
 ```
 
-代码片段
+#### 代码片段示例
 
 ```c++
   cv::Mat camera_matrix_;
@@ -481,7 +518,11 @@ cv.undistortPoints(	src, cameraMatrix, distCoeffs[, dst[, R[, P]]]	) ->	dst
 cv.undistortPointsIter(	src, cameraMatrix, distCoeffs, R, P, criteria[, dst]	) ->	dst
 ```
 
+## 4. 相机外参的估计
 
+基于ChArUco board，做相机的外参标定
+
+[2020-07-14-MarkerPoseEstimate](cv/2020-07-14-MarkerPoseEstimate.md)
 
 
 

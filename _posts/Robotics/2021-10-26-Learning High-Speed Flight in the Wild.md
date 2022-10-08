@@ -3,7 +3,7 @@ layout: post
 title: "paper:Learning High-Speed Flight in the Wild"
 subtitle: "Learning High-Speed Flight in the Wild - University of Zurich and Intel"
 categories: [DeepLearning, Robotic]
-tags: [paper,path plan,quadrotor,autonomously fly]
+tags: [paper,path-plan,quadrotor,autonomously-fly]
 redirect_from:
   - /2021/10/26/
 ---

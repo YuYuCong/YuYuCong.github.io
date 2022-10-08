@@ -2,8 +2,8 @@
 layout: post
 title: "Cartographer Overview"
 description: "Cartographer Overview"
-categories: [slam]
-tags: [cartographer,slam,python]
+categories: [SLAM]
+tags: [cartographer,SLAM, paper]
 redirect_from:
   - /2021/07/20/
 ---
