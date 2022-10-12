@@ -3,11 +3,14 @@
   "dataview",
   "calendar",
   "obsidian-excalidraw-plugin",
-  "obsidian-outliner",
   "obsidian-kanban",
   "obsidian-icon-folder",
   "obsidian-icons-plugin",
   "templater-obsidian",
   "highlightr-plugin",
-  "code-block-copy"
+  "code-block-copy",
+  "mousewheel-image-zoom",
+  "obsidian-git",
+  "cm-editor-syntax-highlight-obsidian",
+  "markdown-prettifier"
 ]

@@ -1,5 +1,24 @@
 {
   "newLinkFormat": "absolute",
-  "showLineNumber": false,
-  "spellcheck": true
+  "showLineNumber": true,
+  "spellcheck": true,
+  "showFrontmatter": false,
+  "strictLineBreaks": true,
+  "attachmentFolderPath": "_backup",
+  "pdfExportSettings": {
+    "pageSize": "A4",
+    "landscape": false,
+    "margin": "2",
+    "downscalePercent": 100
+  },
+  "communityThemeSortOrder": "download",
+  "alwaysUpdateLinks": true,
+  "useMarkdownLinks": true,
+  "userIgnoreFilters": [
+    "Excalidraw/",
+    "_backup/",
+    "project_list.md"
+  ],
+  "promptDelete": true,
+  "showUnsupportedFiles": true
 }
