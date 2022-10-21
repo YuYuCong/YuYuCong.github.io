@@ -387,7 +387,12 @@ print("euler_angle", euler_angle)
 vec, theta = tfs.axangles.mat2axangle(rotate_matrix)  
 print("angleaxis.v", vec)  
 print("angleaxis.theta", theta)  
-  
+# 或者  
+angleaxis = tfs.axangles.mat2axangle(rotate_matrix)  
+print("angleaxis", angleaxis)  
+print("angleaxis.v", angleaxis[0])  
+print("angleaxis.theta", angleaxis[1])
+
 # 旋转矩阵 -> 四元数  
 quaternion = tfs.quaternions.mat2quat(rotate_matrix)  
 print("quaternion(w,x,y,z)", quaternion)
@@ -406,8 +411,8 @@ todo(congyu)
 ## 7. 转换公式
 
 - refitem: 
-  - http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/index.htm
-  - http://www.euclideanspace.com/maths/geometry/rotations/euler/index.htm
+  - [http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/index.htm](http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/index.htm)
+  - [http://www.euclideanspace.com/maths/geometry/rotations/euler/index.htm](http://www.euclideanspace.com/maths/geometry/rotations/euler/index.htm)
 
 ##### 欧拉角转四元数
 
