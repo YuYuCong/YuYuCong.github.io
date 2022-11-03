@@ -33,8 +33,8 @@ Copyleft! 2022 Cong Yu. Some rights reserved.
 
 i, j, x, y, r, c, w, h 与图像坐标轴相关的变量总是写反？傻傻分不清？总结如下
 
-[[Excalidraw/Drawing 2022-09-23 23.14.54.excalidraw]]
-<img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/master/_posts/Excalidraw/Drawing%202022-09-23%2023.14.54.excalidraw.png" alt="img" style="zoom:50%;" align='center' text ="home-congyu2.png"/>
+[[Excalidraw/opencv_pix.excalidraw]]
+<img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/master/_posts/Excalidraw/opencv_pix.excalidraw" alt="img" style="zoom:50%;" align='center' text ="opencv_pix.excalidraw"/>
 
 
 遍历一张图像时
@@ -78,8 +78,8 @@ if( 0 <= roi.x && roi.x < img.cols && 0 <= roi.y && roi.y < img.rows && 0 < roi.
 }
 ```
 
-[[Excalidraw/Drawing 2022-09-24 00.26.40.excalidraw]]
-<img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/master/_posts/Excalidraw/Drawing%202022-09-24%2000.26.40.excalidraw.png" alt="img" style="zoom:50%;" align='center' text ="home-congyu2.png"/>
+[[Excalidraw/opencv_pix2.excalidraw]]
+<img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/master/_posts/Excalidraw/opencv_pix2.excalidraw.png" alt="img" style="zoom:50%;" align='center' text ="opencv_pix2.excalidraw"/>
 
 
 ## -多线程imshow
