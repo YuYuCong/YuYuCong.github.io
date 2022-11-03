@@ -45,13 +45,10 @@ Copyleft! 2022 Cong Yu. Some rights reserved.
 
 - bottleneck: The lack of readily available, reliable, and efficient implementations of 3D mapping.
 
-- three requirements: 三个需求
-
-  - ### - probabilistic representation
-
-  - ### - unmapped area
-
-  - ### - Efficiency
+- three requirements: 三个需求:
+	- probabilistic representation
+	- unmapped area
+	- Efficiency
 
 - Several approaches have been proposed to model 3D environments in robotics: 现有方案
 

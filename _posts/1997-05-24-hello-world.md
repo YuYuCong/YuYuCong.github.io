@@ -45,6 +45,9 @@ Hello World! <mark style="background: #ADCCFFA6;">This is the beginning of this 
 <img src="/img/home-congyu2.png" alt="img" style="zoom:40%;" align='center' text ="home-congyu2.png"/>
 <small class="img-hint">Fig1. test_img</small>
 
+<img src="https://raw.githubusercontent.com/YuYuCong/BlogImg/develop/post_SLAM/ba.png" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
+<small class="img-hint">Fig2. test_img_github</small>
+
 1.3 test math block
 
 inline math block $x+y$
