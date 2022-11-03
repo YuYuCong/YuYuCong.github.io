@@ -393,6 +393,32 @@ git diff [branch]或者[commit-id]
 ```
 
 
+### git ignore
+
+对于已经添加追踪的文件，想要取消追踪
+
+文件夹：
+
+
+```shell
+git rm -r --cached . #不删除本地文件
+git rm -r --f .      #删除本地文件
+```
+
+
+对某个文件取消跟踪
+
+```shell
+git rm --cached readme1.txt    #删除readme1.txt的跟踪，并保留在本地。
+git rm --f readme1.txt    #删除readme1.txt的跟踪，并且删除本地文件。
+```
+
+然后git commit 即可。
+
+对于没有添加追踪的新文件，想忽略的话，添加gitignore文件即可
+
+gitignore规则：todo(congyu)
+
 
 ### git 远程工作
 
