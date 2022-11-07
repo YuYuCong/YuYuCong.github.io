@@ -48,6 +48,9 @@ Hello World! <mark style="background: #ADCCFFA6;">This is the beginning of this 
 <img src="https://raw.githubusercontent.com/YuYuCong/BlogImg/develop/post_SLAM/ba.png" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
 <small class="img-hint">Fig2. test_img_github</small>
 
+<img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/develop/img/in-post/post-optimal/solve_levenberg_marquardt_mu_is_1e3.png" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
+<small class="img-hint">Fig3. test_img_github</small>
+
 1.3 test math block
 
 inline math block $x+y$
@@ -60,6 +63,11 @@ x_{y} + y_{x} = & x ^2 + xy + y^2 \tag2 \\
 A = & \begin{bmatrix} f_x & 0 & c_x \\  0 & f_y & c_y \\ 0 & 0 & 1 \end{bmatrix}
 \end{align}
 $$
+
+math block using online image:
+
+![pitc](https://latex.codecogs.com/svg.image?x_{k&plus;1}&space;=&space;x_{k}&space;-&space;H^{-1}&space;J)
+
 
 1.4 test code block
 ```c++
