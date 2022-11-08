@@ -49,14 +49,13 @@ Copyleft! 2022 William Yu. Some rights reserved.
 - 处理器 -> 处理单元(processing unit) 或称 核心(core)
 - 一个计算机就有一个或多个处理器，一个处理器具有一个或多个核心
 - 一个核心在某一时间只能同时处理一项任务
-- 假并行：单核，任务切换(task switching)
-- 真并行：多核，硬件并发(hardware concurrency)
+- <mark style="background: #ADCCFFA6;">假并行：单核，任务切换(task switching)</mark>
+- <mark style="background: #ADCCFFA6;">真并行：多核，硬件并发(hardware concurrency)</mark>
 
 <img src="https://raw.githubusercontent.com/xiaoweiChen/Cpp_Concurrency_In_Action/master/images/chapter1/1-1.png" alt="img" style="zoom:90%;" />
 
 - 假并发，任务切换耗时较大
-
-- 真假并发混合：任务数大于核心数
+- <mark style="background: #ADCCFFA6;">真假并发混合</mark>：任务数大于核心数时采用这种方案
 
   ![img](https://raw.githubusercontent.com/xiaoweiChen/Cpp_Concurrency_In_Action/master/images/chapter1/1-2.png)
 
@@ -80,7 +79,7 @@ Copyleft! 2022 William Yu. Some rights reserved.
 
 总结
 
-<img src="/img/in-post/post-cpp/cpp_thread_1.png" alt="img" style="zoom:40%;" align='center' text ="cpp_thread_1.png"/>
+<img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/develop/img/in-post/post-cpp/cpp_thread_1.png" alt="img" style="zoom:40%;" align='center' text ="cpp_thread_1.png"/>
 
 <small class="img-hint">Fig3. 并发</small>
 

@@ -84,7 +84,7 @@ Copyleft! 2022 William Yu. Some rights reserved.
 
 #### 5.2.2 原子类型
 
-<center style="font-size:30px;color:#CD5C5C;text-align:right;">std::atomic<></center> 
+<center style="font-size:30px;color:#CD5C5C;text-align:right;">std::atomic</center> 
 
 头文件
 
@@ -97,7 +97,7 @@ Copyleft! 2022 William Yu. Some rights reserved.
 | 原子类型        | 相关特化类                      |
 | :-------------- | :------------------------------ |
 | atomic_bool     | std::atomic<bool>               |
-| atomic_char     | std::atomic<char>               |
+| atomic_char      |  std::atomic<char>                |
 | atomic_schar    | std::atomic<signed char>        |
 | atomic_uchar    | std::atomic<unsigned char>      |
 | atomic_int      | std::atomic<int>                |
