@@ -210,7 +210,7 @@ void data_processing_thread() {
 
 ##### 4.2.0 future
 
-<p style="font-size:30px;color:#CD5C5C;text-align:right;">std::future<></p> 
+<p style="font-size:30px;color:#CD5C5C;text-align:right;">std::future</p> 
 
 - 期望
   - 唯一期望  std::future<>
