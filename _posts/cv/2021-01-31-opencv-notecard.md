@@ -81,6 +81,47 @@ if( 0 <= roi.x && roi.x < img.cols && 0 <= roi.y && roi.y < img.rows && 0 < roi.
 [[Excalidraw/opencv_pix2.excalidraw]]
 <img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/master/_posts/Excalidraw/opencv_pix2.excalidraw.png" alt="img" style="zoom:50%;" align='center' text ="opencv_pix2.excalidraw"/>
 
+## -卷积
+
+卷积常用代码片段：
+
+```c++
+  for (size_t r = 0; r < src.rows; ++r) {  
+#pragma omp parallel for  
+    for (size_t c = 0; c < src.cols; ++c) {  
+      float res = 0.0;  
+      for (size_t m = 0; m < kernel_mat_->rows; ++m) {  
+        for (size_t n = 0; n < kernel_mat_->cols; ++n) {  
+          const float a = kernel_mat_->at<float>(m, n);  
+          float b;  
+          const int x = int(r) + (int(m) - int(kernel_mat_->rows / 2));  
+          const int y = int(c) + (int(n) - int(kernel_mat_->cols / 2));  
+          if (x < 0 || y < 0 || x > (src.rows - 1) || y > (src.cols - 1)) {  
+            b = 0.0;  
+          } else {  
+            b = src.at<uchar>(x, y);  
+          }  
+          res += (a * b);  
+        }  // end for n  
+      }    // end for m  
+      cost_map.at<uchar>(r, c) = res;  
+    }  // end for c  
+  }    // end for r
+```
+
+其中，卷积位置的计算：直接卷积核除以2即可
+
+```c++
+          const int x = int(r) + (int(m) - int(kernel_mat_->rows / 2));  
+          const int y = int(c) + (int(n) - int(kernel_mat_->cols / 2));  
+```
+
+其中，需要考虑超出边界判断
+
+```c++
+          if (x < 0 || y < 0 || x > (src.rows - 1) || y > (src.cols - 1)) {  
+            b = 0.0;  
+```
 
 ## -多线程imshow
 
