@@ -43,15 +43,10 @@ Copyleft! 2022 William Yu. Some rights reserved.
 ### 3.1 Concepts
 
 - 不变量
-
 - 条件竞争
-
 - 互斥量
-
 - 无锁编程
-
 - 锁
-
 - 死锁
 
   
@@ -141,9 +136,9 @@ void some_thread_function(){
 }
 ```
 
-### 3.5 std::lock_ground<>
+### 3.5 std::lock_guard<>
 
-<center style="font-size:30px;color:#CD5C5C;text-align:right;">std::lock_ground<></center> 
+<center style="font-size:30px;color:#CD5C5C;text-align:right;">std::lock_guard</center> 
 
 自动的锁
 
@@ -180,7 +175,7 @@ bool list_contains(int value_to_find) {
 
 ### 3.6 std::unique_lock<>
 
-<center style="font-size:30px;color:#CD5C5C;text-align:right;">std::unique_lock<></center> 
+<center style="font-size:30px;color:#CD5C5C;text-align:right;">std::unique_lock</center> 
 
 轻度灵活锁
 
@@ -241,29 +236,35 @@ bool list_contains(int value_to_find) {
 
 举例：
 
-​	两个线程，两个互斥量。线程1访问数据A时，将互斥量A上锁，然后开始操作，后面的某些操作中需要用到数据B，会尝试获取B的锁；与此同时，线程2在访问数据B时，将互斥量B上锁，然后开始操作，某些操作中需要用到数据A，会尝试获取A的锁。这种情况下，线程1在等待互斥量B的锁被释放，而线程2在等待互斥量A的锁被释放。产生死锁。
+- 两个线程，两个互斥量。线程1访问数据A时，将互斥量A上锁，然后开始操作，后面的某些操作中需要用到数据B，会尝试获取B的锁；与此同时，线程2在访问数据B时，将互斥量B上锁，然后开始操作，某些操作中需要用到数据A，会尝试获取A的锁。这种情况下，线程1在等待互斥量B的锁被释放，而线程2在等待互斥量A的锁被释放。产生死锁。
 
 ##### 避免的措施
+
+2种措施：
+
+###### 按照顺序上锁
 
 - 无死锁的代码风格  deadlock-free:
   - 建议互斥量总是以相同的顺序上锁。（上面的例子中，线程1和2都先锁互斥量A，再锁互斥量B） -- 但这种方法并不总是奏效:slightly_smiling_face:
   - 一个线程只持有一个锁，当已经持有一个锁时，不要再去获取第二把锁
   - 使用分层互斥锁
+
+###### 同时上锁
+
 - `std::lock()`： c++标准提供的解决方案。可以<u>一次锁住多个互斥量</u>，没有死锁风险
 
 <center style="font-size:30px;color:#CD5C5C;text-align:right;">std::lock()</center> 
 
-C++ 标准库中提供了`std::lock()`函数，能够保证将多个互斥锁同时上锁，
+步骤：
+
+1. C++ 标准库中提供了`std::lock()`函数，能够保证将多个互斥锁同时上锁，
+2. 然后，使用`lock_guard`，加参数`std::adopt_lock`表示无需再次上锁。
+	  备注：因为互斥锁已经被上锁了，那么`lock_guard`构造的时候不应该上锁，只是需要在析构的时候释放锁就行了，使用参数`std::adopt_lock`表示无需上锁：
 
 ```c++
 std::lock(_mu, _mu2);
-```
-
-然后，使用`lock_guard`，也需要做修改，因为互斥锁已经被上锁了，那么`lock_guard`构造的时候不应该上锁，只是需要在析构的时候释放锁就行了，使用参数`std::adopt_lock`表示无需上锁：
-
-```c++
-std::lock_guard<std::mutex> guard(_mu2, std::adopt_lock);
-std::lock_guard<std::mutex> guard2(_mu, std::adopt_lock);
+std::lock_guard<std::mutex> lock1(_mu, std::adopt_lock);
+std::lock_guard<std::mutex> lock2(_mu2, std::adopt_lock);
 ```
 
 完整的代码如下
