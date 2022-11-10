@@ -4,7 +4,7 @@ title: "非线性优化"
 subtitle: "详细解读常用的数值优化方法，如：梯度下降，高速牛顿，以及LevenbergMarquardt等"
 categories: [SLAM]
 tags: [SLAM, Optimal, Math]
-header-img: "img/in-post/post-optimal/post-bg.png"
+header-img: "img/in-post/post-optimal/post-bg-1.png"
 header-style: img
 date: 2022.01.01
 author: "CongYu"
@@ -83,7 +83,7 @@ $$
 \mathbf x:= \mathbf x-\eta J^T
 $$
 
-<img src="https://img-blog.csdnimg.cn/20191127192843314.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Njb3R0MTk4NTEw)" alt="img" style="zoom:40%;" align='center' text ="https://i.imgur.com/2dKCQHh.gif"/>
+<img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/develop/img/in-post/post-optimal/gd.png" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
 
 
 ### 1.2 最速下降衍生算法
@@ -127,11 +127,11 @@ $$
 //todo(congyu)
 
 所有方法的对比：
-<img src="https://i.imgur.com/2dKCQHh.gif)" alt="img" style="zoom:40%;" align='center' text ="https://i.imgur.com/2dKCQHh.gif"/>
 
-<img src="https://i.imgur.com/pD0hWu5.gif)" alt="img" style="zoom:40%;" align='center' text ="https://i.imgur.com/pD0hWu5.gif"/>
+<img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/develop/img/in-post/post-optimal/NKsFHJb.gif" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
 
-<img src="https://i.imgur.com/NKsFHJb.gif)" alt="img" style="zoom:40%;" align='center' text ="https://i.imgur.com/NKsFHJb.gif"/>
+<img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/develop/img/in-post/post-optimal/pD0hWu5.gif" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
+
 
 
 ### 1.3 牛顿法
@@ -272,7 +272,7 @@ $$
 最终的迭代公式：
 
 $$
-\mathbf x_{k} := \mathbf x_{k} - \alpha H^{-1} J^T
+\mathbf x_{k} := \mathbf x_{k} - \eta H^{-1} J^T
 $$
 
 ### 2.3 列文伯格-马夸尔特法
@@ -283,11 +283,19 @@ $$
 \mathbf x_{k}:= \mathbf x_{k} - \eta (H + \mu I) ^ {-1} J ^T
 $$
 
-<img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/develop/img/in-post/post-optimal/Levenberg–Marquardt.png" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
+<img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/develop/img/in-post/post-optimal/Levenberg–Marquardt-1.png" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
 
 更多的小技巧：
 
 // todo(congyu)
+
+
+Ceres 优化中使用的方法：
+
+// todo(congyu)
+
+[2021-12-24-ceres](c++/Ceres/2021-12-24-ceres.md)
+
 
 
 ------

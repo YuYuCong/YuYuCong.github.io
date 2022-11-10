@@ -30,7 +30,7 @@ Copyleft! 2022 William Yu. Some rights reserved.
 
 refitem:
 
-- introductory paper https://www.cs.unc.edu/~welch/media/pdf/kalman_intro.pdf
+- paper [https://www.cs.unc.edu/~welch/media/pdf/kalman_intro.pdf](https://www.cs.unc.edu/~welch/media/pdf/kalman_intro.pdf)
 - blog https://zhuanlan.zhihu.com/p/39912633
 - blog https://longaspire.github.io/blog/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/
 - blog https://zhuanlan.zhihu.com/p/48876718
@@ -63,8 +63,8 @@ $$
 $$
 
 - 状态 $\vec x$ 由两部分组成
-- $ \vec x$ 的实际值并不知 
-- 卡尔曼滤波假设每个变量（在我们的例子里是位置和速度）都应该是**随机的**，而且符合**高斯分布**。每个变量都有一个**均值** ![[公式]](https://www.zhihu.com/equation?tex=%CE%BC) ，它是随机分布的中心；有一个方差 ![[公式]](https://www.zhihu.com/equation?tex=%CF%83%5E2) 
+- $\vec x$ 的实际值并不知 
+- 卡尔曼滤波假设每个变量（在我们的例子里是位置和速度）都应该是**随机的**，而且符合**高斯分布**。每个变量都有一个**均值** $\mu$ ，它是随机分布的中心；有一个方差$\sigma^2$
 - 这些输入信息可能是相关的，也可能不是相关的
 
 <img src="https://pic1.zhimg.com/80/v2-ebb864b7af322d063c9e75b79d28957c_720w.jpg" alt="img" style="zoom:32%;" />
@@ -73,7 +73,7 @@ $$
 
 ## Model
 
-#### 1.1 运动方程（状态方程）
+#### 1.1 运动方程（状态转移方程）
 
 系统的状态转移方程（运动方程），线性方程
 $$
@@ -102,9 +102,11 @@ $$
 #### 1.3 噪声
 
 $$
+\begin{align}
 p(w) ∼ N (0, Q)
 \\
 p(v) ∼ N (0, R)
+\end{align}
 $$
 
 - 随机信号 w(k) 和 v(k) 分别表示运动噪声和观测噪声
@@ -138,8 +140,7 @@ K_k = P_k^- H^T (HP_k^-H^T + R )^{-1} \tag 5
 $$
 状态更新
 $$
-x_k := x_k^- +  K_k(\underbrace{ z_k - \underbrace{H x_k^-}_{\rm estimate 
-\ measure} }_{\rm error}) \tag 6
+x_k := x_k^- +  K_k(\underbrace{ z_k - \underbrace{H x_k^-}_{\rm measure} }_{\rm error}) \tag 6
 $$
 协方差更新
 $$
@@ -154,9 +155,9 @@ $$
 
 ## Tips
 
-1. Falman filter defines every state with Guissian $(\eta, \sigma^2)$.
+1. Kalman filter defines every state with Guissian $(\eta, \sigma^2)$.
 
-   Falman filter predicts and updates not only $\eta$, but also $\sigma$.
+   Kalman filter predicts and updates not only $\eta$, but also $\sigma$.
 
    While Bayesian filter only offer a $\eta$
 
