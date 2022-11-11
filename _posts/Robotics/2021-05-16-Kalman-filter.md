@@ -34,6 +34,7 @@ refitem:
 - blog https://zhuanlan.zhihu.com/p/39912633
 - blog https://longaspire.github.io/blog/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/
 - blog https://zhuanlan.zhihu.com/p/48876718
+- blog 关于协方差矩阵 https://zhuanlan.zhihu.com/p/338335181
 
 
 

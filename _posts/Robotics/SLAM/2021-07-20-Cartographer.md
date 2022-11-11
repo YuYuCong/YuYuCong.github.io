@@ -3,7 +3,7 @@ layout: post
 title: "Cartographer Overview"
 description: "Cartographer Overview"
 categories: [SLAM]
-tags: [cartographer,SLAM, paper]
+tags: [SLAM, cartographer,paper]
 redirect_from:
   - /2021/07/20/
 ---
