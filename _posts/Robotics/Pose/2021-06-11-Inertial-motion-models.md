@@ -104,7 +104,10 @@ $E_{wb}$ 表示将IMU 坐标系下得到的角速度测量值投影到欧拉角�
 ### 预积分
 
 <img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/develop/img/in-post/post-geometry/post-robotics-imu-pre-integral.png" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
-
+注意一个问题：
+- VIO中直接对陀螺仪积分求姿态，直接对加速度积分求位置
+- 并不像 Mahony算法中，使用加速度计对陀螺仪做补偿
+	- mahony 算法中假定加速度计测量的只有重力加速度，这是怎么回事？
 
 Inertial measurement units (IMU) and the related motion model are useful for agile plat-
 forms with or without contact to the ground. IMU measurements of acceleration a S and
