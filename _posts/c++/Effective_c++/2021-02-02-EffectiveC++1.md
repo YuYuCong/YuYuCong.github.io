@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Effective C++笔记"
-description: "Effective C++学习笔记"
+title: "Effective C++系列笔记1-4"
+description: "Effective C++系列笔记，第一章，第1-4小节"
 categories: [c++]
 tags: [c++]
 redirect_from:
@@ -10,9 +10,11 @@ redirect_from:
 
 >  Effective C++
 
+
 * Kramdown table of contents
 {:toc .toc}
-# Effective C++
+
+# Effective C++ 1-4
 
 Created 2021.02.20 by William Yu; Last modified: 2021.02.21-V1.0.0
 
@@ -26,28 +28,54 @@ Copyleft! 2021 William Yu. Some rights reserved.
 
 - 《Effective C++》
 
+本文内容：《Effective C++》阅读笔记，总共9个章节，55小节。
 
+# Ch1 习惯c++
 
-# Part One
+## L1: 将c++看做一个语言联邦
 
-## L1: four part of c++
+从4个方面去看待c++
 
 ### c
 
-### Class
+以c语言为基础。包含了c的特性：
+- 区块 blocks
+- 语句 statements
+- 预处理 preprocessor
+- 内置数据类型
+- 数组
+- 指针
+
+### Object-Oriented
+
+简单来讲就是面向对象
+
+- class
+	- 构造函数
+	- 析构函数
+	- 封装
+	- 继承
+	- 多态
+	- virtual 函数 （动态绑定）
 
 ### Template
 
+泛型编程
+
 ### STL
+
+是一个template标准库
+
+- 容器
+- 迭代器
+- 算法
 
 ## L2: 少用#define
 
-- 尽量少用预编译期，多用编译器
-
+- 尽量少用预处理器，多用编译器
 - 使用const, enum, inline 替换 `#define`
-
-  - 对于常量，使用const, enum替换#define
-  - 对于形似函数的宏，使用inline函数替换#define
+	- 对于常量，使用const, enum替换#define
+	- 对于形似函数的宏，使用inline函数替换#define
 
 #### const、inline
 
@@ -74,7 +102,7 @@ class专属常量
   - 将常量的作用域限制于class内    ->     定义为类内成员
   - 确保此常量只有一份实体     ->    定义为static成员
 
-- ```c++
+ ```c++
   // xxx.h
   class GamePlayer{
     private:
@@ -197,7 +225,7 @@ int main(){
 
 - STL 迭代器相当于 T* 指针，所以const修饰指针和修饰迭代器差不多
 
-- ```c++
+ ```c++
   const std::vector<int>::iterator iter = vec.begin();    // iter相当于T* const   // const iter, non-const data
   std::vector<int>::const_iterator const_iter = vec.begin();  //const_iter相当于const T*  // non-const iter, const data
   ```
@@ -240,7 +268,24 @@ if (10 == f_add(a + b)){  // good
 
 ##### 2. const成员函数
 
-// todo(congyu)
+如果一个成员方法里面的操作是不会改变成员变量的，那么我们应该务必将它限定为const
+
+好处：
+- class的接口可以非常容易理解：哪些是会改变对象内容的，哪些是不会改变对象内容的。一目了然。
+
+```c++
+class TestClass{
+ public:
+	int GetNum() const { // 限定const成员函数
+		nums_++; // 这种操作会在编译时报错
+		return nums_;
+	}
+
+ private:
+	int nums_;
+}
+
+```
 
 #### const修饰类
 
@@ -251,8 +296,8 @@ if (10 == f_add(a + b)){  // good
 ## L4: 确定对象被使用前已经被初始化
 
 - 永远在使用对象之前先将其初始化
-  - 对于C++内置数据类型（如int, double, string），手动完成初始化
-  - 对于其他，在构造函数进行初始化，确保每一个构造函数都将对象的每一个成员初始化
+	- 对于C++内置数据类型（如int, double, string），手动完成初始化
+	- 对于其他，在构造函数进行初始化，确保每一个构造函数都将对象的每一个成员初始化
 
 
 #### 初始化的方法：成员初值列
@@ -260,7 +305,6 @@ if (10 == f_add(a + b)){  // good
 ##### 初始化和赋值的区别
 
 - 对象成员变量的初始化动作发生在进入构造函数本体之前，**成员初值列**     **member initialization list**
-
 - 在构造函数之内的，都是赋值而非初始化
 
 for example:
@@ -334,8 +378,8 @@ Tips：
 #### 成员初始化次序
 
 - c++有固定的成员初始化顺序
-  - base class 早于  derived class
-  - class内的成员变量按照其声明顺序初始化
+	- base class 早于  derived class
+	- class内的成员变量按照其声明顺序初始化
 - 但是对于static对象，该如何分析？
 
 For example
@@ -351,254 +395,6 @@ code: pc/sync/c++/basic/Effective_c++/L4.cpp
 // todo(congyu) P61 - 63
 
 - 最好使用local static对象替换non-local static对象
-
-
-
-
-
-# Part Two: Constructors, Destructor and Assignment Operators
-
-析构、构造、赋值运算    ->  Class的脊柱
-
-- 每一个class都会有一或多个构造函数、一个析构函数、一个copy assignment 操作符
-
-## L5: c++默认编写并调用的函数
-
-- 如果一个类是空的，当某操作会用到空类的【default构造函数，copy构造方法，析构函数，copy assignment 操作符】之一的时候，编译器会自动为空类声明缺少的方法
-
-  for example:
-
-  ```c++
-  class Empty{};
-  
-  // 一些操作 与 会用到的函数
-  Empty e1;       // default构造函数
-  Empty e2(e1);   // copy构造函数
-  e2 = e1;        // copy assignment 操作符
-  				// 析构函数
-  ```
-
-  ```c++
-  // 编译器自动补全
-  class Empty{
-    public:
-      Empty() {...} 						 		// default 构造函数
-      Empty(const Empty& rhs) {...}				// copy 构造函数
-  	~Empty() {...};								// 析构函数
-      
-      Empty& oprator=(const Empty& rhs){...}		// copy assignment 操作符
-  };
-  ```
-
-- 注意：所有编译器产生的方法都是public的
-
-## L6: 阻止copy
-
-问题描述：
-
-- 某类可以生成多个实例，但是每个实例都不能被复制出一份副本
-- 因此，不应该为该类声明和实现copy构造函数或者copy assignment 操作符号。
-- 但是即便程序员不实现，编译器却会自动声明（如L5所述）
-- 如何阻止copy呢？
-
-答案：
-
-##### 方法一：
-
-- 所有编译器产生的方法都是public的，为阻止编译器创建这些方法，可以自行声明copy构造函数和 copy assignment 操作符 为private
-
-- 并且只写声明，不予实现
-
-- ```c++
-  class OnlyOne{
-    public:
-      ...
-    private:
-      ...
-      OnlyOne(const OnlyOne&);  // 但是阻止copy
-      OnlyOne& operator=(const OnlyOne&);
-  };
-  ```
-
-- 缺点：
-
-  - member函数和friend函数还是可以调用private函数，但是由于未定义copy方法，所以会在链接时产生链接错误
-  - 我们完全可以在编译阶段就防止member和friend函数的copy行为
-  - 虽有不足，但非常通用
-
-##### 方法二：
-
-- base Class
-
-- 专门设计一个阻止copy的 base class，再将不愿被copy的类继承它
-
-- ```c++
-  class Uncopyable{
-    protected:
-      Uncopyable() {}   // 允许derived对象构造和析构
-      ~Uncopyable() {}
-    private:
-      Uncopyable(const Uncopyable&);  // 但是阻止copy
-      Uncopyable& operator=(const Uncopyable&);
-  };
-  
-  class OnlyOne: private Uncopyable{
-      ...
-  };
-  ```
-
-- 缺点：
-
-  - 当多个不可拷贝的类都继承这个base class， 可能导致多重继承
-
-#### 补充需求：某类只可以生成一个实例
-
-```
-// L6_instance.cpp
-//********************************************************************************
-/**
- * 实现只能生成一个实例的类
- */
-
-class Base {
- public:
-  static Base *getInstance() {
-    if (0 == instance_) {
-      // instance_为0才调用构造函数，实例化一次成功后，instance_不再为0，除非将其释放掉，才能开始下一次实例化
-      instance_ = new Base();
-    }
-    return instance_;
-  }
-
- private:
-  Base() {}        // 将构造函数定义为private
-  static Base *instance_;  //声明一个指向Base的static指针
-};
-Base *Base::instance_ = 0;  //定义+初始化
-
-int main() {
-  Base *s = Base::getInstance();  //第一次如果实例化成功，那么s不再为0
-  Base *s1 = Base::getInstance();  //实例化不成功，因为 s!=0,无法调用构造函数，得到s1 = s
-  return 0;
-}
-```
-
-
-
-
-
-## L7: 为多态基类声明virtual析构函数
-
-//todo(congyu)  p71 - 74
-
-
-
-## L10: 让operate= 返回一个 reference to *this 
-
-- 在为类实现赋值操作符的时候应该遵循下面的协议：赋值操作符必须返回一个reference指向操作符的左侧实参
-
-```c++
-class Point{
-  public:
-    Point() {...} 						 		// default 构造函数
-    Point(const Point& rhs) {...}				// copy 构造函数
-	~Point() {...};								// 析构函数
-    
-    Point& oprator=(const Point& rhs){          // copy assignment 操作符
-        ...										// 返回类型是一个Reference指向当前对象
-    	return* this;
-    }
-};
-```
-
-- 适用于以上标准赋值
-- 同样适用于所有赋值相关运算
-
-```c++
-class Point{
-  public:
-    ...
-    Point& oprator+=(const Point& rhs){         // 此协议是英语 +=，-+，*= 等 
-        ...										
-    	return* this;
-    }
-};
-```
-
-
-
-## L11: 在=里处理好自我赋值
-
-## L12: 复制对象时勿忘每一成分
-
-# Part Three: Resource Management
-
-资源管理
-
- 
-
-# Part Four: 设计与声明
-
-## L20: 参数传入：多使用pass-by-reference-to-const 替换 pass-by-value
-
-- pass-by-value 是一件非常耗时的事情
-  - 当函数被调用的时候，会调用传入参数的类的copy构造，初始化形参
-  - 当函数返回时，又会触发析构
-- pass-by-reference-to-const 效率高
-  - 避免了所有参数的构造和析构动作，没有任何新对象被创建
-  - const是非常重要的
-    - 保证不会对传入的对象作改变
-  - 可以避免对象切割问题
-- 内置类型，STL的迭代器和函数对象，pass-by-value往往更合适
-  - reference 是以指针实现的
-  - 所以，对于内置对象而言，pass-by-value比pass-by-reference-to-const更高校，还是建议使用pass-by-value
-  - 内置对象非常小，copy的消耗不大
-  - 但是用户自定义的小对象却不一定满足这个法则，小对象并不意味着copy的消耗不大
-    - 比如：某些对象含有的东西只比一个指针多一点点
-    - 但是copy这个对象，却要copy指针所指的每一样东西
-
-
-
-## L21: 参数返回：不要返回reference
-
-
-
-## L22: 将成员变量声明为private
-
-- 将成员变量声明为private
-- 提供public的成员方法访问和修改这些成员变量
-
-
-
-
-
-# Part Five: Implementations
-
-实现
-
-## L30: inline
-
-- inline 可免除函数调用成本
-- 过度使用inline 会使目标代码大小变大 
-- 尽量对小型、被频繁调用的函数使用inline
-
-
-
-# Part Six: Object
-
-继承和面向对象设计 OOP
-
-
-
-
-
-
-
-# Part Seven: Templates
-
-模板和泛型编程
-
-
 
 
 
