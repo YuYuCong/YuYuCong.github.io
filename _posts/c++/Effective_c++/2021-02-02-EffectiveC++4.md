@@ -30,7 +30,7 @@ Copyleft! 2021 William Yu. Some rights reserved.
 
 本文内容：《Effective C++》阅读笔记，总共9个章节，55小节。
 
-# Ch3 设计与声明
+# Ch4 设计与声明
 
 ## L20: 参数传入：多使用pass-by-reference-to-const 替换 pass-by-value
 
