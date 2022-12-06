@@ -68,7 +68,7 @@ todo(congyu)
 
 注意上述公式中的姿态积分都是用的四元数的形式表达出来的，也有很多其他积分表达方式
 
-### IMU积分的几种表达方式总结
+### Gyro积分的几种表达方式总结
 
 公式： (vio_learning, l2, p43)
 
@@ -99,7 +99,7 @@ $E_{wb}$ 表示将IMU 坐标系下得到的角速度测量值投影到欧拉角�
 
 投影公式推导：
 - 公式： (vio_learning, l2, p44-46)
-- [投影步骤](YuYuCong.github.io/_posts/Robotics/Geometry/2021-06-02-EulerAngles.md#投影步骤)
+- [投影步骤](Robotics/Geometry/2021-06-02-EulerAngles.md#投影步骤)
 
 ### 预积分
 
