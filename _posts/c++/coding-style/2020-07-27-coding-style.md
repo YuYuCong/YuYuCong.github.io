@@ -343,26 +343,16 @@ Usage:
   if (std::abs(a) > std::numeric_limits<float>::epsilon()) { // good
   }
   
-  double d = 0.0001;
-  if (d) { // bad
-  }
-  if (std::abs(d > std::numeric_limits<double>::epsilon() ) { // good
-  }
-      
-  if (!d) { // bad
-  }
-  if (std::abs(d < std::numeric_limits<double>::epsilon() ) { // good
-  }
   ```
-
+  
   在CmakeList中禁止写出 float-equal 的代码
-
+  
   ```cmake
   # Suppress float-equal warnings for line_tracker headers
   set_source_files_properties("test.cc" PROPERTIES
       COMPILE_FLAGS -Wno-float-equal)
   ```
-
+  
   但是要注意python的不同
   ```python
   print(1.001 == True) # False
@@ -383,7 +373,7 @@ Usage:
   else:
       print("no")
   ```
-
+  
 - 有很多大括号嵌套的时候要注释结束符号
 
   ```c++
