@@ -80,7 +80,7 @@ Copyleft! 2022 Cong Yu. Some rights reserved.
 
 - volumetric model and tree representation.
 
-  <img src="/home/trifo/code/sync/DevelopNotes/img/Screenshot from 2022-07-14 14-41-30.png" alt="Screenshot from 2022-07-14 14-41-30" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/YuYuCong/BlogImg/develop/post_octmap/fig1.png" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
 
 - Boolean property.
 
@@ -95,9 +95,9 @@ Copyleft! 2022 Cong Yu. Some rights reserved.
 
 - This formulation of the update rule allows for faster updates since multiplications are replaced by additions. 因为是加法，所以概率更新计算非常块
 
-- <img src="/home/trifo/code/sync/DevelopNotes/img/Screenshot from 2022-07-14 15-02-24.png" alt="Screenshot from 2022-07-14 15-02-24" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/YuYuCong/BlogImg/develop/post_octmap/f1.png" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
 
-- <img src="/home/trifo/code/sync/DevelopNotes/img/Screenshot from 2022-07-14 15-03-33.png" alt="Screenshot from 2022-07-14 15-03-33" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/YuYuCong/BlogImg/develop/post_octmap/f2.png" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
 
 - node 中保存log-odds，而非the occupancy probability
 
@@ -113,7 +113,7 @@ Copyleft! 2022 Cong Yu. Some rights reserved.
 
 - 最终的更新公式：occupancy estimates are updated according to
 
-  <img src="/home/trifo/code/sync/DevelopNotes/img/Screenshot from 2022-07-14 15-06-57.png" alt="Screenshot from 2022-07-14 15-06-57" style="zoom:70%;" />
+<img src="https://raw.githubusercontent.com/YuYuCong/BlogImg/develop/post_octmap/f4.png" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
 
 ### 3.3 Multi-Resolution Queries
 
