@@ -517,6 +517,17 @@ TYPED_TEST_CASE(QueueTest, typelist);
 - random
   - gtest 经常会调用到random模块，补充一些c++的random操作。
 
+注意参数的范围是：左闭右闭
+
+```c++
+inline int RandomInt(int min = INT_MIN, int max = INT_MAX)  
+{  
+    std::default_random_engine random_engine(std::random_device{}());  
+    std::uniform_int_distribution<> random_int(min, max);  
+    return random_int(random_engine);  
+}
+```
+
 ### 测试思路
 
 待测试的功能为：
@@ -527,6 +538,22 @@ TYPED_TEST_CASE(QueueTest, typelist);
 
 1. 找出另一种你认为正确的方法，对比两种方法结果之间的差异
 2. 黑箱测试，按照该方法的功能要求，去检查结果即可
+
+
+### 过滤目标Test运行
+
+```c++
+
+TEST_F(CalculatorTest, TimeTest) 
+{
+
+}
+
+```
+
+```shell
+rosrun package_name package_name_test --gtest_filter=*TimeTest 
+```
 
 ------
 
