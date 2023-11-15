@@ -49,6 +49,9 @@ for (int r = 0; r < image.rows; ++r) {
     cv::Vec3b color = image.at<cv::Vec3b>(r, c);  //取出该坐标处的像素值  
     if (color[0] < 127 && color[1] < 127 &&  color[2] < 127) {  
       image.at<cv::Vec3b>(r, c) = cv::Vec3b(0, 0, 0);  //将背景设置为黑色  
+      // 等同于
+      const auto pix(c, r);
+	  cv::line(image, pix, pix, cv::Vec3b(0,0,0));
     }
   }
 }
@@ -65,6 +68,19 @@ point的x轴朝向右！！！
 ```
 
 
+```c++
+    image.at<cv::Vec3b>(i, j) = cv::Vec3b(0, 0, 0); 
+	// 等同于
+	const auto pix(j, i); // 先j后i
+	cv::line(image, pix, pix, cv::Vec3b(0,0,0));
+```
+
+```c++
+	const auto pix;
+	cv::line(image, pix, pix, cv::Vec3b(0,0,0));
+    // 等同于
+    image.at<cv::Vec3b>(pix.y, pix.x) = cv::Vec3b(0, 0, 0);  // 先y后x 
+```
 ##### --ROI坐标轴
 
 Roi以矩形的方式表达：Rec.x  Rec.y  Rec.width  Rec.height 。
