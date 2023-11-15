@@ -42,7 +42,7 @@ $ vokoscreen
 
 
 
-## ffmpeg 视频流转 GIF 动图
+## ffmpeg 视频流转GIF动图
 
 ```shell
 ffmpeg -ss 2 -t 10 -i output.avi -s 320x240 -r 15 output.gif
