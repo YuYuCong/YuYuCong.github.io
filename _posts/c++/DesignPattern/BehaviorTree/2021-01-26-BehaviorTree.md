@@ -47,23 +47,41 @@ Copyleft! 2022 William Yu. Some rights reserved.
 <small class="img-hint">Fig1. Btree</small>
 
 
-
 ### 0. Basic Concepts
 
 ##### keywords
 
-- Root 根节点
 
-- Control Node 控制节点（父节点）
+所有节点汇总
 
-- Condition Node 条件节点
+- ControlNode 控制节点
+  - SequenceNode 序列节点
+    - SequenceNode 普通顺序节点
+    - SequenceStarNode
+    - ReactiveSequence
+  - Selector 选择节点
+    - FallbackNode
+    - ReactiveFallback
+    - IfThenElseNode
+    - ManualSelectorNode
+    - SwitchNode
+    - WhileDoElseNode
+  - ParallelNode 并行节点
 
-- Action Node 行为节点（叶子节点）
+- ConditionNode 条件节点
 
-- Precondition 前提
+- ActionNode 行为节点
+  - 同步节点 SyncActionNode
+    - AlwaysFailureNode
+    - AlwaysSuccessNode
+    - PopFromQueue
+    - SetBlackboard
+  - 异步节点 AsyncActionNode
+  - 协程节点 CoroActionNode
 
-  - 内在前提 和节点类静态绑定
-  - 外在前提 和节点动态绑定
+- 装饰节点
+  - ...
+
 
 
 ##### sentence
@@ -78,7 +96,7 @@ Copyleft! 2022 William Yu. Some rights reserved.
     - 选择节点 Priority / Selector / Fallback_node / Fallback_star_node 
       - 规则：从begin到end迭代执行自己的Child Node：如遇到一个Child Node执行后返回True，那停止迭代，本Node向自己的Parent Node也返回True；否则所有Child Node都返回False，那本Node向自己的Parent Node返回False。
       
-    - 并行节点 Parallel Node
+    - 并行节点 ParallelNode
     
       - 规则：从头到尾，平行执行所有的节点。
         - Parallel Selector Node: 有一个子节点True返回True，否则返回False。
@@ -150,8 +168,8 @@ e.g.
  | Type of ControlNode | Child returns FAILURE | Child returns RUNNING |
  | ------------------- | --------------------- | --------------------- |
  | Sequence            | Restart               | Tick again            |
- | ReactiveSequence    | Restart               | Restart               |
  | SequenceStar        | Tick again            | Tick again            |
+ | ReactiveSequence    | Restart               | Restart               |
 
   - "**Restart**" means that the entire sequence is restarted from the first child of the list. （个人理解为：比如对于SequenceNode，当一个子节点返回失败的时候，会触发Restart，这个restart的意思是，下一次调用这个SequenceNode的时候会从头开始执行每一个子节点，所以个人认为，上述原文描述再加几句："**Restart**" means that the entire sequence <u>will be</u> restarted from the first child of the list, <u>when the next time this sequence is ticked</u>.）   
   - "**Tick again**" means that the next time the sequence is ticked, the same child is ticked again. Previous sibling, which returned SUCCESS already, are not ticked again.
@@ -275,9 +293,23 @@ BT::NodeStatus SequenceStar() {
 
 
 
-##### 2.2 并行节点 Parallel Node 
+##### 2.2 并行节点 ParallelNode 
 
-// todo(congyu)
+
+- 并行节点同时执行所有的子节点
+- 但是并不是在不同的线程里执行
+  - 意味着如果所有的子节点都是同步节点，那还是相当于在一个一个按照顺序执行
+  - 如果所有的子节点都是异步节点，则这些节点同时进行
+  - 如果子节点是一个异步节点，后面跟一个同步节点，则这两个节点也可以同时进行
+  - 如果子节点是一个同步节点，后面跟一个异步节点，则会被这个同步节点阻塞
+- 并行节点是唯一一个可以存在多个RUNNING子节点的节点
+
+- 有成功阈值和失败阈值
+- 当成功的子节点数量或者失败的子节点数量达到阈值，则halt其余还在running的子节点，并且向父节点返回结果
+- 阈值为-1表示等于子节点的数量
+- 默认失败阈值为-1
+
+
 
 ##### 2.3 选择节点 Fallback / ReactiveFallback Node 
 
@@ -352,7 +384,7 @@ e.g.
 - 在父节点所在的线程内另开一个协程执行，不会阻塞父节点的线程
 - 不会产生一个新的线程，效率更高
 
-### 5. 条件节点 Condition Node
+### 5. 条件节点 ConditionNode
 
 - 非常简单
 - 条件满足，返回成功
@@ -397,6 +429,8 @@ Install
 ```shell
 git clone https://github.com/BehaviorTree/BehaviorTree.CPP.git
 cd BehaviorTree.CPP
+git checkout 3.8.6
+
 mkdir build
 cd build
 cmake ..
