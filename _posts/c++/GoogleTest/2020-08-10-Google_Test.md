@@ -81,7 +81,7 @@ g++ test.cpp /usr/local/lib/libgtest.a -lpthread -o test
 
 - 主CMakeLists.txt    项目目录/CMakeLists.txt
 
-  ```cmake
+```cmake
   cmake_minimum_required(VERSION 3.3)
   project(gtest_cmake_example)
   
@@ -92,7 +92,7 @@ g++ test.cpp /usr/local/lib/libgtest.a -lpthread -o test
   add_subdirectory(src)
   add_subdirectory(tst)
   add_subdirectory(lib/googletest)
-  ```
+```
 
 - src目录下面为待测试的源码
 
@@ -101,7 +101,7 @@ g++ test.cpp /usr/local/lib/libgtest.a -lpthread -o test
 
 - src目录下面的CMakeLists.txt 正常填写即可
 
-  ```cmake
+```cmake
   file(GLOB_RECURSE SOURCES LIST_DIRECTORIES true *.h *.cc)
   set(SOURCES ${SOURCES})
   add_library(${CMAKE_PROJECT_NAME}_lib STATIC ${SOURCES})
@@ -109,11 +109,11 @@ g++ test.cpp /usr/local/lib/libgtest.a -lpthread -o test
   set(BINARY ${CMAKE_PROJECT_NAME})
   add_executable(${BINARY}_run main.cpp)
   target_link_libraries(${BINARY}_run ${CMAKE_PROJECT_NAME}_lib)
-  ```
+```
   
 - tst目录下的CMakeLists.txt，引入src目录下生成的lib
 
-  ```cmake
+```cmake
   file(GLOB_RECURSE TEST_SOURCES LIST_DIRECTORIES false *.cpp)
   set(SOURCES ${TEST_SOURCES})
   
@@ -125,7 +125,7 @@ g++ test.cpp /usr/local/lib/libgtest.a -lpthread -o test
     )
   
   add_test(NAME ${BINARY} COMMAND ${BINARY})
-  ```
+```
 
   
 
@@ -134,7 +134,7 @@ g++ test.cpp /usr/local/lib/libgtest.a -lpthread -o test
 - Test Case
 - Test
 
-- ```c++
+```c++
   TEST(FunTest, HandlesZeroInput) {}
   
   /*
@@ -144,7 +144,7 @@ g++ test.cpp /usr/local/lib/libgtest.a -lpthread -o test
     - 一个Test Case 可以有多个 Test  
     - 注意每个Test 都不可以重名
   */
-  ```
+```
 
 
 
