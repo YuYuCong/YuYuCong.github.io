@@ -27,6 +27,8 @@ Copyleft! 2021 William Yu. Some rights reserved.
 <p style="color:#A04000;font-size:26px">References</p>
 
 - 《Effective C++》
+- [https://cntransgroup.github.io/EffectiveModernCppChinese/Introduction.html](https://cntransgroup.github.io/EffectiveModernCppChinese/Introduction.html)
+- [https://harttle.land/effective-cpp.html](https://harttle.land/effective-cpp.html)
 
 本文内容：《Effective C++》阅读笔记，总共9个章节，55小节。
 
