@@ -58,9 +58,9 @@ inline math block $x+y$
 outline math block:
 $$
 \begin{align}
-x = & -xy \tag1 \\ 
-x_{y} + y_{x} = & x ^2 + xy + y^2 \tag2 \\
-A = & \begin{bmatrix} f_x & 0 & c_x \\  0 & f_y & c_y \\ 0 & 0 & 1 \end{bmatrix}
+& x = -xy \tag1 \\ 
+& x_{y} + y_{x} =  x ^2 + xy + y^2 \tag2 \\
+& A = \begin{bmatrix} f_x & 0 & c_x \\  0 & f_y & c_y \\ 0 & 0 & 1 \end{bmatrix} 
 \end{align}
 $$
 
