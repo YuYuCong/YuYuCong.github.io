@@ -10,7 +10,7 @@ date: 2022.01.01
 author: "CongYu"
 ---
 
->  本文主要记录常见非线性数值优化方法的原理与公式推导，另有python代码仿真。梯度下降，(批量，全量，随机)梯度下降，牛顿法。以及适用于最小二乘优化问题的高斯牛顿法，LevenbergMarquardt等方法。
+>  本文主要记录常见非线性数值优化方法的原理与公式推导，另有python代码示例。梯度下降，(批量，全量，随机)梯度下降，牛顿法。以及适用于最小二乘优化问题的高斯牛顿法，LevenbergMarquardt等方法。
 
 * Kramdown table of contents
 {:toc .toc}
@@ -131,9 +131,9 @@ $$
 
 ##### 1.5 线性优化
 
-线性优化：目标函数$F$和约束函数$f_i(x)$都是线性函数的一类优化问题。
-
 <mark style="background: #FF5582A6;">线性函数</mark>： 对于任意的 $x,y \in \mathbf{R}^n$ 和 $\alpha, \beta \in \mathbf{R}$ ，有下述等式成立 $f(\alpha x + \beta y) = \alpha f(x) + \beta f(y)$ 。
+
+线性优化：目标函数$F$和约束函数$f_i(x)$都是线性函数的一类优化问题。
 
 问题的表达形式：
 
@@ -181,6 +181,8 @@ $$
 - 没有约束条件。
 - 目标函数具有特殊形式，是若干项的平方和。
 
+
+Definition 1.1. Least Squares Problem
 
 $$F(\mathbf x)= \frac{1}{2}\sum_{i=1}^{m} ( f_{i}( \mathbf{x} ) )^2$$
 
@@ -323,7 +325,11 @@ P73
 ---
 
 
-## 1. 解法
+## 1. 凸优化问题的解法
+
+refitem: [METHODS-FOR-NON-LINEAR-LEAST-SQUARES-PROBLEMS](Math/METHODS-FOR-NON-LINEAR-LEAST-SQUARES-PROBLEMS.pdf)
+
+有代码可查 
 
 讨论一类朴素的无约束凸优化问题的解法:
 
@@ -473,18 +479,13 @@ $$
 $$
 
 
-## 2. 最小二乘问题  
+## 2. 非线性最小二乘问题的解法
 
-Least Squares Problem
+Non-Linear Least Squares Problem
 
-<mark style="background: #FF5582A6;">最小二乘问题</mark>是 优化问题 的一个特例。对于这个特例，可以有更多更精细化的方法。
+<mark style="background: #FF5582A6;">非线性最小二乘问题</mark>是 凸优化问题 的一个特例。对于这个特例，除了上述解法之外，还可以有更多更精细化的方法。
 
-Definition 1.1. Least Squares Problem
-
-$$F(\mathbf x)= \frac{1}{2}\sum_{i=1}^{m} ( f_{i}( \mathbf{x} ) )^2$$
-
-
-### 2.2 改进最速下降法
+### 2.1 改进最速下降法
 
 由于该问题由很多项组合而成，所以上面的公式中，我们可以对求和符号可以做进一步深究，由此衍生出各种批量的梯度下降算法：
 
@@ -523,7 +524,7 @@ $$
 F(\mathbf x)= \frac{1}{2} \sum_{i=j s}^{(j+1)s} f_{i}( \mathbf{x} ) ^2
 $$
 
-### 2.3 高斯牛顿法 
+### 2.2 高斯牛顿法 
 
 思路：
 
@@ -558,7 +559,7 @@ $$
 \mathbf x_{k} := \mathbf x_{k} - \eta H^{-1} J^T
 $$
 
-### 2.4 列文伯格-马夸尔特法
+### 2.3 列文伯格-马夸尔特法
 
 思路：可以简单理解为 带阻尼的 高斯-牛顿方法
 
@@ -567,6 +568,12 @@ $$
 $$
 
 <img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/develop/img/in-post/post-optimal/Levenberg–Marquardt-1.png" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
+
+### 2.4 狗腿法
+
+todo（congyu）
+
+
 
 更多的小技巧：
 
