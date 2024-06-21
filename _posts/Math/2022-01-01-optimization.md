@@ -30,6 +30,7 @@ Copyleft! 2022 Cong Yu. Some rights reserved.
 <p style="font-size:16px;color:#176;text-align:left;">References</p> 
 
 - book METHODS-FOR-NON-LINEAR-LEAST-SQUARES-PROBLEMS.pdf
+- post https://www.cnblogs.com/d1012181765/p/13841903.html
 - paper [An overview of gradient descent optimization algorithms](http://cn.arxiv.org/abs/1609.04747)
 - paper [http://cn.arxiv.org/pdf/1705.08292.pdf](http://cn.arxiv.org/pdf/1705.08292.pdf)
 - Course [https://www.stat.cmu.edu/~ryantibs/convexopt/](https://www.stat.cmu.edu/~ryantibs/convexopt/)
