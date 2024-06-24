@@ -32,7 +32,7 @@ Copyleft! 2024 Cong Yu. Some rights reserved.
 - book [[METHODS-FOR-NON-LINEAR-LEAST-SQUARES-PROBLEMS.pdf]]
 - post https://www.cnblogs.com/d1012181765/p/13841903.html
 - book [Math_Convex-Optimization凸优化中文版](Math/Math_Convex-Optimization凸优化中文版.pdf)
-- paper [An overview of gradient descent optimization algorithms](http://cn.arxiv.org/abs/1609.04747)
+- paper [An overview of gradient descent optimization algorithms](http://arxiv.org/abs/1609.04747)
 - post [https://blog.csdn.net/shuzfan/article/details/75675568](https://blog.csdn.net/shuzfan/article/details/75675568)
 - paper [http://cn.arxiv.org/pdf/1705.08292.pdf](http://cn.arxiv.org/pdf/1705.08292.pdf)
 - Course [https://www.stat.cmu.edu/~ryantibs/convexopt/](https://www.stat.cmu.edu/~ryantibs/convexopt/)
@@ -156,7 +156,7 @@ $$
 
 ##### 1.7 凸优化问题
 
-[2022-01-01-凸优化](Math/2022-01-01-凸优化.md)
+[2022-01-03-凸优化](Math/2022-01-03-凸优化.md)
 
 
 $$
@@ -167,7 +167,7 @@ $$
 \end{align}
 $$
 
-且其中目标函数  $F$   和约束函数 $ f_i(x) $ 都是凸函数
+且其中目标函数  $F$   和约束函数 $f_i(x)$ 都是凸函数
 
 
 <mark style="background: #FF5582A6;">凸函数</mark>： 对于任意的 $x,y \in \mathbf{R}^n$，任意 $\alpha, \beta \in \mathbf{R}$ 且满足 $\alpha + \beta = 1, \alpha \geq 0, \beta \geq 0$ ，下述不等式成立 $f(\alpha x + \beta y) \leq \alpha f(x) + \beta f(y)$ 。
@@ -182,7 +182,7 @@ $$
 
 ##### 1.8 最小二乘问题
 
-[2022-01-01-最小二乘](Math/2022-01-01-最小二乘.md)
+[2022-01-04-最小二乘](Math/2022-01-04-最小二乘.md)
 
 ## 2. 凸集
 
