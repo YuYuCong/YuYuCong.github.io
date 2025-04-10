@@ -1,9 +1,13 @@
 ---
 layout: post
-title: "Smart Pointer"
-description: "Smart Pointer"
-categories: [c++]
-tags: [c++,shared_ptr]
+title: Smart Pointer
+description: Smart Pointer
+categories:
+  - c++
+tags:
+  - shared_ptr
+  - cpp
+  - cplusplus
 redirect_from:
   - /2020/10/12/
 ---

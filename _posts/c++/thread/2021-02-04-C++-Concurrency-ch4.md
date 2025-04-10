@@ -1,10 +1,15 @@
 ---
 layout: post
-title: "C++并发编程系列4-同步并发"
-subtitle: "C++并发编程系列笔记，ch4笔记"
-categories: [c++]
-tags: [c++,多线程,thread]
-header-img: "img/in-post/post-cpp/"
+title: C++并发编程系列4-同步并发
+subtitle: C++并发编程系列笔记，ch4笔记
+categories:
+  - c++
+tags:
+  - 多线程
+  - thread
+  - cpp
+  - cplusplus
+header-img: img/in-post/post-cpp/
 header-style: text
 redirect_from:
   - /2021/02/04/
@@ -32,7 +37,7 @@ Copyleft! 2022 William Yu. Some rights reserved.
 
 ## Chapter Four: 同步并发
 
-**条件变量(condition variables)**和**期望(futures)**
+**条件变量(condition variables)** 和 **期望(futures)**
 
 <p style="font-size:20px;color:;text-align:;">Reference</p> 
 
@@ -220,13 +225,13 @@ void data_processing_thread() {
 
 - 使用期望实现带返回值的子线程任务
 
-- | API           | C++标准 | 说明                                              |
-  | :------------ | :------ | :------------------------------------------------ |
-  | async         | C++11   | 异步运行一个函数，并返回保有其结果的`std::future` |
-  | future        | C++11   | 等待被异步设置的值                                |
-  | packaged_task | C++11   | 打包一个函数，存储其返回值以进行异步获取          |
-  | promise       | C++11   | 存储一个值以进行异步获取                          |
-  | shared_future | C++11   | 等待被异步设置的值（可能为其他 future 所引用）    |
+| API           | C++标准 | 说明                              |
+| :------------ | :---- | :------------------------------ |
+| async         | C++11 | 异步运行一个函数，并返回保有其结果的`std::future` |
+| future        | C++11 | 等待被异步设置的值                       |
+| packaged_task | C++11 | 打包一个函数，存储其返回值以进行异步获取            |
+| promise       | C++11 | 存储一个值以进行异步获取                    |
+| shared_future | C++11 | 等待被异步设置的值（可能为其他 future 所引用）     |
 
 - 头文件
 

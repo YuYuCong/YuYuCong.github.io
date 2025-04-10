@@ -135,9 +135,9 @@ $p(x_0)$ ,   $x_{k-1}$
 
 1. <u>-> 2. -> 3.</u>   <u>-> 2. -> 3.</u>  <u>-> 2. -> 3.</u>  <u>-> 2. -> 3.</u>  不断进行下去
 
-<img src="/home/trifo/code/sync/DevelopmentNotes/img/Screenshot from 2021-09-07 11-32-03.png" alt="Screenshot from 2021-09-07 11-32-03" style="zoom:33%;" />
 
 
+![](img/Screenshot%20from%202021-09-07%2011-32-03.png)
 
 
 

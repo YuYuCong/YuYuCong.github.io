@@ -388,7 +388,7 @@ $$
 四元数微分
 
 
-![|200](_backup/post-robotics-quaternion-diff.png)
+![|200](img/in-post/post-geometry/post-robotics-quaternion-diff.png)
 
 $$
 \begin{equation}
