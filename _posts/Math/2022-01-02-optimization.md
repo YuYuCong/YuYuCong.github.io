@@ -53,8 +53,6 @@ Copyleft! 2024 Cong Yu. Some rights reserved.
 
 - 无约束优化问题可以是全局优化的，也可以是局部优化的
 - 有约束优化问题也可以是全局优化的，也可以是局部优化的
-- <u>最小二乘问题是凸优化问题的一个特例</u>
-- <u>线性规划问题是凸优化问题的一个特例</u>
 
 ---
 
@@ -69,7 +67,7 @@ F(x) 称为目标函数，或者代价函数。
 $$
 \begin{align}
 & \textrm{Given   }F：\mathbf{R} ^{n} \mapsto \mathbf{R} \\ 
-& \textrm{Find } \mathbf{x}^+ = \textrm {argmin}_\mathbf{x} \{F(x)\}. \\
+& \textrm{Find } \mathbf{x}^+ = \textrm {argmin}_\mathbf{x} \{F(\mathbf x)\}. \\
 \end{align}
 $$
 
@@ -90,7 +88,7 @@ $$
 $$
 \begin{align}
 & \textrm{Given   }F：\mathbf{R} ^{n} \mapsto \mathbf{R} \\ 
-& \textrm{Find } \mathbf{x}^+ = \textrm {argmin}_\mathbf{x} \{F(x)\}. \\
+& \textrm{Find } \mathbf{x}^+ = \textrm {argmin}_\mathbf{x} \{F(\mathbf x)\}. \\
 & \textrm{subject to } f_i(x) \leq b_i, i = 1,...,m. 
 \end{align}
 $$
@@ -108,7 +106,7 @@ Definition 1.2. Global Minimizer
 $$
 \begin{align}
 & \textrm{Given }F：\mathbf{R} ^{n} \mapsto \mathbf{R}. \\ 
-& \textrm{ Find } \mathbf{x}^+ = \textrm {argmin}_\mathbf{x} \{F(x)\}.
+& \textrm{ Find } \mathbf{x}^+ = \textrm {argmin}_\mathbf{x} \{F(\mathbf x)\}.
 \end{align}
 $$
 
@@ -150,9 +148,7 @@ $$
 
 ##### 1.6 非线性优化
 
-如果优化问题不是线性的，就称为非线性规划。
-
-非线性规划问题的研究主要关注在局部最优化问题的求解上。
+如果优化问题不是线性的，就称为非线性优化。
 
 ##### 1.7 凸优化问题
 
@@ -162,7 +158,7 @@ $$
 $$
 \begin{align}
 & \textrm{Given   }F：\mathbf{R} ^{n} \mapsto \mathbf{R} \\ 
-& \textrm{Find } \mathbf{x}^+ = \text {argmin}_\mathbf{x} \{F(x)\}. \\
+& \textrm{Find } \mathbf{x}^+ = \text {argmin}_\mathbf{x} \{F(\mathbf x)\}. \\
 & \textrm{subject to } f_i(x) \leq b_i, i = 1,...,m. 
 \end{align}
 $$
@@ -174,7 +170,7 @@ $$
 
 比较线性函数和凸函数，可以发现凸函数仅仅需要在 $\alpha$ 和 $\beta$ 取特定数值的情况下满足不等式，而线性需要严格满足等式。
 
-- 可见 <u>线性规划问题是凸优化问题的一个特例</u>，且线性规划是广泛应用的一类凸优化问题。
+- 可见 <u>线性优化问题是凸优化问题的一个特例</u>，且是广泛应用的一类凸优化问题。
 - <u>线性函数一定是是凸函数</u>。 
 - <u>非线性函数可能是凸函数，也可能是非凸的</u>。 
 - 凸优化问题的求解已经有了非常成熟的解法，所以本文主要关注于凸优化。
@@ -183,6 +179,10 @@ $$
 ##### 1.8 最小二乘问题
 
 [2022-01-04-最小二乘](Math/2022-01-04-最小二乘.md)
+
+线性最小二乘
+
+非线性最小二乘
 
 ## 2. 凸集
 

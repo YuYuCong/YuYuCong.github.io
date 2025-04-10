@@ -1,13 +1,15 @@
 ---
 layout: post
-title: "c++ coding style"
-subtitle: "c++代码风格规范，以及一些良好的代码习惯建议"
-categories: [c++]
-tags: [c++]
-header-img: "img/in-post/post-cpp/bg_code_style.png"
+title: c++ coding style
+subtitle: c++代码风格规范，以及一些良好的代码习惯建议
+categories:
+  - c++
+tags:
+  - cpp
+  - cplusplus
+header-img: img/in-post/post-cpp/bg_code_style.png
 redirect_from:
   - /20220/07/27/
-
 ---
 
 >  本文主要记录c++ coding style相关的一些笔记，以及一些常用的代码建议与小技巧。尽力将自己写的代码视作一件艺术品，是技术与艺术的结合体。
@@ -342,7 +344,19 @@ Usage:
   }
   if (std::abs(a) > std::numeric_limits<float>::epsilon()) { // good
   }
-  
+
+
+  double d = 0.0001;
+  if (d) { // bad
+  }
+  if (std::abs(d > std::numeric_limits<double>::epsilon() ) { // good
+  }
+      
+  if (!d) { // bad
+  }
+  if (std::abs(d < std::numeric_limits<double>::epsilon() ) { // good
+  }
+
   ```
   
   在CmakeList中禁止写出 float-equal 的代码

@@ -1,9 +1,13 @@
 ---
 layout: post
-title: "Boost filesystem"
-description: "boost filesystem"
-categories: [c++]
-tags: [boost,c++]
+title: Boost filesystem
+description: boost filesystem
+categories:
+  - c++
+tags:
+  - boost
+  - cpp
+  - cplusplus
 redirect_from:
   - /2020/09/25/
 ---
@@ -36,7 +40,9 @@ Copyleft! 2021 William Yu. Some rights reserved.
 
 <h4>Reference</h4>
 
-- http://zh.highscore.de/cpp/boost/filesystem.html
+- [http://zh.highscore.de/cpp/boost/filesystem.html](http://zh.highscore.de/cpp/boost/filesystem.html)
+- boost filesystem [https://www.boost.org/doc/libs/1_79_0/libs/filesystem/doc/index.htm](https://www.boost.org/doc/libs/1_79_0/libs/filesystem/doc/index.htm)
+
 
 
 

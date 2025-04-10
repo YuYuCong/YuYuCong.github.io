@@ -1,10 +1,14 @@
 ---
 layout: post
-title: "Python多线程"
-subtitle: "Python多线程编程简单笔记"
-categories: [python]
-tags: [多线程,thread,python]
-header-img: "img/in-post/post-python/"
+title: Python多线程
+subtitle: Python多线程编程简单笔记
+categories:
+  - python
+tags:
+  - 多线程
+  - thread
+  - python
+header-img: img/in-post/post-python/
 header-style: text
 date: 2021.02.22
 ---
