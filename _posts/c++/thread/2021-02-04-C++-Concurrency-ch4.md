@@ -89,18 +89,20 @@ void wait_for_flag() {
 
 ##### std::condition_variable 简介
 
-- 两种实现  `std::condition_variable`  `std::condition_varoable_any`
+提供2个实现 
+
+- `std::condition_variable`  
+- `std::condition_varoable_any`
 - 前者限于与`std::mutex`一起工作，后者可以与任何最低标准的互斥量一起工作
 - 后者更加通用，但是意味着性能开销较大
 
-condition_variable 类的5个方法
+提供5个方法
 
 - condition_variable::wait()
 - condition_variable::wait_for()
 - condition_variable::wait_until()
 - condition_variable::notify_one()
 - condition_variable::notify_all()
-- ondition_variable_any
 
 ##### 1. wait()
 
@@ -109,7 +111,7 @@ condition_variable 类的5个方法
 ###### 第一种 wait()
 
 ```c++
-void wait (unique_lock<mutex>& lck);
+void wait(unique_lock<mutex>& lck);
 ```
 
 - 当前线程调用 `wait()` 后将被阻塞，直到另外某个线程调用 `notify_*` 唤醒了当前线程。
@@ -138,75 +140,183 @@ void wait(unique_lock<mutex>& lck, Predicate pred);
 
 ##### 2. wait_for()
 
-// todo(congyu)
-
-##### 3. wait_untill()
-
-##### 4. notify_one()
-
-##### 5. notify_all()
-
-##### 示例
-
 ```c++
-std::mutex mut;
-std::queue<data_chunk> data_queue;  // 1
-std::condition_variable data_cond;
+template <class Rep, class Period>
+cv_status wait_for(unique_lock<mutex>& lck, const chrono::duration<Rep,Period>& rel_time);
 
-void data_preparation_thread() {
-  while(more_data_to_prepare()) {
-    data_chunk const data=prepare_data();
-    std::lock_guard<std::mutex> lk(mut); // 2
-    data_queue.push(data);  
-    data_cond.notify_one();  // 3
-  }
-}
+template <class Rep, class Period, class Predicate>
+bool wait_for(unique_lock<mutex>& lck, const chrono::duration<Rep,Period>& rel_time, Predicate pred);
+```
 
-void data_processing_thread() {
-  while(true) {
-    std::unique_lock<std::mutex> lk(mut);  // 4
-    data_cond.wait(lk,[]{return !data_queue.empty();});  // 5
-    data_chunk data=data_queue.front();
-    data_queue.pop();
-    lk.unlock();  // 6
-    process(data);
-    if(is_last_chunk(data))
-      break;
-  }
+- 与`wait()`类似，但增加了超时机制
+- 第一个版本：等待直到被唤醒或超时
+  - 如果超时，返回`std::cv_status::timeout`
+  - 如果被唤醒，返回`std::cv_status::no_timeout`
+- 第二个版本：带谓词的版本
+  - 如果谓词为true，立即返回true
+  - 如果超时，返回false
+  - 如果被唤醒且谓词为true，返回true
+  - 如果被唤醒但谓词为false，继续等待
+
+示例：
+```c++
+std::condition_variable cv;
+std::mutex cv_mutex;
+bool ready = false;
+
+// 等待线程
+std::unique_lock<std::mutex> lk(cv_mutex);
+if(cv.wait_for(lk, std::chrono::seconds(5), []{return ready;})) {
+    // 条件满足或超时前被唤醒
+    std::cout << "Condition met or awakened before timeout\n";
+} else {
+    // 超时
+    std::cout << "Timeout occurred\n";
 }
 ```
 
-- data_queue 是两个线程的共享数据
+##### 3. wait_until()
 
-- data_cond 是条件变量
+```c++
+template <class Clock, class Duration>
+cv_status wait_until(unique_lock<mutex>& lck, const chrono::time_point<Clock,Duration>& abs_time);
 
-- 线程1 ：2 标记的位置 对共享数据上锁，然后进行操作
+template <class Clock, class Duration, class Predicate>
+bool wait_until(unique_lock<mutex>& lck, const chrono::time_point<Clock,Duration>& abs_time, Predicate pred);
+```
 
-  操作完之后，3 标记的位置对 条件变量data_cond 发出通知
+- 与`wait_for()`类似，但使用绝对时间点而不是相对时间
+- 第一个版本：等待直到被唤醒或到达指定时间点
+  - 如果超时，返回`std::cv_status::timeout`
+  - 如果被唤醒，返回`std::cv_status::no_timeout`
+- 第二个版本：带谓词的版本
+  - 如果谓词为true，立即返回true
+  - 如果到达时间点，返回false
+  - 如果被唤醒且谓词为true，返回true
+  - 如果被唤醒但谓词为false，继续等待
 
-  如果此时有其他线程在等待wait，接到通知继续执行
+示例：
+```c++
+std::condition_variable cv;
+std::mutex cv_mutex;
+bool ready = false;
 
-- 线程2 ： 4 标记的位置对共享数据上锁
+// 等待线程
+std::unique_lock<std::mutex> lk(cv_mutex);
+auto timeout = std::chrono::system_clock::now() + std::chrono::seconds(5);
+if(cv.wait_until(lk, timeout, []{return ready;})) {
+    // 条件满足或超时前被唤醒
+    std::cout << "Condition met or awakened before timeout\n";
+} else {
+    // 超时
+    std::cout << "Timeout occurred\n";
+}
+```
 
-  <center style="font-size:30px;color:#CD5C5C;text-align:right;">.wait()</center> 
+##### 4. notify_one()
 
-  <center style="font-size:30px;color:#CD5C5C;text-align:right;">.notify_one()</center> 
+```c++
+void notify_one() noexcept;
+```
 
-  5 标记的位置 调用`wait()` 检查条件，即后面的lambda表达式
+- 唤醒一个等待中的线程
+- 如果有多个线程在等待，具体唤醒哪一个是不确定的
+- 常用于生产者-消费者模式中，当生产者产生一个数据时，只需要唤醒一个消费者
 
-  条件满足，返回，线程2继续向下执行，并且此时线程2继续持有该锁
+示例：
+```c++
+std::condition_variable cv;
+std::mutex cv_mutex;
+bool ready = false;
 
-  条件不满足，`wait()`会解锁互斥量，并阻塞等待休眠
+// 生产者线程
+{
+    std::lock_guard<std::mutex> lk(cv_mutex);
+    ready = true;
+    cv.notify_one();  // 唤醒一个等待的消费者
+}
+```
 
-  直到data_cond收到通知时苏醒
+##### 5. notify_all()
 
-  苏醒后重新获取锁，重新进行检查
+```c++
+void notify_all() noexcept;
+```
 
-- 标记4的位置使用 unique_lock()
+- 唤醒所有等待中的线程
+- 所有等待的线程都会被唤醒，然后竞争互斥锁
+- 适用于需要广播的场景，比如系统状态改变时通知所有相关线程
 
-  为什么？
+示例：
+```c++
+std::condition_variable cv;
+std::mutex cv_mutex;
+bool ready = false;
 
-  等待中的线程必须在等待期间解锁互斥量，并在收到通知之后对互斥量再次上锁，而`std::lock_guard`没有这么灵活。如果互斥量在线程休眠期间保持锁住状态，准备数据的线程将无法锁住互斥量，也无法添加数据到队列中。
+// 生产者线程
+{
+    std::lock_guard<std::mutex> lk(cv_mutex);
+    ready = true;
+    cv.notify_all();  // 唤醒所有等待的消费者
+}
+```
+
+完整示例：生产者-消费者模式
+```c++
+#include <iostream>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+#include <queue>
+
+std::mutex mtx;
+std::condition_variable cv;
+std::queue<int> data_queue;
+bool done = false;
+
+void producer() {
+    for(int i = 0; i < 5; ++i) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        {
+            std::lock_guard<std::mutex> lk(mtx);
+            data_queue.push(i);
+            std::cout << "Produced: " << i << std::endl;
+        }
+        cv.notify_one();  // 通知一个消费者
+    }
+    {
+        std::lock_guard<std::mutex> lk(mtx);
+        done = true;
+    }
+    cv.notify_all();  // 通知所有消费者结束
+}
+
+void consumer(int id) {
+    while(true) {
+        std::unique_lock<std::mutex> lk(mtx);
+        cv.wait(lk, []{ return !data_queue.empty() || done; });
+        
+        if(done && data_queue.empty()) {
+            break;
+        }
+        
+        int value = data_queue.front();
+        data_queue.pop();
+        std::cout << "Consumer " << id << " consumed: " << value << std::endl;
+    }
+}
+
+int main() {
+    std::thread prod(producer);
+    std::thread cons1(consumer, 1);
+    std::thread cons2(consumer, 2);
+    
+    prod.join();
+    cons1.join();
+    cons2.join();
+    return 0;
+}
+```
 
 ### 4.2 期望  future
 
@@ -225,13 +335,13 @@ void data_processing_thread() {
 
 - 使用期望实现带返回值的子线程任务
 
-| API           | C++标准 | 说明                              |
-| :------------ | :---- | :------------------------------ |
-| async         | C++11 | 异步运行一个函数，并返回保有其结果的`std::future` |
-| future        | C++11 | 等待被异步设置的值                       |
-| packaged_task | C++11 | 打包一个函数，存储其返回值以进行异步获取            |
-| promise       | C++11 | 存储一个值以进行异步获取                    |
-| shared_future | C++11 | 等待被异步设置的值（可能为其他 future 所引用）     |
+| API           | C++标准 | 说明                                              |
+| :------------ | :------ | :------------------------------------------------ |
+| async         | C++11   | 异步运行一个函数，并返回保有其结果的`std::future` |
+| future        | C++11   | 等待被异步设置的值                                |
+| packaged_task | C++11   | 打包一个函数，存储其返回值以进行异步获取          |
+| promise       | C++11   | 存储一个值以进行异步获取                          |
+| shared_future | C++11   | 等待被异步设置的值（可能为其他 future 所引用）    |
 
 - 头文件
 
@@ -323,15 +433,414 @@ Worker w; // 创建对象
 auto f3 = async(&Worker::work, &w); // 传入类的方法，以及具体对象
 ```
 
-##### 4.2.2 packaged_task   线程池 
+##### 4.2.2 shared_future
 
-// todo(congyu)
+<p style="font-size:30px;color:#CD5C5C;text-align:right;">std::shared_future</p>
+
+- `std::shared_future` 是 `std::future` 的可共享版本
+- 与 `std::future` 不同，`shared_future` 可以被多个线程共享和访问
+- 头文件：`#include <future>`
+
+###### 创建方式
+
+1. 从 `std::future` 移动构造
+```c++
+std::future<int> f = std::async([]{ return 42; });
+std::shared_future<int> sf = f.share();  // 移动构造，f变为无效
+```
+
+2. 从 `std::promise` 获取
+```c++
+std::promise<int> p;
+std::shared_future<int> sf = p.get_future().share();
+```
+
+###### 主要方法
+
+1. `get()`
+   - 获取结果值
+   - 可以多次调用
+   - 如果结果未就绪，会阻塞等待
+
+2. `wait()`
+   - 等待结果就绪
+   - 可以多次调用
+   - 不返回结果，只等待
+
+3. `wait_for()`
+   - 等待指定时间
+   - 返回 `std::future_status`
+   - 可以多次调用
+
+4. `wait_until()`
+   - 等待到指定时间点
+   - 返回 `std::future_status`
+   - 可以多次调用
+
+###### 示例1：基本使用
+
+```c++
+#include <iostream>
+#include <thread>
+#include <future>
+#include <vector>
+
+void print_result(std::shared_future<int> sf) {
+    std::cout << "Thread " << std::this_thread::get_id() 
+              << " got result: " << sf.get() << std::endl;
+}
+
+int main() {
+    std::promise<int> p;
+    std::shared_future<int> sf = p.get_future().share();
+    
+    std::vector<std::thread> threads;
+    // 创建多个线程共享同一个future
+    for(int i = 0; i < 3; ++i) {
+        threads.emplace_back(print_result, sf);
+    }
+    
+    // 设置值
+    p.set_value(42);
+    
+    // 等待所有线程完成
+    for(auto& t : threads) {
+        t.join();
+    }
+    
+    return 0;
+}
+```
+
+###### 示例2：异常处理
+
+```c++
+#include <iostream>
+#include <thread>
+#include <future>
+#include <vector>
+
+void handle_result(std::shared_future<int> sf) {
+    try {
+        int result = sf.get();
+        std::cout << "Result: " << result << std::endl;
+    } catch(const std::exception& e) {
+        std::cout << "Exception: " << e.what() << std::endl;
+    }
+}
+
+int main() {
+    std::promise<int> p;
+    std::shared_future<int> sf = p.get_future().share();
+    
+    std::vector<std::thread> threads;
+    for(int i = 0; i < 3; ++i) {
+        threads.emplace_back(handle_result, sf);
+    }
+    
+    // 设置异常
+    p.set_exception(std::make_exception_ptr(std::runtime_error("Task failed")));
+    
+    for(auto& t : threads) {
+        t.join();
+    }
+    
+    return 0;
+}
+```
+
+###### 示例3：超时处理
+
+```c++
+#include <iostream>
+#include <thread>
+#include <future>
+#include <vector>
+#include <chrono>
+
+void check_result(std::shared_future<int> sf) {
+    auto status = sf.wait_for(std::chrono::milliseconds(100));
+    if(status == std::future_status::timeout) {
+        std::cout << "Timeout waiting for result" << std::endl;
+    } else {
+        std::cout << "Got result: " << sf.get() << std::endl;
+    }
+}
+
+int main() {
+    std::promise<int> p;
+    std::shared_future<int> sf = p.get_future().share();
+    
+    std::vector<std::thread> threads;
+    for(int i = 0; i < 3; ++i) {
+        threads.emplace_back(check_result, sf);
+    }
+    
+    // 延迟设置值
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    p.set_value(42);
+    
+    for(auto& t : threads) {
+        t.join();
+    }
+    
+    return 0;
+}
+```
+
+###### 与 std::future 的区别
+
+1. 可共享性
+   - `future` 只能被移动，不能被复制
+   - `shared_future` 可以被复制，多个线程可以共享同一个结果
+
+2. 结果获取
+   - `future::get()` 只能调用一次
+   - `shared_future::get()` 可以多次调用
+
+3. 使用场景
+   - `future` 适用于单线程等待结果
+   - `shared_future` 适用于多线程共享结果
+
+###### 注意事项
+
+1. `shared_future` 对象可以被复制，但复制的是同一个结果的引用
+2. 所有线程都会等待结果就绪
+3. 结果就绪后，所有线程都可以获取结果
+4. 如果设置的是异常，所有线程都会收到相同的异常
+5. 使用 `wait_for()` 或 `wait_until()` 时，每个线程独立判断超时
 
 ##### 4.2.3 promise 
 
-// todo(congyu)
+<p style="font-size:30px;color:#CD5C5C;text-align:right;">std::promise</p>
 
-- [https://paul.pub/cpp-concurrency/#id-promise%E4%B8%8Efuture](https://paul.pub/cpp-concurrency/#id-promise%E4%B8%8Efuture)
+- `std::promise` 是一个模板类，用于在线程间传递数据
+- 与 `std::future` 配对使用，一个线程通过 `promise` 设置值，另一个线程通过对应的 `future` 获取值
+- 头文件：`#include <future>`
+
+###### 基本用法
+
+```c++
+std::promise<T> p;  // 创建一个promise对象
+std::future<T> f = p.get_future();  // 获取与promise关联的future
+```
+
+###### 主要方法
+
+1. `get_future()`
+   - 返回与promise关联的future对象
+   - 每个promise只能调用一次
+   - 如果多次调用会抛出`std::future_error`异常
+
+2. `set_value()`
+   - 设置值，并让future就绪
+   - 只能调用一次
+   - 如果多次调用会抛出`std::future_error`异常
+
+3. `set_exception()`
+   - 设置异常，并让future就绪
+   - 只能调用一次
+
+4. `set_value_at_thread_exit()`
+   - 在线程退出时设置值
+   - 确保值在线程完全退出后才可用
+
+5. `set_exception_at_thread_exit()`
+   - 在线程退出时设置异常
+   - 确保异常在线程完全退出后才可用
+
+###### 示例1：基本使用
+
+```c++
+#include <iostream>
+#include <thread>
+#include <future>
+
+void task(std::promise<int> p) {
+    // 模拟一些工作
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    // 设置值
+    p.set_value(42);
+}
+
+int main() {
+    std::promise<int> p;
+    std::future<int> f = p.get_future();
+    
+    std::thread t(task, std::move(p));
+    
+    // 等待并获取结果
+    std::cout << "Result: " << f.get() << std::endl;
+    
+    t.join();
+    return 0;
+}
+```
+
+###### 示例2：异常传递
+
+```c++
+#include <iostream>
+#include <thread>
+#include <future>
+
+void task(std::promise<int> p) {
+    try {
+        // 模拟一些可能抛出异常的工作
+        throw std::runtime_error("Task failed");
+    } catch(...) {
+        // 捕获异常并传递给future
+        p.set_exception(std::current_exception());
+    }
+}
+
+int main() {
+    std::promise<int> p;
+    std::future<int> f = p.get_future();
+    
+    std::thread t(task, std::move(p));
+    
+    try {
+        // 等待并获取结果
+        std::cout << "Result: " << f.get() << std::endl;
+    } catch(const std::exception& e) {
+        std::cout << "Exception: " << e.what() << std::endl;
+    }
+    
+    t.join();
+    return 0;
+}
+```
+
+###### 示例3：多线程协作
+
+```c++
+#include <iostream>
+#include <thread>
+#include <future>
+#include <vector>
+
+void worker(std::promise<int> p, int value) {
+    // 模拟一些工作
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    p.set_value(value * value);
+}
+
+int main() {
+    std::vector<std::thread> threads;
+    std::vector<std::future<int>> futures;
+    
+    // 创建多个工作线程
+    for(int i = 0; i < 5; ++i) {
+        std::promise<int> p;
+        futures.push_back(p.get_future());
+        threads.emplace_back(worker, std::move(p), i);
+    }
+    
+    // 收集所有结果
+    for(auto& f : futures) {
+        std::cout << "Result: " << f.get() << std::endl;
+    }
+    
+    // 等待所有线程完成
+    for(auto& t : threads) {
+        t.join();
+    }
+    
+    return 0;
+}
+```
+
+###### 注意事项
+
+1. `promise`对象不能被复制，只能被移动
+2. 每个`promise`只能设置一次值或异常
+3. 如果`promise`被销毁时还没有设置值或异常，会设置一个`broken_promise`异常
+4. `get_future()`只能调用一次，多次调用会抛出异常
+5. 使用`set_value_at_thread_exit()`或`set_exception_at_thread_exit()`时，要确保线程正常退出
+
+###### 与async的区别
+
+- `async`更适合简单的异步任务，使用更简单
+- `promise`提供更多的控制，可以：
+  - 在任意时间点设置值
+  - 显式控制异常传递
+  - 在线程退出时设置值
+  - 在多个线程间共享future
+
+##### 4.2.4 packaged_task
+
+基本概念：
+- packaged_task 是一个可调用对象的包装器
+- 它存储了一个任务（函数、lambda表达式等）
+- 它提供了一个 future 对象来获取任务的执行结果
+
+主要特点：
+- 只能移动（move），不能复制
+- 可以异步执行
+- 可以获取执行结果
+- 可以处理异常
+
+常用方法：
+
+```c++
+std::packaged_task<T> task;  // 创建任务
+task.get_future();           // 获取关联的 future
+task(参数...);               // 执行任务
+task.reset();                // 重置任务
+task.valid();                // 检查任务是否有效
+```
+
+与 std::async 的区别：
+- packaged_task 提供了更多的控制权
+- 可以手动控制任务的执行时机
+- 可以自定义任务的执行方式
+- 更适合在线程池等自定义执行环境中使用
+
+使用建议：
+- 当需要手动控制任务的执行时机时使用
+- 在线程池实现中作为任务的基本单位
+- 需要处理异常传播时使用
+- 需要获取异步操作的结果时使用
+
+注意事项：
+- 任务只能执行一次
+- 执行后需要调用 get_future() 获取结果
+- 移动后原对象变为无效
+- 需要正确处理异常
+
+packaged_task 是 C++ 并发编程中非常重要的一个组件，它提供了任务执行和结果获取的完整解决方案。在线程池、异步编程等场景中都有广泛的应用。
+
+```c++
+class ThreadPool {
+   public:
+       template<typename F, typename... Args>
+       auto submit(F&& f, Args&&... args) 
+           -> std::future<typename std::result_of<F(Args...)>::type> {
+           
+           using return_type = typename std::result_of<F(Args...)>::type;
+           
+           // 创建 packaged_task
+           auto task = std::packaged_task<return_type()>(
+               std::bind(std::forward<F>(f), std::forward<Args>(args)...)
+           );
+           
+           // 获取 future
+           std::future<return_type> res = task.get_future();
+           
+           {
+               std::unique_lock<std::mutex> lock(queue_mutex);
+               // 将任务加入队列
+               tasks.push(std::move(task));
+           }
+           
+           // 通知一个等待的线程
+           condition.notify_one();
+           
+           return res;
+       }
+   };
+```
 
 ### 4.3 时间限定  std::chrono
 
@@ -348,11 +857,25 @@ wait()方法等各种阻塞调用，可以提供线程等待功能，等待某�
 
 <p style="text-align:center;">表4.1 可接受超时的函数</p>
 
-<table border="1"><tbody><tr><td>类型/命名空间</td><td>函数</td><td>返回值</td></tr><tr><td rowspan="2"> std::this_thread[namespace] </td><td> sleep_for(duration) </td><td rowspan="2">N/A</td></tr><tr><td>sleep_until(time_point)</td></tr><tr><td rowspan="2">std::condition_variable 或 std::condition_variable_any</td><td>wait_for(lock, duration)</td><td rowspan="2">std::cv_status::time_out 或 std::cv_status::no_timeout</td></tr><tr><td>wait_until(lock, time_point)</td></tr><tr><td rowspan="2"> </td><td> wait_for(lock, duration, predicate)</td><td rowspan="2">bool —— 当唤醒时，返回谓词的结果</td></tr><tr><td>wait_until(lock, duration, predicate)</td></tr><tr><td rowspan="2">std::timed_mutex 或 std::recursive_timed_mutex</td><td>try_lock_for(duration)</td><td rowspan="2"> bool —— 获取锁时返回true，否则返回fasle</td></tr><tr><td>try_lock_until(time_point)</td></tr><tr><td rowspan="2">std::unique_lock&lt;TimedLockable&gt;</td><td>unique_lock(lockable, duration)</td><td>N/A —— 对新构建的对象调用owns_lock();</td></tr><tr><td>unique_lock(lockable, time_point)</td><td>当获取锁时返回true，否则返回false</td></tr><tr><td rowspan="2"></td><td>try_lock_for(duration)</td><td rowspan="2">bool —— 当获取锁时返回true，否则返回false</td></tr><tr><td>try_lock_until(time_point)</td></tr><tr><td rowspan="3">std::future&lt;ValueType&gt;或std::shared_future&lt;ValueType&gt;</td><td>wait_for(duration)</td><td>当等待超时，返回std::future_status::timeout</td></tr><tr><td rowspan="2">wait_until(time_point)</td><td>当“期望”准备就绪时，返回std::future_status::ready</td></tr><tr><td>当“期望”持有一个为启动的延迟函数，返回std::future_status::deferred</td></tr></tbody></table>
+| 类型/命名空间                                          | 函数                                  | 返回值                                                             |
+| ------------------------------------------------------ | ------------------------------------- | ------------------------------------------------------------------ |
+| std::this_thread[namespace]                            | sleep_for(duration)                   | N/A                                                                |
+|                                                        | sleep_until(time_point)               |                                                                    |
+| std::condition_variable 或 std::condition_variable_any | wait_for(lock, duration)              | std::cv_status::time_out 或 std::cv_status::no_timeout             |
+|                                                        | wait_until(lock, time_point)          |                                                                    |
+|                                                        | wait_for(lock, duration, predicate)   | bool —— 当唤醒时，返回谓词的结果                                   |
+|                                                        | wait_until(lock, duration, predicate) |                                                                    |
+| std::timed_mutex 或 std::recursive_timed_mutex         | try_lock_for(duration)                | bool —— 获取锁时返回true，否则返回false                            |
+|                                                        | try_lock_until(time_point)            |                                                                    |
+| std::unique_lock<TimedLockable>                        | unique_lock(lockable, duration)       | N/A —— 对新构建的对象调用owns_lock()                               |
+|                                                        | unique_lock(lockable, time_point)     | 当获取锁时返回true，否则返回false                                  |
+|                                                        | try_lock_for(duration)                | bool —— 当获取锁时返回true，否则返回false                          |
+|                                                        | try_lock_until(time_point)            |                                                                    |
+| std::future<ValueType>或std::shared_future<ValueType>  | wait_for(duration)                    | 当等待超时，返回std::future_status::timeout                        |
+|                                                        | wait_until(time_point)                | 当"期望"准备就绪时，返回std::future_status::ready                  |
+|                                                        |                                       | 当"期望"持有一个为启动的延迟函数，返回std::future_status::deferred |
 
   ##### 4.3.1 时钟 
-
-// todo(congyu)
 
 - 获取现在时间，系统时钟
 
@@ -360,21 +883,222 @@ wait()方法等各种阻塞调用，可以提供线程等待功能，等待某�
 std::chrono::system_clock::now();
 ```
 
+C++11提供了三种时钟类型：
+
+1. `std::chrono::system_clock`
+   - 系统时钟，表示系统范围的时间
+   - 可以转换为日历时间
+   - 可能受系统时间调整影响
+
+2. `std::chrono::steady_clock`
+   - 稳定时钟，表示单调递增的时间
+   - 不受系统时间调整影响
+   - 适合测量时间间隔
+   - 具体实现依赖于操作系统：
+     - Linux: 通常使用 CLOCK_MONOTONIC，从系统启动开始计时
+     - Windows: 通常使用 QueryPerformanceCounter，不一定是系统启动时间
+     - macOS: 通常使用 mach_absolute_time()，不一定是系统启动时间
+   - 主要特点是保证时间值单调递增且稳定
+
+3. `std::chrono::high_resolution_clock`
+   - 高精度时钟
+   - 通常是system_clock或steady_clock的别名
+   - 提供最高精度的时间测量
+
+示例：
+```c++
+#include <iostream>
+#include <chrono>
+
+void clock_example() {
+    // 系统时钟
+    auto sys_now = std::chrono::system_clock::now();
+    std::time_t sys_time = std::chrono::system_clock::to_time_t(sys_now);
+    std::cout << "System time: " << std::ctime(&sys_time);
+
+    // 稳定时钟
+    auto steady_now = std::chrono::steady_clock::now();
+    // 稳定时钟不能直接转换为日历时间
+
+    // 高精度时钟
+    auto high_now = std::chrono::high_resolution_clock::now();
+}
+```
+
 ##### 4.3.2 时延
 
-// todo(congyu)
+时延（duration）表示一段时间间隔，由数值和单位组成。
+
+###### 预定义的时延类型
+
+```c++
+std::chrono::nanoseconds    // 纳秒
+std::chrono::microseconds   // 微秒
+std::chrono::milliseconds   // 毫秒
+std::chrono::seconds        // 秒
+std::chrono::minutes        // 分钟
+std::chrono::hours          // 小时
+```
+
+###### 创建时延
+
+```c++
+// 使用预定义类型
+std::chrono::seconds s(5);  // 5秒
+std::chrono::milliseconds ms(100);  // 100毫秒
+
+// 使用duration模板
+std::chrono::duration<int> d(5);  // 5个时间单位
+std::chrono::duration<double> d2(3.5);  // 3.5个时间单位
+```
+
+###### 时延运算
+
+```c++
+#include <chrono>
+
+void duration_example() {
+    using namespace std::chrono;
+    
+    // 时延相加
+    seconds s1(5);
+    seconds s2(3);
+    seconds s3 = s1 + s2;  // 8秒
+    
+    // 时延相减
+    seconds s4 = s1 - s2;  // 2秒
+    
+    // 时延比较
+    bool b1 = s1 > s2;  // true
+    
+    // 时延转换
+    milliseconds ms = s1;  // 5000毫秒
+    
+    // 时延计数
+    long count = s1.count();  // 5
+}
+```
+
+###### 自定义时延
+
+```c++
+// 自定义时延类型：1/30秒
+using frame_duration = std::chrono::duration<int, std::ratio<1, 30>>;
+frame_duration fd(1);  // 1/30秒
+```
 
 ##### 4.3.3 时间点
 
-// todo(congyu) 
+时间点（time_point）表示时间线上的一个特定点。
 
- 
+###### 创建时间点
 
+```c++
+#include <chrono>
 
+void time_point_example() {
+    using namespace std::chrono;
+    
+    // 获取当前时间点
+    auto now = system_clock::now();
+    
+    // 创建特定时间点
+    time_point<system_clock> tp = now + seconds(5);  // 5秒后
+    
+    // 时间点运算
+    auto diff = tp - now;  // 时间差
+    auto tp2 = tp + seconds(10);  // 10秒后
+    auto tp3 = tp - seconds(10);  // 10秒前
+}
+```
 
+###### 时间点转换
 
+```c++
+#include <chrono>
+#include <ctime>
+#include <iostream>
 
+void time_point_conversion() {
+    // 系统时间点转换为日历时间
+    auto now = std::chrono::system_clock::now();
+    std::time_t time = std::chrono::system_clock::to_time_t(now);
+    std::cout << "Current time: " << std::ctime(&time);
+    
+    // 日历时间转换为系统时间点
+    std::time_t t = std::time(nullptr);
+    auto tp = std::chrono::system_clock::from_time_t(t);
+}
+```
 
+###### 时间点比较
+
+```c++
+void time_point_comparison() {
+    auto now = std::chrono::system_clock::now();
+    auto future = now + std::chrono::seconds(5);
+    
+    if (future > now) {
+        std::cout << "Future is after now\n";
+    }
+    
+    if (now < future) {
+        std::cout << "Now is before future\n";
+    }
+}
+```
+
+###### 实际应用示例
+
+```c++
+#include <iostream>
+#include <chrono>
+#include <thread>
+
+void timing_example() {
+    using namespace std::chrono;
+    
+    // 测量代码执行时间
+    auto start = steady_clock::now();
+    
+    // 执行一些操作
+    std::this_thread::sleep_for(milliseconds(100));
+    
+    auto end = steady_clock::now();
+    auto duration = duration_cast<milliseconds>(end - start);
+    
+    std::cout << "Operation took " << duration.count() << "ms\n";
+    
+    // 设置超时
+    auto timeout = steady_clock::now() + seconds(5);
+    while (steady_clock::now() < timeout) {
+        // 执行操作直到超时
+        std::this_thread::sleep_for(milliseconds(100));
+    }
+}
+```
+
+###### 注意事项
+
+1. 选择适当的时钟类型
+   - 需要日历时间：使用`system_clock`
+   - 需要稳定时间测量：使用`steady_clock`
+   - 需要最高精度：使用`high_resolution_clock`
+
+2. 时延转换
+   - 注意精度损失
+   - 使用`duration_cast`进行显式转换
+   - 避免隐式转换
+
+3. 时间点运算
+   - 只能对相同时钟类型的时间点进行运算
+   - 注意时区问题
+   - 考虑系统时间调整的影响
+
+4. 性能考虑
+   - 时间点获取可能有一定开销
+   - 频繁获取时间可能影响性能
+   - 考虑使用缓存的时间值
 
 ---
 

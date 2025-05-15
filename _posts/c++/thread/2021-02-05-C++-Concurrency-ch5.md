@@ -102,7 +102,7 @@ Copyleft! 2022 William Yu. Some rights reserved.
 | 原子类型        | 相关特化类                      |
 | :-------------- | :------------------------------ |
 | atomic_bool     | std::atomic<bool>               |
-| atomic_char      |  std::atomic<char>                |
+| atomic_char     | std::atomic<char>               |
 | atomic_schar    | std::atomic<signed char>        |
 | atomic_uchar    | std::atomic<unsigned char>      |
 | atomic_int      | std::atomic<int>                |
