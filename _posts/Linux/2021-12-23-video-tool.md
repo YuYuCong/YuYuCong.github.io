@@ -55,6 +55,20 @@ ffmpeg -ss 2 -t 10 -i output.avi -s 320x240 -r 15 output.gif
 - -r 表示视频帧率
 
 
+##### 调整视频速率
+
+视频的倍速主要是通过控制`filter`中的`setpts`来实现,`setpts`是视频滤波器通过改变每一个`pts`时间戳来实现倍速的效果，如下只要把`PTS`缩小一半就可以实现2倍速，相反的是`PTS`增加一倍就达到2倍慢放的效果。  
+实现：  
+`ffmpeg -i test.mp4 -an -filter:v "setpts=0.5*PTS" output.mp4`  
+`ffmpeg -i test.mp4 -an -filter:v "setpts=2*PTS" output.mp4`  
+注意：视频调整的速度倍率范围为：[0.25, 4]
+
+如果只调整视频的话最好把音频禁掉。
+
+对视频进行加速时，如果不想丢帧，可以用-r 参数指定输出视频FPS，方法如下:  
+`ffmpeg -i test.mp4 -an -r 60 -filter:v "setpts=2.0*PTS" output.mp4`
+
+
 
 ## ffmpeg 视频格式转码
 

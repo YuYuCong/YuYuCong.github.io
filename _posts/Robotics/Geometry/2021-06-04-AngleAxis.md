@@ -33,7 +33,7 @@ Copyleft! 2022 Cong Yu. Some rights reserved.
 
 
 - 三维中的任一位姿，都只有两种轴角表达，两个的关系是直接取负
-- 用一个单位向量描述旋转轴，外加一个角度描述旋转角度。一起4各参数描述三维旋转。
+- 用一个单位向量描述旋转轴，外加一个角度描述旋转角度。一起共4个参数描述三维旋转。
 - 也可以使用非归一化的旋转轴描述三维旋转。
 - 轴角表达也不是唯一的，一个姿态可以有两种表达。
 
@@ -47,8 +47,8 @@ Copyleft! 2022 Cong Yu. Some rights reserved.
 - robot坐标系  front  x, left  y, up  z
 - 欧拉角顺序 zyx ypr yaw pitch roll
 - $\Psi$ 方向或偏航 (heading or yaw)
-  - $\theta$  升降或俯仰 (elevation or pitch)
-  - $\phi$ 倾斜或横滚 (bank or roll)
+- $\theta$  升降或俯仰 (elevation or pitch)
+- $\phi$ 倾斜或横滚 (bank or roll)
 
 
 

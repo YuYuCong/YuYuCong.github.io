@@ -5,7 +5,7 @@ description: "git 使用笔记"
 categories: [Linux]
 tags: [git,Linux]
 redirect_from:
-  - /2018/05/13/
+  - /2020/07/09/
 ---
 
 [TOC]
@@ -63,6 +63,10 @@ cd .git/
 cat config
 可以修改各项配置
 比如commit的创建人名与邮箱等
+
+$ git config --local user.name <github’s Name>
+$ git config --local user.email <user@email.com>
+$ git config --list
 ```
 
 ```shell

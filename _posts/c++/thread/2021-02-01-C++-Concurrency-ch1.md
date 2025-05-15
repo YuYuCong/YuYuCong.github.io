@@ -80,7 +80,6 @@ Copyleft! 2022 William Yu. Some rights reserved.
 
 <img src="https://raw.githubusercontent.com/xiaoweiChen/Cpp_Concurrency_In_Action/master/images/chapter1/1-4.png" alt="img" style="zoom:100%;" align='center'/>         
 
-修正：多线程通信方式是：共享变量
 
 <small class="img-hint">Fig2. 多线程并发</small>
 

@@ -79,7 +79,7 @@ int main() {
 ```
 
 
-什么时候用unique_ptr合适呢？ todo(congyu)
+什么时候用unique_ptr合适呢？ 
 
 第一种：经常用在 unit test 里面，用于创建全局统一的实体用于测试
 
@@ -96,6 +96,8 @@ class ProblemTest : public testing::Test {
   std::unique_ptr<Problem> problem_;  
 };
 ```
+
+第二种：用于创建类唯一成员
 
 ## 2. std::shared_ptr
 
@@ -282,9 +284,110 @@ auto data = parent->user_data_;
 
 #### 循环引用
 
-// todo(congyu)
+循环引用是指两个或多个对象通过 shared_ptr 相互引用，导致它们的引用计数永远不会降为 0，从而造成内存泄漏。
 
+##### 示例代码
 
+```cpp
+#include <iostream>
+#include <memory>
+
+class B;  // 前向声明
+
+class A {
+public:
+    std::shared_ptr<B> b_ptr;
+    ~A() { std::cout << "A destroyed" << std::endl; }
+};
+
+class B {
+public:
+    std::shared_ptr<A> a_ptr;
+    ~B() { std::cout << "B destroyed" << std::endl; }
+};
+
+int main() {
+    {
+        auto a = std::make_shared<A>();
+        auto b = std::make_shared<B>();
+        
+        // 创建循环引用
+        a->b_ptr = b;
+        b->a_ptr = a;
+        
+        // 离开作用域时，a 和 b 的引用计数都是 2
+        // 由于循环引用，它们的析构函数不会被调用
+    }
+    // 这里不会输出 "A destroyed" 和 "B destroyed"
+    return 0;
+}
+```
+
+##### 解决方案
+
+使用 `std::weak_ptr` 来打破循环引用。将其中一个 shared_ptr 改为 weak_ptr：
+
+```cpp
+#include <iostream>
+#include <memory>
+
+class B;  // 前向声明
+
+class A {
+public:
+    std::shared_ptr<B> b_ptr;
+    ~A() { std::cout << "A destroyed" << std::endl; }
+};
+
+class B {
+public:
+    std::weak_ptr<A> a_ptr;  // 使用 weak_ptr 替代 shared_ptr
+    ~B() { std::cout << "B destroyed" << std::endl; }
+};
+
+int main() {
+    {
+        auto a = std::make_shared<A>();
+        auto b = std::make_shared<B>();
+        
+        a->b_ptr = b;
+        b->a_ptr = a;  // weak_ptr 不会增加引用计数
+        
+        // 离开作用域时：
+        // 1. a 的引用计数降为 0，A 被销毁
+        // 2. A 销毁时，b_ptr 被销毁，B 的引用计数降为 0
+        // 3. B 被销毁
+    }
+    // 这里会正确输出 "A destroyed" 和 "B destroyed"
+    return 0;
+}
+```
+
+##### 使用 weak_ptr 的注意事项
+
+1. **检查有效性**：
+   - 使用 weak_ptr 前应该检查它是否有效
+   - 使用 `expired()` 方法检查对象是否已被销毁
+   - 使用 `lock()` 方法获取 shared_ptr
+
+```cpp
+if (auto shared_ptr = weak_ptr.lock()) {
+    // 对象仍然存在，可以使用 shared_ptr
+} else {
+    // 对象已被销毁
+}
+```
+
+2. **常见使用场景**：
+   - 观察者模式中的观察者列表
+   - 缓存系统
+   - 树形结构中的父节点引用
+   - 任何需要打破循环引用的场景
+
+3. **性能考虑**：
+   - weak_ptr 的创建和销毁比 shared_ptr 更轻量
+   - lock() 操作是线程安全的，但可能有性能开销
+   - 在性能关键路径上应谨慎使用
 
 ## Contact
 
