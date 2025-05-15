@@ -230,7 +230,7 @@ git log --graph --decorate --first-parent <上一个tag名称>..HEAD
   - e.g. 预计同期发布两个产品Release/Ch_v2.6.0和Release/En_v2.4.0
     - Release/En_v2.4已经定完版，理应合并回develop，此时发现尚有未定完版的Ch_v2.6，则应提pr合并到Release/Ch_v2.6
 - 如有冲突，解决冲突，再commit
-- 待CI 编译check通过之后，merge到develop即可
+- 待CI 编译check通过之后，merge到develop（**选择普通合并Merge Pull Request**）
 
 
 

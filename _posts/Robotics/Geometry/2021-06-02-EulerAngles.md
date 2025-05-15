@@ -46,10 +46,10 @@ Copyleft! 2022 Cong Yu. Some rights reserved.
 - 规定内旋外旋
 	- 内旋
 		- 也称为静态欧拉角
-		- 每次旋转都是绕固定轴，即世界坐标系的轴旋转
+		- 每次旋转都是绕全局固定轴，即世界坐标系的轴旋转
 	- 外旋
-		- 也成为动态欧拉角
-		- 每次旋转都是绕旋转之后的轴
+		- 也称为动态欧拉角
+		- 每次旋转都是绕上一次旋转之后的轴
 	- 通常使用的是动态欧拉角。本博客只讨论常用的动态欧拉角。
 - 角度数值
 	- 使用三个参数表达三维姿态 [yaw,pitch,roll]。数值范围都是-180到+180
@@ -57,7 +57,7 @@ Copyleft! 2022 Cong Yu. Some rights reserved.
 ### 2. 欧拉角表达姿态
 
 - 欧拉角表达姿态时并不唯一
-	- 三维中的任一位姿，都可以有<u>至少两种</u>欧拉角表达，第二个等于180°减去第一个。
+	- 三维中的任一姿态，都可以有<u>至少两种</u>欧拉角表达，第二个等于180°减去第一个。
 
 
 ### 3. 欧拉角表达旋转
@@ -66,11 +66,11 @@ Rotations with euler angle representation
 
 - 欧拉角表达旋转时，直接求和或者做差即可。
 - 比如：姿态1 （12°，100°，113°），姿态2（15°，108°，117°）
-	- 两个姿态之间的过渡为 （3°，8°，4°）
+	- 两个姿态之间的旋转动作为 （3°，8°，4°）
 
 ### 4. 万向锁  gimbal lock 
 
-理解万向锁需要注意以下关键点：
+理解万向锁需要注意以下关键点：（注意！下面这一部分理解透彻是非常重要的）
 
 - 第一个关键点：注意欧拉角的旋转轴并不是正交的，从桁架系统这个机构去理解：
 	- z轴其实永远是朝向正上方的
@@ -82,13 +82,14 @@ Rotations with euler angle representation
     - 我们需要的是：在任何一个姿态下，可以向任何另外一个姿态过渡。但是在万向锁姿态下，只有两个方向是可以微分的 （围绕y轴的微分 + 围绕xz轴的这两个重叠的微分）
 - 第三个关键点：注意理解欧拉角的顺序。
 	- 并不是说必须按照顺序依次做三个旋转，顺序颠倒也是可以的，但是注意耦合关系。
-	- 先转哪个轴都可以，但是要确保确保转z轴的时候xy都会被带动，转x轴的时候其他不动，转y轴的时候x轴会被带动即可。
+	- 先转哪个轴都可以，但是要确保确保转z轴的时候xy都会被带动，转y轴的时候x轴会被带动，转x轴的时候其他不动即可。
 	- <u>与其说是欧拉角顺序，不如说是欧拉角父子关系。</u>
 
 [euler_angle_description.excalidraw](Excalidraw/euler_angle_description.excalidraw.md)
 
 <img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/develop/_posts/Excalidraw/euler_angle_description.excalidraw.png" alt="img" style="zoom:50%;" align='center' text ="euler_angle_description.excalidraw"/>
 
+x与z重合时，绕z旋转等效于绕x旋转，就产生了万向锁。
 
 ### 5. 欧拉角表达下的陀螺仪积分
 
@@ -102,6 +103,9 @@ Derivations
 $$
 R_n^b = R_2^b(\psi) \cdot R_1^2(\theta) \cdot R_n^1(\phi) \tag1
 $$
+
+其中$R_n^b$表示从n系（导航系）到b系（机体系）的旋转动作
+
 
 注意直接微分并不等于陀螺仪的角速度测量值
 $$
@@ -157,7 +161,7 @@ $$
 \left[
 \begin{matrix} {\dot\psi_n} \ {\dot\theta_n}\ {\dot\phi_n} 
 \end{matrix}
-\right]^T = w_n  = (R^b_{\dot\psi \dot\theta \dot\phi}) ^ {-1} \cdot w_b \tag6
+\right]^T := w_n  = (R^b_{\dot\psi \dot\theta \dot\phi}) ^ {-1} \cdot w_b \tag6
 $$
 
 然后对$w_n$积分即可得到正确的欧拉角。

@@ -1,12 +1,17 @@
 ---
 layout: post
-title: "线程池与生产消费者模式"
-subtitle: "线程池"
-categories: [c++]
-tags: [c++,多线程,thread]
-header-img: "img/in-post/post-cpp/"
+title: 线程池与生产消费者模式
+subtitle: 线程池
+categories:
+  - c++
+tags:
+  - 多线程
+  - thread
+  - cplusplus
+  - cpp
+header-img: img/in-post/post-cpp/
 header-style: text
-redirect_from:
+redirect_from: 
 date: 2021.02.08
 ---
 
