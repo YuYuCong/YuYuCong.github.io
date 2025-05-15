@@ -35,8 +35,8 @@ refitem: https://stanford.edu/class/ee267/lectures/lecture10.pdf
 - robot坐标系  front  x, left  y, up  z
 - 欧拉角顺序 zyx ypr yaw pitch roll
 - $\Psi$ 方向或偏航 (heading or yaw)
-  - $\theta$  升降或俯仰 (elevation or pitch)
-  - $\phi$ 倾斜或横滚 (bank or roll)
+- $\theta$  升降或俯仰 (elevation or pitch)
+- $\phi$ 倾斜或横滚 (bank or roll)
 - n系 导航坐标系
 - b系 机体坐标系
 
@@ -388,7 +388,7 @@ $$
 四元数微分
 
 
-![|200](_backup/post-robotics-quaternion-diff.png)
+![|200](img/in-post/post-geometry/post-robotics-quaternion-diff.png)
 
 $$
 \begin{equation}

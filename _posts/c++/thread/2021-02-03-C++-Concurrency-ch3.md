@@ -1,10 +1,15 @@
 ---
 layout: post
-title: "C++并发编程系列3-数据共享与同步"
-subtitle: "C++并发编程系列笔记，ch3笔记"
-categories: [c++]
-tags: [c++,多线程,thread]
-header-img: "img/in-post/post-cpp/"
+title: C++并发编程系列3-数据共享与同步
+subtitle: C++并发编程系列笔记，ch3笔记
+categories:
+  - c++
+tags:
+  - 多线程
+  - thread
+  - cpp
+  - cplusplus
+header-img: img/in-post/post-cpp/
 header-style: text
 redirect_from:
   - /2021/02/03/
@@ -223,9 +228,9 @@ bool list_contains(int value_to_find) {
 
 ### 3.8 发现接口内在的条件竞争
 
-// todo(congyu)
-
 参 https://www.kancloud.cn/jxm_zn/cpp_concurrency_in_action/264954#31__12     3.2.3 小节
+
+单独每个接口中的线程安全并不意味着整体是线程安全的，调用方在组合使用多个接口时，可能也会存在异常。所以要谨慎小心的设计接口。
 
 ### 3.9 死锁 deadlock
 
@@ -242,14 +247,14 @@ bool list_contains(int value_to_find) {
 
 2种措施：
 
-###### 按照顺序上锁
+###### 1.总是按照顺序上锁
 
 - 无死锁的代码风格  deadlock-free:
   - 建议互斥量总是以相同的顺序上锁。（上面的例子中，线程1和2都先锁互斥量A，再锁互斥量B） -- 但这种方法并不总是奏效:slightly_smiling_face:
   - 一个线程只持有一个锁，当已经持有一个锁时，不要再去获取第二把锁
   - 使用分层互斥锁
 
-###### 同时上锁
+###### 2.同时上锁
 
 - `std::lock()`： c++标准提供的解决方案。可以<u>一次锁住多个互斥量</u>，没有死锁风险
 
@@ -316,8 +321,6 @@ void TestSolveDeadLock() {
 }
 ```
 
-// todo(congyu)
-
 参 https://www.kancloud.cn/jxm_zn/cpp_concurrency_in_action/264954#31__12    3.2.4 和 3.2.5
 
 ### 3.10 锁的粒度
@@ -326,17 +329,13 @@ void TestSolveDeadLock() {
 
 - 良好的代码：在锁住互斥量的同时，只进行共享数据的处理。锁外数据的处理在上锁前就做好准备工作。锁内共享数据的访问结束就立即释放锁
 
-// todo(congyu)
-
 ### 3.11 保护共享数据的初始化过程
-
-// todo(congyu)
 
 参 https://www.kancloud.cn/jxm_zn/cpp_concurrency_in_action/264954#31__12    3.3.1
 
-### 3.12 保护很少更新的数据
+这一部分可以参照单例模式，double check，call_once
 
-// todo(congyu)
+### 3.12 保护很少更新的数据
 
 参 https://www.kancloud.cn/jxm_zn/cpp_concurrency_in_action/264954#31__12    3.3.2
 
@@ -345,13 +344,13 @@ void TestSolveDeadLock() {
 - 只有在更新发生时，即有线程写入数据时，才上锁
 - 在没有写操作发生时，允许多个线程同时读取数据
 
-### 3.13 嵌套锁
+详见 shared_mutex 章节 [2021-03-08-lock](c++/thread/2021-03-08-lock.md)
 
-// todo(congyu)
+### 3.13 嵌套锁
 
 参 https://www.kancloud.cn/jxm_zn/cpp_concurrency_in_action/264954#31__12    3.3.3
 
-
+通常避免使用到嵌套锁
 
 ---
 

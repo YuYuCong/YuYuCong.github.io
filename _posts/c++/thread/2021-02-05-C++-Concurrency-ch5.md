@@ -1,10 +1,15 @@
 ---
 layout: post
-title: "C++并发编程系列5-内存模型与原子操作"
-subtitle: "C++并发编程系列笔记，ch5笔记"
-categories: [c++]
-tags: [c++,多线程,thread]
-header-img: "img/in-post/post-cpp/"
+title: C++并发编程系列5-内存模型与原子操作
+subtitle: C++并发编程系列笔记，ch5笔记
+categories:
+  - c++
+tags:
+  - 多线程
+  - thread
+  - cpp
+  - cplusplus
+header-img: img/in-post/post-cpp/
 header-style: text
 redirect_from:
   - /2021/02/05/
@@ -97,7 +102,7 @@ Copyleft! 2022 William Yu. Some rights reserved.
 | 原子类型        | 相关特化类                      |
 | :-------------- | :------------------------------ |
 | atomic_bool     | std::atomic<bool>               |
-| atomic_char      |  std::atomic<char>                |
+| atomic_char     | std::atomic<char>               |
 | atomic_schar    | std::atomic<signed char>        |
 | atomic_uchar    | std::atomic<unsigned char>      |
 | atomic_int      | std::atomic<int>                |

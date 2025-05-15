@@ -1,10 +1,15 @@
 ---
 layout: post
-title: "C++并发编程系列1-概述"
-subtitle: "C++并发编程系列笔记，ch1笔记"
-categories: [c++]
-tags: [c++,多线程,thread]
-header-img: "img/in-post/post-cpp/"
+title: C++并发编程系列1-概述
+subtitle: C++并发编程系列笔记，ch1笔记
+categories:
+  - c++
+tags:
+  - 多线程
+  - thread
+  - cpp
+  - cplusplus
+header-img: img/in-post/post-cpp/
 header-style: text
 redirect_from:
   - /2021/02/01/
@@ -75,19 +80,21 @@ Copyleft! 2022 William Yu. Some rights reserved.
 
 <img src="https://raw.githubusercontent.com/xiaoweiChen/Cpp_Concurrency_In_Action/master/images/chapter1/1-4.png" alt="img" style="zoom:100%;" align='center'/>         
 
+
 <small class="img-hint">Fig2. 多线程并发</small>
 
 总结
 
 <img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/develop/img/in-post/post-cpp/cpp_thread_1.png" alt="img" style="zoom:40%;" align='center' text ="cpp_thread_1.png"/>
+修正：多线程通信方式是：共享变量
 
 <small class="img-hint">Fig3. 并发</small>
 
 ###### 2. 多线程并发
 
 - 进程中的所有线程共享地址空间
-- 线程间通信：共享内存
-- 共享内存非常灵活，多线程的开销远小于多进程
+- 线程间通信：共享变量
+- 共享变量非常灵活，多线程的开销远小于多进程
 - 灵活的代价：程序员必须维护多个线程所访问到的数据。维护方法：加锁
 - 并发 -> 主要使用多线程并发
 

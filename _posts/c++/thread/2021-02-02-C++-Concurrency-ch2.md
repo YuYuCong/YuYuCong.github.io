@@ -1,10 +1,15 @@
 ---
 layout: post
-title: "C++并发编程系列2-线程管理"
-subtitle: "C++并发编程系列笔记，ch2笔记"
-categories: [c++]
-tags: [c++,多线程,thread]
-header-img: "img/in-post/post-cpp/"
+title: C++并发编程系列2-线程管理
+subtitle: C++并发编程系列笔记，ch2笔记
+categories:
+  - c++
+tags:
+  - 多线程
+  - thread
+  - cpp
+  - cplusplus
+header-img: img/in-post/post-cpp/
 header-style: text
 redirect_from:
   - /2021/02/02/

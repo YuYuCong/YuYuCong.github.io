@@ -452,7 +452,8 @@ Quaternion ToQuaternion(double yaw, double pitch, double roll) // yaw (Z), pitch
 
 ![img](https://img-blog.csdnimg.cn/20191217160826969.png)
 
-- arctan和arcsin的结果是![[-\frac{\pi}{2},\frac{\pi}{2}]](https://private.codecogs.com/gif.latex?%5B-%5Cfrac%7B%5Cpi%7D%7B2%7D%2C%5Cfrac%7B%5Cpi%7D%7B2%7D%5D)，这并不能覆盖所有朝向(对于![\theta](https://private.codecogs.com/gif.latex?%5Ctheta)角![[-\frac{\pi}{2},\frac{\pi}{2}]](https://private.codecogs.com/gif.latex?%5B-%5Cfrac%7B%5Cpi%7D%7B2%7D%2C%5Cfrac%7B%5Cpi%7D%7B2%7D%5D)的取值范围已经满足)，因此需要用atan2来代替arctan。
+- arctan和arcsin的结果是
+$$[-\frac{\pi}{2},\frac{\pi}{2}]$$(https://private.codecogs.com/gif.latex?%5B-%5Cfrac%7B%5Cpi%7D%7B2%7D%2C%5Cfrac%7B%5Cpi%7D%7B2%7D%5D)，这并不能覆盖所有朝向(对于![\theta](https://private.codecogs.com/gif.latex?%5Ctheta)角$$[\frac{\pi}{2},\frac{\pi}{2}]$$(https://private.codecogs.com/gif.latex?%5B-%5Cfrac%7B%5Cpi%7D%7B2%7D%2C%5Cfrac%7B%5Cpi%7D%7B2%7D%5D)的取值范围已经满足)，因此需要用atan2来代替arctan。
 - 符号约定 q0q1q2q3 qwqxqyqz
 
 ![img](https://img-blog.csdnimg.cn/20191217160923942.png)

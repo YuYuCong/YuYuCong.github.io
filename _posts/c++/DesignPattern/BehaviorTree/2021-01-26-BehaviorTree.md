@@ -1,10 +1,15 @@
 ---
 layout: post
-title: "BehaviorTree(行为树)入门"
-subtitle: "使用行为树模式，让机器人实现复杂任务决策"
-categories: [Design-Pattern]
-tags: [BehaviorTree, Design-Pattern, c++, state-machine, ros]
-header-img: "img/in-post/post-cpp/bg_behavior_tree.drawio.png"
+title: BehaviorTree(行为树)入门
+subtitle: 使用行为树模式，让机器人实现复杂任务决策
+categories:
+  - Design-Pattern
+tags:
+  - BehaviorTree
+  - Design-Pattern
+  - state-machine
+  - ros
+header-img: img/in-post/post-cpp/bg_behavior_tree.drawio.png
 date: 2021.01.26
 ---
 
