@@ -69,7 +69,7 @@ where
 - and $s$ is the projective transformation's arbitrary scaling and not part of the camera model. 影射变换的尺度部分，与相机模型无关
 
 ![pinhole_camera_model.png](https://docs.opencv.org/4.x/pinhole_camera_model.png)
-<small class="img-hint">Fig1.  **Pinhole camera model**</small>
+<small class="img-hint">Fig1.  **Pinhole camera model**</small>
 
 注意：相机坐标系的方向规定为：假设你的眼睛是相机，右手方向为x，脚的方向为y，目光直视方向（正前方）为z。得到的图像视野为左上方到右下方。横宽竖窄。
 
@@ -118,20 +118,14 @@ Real lenses usually have some distortion, mostly radial distortion, and slight t
 畸变 distortion 包括两部分：
 
 - mostly radial distortion,  主要是径向畸变
-- and slight tangential distortion. 以及轻微的切向畸变
-
-径向畸变分为两种：
-- 枕形畸变
-
-- 桶形畸变
+  - 枕形畸变
+  - 桶形畸变
+- and slight tangential distortion. 以及轻微的切向畸变: 切向畸变是由于镜头与图像平面不完全平行造成的。它会导致图像中的点相对于其理想位置发生偏移，这种偏移主要表现为图像中的点沿着切线方向移动。切向畸变通常比径向畸变小，但在某些情况下（如广角镜头）也会比较明显。
 
   <img src="https://docs.opencv.org/4.x/distortion_examples.png" alt="distortion_examples.png" style="zoom:67%;" />
 
   <small class="img-hint">Fig2.  radial distortion</small>
 
-切向畸变
-
-// todo(congyu)
 
 #### 畸变模型
 
@@ -344,8 +338,18 @@ $$
 - stdDeviationsIntrinsics:  Output vector of standard deviations estimated for intrinsic parameters. Order of deviations values: (fx,fy,cx,cy,k1,k2,p1,p2,k3,k4,k5,k6,s1,s2,s3,s4,τx,τy) If one of parameters is not estimated, it's deviation is equals to zero. 内参估计的标准差
 - stdDeviationsExtrinsics: Output vector of standard deviations estimated for extrinsic parameters. Order of deviations values: (R1,T1,…,RM,TM) where M is number of pattern views, Ri,Ti are concatenated 1x3 vectors.外参估计的标准差
 - perViewErrors: Output vector of average re-projection errors estimated for each pattern view. 每一帧的平均冲投影误差
-- flags: todo(congyu)
-- criteria: todo(congyu)
+- flags: 不同的标志位，可以是零或以下值的组合：
+  - CALIB_USE_INTRINSIC_GUESS: cameraMatrix包含有效的初始值fx, fy, cx, cy，这些值会在优化过程中进一步调整
+  - CALIB_FIX_ASPECT_RATIO: 函数只将fy作为自由参数。fx/fy的比值保持与输入cameraMatrix中相同
+  - CALIB_FIX_PRINCIPAL_POINT: 主点在全局优化过程中保持不变
+  - CALIB_ZERO_TANGENT_DIST: 切向畸变系数(p1,p2)被设置为零并保持为零
+  - CALIB_FIX_K1,...,CALIB_FIX_K6: 对应的径向畸变系数在优化过程中保持不变
+  - CALIB_RATIONAL_MODEL: 启用系数k4, k5和k6
+  - CALIB_THIN_PRISM_MODEL: 启用系数s1, s2, s3和s4
+  - CALIB_FIX_S1_S2_S3_S4: 薄棱镜畸变系数在优化过程中保持不变
+  - CALIB_TILTED_MODEL: 启用系数tauX和tauY
+  - CALIB_FIX_TAUX_TAUY: 倾斜传感器模型的系数在优化过程中保持不变
+- criteria: 迭代优化算法的终止条件。包含最大迭代次数和/或期望精度。默认值为TermCriteria(TermCriteria::COUNT+TermCriteria::EPS, 30, DBL_EPSILON)
 
 返回值
 
