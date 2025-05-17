@@ -2,7 +2,7 @@
 layout: post
 title: "优化理论"
 subtitle: "详细解读常用的数值优化方法，如：梯度下降，高速牛顿，以及LevenbergMarquardt等"
-categories: [SLAM]
+categories: [Math]
 tags: [SLAM, Optimal, Math]
 header-img: "img/in-post/post-optimal/post-bg-1.png"
 header-style: img
@@ -58,9 +58,9 @@ Copyleft! 2024 Cong Yu. Some rights reserved.
 
 ##### 1.1 无约束优化问题
 
-无约束优化问题：一个代价函数  cost function: $F：\mathbf{R} ^{n} \mapsto \mathbf{R}$，寻找一个$\mathbf{x}^+$ ，得到最小的F(x)值。
+无约束优化问题：一个代价函数  cost function: $F：\mathbf{R} ^{n} \mapsto \mathbf{R}$，寻找一个$\mathbf{x}^+$ ，使得$F(\mathbf x)$最小。
 
-F(x) 称为目标函数，或者代价函数。
+$F(\mathbf x)$ 称为目标函数，或者代价函数。
 
 该 $\mathbf{x}^+$  称为解。
 
@@ -113,7 +113,7 @@ $$
 
 #####  1.4 局部优化问题
 
-局部优化问题的定义：在x的取值范围内，找到初值$x_0$附近的F的某个局部最小值即可。
+局部优化问题的定义：在x的取值范围内，找到初值$x_0$附近一个范围内的F的某个局部最小值即可。
 
 无约束局部优化问题的表达形式：
 
@@ -148,7 +148,19 @@ $$
 
 ##### 1.6 非线性优化
 
-如果优化问题不是线性的，就称为非线性优化。
+
+$$
+\begin{align}
+& \textrm{Given   }F：\mathbf{R} ^{n} \mapsto \mathbf{R} \\ 
+& \textrm{Find } \mathbf{x}^+ = \text {argmin}_\mathbf{x} \{F(\mathbf x)\}. \\
+& \textrm{subject to } f_i(x) \leq b_i, i = 1,...,m. 
+\end{align}
+$$
+
+且其中目标函数  $F$  是非线性函数，且任一约束函数 $f_i(x)$ 是非线性函数
+
+非线性函数：存在x、y、a、b，使得 $f(\alpha x + \beta y) \neq \alpha f(x) + \beta f(y)$
+
 
 ##### 1.7 凸优化问题
 
@@ -178,11 +190,57 @@ $$
 
 ##### 1.8 最小二乘问题
 
-[2022-01-04-最小二乘](Math/2022-01-04-最小二乘.md)
+[2022-01-04-最小二乘优化](Math/2022-01-04-最小二乘优化.md)
 
-线性最小二乘
 
-非线性最小二乘
+$$
+\begin{align}
+& \textrm{Given   }F：\mathbf{R} ^{n} \mapsto \mathbf{R} \\ 
+& \textrm{Find } \mathbf{x}^+ = \text {argmin}_\mathbf{x} \{F(\mathbf x)\}
+\end{align}
+$$
+
+其中 $F$ 具有形式：
+
+$$
+F(\mathbf x)= \frac{1}{2}\sum_{i=1}^{m} ( f_{i}( \mathbf{x} ) )^2
+$$
+其中 $f_i(\mathbf{x})$ 具有形式：
+
+$$f_i(\mathbf{x}) = h(\mathbf x,t_i)-y_i$$
+
+$h (\mathbf x,t)$ 即预测方程 hypothesis_func，被拟合的函数。
+
+$t$即数据集中的输入，$y$ 即数据集中的拟合目标label。$f$即残差。m即样本数。n即输入数据$t$的维度。
+
+优化目标是 $h(\mathbf x,t)$ 中的参数 $\mathbf x$ 。
+
+
+##### 1.9 线性最小二乘
+
+$$
+\begin{align}
+& \textrm{Given   }F：\mathbf{R} ^{n} \mapsto \mathbf{R} \\ 
+& \textrm{Find } \mathbf{x}^+ = \text {argmin}_\mathbf{x} \{F(\mathbf x)\}
+\end{align}
+$$
+
+其中 $F$ 具有形式：
+
+$$
+F(\mathbf x)= \frac{1}{2}\sum_{i=1}^{m} ( f_{i}( \mathbf{x} ) )^2
+$$
+
+其中 $f_i(\mathbf{x})$ 具有形式：
+
+$$f_i(\mathbf{x}) = h(\mathbf x,t_i) - y_i = t_i \mathbf x -y_i$$
+即 $h(\mathbf x,t)$ 是线性函数。
+
+
+##### 1.10 非线性最小二乘
+
+即 预测函数 $h(\mathbf x,t)$是非线性函数
+
 
 ## 2. 凸集
 
