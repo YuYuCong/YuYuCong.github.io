@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "WeChatORCode二维码识别"
+title: "WeChatQRCode二维码识别"
 subtitle: "关于OpenCV中cv::wechat_qrcode的一些简单笔记"
 categories: [OpenCV]
 tags: [OpenCV]
@@ -10,12 +10,12 @@ redirect_from:
 ---
 
 
->  OpenCV Wechart QR Class, 一条函数搞定二维码识别！
+>  OpenCV Wechat QR Class, 一条函数搞定二维码识别！
 
 * Kramdown table of contents
 {:toc .toc}
 
-# WeChatORCode 简单笔记
+# WeChatQRCode 简单笔记
 
 ---
 
@@ -95,9 +95,9 @@ python
 ```
 ##### 参数解释
 
-| Parameters | Description |
-| --- | --- |
-| detector_prototxt_path | prototxt file path for the detector |
+| Parameters                        | Description                                       |
+| --------------------------------- | ------------------------------------------------- |
+| detector_prototxt_path            | prototxt file path for the detector               |
 | detector_caffe_model_path         | caffe model file path for the detector            |
 | super_resolution_prototxt_path    | prototxt file path for the super resolution model |
 | super_resolution_caffe_model_path | caffe file path for the super resolution model    |
@@ -130,7 +130,7 @@ retval, points	=	cv.wechat_qrcode_WeChatQRCode.detectAndDecode(	img[, points]	)
 - Returns
   - list of decoded string. 解码结果
 
-有了WeChatORCode，一条函数搞定二维码识别！
+有了WeChatQRCode，一条函数搞定二维码识别！
 
 ### 1.3 code e.g.
 

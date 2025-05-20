@@ -64,7 +64,7 @@ cat config
 可以修改各项配置
 比如commit的创建人名与邮箱等
 
-$ git config --local user.name <github’s Name>
+$ git config --local user.name <github's Name>
 $ git config --local user.email <user@email.com>
 $ git config --list
 ```
@@ -419,9 +419,38 @@ git rm --f readme1.txt    #删除readme1.txt的跟踪，并且删除本地文件
 
 然后git commit 即可。
 
-对于没有添加追踪的新文件，想忽略的话，添加gitignore文件即可
+对于没有添加追踪的新文件，想忽略的话，添加.gitignore文件即可
 
-gitignore规则：todo(congyu)
+.gitignore语法规则：
+
+1. 空行或#开头的行会被忽略
+2. 可以使用标准的glob模式匹配
+3. 匹配模式最后跟反斜杠(/)说明要忽略的是目录
+4. 要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号(!)取反
+
+示例：
+```gitignore
+# 忽略所有 .a 结尾的文件
+*.a
+
+# 但 lib.a 除外
+!lib.a
+
+# 忽略 build/ 目录下的所有文件
+build/
+
+# 忽略 doc/notes.txt，但不忽略 doc/server/arch.txt
+doc/*.txt
+
+# 忽略 doc/ 目录下所有 .pdf 文件
+doc/**/*.pdf
+
+# 忽略当前目录下的 .env 文件
+.env
+
+# 忽略所有目录下的 .env 文件
+**/.env
+```
 
 
 ### git 远程工作
