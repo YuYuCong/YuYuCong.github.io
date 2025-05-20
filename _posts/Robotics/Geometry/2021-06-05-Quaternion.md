@@ -26,7 +26,7 @@ Copyleft! 2022 Cong Yu. Some rights reserved.
 
 ----
 
-## Quaternion
+# Quaternion
 
 refitem: https://stanford.edu/class/ee267/lectures/lecture10.pdf
 
@@ -40,13 +40,19 @@ refitem: https://stanford.edu/class/ee267/lectures/lecture10.pdf
 - n系 导航坐标系
 - b系 机体坐标系
 
-### Basic
+## 1. 基本概念
+
+##### 表达形式
 
 $$
 q = q_w + i q_x + j q_y + k q_z
 $$
 
-where
+where:
+- $q_w$是实部
+- $q_x,q_y,q_z$是虚部
+- i,j,k有如下特性：
+
 $$
 \\
 i ≠ j ≠ k
@@ -60,60 +66,16 @@ ki = -ik = j
 jk = -kj = i
 $$
 
-- valid rotation quaternions have unit length
-  $$
-  ||q|| = \sqrt {q_w^2 + q_x^2+ q_y^2+ q_z^2} = 1
-  $$
+且用于三维刚体旋转时，必须使用单位四元数
 
-
-
-### Rotations with quaternions
-
-#### 1.表达姿态
-
-
-
-#### 2.表达转动
-
- ##### 2.1 向量旋转
-
-a point in 3d space
 $$
-p_0 = [p_x,p_y,p_z]^T
-$$
-写为纯四元数
-$$
-p = [0, p_0]^T
-$$
-有一单位四元数表达的旋转操作q
-$$
-q = [cos(\theta / 2), v \cdot sin(\theta/2)]
-$$
-q作用于p的结果
-$$
-p' = q \cdot p \cdot \ q^{-1} = [0,p_t]^T
-$$
-得到 $p_t$
-
-
- ##### 2.2 坐标系旋转
-
-有o-xyz坐标系下的点 $p = [0, p_x,p_y,p_z]^T$
-
-有一个$q = [cos(\theta / 2), v \cdot sin(\theta/2)]$ 表示：将 o-xyz坐标系 沿着单位旋转轴v旋转$\theta$角度，得到新的坐标系 o'-xyz'
-
-此时 p_0在新坐标系下的表示为 点 $p' = [0, p_x',p_y',p_z']^T$
-
-有
-$$
-p' = q^{-1} \cdot p \cdot  q
+||q|| = \sqrt {q_w^2 + q_x^2+ q_y^2+ q_z^2} = 1
 $$
 
+##### 轴角转换四元数
 
-### 轴角转换四元数
-
-- axis-angle to quaternion (need **normalized** axis v)
-  $$
+axis-angle to quaternion (need **normalized** axis $v$)
+$$
   q_w = cos(\theta/2)
   \\
   q_x = v_x sin(\theta/2)
@@ -123,62 +85,126 @@ $$
   q_z = v_z sin(\theta/2)
   \\
   q = q_w + i q_x + j q_y + k q_z
-  $$
+$$
 
-### 特性
+$$
+q = [\cos(\theta / 2), \mathbf v \sin(\theta/2)]
+$$
 
+## 2. 基本运算
 
-
-### Quaternion Algebra
+Quaternion Algebra
 
 refitem: https://stanford.edu/class/ee267/lectures/lecture10.pdf p20
 
-##### Two Types
 
-###### 1. Vector quaternions 
+##### 1. 四元数乘法
 
-又称纯四元数
-
-represent 3D points or vectors u=(ux,uy,uz) can have arbitrary length
+对于两个元数:
 $$
-q_u = 0 + iu_x + ju_y + ku_z
+\\ q_1 = w_1 + i x_1 + j y_1 + k z_1
+\\ q_2 = w_2 + i x_2 + j y_2 + k z_2
 $$
 
-###### 2. rotation quaternions
+其乘法结果计算如下:
 
-valid rotation quaternions have unit length
+1. 标量部分:
 $$
-||q|| = \sqrt {q_w^2 + q_x^2+ q_y^2+ q_z^2} = 1
-$$
-
-##### addition
-
-//todo(congyu)
-
-##### multiplication
-
-//todo(congyu)
-
-##### rotation
-
-rotation of vector quaternion $q_u$ by $q$ :
-$$
-q'_u = q q_u q^{-1}
+w = w_1w_2 - x_1x_2 - y_1y_2 - z_1z_2
 $$
 
-##### inverse rotation
-
+2. 向量部分:
 $$
-q_u = q^{-1}q'_u q
-$$
-
-##### rotation after rotation
-
-$$
-q'_u = q_2 q_1 q_u q_1^{-1} q_2^{-1}
+\begin{aligned}
+x &= w_1x_2 + x_1w_2 + y_1z_2 - z_1y_2 \\
+y &= w_1y_2 - x_1z_2 + y_1w_2 + z_1x_2 \\
+z &= w_1z_2 + x_1y_2 - y_1x_2 + z_1w_2
+\end{aligned}
 $$
 
-### Gyro Integration with Quaternions
+最终有
+$$
+q_1 \cdot q_2 = w + i x + j y + k z
+$$
+
+重要性质:
+- 四元数乘法不满足交换律: $q_1q_2 \neq q_2q_1$
+- 四元数乘法满足结合律: $(q_1q_2)q_3 = q_1(q_2q_3)$
+- 对于旋转四元数,必须保持单位长度: $||q|| = \sqrt{w^2 + x^2 + y^2 + z^2} = 1$
+
+##### 2. 四元数求逆
+
+对于四元数 $q = q_w + i q_x + j q_y + k q_z$，其逆定义为：
+
+$$
+q^{-1} = \frac {q_w - i q_x - j q_y - k q_z} {||q||²}
+$$
+
+其中 $||q||² = q_w² + q_x² + q_y² + q_z²$ 是四元数的平方范数。
+
+对于单位四元数（$||q|| = 1$），逆运算简化为：
+$q⁻¹ = q_w - i q_x - j q_y - k q_z$
+
+重要性质：
+- 对于单位四元数，$q^{-1} = q^*$（共轭）
+- $q·q⁻¹ = q⁻¹·q = \mathbf 1$（其中$\mathbf 1$是单位四元数$[1,0,0,0]$）
+- $(q₁·q₂)⁻¹ = q₂⁻¹·q₁⁻¹$（由于非交换性，顺序很重要）
+- 对于纯四元数，有$q_w = 0$，逆就是取负值
+- 对于表示旋转的单位四元数，逆表示相反的旋转
+
+
+
+## 3. 表达姿态与旋转
+
+必须使用单位四元数
+
+##### 1. 表达姿态
+
+todo(congyu)
+
+##### 2. 表达姿态间的旋转
+
+todo(congyu)
+
+##### 3. 点的旋转
+
+运算时，需要将三维点$p = [p_x,p_y,p_z]^T$写为纯四元数形式$p := [0, p_x,p_y,p_z]^T$
+
+对于一个三维点 $p_0$，有一单位四元数表达的旋转操作$q$，作用于$p_0$的结果
+$$
+p_t = q \cdot p_0 \cdot \ q^{-1}
+$$
+
+##### 4. 逆旋转
+
+旋转的逆旋转：四元数的逆表示相反的旋转动作
+
+$$qq⁻¹ = q⁻¹q = \mathbf 1, \\ \mathbf 1 = [1,0,0,0]$$
+
+点的逆旋转
+
+$$
+\\p_t = q p_0 q^{-1} 
+\\p_0 = q^{-1}p_tq
+$$
+
+##### 5. 多次旋转
+
+旋转叠加，先做q_1旋转再做q_2旋转，有总旋转
+
+$$
+q_a = q_2q_1
+$$
+
+点的旋转叠加
+
+$$
+p_t = q_2q_1p_0q_1^{-1}q_2^{-1} = q_a p_0 q_a^{-1}
+$$
+
+## 4. Gyro Integration with Quaternions
+
+四元数微分
 
 #### Derivations 1
 
@@ -420,4 +446,45 @@ refitem:
 
 
 
+
+
+## 5. 四元数插值
+
+在机器人运动规划中,经常需要在两个姿态之间进行平滑插值。四元数插值主要有两种方法:
+
+##### 1. 线性插值 (LERP)
+
+对于两个四元数 $q_0$ 和 $q_1$,线性插值定义为:
+
+$$
+q_{lerp}(t) = \frac{(1-t)q_0 + tq_1}{||(1-t)q_0 + tq_1||}
+$$
+
+其中 $t \in [0,1]$ 是插值参数。
+
+特点:
+- 计算简单
+- 插值路径不是最短路径
+- 插值速度不均匀
+
+##### 2. 球面线性插值 (SLERP)
+
+球面线性插值能够保证插值路径是最短路径,且速度均匀:
+
+$$
+q_{slerp}(t) = q_0 \cdot (q_0^{-1}q_1)^t
+$$
+
+或者等价的表达式:
+
+$$
+q_{slerp}(t) = \frac{\sin((1-t)\theta)}{\sin\theta}q_0 + \frac{\sin(t\theta)}{\sin\theta}q_1
+$$
+
+其中 $\theta$ 是 $q_0$ 和 $q_1$ 之间的夹角。
+
+特点:
+- 插值路径是最短路径
+- 角速度恒定
+- 计算相对复杂
 
