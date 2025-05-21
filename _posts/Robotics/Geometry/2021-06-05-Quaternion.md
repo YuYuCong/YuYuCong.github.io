@@ -54,6 +54,7 @@ where:
 - i,j,k有如下特性：
 
 $$
+\begin{gather}
 \\
 i ≠ j ≠ k
 \\
@@ -64,6 +65,7 @@ ij = -ji = k
 ki = -ik = j
 \\
 jk = -kj = i
+\end{gather}
 $$
 
 ##### 单位四元数
@@ -164,8 +166,7 @@ $$
 
 其中 $||q||² = q_w² + q_x² + q_y² + q_z²$ 是四元数的平方范数。
 
-对于单位四元数（$||q|| = 1$），逆运算简化为：
-$q⁻¹ = q_w - i q_x - j q_y - k q_z$
+对于单位四元数（$||q|| = 1$），逆运算简化为：$q⁻¹ = q_w - i q_x - j q_y - k q_z$
 
 重要性质：
 - 对于单位四元数，$q^{-1} = q^*$（共轭）
@@ -187,15 +188,17 @@ $q⁻¹ = q_w - i q_x - j q_y - k q_z$
 
 axis-angle to quaternion (need **normalized** axis $v$)
 $$
-  q_w = cos(\theta/2)
+\begin{align}
+  q_w &= cos(\theta/2)
   \\
-  q_x = v_x sin(\theta/2)
+  q_x &= v_x sin(\theta/2)
   \\
-  q_y = v_y sin(\theta/2)
+  q_y &= v_y sin(\theta/2)
   \\
-  q_z = v_z sin(\theta/2)
+  q_z &= v_z sin(\theta/2)
   \\
-  q = q_w + i q_x + j q_y + k q_z
+  q &= q_w + i q_x + j q_y + k q_z
+\end{align}
 $$
 
 $$
@@ -208,8 +211,10 @@ $$
 姿态q1到q2的旋转动作有
 
 $$
-\\q_2 = q_1^2 q_1
-\\q_1^2 = q_2 q_1^{-1}
+\begin{align}
+\\q_2 &= q_1^2 q_1
+\\q_1^2 &= q_2 q_1^{-1}
+\end{align}
 $$
 
 ##### 点的旋转
@@ -225,13 +230,20 @@ $$
 
 旋转的逆旋转：四元数的逆表示相反的旋转动作
 
-$$qq^{-1} = q^{-1}q = \mathbf 1, \\ \mathbf 1 = [1,0,0,0]$$
+$$
+\begin{gather}
+qq^{-1} = q^{-1}q = \mathbf 1, 
+\\ \mathbf 1 = [1,0,0,0]
+\end{gather}
+$$
 
 点的逆旋转
 
 $$
+\begin{align}
 \\p_t = q p_0 q^{-1} 
 \\p_0 = q^{-1}p_tq
+\end{align}
 $$
 
 ##### 多次旋转
@@ -455,6 +467,7 @@ refitem:
 - https://blog.csdn.net/u013236946/article/details/72831380
 
 $$
+\begin{gather}
 q(t): t时刻姿态四元数
 \\
 q(t+\Delta t): t+1时刻姿态四元数
@@ -462,6 +475,7 @@ q(t+\Delta t): t+1时刻姿态四元数
 w: 瞬时角速度(global \ frame)
 \\
 q_\Delta = q(\Delta t ||\omega||, \frac{\omega}{||\omega||})
+\end{gather}
 $$
 
 有

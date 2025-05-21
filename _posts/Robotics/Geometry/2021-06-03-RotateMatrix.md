@@ -117,8 +117,10 @@ $$
 姿态R1到姿态R2的旋转动作有
 
 $$
+\begin{gather}
 \\R_2 = R_1^2R_1
 \\R_1^2 = R_2R_1^{-1}= R_2R_1^T
+\end{gather}
 $$
 
 ##### 点的旋转
@@ -166,8 +168,10 @@ T^{-1} = \begin{bmatrix} R^{-1} & -R^{-1}t \\ 0^T & 1 \end{bmatrix} = \begin{bma
 $$
 
 $$
+\begin{gather}
 p_g = T_b^g p_b = Rp_b + t \\
 p_b = R^{-1}(p_g - t) = R^T p_g - R^T t
+\end{gather}
 $$
 
 
