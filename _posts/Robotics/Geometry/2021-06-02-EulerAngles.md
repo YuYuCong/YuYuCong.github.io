@@ -122,6 +122,7 @@ $$
 
 注意欧拉角微分$w_e$并不等于陀螺仪的角速度测量值$w_b$
 $$
+\begin{gather}
 w_e \equiv \left[
 \begin{matrix}
 {\dot\psi} \ {\dot\theta}\ {\dot\phi} 
@@ -135,6 +136,7 @@ w_{z} \ w_{y} \ w_{x}
 \right]^T 
 \\
 w_n \not= w_b 
+\end{gather}
 $$
 
 原因：动态欧拉角的轴并不一定正交，是由当前姿态决定的。而IMU的瞬时测量值是在I系下测得的，是正交的。只有旋转轴和角速度轴重合的情况下才能积分。所以角速度需要被投影分解到相应的欧拉角旋转轴上面去才能积分。
@@ -189,10 +191,12 @@ $$
 注意到，上述投影步骤，理解起来并不容易。可以有借助$w_n$的推导：
 
 $$
+\begin{gather}
 \\ w_b = R_2^bR_1^2R_n^1 w_n
 \\ \dot \psi = R_n^1 w_{nz} = R_n^1 R_1^n R_2^1 R_b^2 w_{bz} = R_2^1 R_b^2 w_{bz}
 \\ \dot \theta = R_1^2 R_n^1 w_{ny} = R_1^2 R_n^1 R_1^n R_2^1 R_b^2 w_{by} = R_b^2 w_{by}
 \\ \dot \phi = R_2^b R_1^2 R_n^1 w_{nx} = R_2^b R_1^2 R_n^1R_1^n R_2^1 R_b^2 w_{bx} = w_{bx}
+\end{gather}
 $$
 
 ##### 特别注意
