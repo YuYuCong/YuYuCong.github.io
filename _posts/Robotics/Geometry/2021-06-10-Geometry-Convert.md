@@ -266,7 +266,7 @@ Eigen::Quaterniond RotationMatrix2Quaternion(Eigen::Matrix3d rotation_matrix) {
   Eigen::Quaterniond q2;
   q2 = rotation_matrix;
 
-  // q.normalize(); // todo(congyu) .normalize方法是做什么的
+  q.normalize();
   LOG(ERROR) << "RotationMatrix2Quaternion result is:\n"
              << "w,x,y,z = [" << q.w() << "," << q.x() << "," << q.y() << ","
              << q.z() << "]";
