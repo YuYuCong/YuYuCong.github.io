@@ -42,7 +42,7 @@ refitem: https://stanford.edu/class/ee267/lectures/lecture10.pdf
 
 ## 1. 基本概念
 
-##### 表达形式
+##### 基本形式
 
 $$
 q = q_w + i q_x + j q_y + k q_z
@@ -66,13 +66,124 @@ ki = -ik = j
 jk = -kj = i
 $$
 
-且用于三维刚体旋转时，必须使用单位四元数
+##### 单位四元数
+
+用于三维刚体运动时，必须使用单位四元数，约束其模长为1
 
 $$
 ||q|| = \sqrt {q_w^2 + q_x^2+ q_y^2+ q_z^2} = 1
 $$
 
-##### 轴角转换四元数
+## 2. 基本运算
+
+Quaternion Algebra
+
+四元数代数 (sync/0.books/Robotics/Course on SLAM-excerpt-Quaternion algebra.pdf)
+
+
+
+refitem: https://stanford.edu/class/ee267/lectures/lecture10.pdf p20
+
+
+##### 1. 四元数乘法
+
+四元数乘法是四元数运算中最基本的运算之一。对于两个四元数 $q_1 = [w_1, \mathbf{v}_1]$ 和 $q_2 = [w_2, \mathbf{v}_2]$，其乘法定义为：
+
+$$
+q_1 \otimes q_2 = [w_1w_2 - \mathbf{v}_1 \cdot \mathbf{v}_2, w_1\mathbf{v}_2 + w_2\mathbf{v}_1 + \mathbf{v}_1 \times \mathbf{v}_2]
+$$
+
+其中：
+- $\cdot$ 表示向量点积
+- $\times$ 表示向量叉积
+
+###### 分量形式
+
+对于四元数 $q_1 = w_1 + ix_1 + jy_1 + kz_1$ 和 $q_2 = w_2 + ix_2 + jy_2 + kz_2$，其乘法结果可以表示为：
+
+$$
+\begin{aligned}
+q_1 \otimes q_2 = &(w_1w_2 - x_1x_2 - y_1y_2 - z_1z_2) \\
+&+ i(w_1x_2 + x_1w_2 + y_1z_2 - z_1y_2) \\
+&+ j(w_1y_2 - x_1z_2 + y_1w_2 + z_1x_2) \\
+&+ k(w_1z_2 + x_1y_2 - y_1x_2 + z_1w_2)
+\end{aligned}
+$$
+
+###### 矩阵形式
+
+四元数乘法也可以用矩阵形式表示。对于四元数 $q = [w, x, y, z]$，定义左乘矩阵 $L(q)$ 和右乘矩阵 $R(q)$：
+
+$$
+L(q) = \begin{bmatrix}
+w & -x & -y & -z \\
+x & w & -z & y \\
+y & z & w & -x \\
+z & -y & x & w
+\end{bmatrix}, \quad
+R(q) = \begin{bmatrix}
+w & -x & -y & -z \\
+x & w & z & -y \\
+y & -z & w & x \\
+z & y & -x & w
+\end{bmatrix}
+$$
+
+则四元数乘法可以表示为：
+
+$$
+q_1 \otimes q_2 = L(q_1)q_2 = R(q_2)q_1
+$$
+
+###### 重要性质
+
+1. 不满足交换律：$q_1 \otimes q_2 \neq q_2 \otimes q_1$
+2. 满足结合律：$(q_1 \otimes q_2) \otimes q_3 = q_1 \otimes (q_2 \otimes q_3)$
+3. 满足分配律：$q_1 \otimes (q_2 + q_3) = q_1 \otimes q_2 + q_1 \otimes q_3$
+4. $[1, 0, 0, 0]$ 是乘法的单位元
+5. 对于单位四元数，其逆等于其共轭：$q^{-1} = q^*$
+6. 对于旋转四元数，必须保持单位长度：$||q|| = \sqrt{w^2 + x^2 + y^2 + z^2} = 1$
+
+###### 几何意义
+
+四元数乘法在旋转中的应用：
+- 连续旋转可以通过四元数乘法组合
+- 对于点 $p$ 的旋转：$p' = q \otimes p \otimes q^*$
+- 两个旋转的组合：$q_{total} = q_2 \otimes q_1$
+
+
+注意说明：后文的公式中如果没有特意说明， $q_1q_2$ 和 $q_1 \cdot q_2$ 等这些形式的写法都指的是四元数乘法 $q_1 \otimes q_2$
+
+##### 2. 四元数求逆
+
+对于四元数 $q = q_w + i q_x + j q_y + k q_z$，其逆定义为：
+
+$$
+q^{-1} = \frac {q_w - i q_x - j q_y - k q_z} {||q||²}
+$$
+
+其中 $||q||² = q_w² + q_x² + q_y² + q_z²$ 是四元数的平方范数。
+
+对于单位四元数（$||q|| = 1$），逆运算简化为：
+$q⁻¹ = q_w - i q_x - j q_y - k q_z$
+
+重要性质：
+- 对于单位四元数，$q^{-1} = q^*$（共轭）
+- $qq⁻¹ = q⁻¹q = \mathbf 1$（其中$\mathbf 1$是单位四元数$[1,0,0,0]$）
+- $(q_1q_2)⁻¹ = q_2^{-1}q_1^{-1}$（由于非交换性，顺序很重要）
+- 对于纯四元数，有$q_w = 0$，逆就是取负值
+- 对于表示旋转的单位四元数，逆表示相反的旋转
+
+
+
+## 3. 表达姿态与旋转
+
+必须使用单位四元数
+
+##### 表达姿态
+
+- 四元数表达姿态不是唯一的。对于同一个旋转/姿态，存在两个四元数表示：q 和 -q。
+- 轴角转单位四元数:
 
 axis-angle to quaternion (need **normalized** axis $v$)
 $$
@@ -91,95 +202,30 @@ $$
 q = [\cos(\theta / 2), \mathbf v \sin(\theta/2)]
 $$
 
-## 2. 基本运算
 
-Quaternion Algebra
+##### 姿态间的旋转
 
-refitem: https://stanford.edu/class/ee267/lectures/lecture10.pdf p20
-
-
-##### 1. 四元数乘法
-
-对于两个元数:
-$$
-\\ q_1 = w_1 + i x_1 + j y_1 + k z_1
-\\ q_2 = w_2 + i x_2 + j y_2 + k z_2
-$$
-
-其乘法结果计算如下:
-
-1. 标量部分:
-$$
-w = w_1w_2 - x_1x_2 - y_1y_2 - z_1z_2
-$$
-
-2. 向量部分:
-$$
-\begin{aligned}
-x &= w_1x_2 + x_1w_2 + y_1z_2 - z_1y_2 \\
-y &= w_1y_2 - x_1z_2 + y_1w_2 + z_1x_2 \\
-z &= w_1z_2 + x_1y_2 - y_1x_2 + z_1w_2
-\end{aligned}
-$$
-
-最终有
-$$
-q_1 \cdot q_2 = w + i x + j y + k z
-$$
-
-重要性质:
-- 四元数乘法不满足交换律: $q_1q_2 \neq q_2q_1$
-- 四元数乘法满足结合律: $(q_1q_2)q_3 = q_1(q_2q_3)$
-- 对于旋转四元数,必须保持单位长度: $||q|| = \sqrt{w^2 + x^2 + y^2 + z^2} = 1$
-
-##### 2. 四元数求逆
-
-对于四元数 $q = q_w + i q_x + j q_y + k q_z$，其逆定义为：
+姿态q1到q2的旋转动作有
 
 $$
-q^{-1} = \frac {q_w - i q_x - j q_y - k q_z} {||q||²}
+\\q_2 = q_1^2 q_1
+\\q_1^2 = q_2 q_1^{-1}
 $$
 
-其中 $||q||² = q_w² + q_x² + q_y² + q_z²$ 是四元数的平方范数。
-
-对于单位四元数（$||q|| = 1$），逆运算简化为：
-$q⁻¹ = q_w - i q_x - j q_y - k q_z$
-
-重要性质：
-- 对于单位四元数，$q^{-1} = q^*$（共轭）
-- $q·q⁻¹ = q⁻¹·q = \mathbf 1$（其中$\mathbf 1$是单位四元数$[1,0,0,0]$）
-- $(q₁·q₂)⁻¹ = q₂⁻¹·q₁⁻¹$（由于非交换性，顺序很重要）
-- 对于纯四元数，有$q_w = 0$，逆就是取负值
-- 对于表示旋转的单位四元数，逆表示相反的旋转
-
-
-
-## 3. 表达姿态与旋转
-
-必须使用单位四元数
-
-##### 1. 表达姿态
-
-todo(congyu)
-
-##### 2. 表达姿态间的旋转
-
-todo(congyu)
-
-##### 3. 点的旋转
+##### 点的旋转
 
 运算时，需要将三维点$p = [p_x,p_y,p_z]^T$写为纯四元数形式$p := [0, p_x,p_y,p_z]^T$
 
 对于一个三维点 $p_0$，有一单位四元数表达的旋转操作$q$，作用于$p_0$的结果
 $$
-p_t = q \cdot p_0 \cdot \ q^{-1}
+p_t = q p_0 q^{-1}
 $$
 
-##### 4. 逆旋转
+##### 逆旋转
 
 旋转的逆旋转：四元数的逆表示相反的旋转动作
 
-$$qq⁻¹ = q⁻¹q = \mathbf 1, \\ \mathbf 1 = [1,0,0,0]$$
+$$qq^{-1} = q^{-1}q = \mathbf 1, \\ \mathbf 1 = [1,0,0,0]$$
 
 点的逆旋转
 
@@ -188,9 +234,9 @@ $$
 \\p_0 = q^{-1}p_tq
 $$
 
-##### 5. 多次旋转
+##### 多次旋转
 
-旋转叠加，先做q_1旋转再做q_2旋转，有总旋转
+旋转叠加：左乘，先做q_1旋转再做q_2旋转，有总旋转
 
 $$
 q_a = q_2q_1
@@ -202,19 +248,170 @@ $$
 p_t = q_2q_1p_0q_1^{-1}q_2^{-1} = q_a p_0 q_a^{-1}
 $$
 
-## 4. Gyro Integration with Quaternions
 
-四元数微分
+## 4. 四元数微分
+
+四元数微分描述了四元数随时间的变化率。对于一个单位四元数 $q(t)$，其微分 $\dot{q}(t)$ 表示四元数在时间 $t$ 处的瞬时变化率。
+
+### 4.1 从轴角表示推导
+
+考虑一个旋转四元数 $q(t)$，它可以表示为轴角形式：
+
+$$
+q(t) = \begin{bmatrix} \cos\frac{\theta(t)}{2} \\ \mathbf{u}(t)\sin\frac{\theta(t)}{2} \end{bmatrix}
+$$
+
+其中 $\mathbf{u}(t)$ 是单位旋转轴，$\theta(t)$ 是旋转角度。
+
+当时间变化一个微小量 $\Delta t$ 时，四元数变为：
+
+$$
+q(t + \Delta t) = \begin{bmatrix} \cos\frac{\theta(t + \Delta t)}{2} \\ \mathbf{u}(t + \Delta t)\sin\frac{\theta(t + \Delta t)}{2} \end{bmatrix}
+$$
+
+### 4.2 角速度与四元数微分的关系
+
+定义角速度 $\boldsymbol{\omega}(t)$ 为：
+
+$$
+\boldsymbol{\omega}(t) = \lim_{\Delta t \to 0} \frac{\Delta \theta}{\Delta t} \mathbf{u}(t)
+$$
+
+其中 $\Delta \theta$ 是在 $\Delta t$ 时间内的旋转角度。
+
+### 4.3 四元数微分的推导
+
+四元数的微分可以表示为：
+
+$$
+\begin{equation}
+\begin{split}
+\dot{q}(t) &= \lim_{\Delta t \to 0} \frac{q(t + \Delta t) - q(t)}{\Delta t} \\
+&= \lim_{\Delta t \to 0} \frac{1}{\Delta t} \left[ \begin{bmatrix} \cos\frac{\theta(t + \Delta t)}{2} \\ \mathbf{u}(t + \Delta t)\sin\frac{\theta(t + \Delta t)}{2} \end{bmatrix} - \begin{bmatrix} \cos\frac{\theta(t)}{2} \\ \mathbf{u}(t)\sin\frac{\theta(t)}{2} \end{bmatrix} \right]
+\end{split}
+\end{equation}
+$$
+
+对于小角度旋转，可以使用以下近似：
+
+$$
+\cos\frac{\Delta \theta}{2} \approx 1, \quad \sin\frac{\Delta \theta}{2} \approx \frac{\Delta \theta}{2}
+$$
+
+代入上式，经过推导可得：
+
+$$
+\dot{q}(t) = \frac{1}{2} \begin{bmatrix} 0 \\ \boldsymbol{\omega}(t) \end{bmatrix} \otimes q(t)
+$$
+
+其中 $\otimes$ 表示四元数乘法。
+
+### 4.4 矩阵形式表示
+
+为了便于计算，可以将四元数微分表示为矩阵形式：
+
+$$
+\dot{q}(t) = \frac{1}{2} \Omega(\boldsymbol{\omega}(t)) q(t)
+$$
+
+其中 $\Omega(\boldsymbol{\omega})$ 是一个 4×4 矩阵：
+
+$$
+\Omega(\boldsymbol{\omega}) = \begin{bmatrix}
+0 & -\omega_x & -\omega_y & -\omega_z \\
+\omega_x & 0 & \omega_z & -\omega_y \\
+\omega_y & -\omega_z & 0 & \omega_x \\
+\omega_z & \omega_y & -\omega_x & 0
+\end{bmatrix}
+$$
+
+
+## 5. 四元数表达下的陀螺仪积分
+
+Gyro Integration with Quaternions
+
+在实际应用中，我们通常使用数值积分方法来求解四元数微分方程。最常用的是四阶龙格-库塔法（RK4）：
+
+$$
+\begin{aligned}
+k_1 &= \frac{1}{2}\Omega(\boldsymbol{\omega}_k)q_k \\
+k_2 &= \frac{1}{2}\Omega(\boldsymbol{\omega}_{k+\frac{1}{2}})(q_k + \frac{h}{2}k_1) \\
+k_3 &= \frac{1}{2}\Omega(\boldsymbol{\omega}_{k+\frac{1}{2}})(q_k + \frac{h}{2}k_2) \\
+k_4 &= \frac{1}{2}\Omega(\boldsymbol{\omega}_{k+1})(q_k + hk_3) \\
+q_{k+1} &= q_k + \frac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4)
+\end{aligned}
+$$
+
+其中 $h$ 是时间步长，$\boldsymbol{\omega}_k$ 是 $t_k$ 时刻的角速度。
+
+注意：由于数值积分可能破坏四元数的单位约束，每次积分后需要进行归一化：
+
+$$
+q_{k+1} \leftarrow \frac{q_{k+1}}{||q_{k+1}||}
+$$
+
+
+在惯性导航系统中，更新姿态过程：
+
+1. 从陀螺仪获取角速度测量值 $\boldsymbol{\omega}_m$
+2. 使用四元数微分方程更新姿态四元数
+3. 对更新后的四元数进行归一化
+4. 重复以上步骤
+
+这种方法的优点是计算效率高，且避免了欧拉角表示中的万向节锁问题。
+
+
+## 6. 四元数插值
+
+在机器人运动规划中,经常需要在两个姿态之间进行平滑插值。四元数插值主要有两种方法:
+
+### 6.1. 线性插值 (LERP)
+
+对于两个四元数 $q_0$ 和 $q_1$,线性插值定义为:
+
+$$
+q_{lerp}(t) = \frac{(1-t)q_0 + tq_1}{||(1-t)q_0 + tq_1||}
+$$
+
+其中 $t \in [0,1]$ 是插值参数。
+
+特点:
+- 计算简单
+- 插值路径不是最短路径
+- 插值速度不均匀
+
+### 6.2. 球面线性插值 (SLERP)
+
+球面线性插值能够保证插值路径是最短路径,且速度均匀:
+
+$$
+q_{slerp}(t) = q_0 (q_0^{-1}q_1)^t
+$$
+
+或者等价的表达式:
+
+$$
+q_{slerp}(t) = \frac{\sin((1-t)\theta)}{\sin\theta}q_0 + \frac{\sin(t\theta)}{\sin\theta}q_1
+$$
+
+其中 $\theta$ 是 $q_0$ 和 $q_1$ 之间的夹角。
+
+特点:
+- 插值路径是最短路径
+- 角速度恒定
+- 计算相对复杂
+
+
+todo(congyu) 以下待整理
 
 #### Derivations 1
 
-简单推导
 
 refitem: 
 
 - https://stanford.edu/class/ee267/lectures/lecture10.pdf p26
 
-start pose : $q_0$ (in world frame)
+start point : $q_0$ (in world frame)
 
 convert 3-axis gyro measurements to instantaneous rotation quaternion (in bot frame) as
 $$
@@ -234,7 +431,6 @@ here we get $q_t$  (in world frame)
 
 #### Derivations 2
 
-复杂推导
 
  refitem:
 
@@ -244,66 +440,15 @@ here we get $q_t$  (in world frame)
 post-robotics-q-imu-inter.png" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
 
 
-$$
-q = [qw, qx, qy, qz]
-\\
-\frac {dq} {dt} = \frac 1 2 \cdot \Omega \cdot q
-\\
-\therefore \ \ \ \ 
-q^{(t+1)} = q^{(t)} + \frac 1 2 \cdot \Delta t \cdot \Omega
-$$
-where
-$$
-\Omega =
-\left[
-\begin{matrix}
-   0 & -w_x & -w_y & -w_z \\ 
-   w_x & 0 & w_z & -w_y \\
-   w_y & -w_z & 0 & w_x \\
-   w_z & w_y & -w_x & 0 \\
-\end{matrix}
-\right] \tag{1}
-$$
-
-
-- why add ???? //todo(congyu)
-
-
-
-#### Derivations 3
-
 refitem:
 
 - https://blog.csdn.net/qq_39554681/article/details/88909564
-
-// todo(congyu)
-$$
-q(t):
-\\
-q(t+\Delta t):
-\\
-w: 瞬时角速度(global \ frame)
-$$
-
-$$
-q_\Delta = q(\Delta t ||\omega||, \frac{\omega}{||\omega||})
-$$
-
-
-
-
-
-#### Derivations 4
-
-refitem:
-
 - http://mars.cs.umn.edu/tr/reports/Trawny05b.pdf
 
 
 
 
-
-#### Derivations 6
+#### Derivations 3
 
 refitem:
 
@@ -382,10 +527,6 @@ $$
 
 
 
-四元数代数 (sync/0.books/Robotics/Course on SLAM-excerpt-Quaternion algebra.pdf) todo(congyu)
-
-
-
 ##### VIO笔记
 
 learning_vio L1 p27
@@ -400,7 +541,7 @@ $$q = \begin{bmatrix} \text{cos}{\frac \theta 2} \\ \mathbf{u} \text{sin} \frac 
 $$
 \Delta q = \begin{bmatrix} \text{cos} \frac {\delta \theta} 2 \\ \mathbf{u} \text{sin}\frac{\delta\theta}2 \end{bmatrix} \approx \begin{bmatrix} 1 \\ \mathbf{u} \frac{\delta\theta}2 \end{bmatrix} = \begin{bmatrix} 1 \\ \frac 1 2 \mathbf {\delta\theta} \end{bmatrix}
 $$
-其中 $\mathbf{\delta\theta}$ 的方向为旋转轴，模长为旋转角度 ？？？？<mark style="background: #FF5582A6;">todo(congyu)</mark> 最后一个等号？？？以及这句话是怎么表达出来的？？？
+其中 $\mathbf{\delta\theta}$ 的方向为旋转轴，模长为旋转角度 ？？？？最后一个等号？？？以及这句话是怎么表达出来的？？？
 
 
 
@@ -443,48 +584,4 @@ refitem:
 
 - https://zhuanlan.zhihu.com/p/254888810
 
-
-
-
-
-
-## 5. 四元数插值
-
-在机器人运动规划中,经常需要在两个姿态之间进行平滑插值。四元数插值主要有两种方法:
-
-##### 1. 线性插值 (LERP)
-
-对于两个四元数 $q_0$ 和 $q_1$,线性插值定义为:
-
-$$
-q_{lerp}(t) = \frac{(1-t)q_0 + tq_1}{||(1-t)q_0 + tq_1||}
-$$
-
-其中 $t \in [0,1]$ 是插值参数。
-
-特点:
-- 计算简单
-- 插值路径不是最短路径
-- 插值速度不均匀
-
-##### 2. 球面线性插值 (SLERP)
-
-球面线性插值能够保证插值路径是最短路径,且速度均匀:
-
-$$
-q_{slerp}(t) = q_0 \cdot (q_0^{-1}q_1)^t
-$$
-
-或者等价的表达式:
-
-$$
-q_{slerp}(t) = \frac{\sin((1-t)\theta)}{\sin\theta}q_0 + \frac{\sin(t\theta)}{\sin\theta}q_1
-$$
-
-其中 $\theta$ 是 $q_0$ 和 $q_1$ 之间的夹角。
-
-特点:
-- 插值路径是最短路径
-- 角速度恒定
-- 计算相对复杂
 
