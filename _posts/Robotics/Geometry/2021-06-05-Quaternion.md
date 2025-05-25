@@ -73,7 +73,7 @@ $$
 用于三维刚体运动时，必须使用单位四元数，约束其模长为1
 
 $$
-||q|| = \sqrt {q_w^2 + q_x^2+ q_y^2+ q_z^2} = 1
+\|q\| = \sqrt {q_w^2 + q_x^2+ q_y^2+ q_z^2} = 1
 $$
 
 ## 2. 基本运算
@@ -144,7 +144,7 @@ $$
 3. 满足分配律：$q_1 \otimes (q_2 + q_3) = q_1 \otimes q_2 + q_1 \otimes q_3$
 4. $[1, 0, 0, 0]$ 是乘法的单位元
 5. 对于单位四元数，其逆等于其共轭：$q^{-1} = q^*$
-6. 对于旋转四元数，必须保持单位长度：$||q|| = \sqrt{w^2 + x^2 + y^2 + z^2} = 1$
+6. 对于旋转四元数，必须保持单位长度：$\|q\| = \sqrt{w^2 + x^2 + y^2 + z^2} = 1$
 
 ###### 几何意义
 
@@ -161,12 +161,12 @@ $$
 对于四元数 $q = q_w + i q_x + j q_y + k q_z$，其逆定义为：
 
 $$
-q^{-1} = \frac {q_w - i q_x - j q_y - k q_z} {||q||²}
+q^{-1} = \frac {q_w - i q_x - j q_y - k q_z} {\|q\|²}
 $$
 
-其中 $||q||² = q_w² + q_x² + q_y² + q_z²$ 是四元数的平方范数。
+其中 $\|q\|² = q_w² + q_x² + q_y² + q_z²$ 是四元数的平方范数。
 
-对于单位四元数（$||q|| = 1$），逆运算简化为：$q⁻¹ = q_w - i q_x - j q_y - k q_z$
+对于单位四元数（$\|q\| = 1$），逆运算简化为：$q⁻¹ = q_w - i q_x - j q_y - k q_z$
 
 重要性质：
 - 对于单位四元数，$q^{-1} = q^*$（共轭）
@@ -359,7 +359,7 @@ $$
 注意：由于数值积分可能破坏四元数的单位约束，每次积分后需要进行归一化：
 
 $$
-q_{k+1} \leftarrow \frac{q_{k+1}}{||q_{k+1}||}
+q_{k+1} \leftarrow \frac{q_{k+1}}{\|q_{k+1}\|}
 $$
 
 
@@ -382,7 +382,7 @@ $$
 对于两个四元数 $q_0$ 和 $q_1$,线性插值定义为:
 
 $$
-q_{lerp}(t) = \frac{(1-t)q_0 + tq_1}{||(1-t)q_0 + tq_1||}
+q_{lerp}(t) = \frac{(1-t)q_0 + tq_1}{\|(1-t)q_0 + tq_1\|}
 $$
 
 其中 $t \in [0,1]$ 是插值参数。
@@ -427,11 +427,11 @@ start point : $q_0$ (in world frame)
 
 convert 3-axis gyro measurements to instantaneous rotation quaternion (in bot frame) as
 $$
-q_\Delta = q(\Delta t ||\omega||, \frac{\omega}{||\omega||})
+q_\Delta = q(\Delta t \|\omega\|, \frac{\omega}{\|\omega\|})
 $$
-where: $\Delta t||\omega||$ is angle (in bot frame)
+where: $\Delta t\|\omega\|$ is angle (in bot frame)
 
-​			$\frac{\omega}{||\omega||}$ is rotation axis (in bot frame)
+​			$\frac{\omega}{\|\omega\|}$ is rotation axis (in bot frame)
 
 integrate as 
 $$
@@ -474,7 +474,7 @@ q(t+\Delta t): t+1时刻姿态四元数
 \\
 w: 瞬时角速度(global \ frame)
 \\
-q_\Delta = q(\Delta t ||\omega||, \frac{\omega}{||\omega||})
+q_\Delta = q(\Delta t \|\omega\|, \frac{\omega}{\|\omega\|})
 \end{gather}
 $$
 

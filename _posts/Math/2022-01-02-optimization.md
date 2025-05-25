@@ -123,7 +123,7 @@ Definition 1.3. Local Minimizer
 $$
 \begin{align}
 & \textrm{Given   }F：\mathbf{R} ^{n} \mapsto \mathbf{R}. \\ 
-& \textrm{ Find } \mathbf{x}^+ \textrm{, so that } F(\mathbf{x}^+) \leq F(\mathbf{x})  \textrm{ for } ||\mathbf{x} - \mathbf{x}^+|| < \delta.
+& \textrm{ Find } \mathbf{x}^+ \textrm{, so that } F(\mathbf{x}^+) \leq F(\mathbf{x})  \textrm{ for } \|\mathbf{x} - \mathbf{x}^+\| < \delta.
 \end{align}
 $$
 
