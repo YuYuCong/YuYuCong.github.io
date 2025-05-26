@@ -75,6 +75,9 @@ $$
 $$
 \|q\| = \sqrt {q_w^2 + q_x^2+ q_y^2+ q_z^2} = 1
 $$
+##### 纯四元数
+
+纯四元数 , 有 $q_w = 0$
 
 ## 2. 基本运算
 
@@ -150,7 +153,7 @@ $$
 
 四元数乘法在旋转中的应用：
 - 连续旋转可以通过四元数乘法组合
-- 对于点 $p$ 的旋转：$p' = q \otimes p \otimes q^*$
+- 对于点 $p$ 的旋转：$p_1 = q \otimes p_0 \otimes q^{-1}$
 - 两个旋转的组合：$q_{total} = q_2 \otimes q_1$
 
 
@@ -291,6 +294,11 @@ $$
 
 其中 $\Delta \theta$ 是在 $\Delta t$ 时间内的旋转角度。
 
+   - 角度增量：$\Delta \theta = \|\boldsymbol{\omega}\|\Delta t$
+   - 旋转轴保持不变近似：$\mathbf{u}(t + \Delta t) \approx \mathbf{u}(t)$
+   - 旋转轴与角速度的关系：$\omega = \|\omega\| \mathbf u(t)$
+
+
 ### 4.3 四元数微分的推导
 
 四元数的微分可以表示为：
@@ -298,25 +306,69 @@ $$
 $$
 \begin{equation}
 \begin{split}
-\dot{q}(t) &= \lim_{\Delta t \to 0} \frac{q(t + \Delta t) - q(t)}{\Delta t} \\
-&= \lim_{\Delta t \to 0} \frac{1}{\Delta t} \left[ \begin{bmatrix} \cos\frac{\theta(t + \Delta t)}{2} \\ \mathbf{u}(t + \Delta t)\sin\frac{\theta(t + \Delta t)}{2} \end{bmatrix} - \begin{bmatrix} \cos\frac{\theta(t)}{2} \\ \mathbf{u}(t)\sin\frac{\theta(t)}{2} \end{bmatrix} \right]
+\dot{q}(t) &= \lim_{\Delta t \to 0} \frac{q(t + \Delta t) - q(t)}{\Delta t}
 \end{split}
 \end{equation}
 $$
 
-对于小角度旋转，可以使用以下近似：
+让我们逐步推导：
 
+1. 首先，对于小角度旋转，我们有以下近似：
+   - $\cos\frac{\Delta \theta}{2} \approx 1$
+   - $\sin\frac{\Delta \theta}{2} \approx \frac{\Delta \theta}{2}$
+
+2. 应用旋转轴不变近似，将 $q(t + \Delta t)$ 展开：
+   $$
+   \begin{split}
+   q(t + \Delta t) &= \begin{bmatrix} \cos\frac{\theta(t) + \Delta \theta}{2} \\ \mathbf{u}(t)\sin\frac{\theta(t) + \Delta \theta}{2} \end{bmatrix} \\
+   &= \begin{bmatrix} \cos\frac{\theta(t)}{2}\cos\frac{\Delta \theta}{2} - \sin\frac{\theta(t)}{2}\sin\frac{\Delta \theta}{2} \\ \mathbf{u}(t)(\sin\frac{\theta(t)}{2}\cos\frac{\Delta \theta}{2} + \cos\frac{\theta(t)}{2}\sin\frac{\Delta \theta}{2}) \end{bmatrix}
+   \end{split}
+   $$
+
+3. 应用小角度近似：
+   $$
+   \begin{split}
+   q(t + \Delta t) &\approx \begin{bmatrix} \cos\frac{\theta(t)}{2} - \sin\frac{\theta(t)}{2}\frac{\Delta \theta}{2} \\ \mathbf{u}(t)(\sin\frac{\theta(t)}{2} + \cos\frac{\theta(t)}{2}\frac{\Delta \theta}{2}) \end{bmatrix} \\
+   &= q(t) + \frac{\Delta \theta}{2} \begin{bmatrix} -\sin\frac{\theta(t)}{2} \\ \mathbf{u}(t)\cos\frac{\theta(t)}{2} \end{bmatrix}
+   \end{split}
+   $$
+
+4. 代入微分定义：
+   $$
+   \begin{split}
+   \dot{q}(t) &\equiv \lim_{\Delta t \to 0} \frac{q(t + \Delta t) - q(t)}{\Delta t} \\
+   &= \lim_{\Delta t \to 0} \frac{1}{\Delta t} \frac{\Delta \theta}{2} \begin{bmatrix} -\sin\frac{\theta(t)}{2} \\ \mathbf{u}(t)\cos\frac{\theta(t)}{2} \end{bmatrix} \\
+   &= \frac{\|\boldsymbol{\omega}\|}{2} \begin{bmatrix} -\sin\frac{\theta(t)}{2} \\ \mathbf{u}(t)\cos\frac{\theta(t)}{2} \end{bmatrix}
+   \end{split}
+   $$
+
+5. 注意到 $\boldsymbol{\omega} = \|\boldsymbol{\omega}\|\mathbf{u}(t)$，我们可以将上式重写为：
+   $$
+   \dot{q}(t) = \frac{1}{2} \begin{bmatrix} 0 \\ \boldsymbol{\omega}(t) \end{bmatrix} \begin{bmatrix} \cos\frac{\theta(t)}{2} \\ \mathbf{u}(t)\sin\frac{\theta(t)}{2} \end{bmatrix}
+   $$
+
+6. 这正好是四元数乘法的形式，其中：
+   - $\begin{bmatrix} 0 \\ \boldsymbol{\omega}(t) \end{bmatrix}$ 是角速度的纯四元数表示
+   - $\begin{bmatrix} \cos\frac{\theta(t)}{2} \\ \mathbf{u}(t)\sin\frac{\theta(t)}{2} \end{bmatrix}$ 就是 $q(t)$
+
+7. 因此，最终得到四元数微分方程：
+   $$
+   \dot{q}(t) = \frac{1}{2} \begin{bmatrix} 0 \\ \boldsymbol{\omega}(t) \end{bmatrix} \otimes q(t)
+   $$
+
+8. 注意：这里的角速度 $\boldsymbol{\omega}(t)$ 是在全局坐标系（世界坐标系）下表示的。在实际应用中，我们通常通过IMU等传感器获得的是物体坐标系下的角速度 $\boldsymbol{\omega}_l$。两者之间的关系为：
 $$
-\cos\frac{\Delta \theta}{2} \approx 1, \quad \sin\frac{\Delta \theta}{2} \approx \frac{\Delta \theta}{2}
+\boldsymbol{\omega}_l = q^* \otimes \boldsymbol{\omega} \otimes q
+$$
+或
+$$
+\boldsymbol{\omega} = q \otimes \boldsymbol{\omega}_l \otimes q^*
 $$
 
-代入上式，经过推导可得：
-
+因此，在实际应用中，我们通常使用物体坐标系下的角速度，此时四元数微分方程变为：
 $$
-\dot{q}(t) = \frac{1}{2} \begin{bmatrix} 0 \\ \boldsymbol{\omega}(t) \end{bmatrix} \otimes q(t)
+\dot{q}(t) = \frac{1}{2} q(t) \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_l(t) \end{bmatrix}
 $$
-
-其中 $\otimes$ 表示四元数乘法。
 
 ### 4.4 矩阵形式表示
 
@@ -337,147 +389,36 @@ $$
 \end{bmatrix}
 $$
 
-
-## 5. 四元数表达下的陀螺仪积分
-
-Gyro Integration with Quaternions
-
-在实际应用中，我们通常使用数值积分方法来求解四元数微分方程。最常用的是四阶龙格-库塔法（RK4）：
-
-$$
-\begin{aligned}
-k_1 &= \frac{1}{2}\Omega(\boldsymbol{\omega}_k)q_k \\
-k_2 &= \frac{1}{2}\Omega(\boldsymbol{\omega}_{k+\frac{1}{2}})(q_k + \frac{h}{2}k_1) \\
-k_3 &= \frac{1}{2}\Omega(\boldsymbol{\omega}_{k+\frac{1}{2}})(q_k + \frac{h}{2}k_2) \\
-k_4 &= \frac{1}{2}\Omega(\boldsymbol{\omega}_{k+1})(q_k + hk_3) \\
-q_{k+1} &= q_k + \frac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4)
-\end{aligned}
-$$
-
-其中 $h$ 是时间步长，$\boldsymbol{\omega}_k$ 是 $t_k$ 时刻的角速度。
-
-注意：由于数值积分可能破坏四元数的单位约束，每次积分后需要进行归一化：
-
-$$
-q_{k+1} \leftarrow \frac{q_{k+1}}{\|q_{k+1}\|}
-$$
-
-
-在惯性导航系统中，更新姿态过程：
-
-1. 从陀螺仪获取角速度测量值 $\boldsymbol{\omega}_m$
-2. 使用四元数微分方程更新姿态四元数
-3. 对更新后的四元数进行归一化
-4. 重复以上步骤
-
-这种方法的优点是计算效率高，且避免了欧拉角表示中的万向节锁问题。
-
-
-## 6. 四元数插值
-
-在机器人运动规划中,经常需要在两个姿态之间进行平滑插值。四元数插值主要有两种方法:
-
-### 6.1. 线性插值 (LERP)
-
-对于两个四元数 $q_0$ 和 $q_1$,线性插值定义为:
-
-$$
-q_{lerp}(t) = \frac{(1-t)q_0 + tq_1}{\|(1-t)q_0 + tq_1\|}
-$$
-
-其中 $t \in [0,1]$ 是插值参数。
-
-特点:
-- 计算简单
-- 插值路径不是最短路径
-- 插值速度不均匀
-
-### 6.2. 球面线性插值 (SLERP)
-
-球面线性插值能够保证插值路径是最短路径,且速度均匀:
-
-$$
-q_{slerp}(t) = q_0 (q_0^{-1}q_1)^t
-$$
-
-或者等价的表达式:
-
-$$
-q_{slerp}(t) = \frac{\sin((1-t)\theta)}{\sin\theta}q_0 + \frac{\sin(t\theta)}{\sin\theta}q_1
-$$
-
-其中 $\theta$ 是 $q_0$ 和 $q_1$ 之间的夹角。
-
-特点:
-- 插值路径是最短路径
-- 角速度恒定
-- 计算相对复杂
-
-
-todo(congyu) 以下待整理
-
-#### Derivations 1
-
-
-refitem: 
-
-- https://stanford.edu/class/ee267/lectures/lecture10.pdf p26
-
-start point : $q_0$ (in world frame)
-
-convert 3-axis gyro measurements to instantaneous rotation quaternion (in bot frame) as
-$$
-q_\Delta = q(\Delta t \|\omega\|, \frac{\omega}{\|\omega\|})
-$$
-where: $\Delta t\|\omega\|$ is angle (in bot frame)
-
-​			$\frac{\omega}{\|\omega\|}$ is rotation axis (in bot frame)
-
-integrate as 
-$$
-q_t = q_\Delta q_{t-1} q_0 q_{t-1}^{-1} q_\Delta ^{-1}
-$$
-here we get $q_t$  (in world frame)
-
-
-
-#### Derivations 2
+### 4.5 四元数微分的推导思路2
 
 
  refitem:
 
 - Quaternion kinematics for the error-state Kalman filter https://arxiv.org/pdf/1711.02508.pdf p45 经典教材
+- https://blog.csdn.net/qq_39554681/article/details/88909564
+- https://blog.csdn.net/u013236946/article/details/72831380
+- http://mars.cs.umn.edu/tr/reports/Trawny05b.pdf
+- https://blog.csdn.net/weixin_37835423/article/details/109452148
+- https://zhuanlan.zhihu.com/p/254888810
+- https://stanford.edu/class/ee267/lectures/lecture10.pdf p26
 
 <img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/develop/img/in-post/post-geometry/
 post-robotics-q-imu-inter.png" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
 
-
-refitem:
-
-- https://blog.csdn.net/qq_39554681/article/details/88909564
-- http://mars.cs.umn.edu/tr/reports/Trawny05b.pdf
-
-
-
-
-#### Derivations 3
-
-refitem:
-
-- https://blog.csdn.net/u013236946/article/details/72831380
+有
 
 $$
-\begin{gather}
-q(t): t时刻姿态四元数
+\begin{align}
+&q(t): &t时刻姿态四元数
 \\
-q(t+\Delta t): t+1时刻姿态四元数
+&q(t+\Delta t): &t+\Delta时刻姿态四元数
 \\
-w: 瞬时角速度(global \ frame)
-\\
+&w: &瞬时角速度(global \ frame)
+\end{align}
+$$
+$$
 q_\Delta = q(\Delta t \|\omega\|, \frac{\omega}{\|\omega\|})
-\end{gather}
 $$
-
 有
 $$
 q(t+\Delta t) = q_\Delta q(t) \tag2
@@ -486,7 +427,7 @@ $$
 $$
 \begin{equation}
   \begin{split}
-\dot{q}(t)=&\lim_{\Delta{t} \to 0}\frac{q(t+\Delta{t})-q(t)}{\Delta{t}}\\
+\dot{q}(t) =&\lim_{\Delta{t} \to 0}\frac{q(t+\Delta{t})-q(t)}{\Delta{t}}\\
 =&\hat{\boldsymbol\omega}\lim_{\Delta{t} \to 0}\frac{\sin(\Vert{\boldsymbol\omega}\Vert\Delta{t}/2)}{\Delta{t}}q(t)\\
 =&\hat{\boldsymbol\omega}\frac{d}{dt}\sin(\frac{\Vert{\boldsymbol\omega}\Vert t}{2})|_{t=0}q(t)\\
 =&\hat{\boldsymbol\omega}\frac{\Vert{\boldsymbol\omega}\Vert}{2}q(t)\\
@@ -538,17 +479,9 @@ q_{k+1}\leftarrow\frac{q_{k+1}}{\Vert{q_{k+1}}\Vert}
 $$
 
 
+### 4.6 推导思路3
 
-
-
-##### VIO笔记
-
-learning_vio L1 p27
-
-轴角 单位向量u，旋转角度$\theta$
-对应的单位四元数
-$$q = \begin{bmatrix} \text{cos}{\frac \theta 2} \\ \mathbf{u} \text{sin} \frac \theta 2\end{bmatrix}$$
-
+- VIO笔记Learning_vio L1 p27
 
 当旋转一段微小的时间，即$\theta \rightarrow 0$ 趋于0时，可以得到
 
@@ -559,7 +492,7 @@ $$
 
 
 
-##### 对时间求导
+对时间求导
 
 角速度
 $$
@@ -582,20 +515,93 @@ $$
 \end{split}
 \end{equation}
 $$
-todo(congyu) 核实上面的公式
 
 
 
+## 5. 四元数表达下的陀螺仪积分
+
+Gyro Integration with Quaternions
+
+在实际应用中，我们通常使用数值积分方法来求解四元数微分方程。最常用的是四阶龙格-库塔法（RK4）：
+
+具体数理详见 [2022-05-05-Runge-Kutta](Math/2022-05-05-Runge-Kutta.md)
 
 
+$$
+\begin{aligned}
+k_1 &= \frac{1}{2}q_k \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_{l,k} \end{bmatrix} \\
+k_2 &= \frac{1}{2}(q_k + \frac{h}{2}k_1) \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_{l,k+\frac{1}{2}} \end{bmatrix} \\
+k_3 &= \frac{1}{2}(q_k + \frac{h}{2}k_2) \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_{l,k+\frac{1}{2}} \end{bmatrix} \\
+k_4 &= \frac{1}{2}(q_k + hk_3) \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_{l,k+1} \end{bmatrix} \\
+q_{k+1} &= q_k + \frac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4)
+\end{aligned}
+$$
+
+其中：
+- $h$ 是时间步长
+- $\boldsymbol{\omega}_{l,k}$ 是 $t_k$ 时刻物体坐标系下的角速度测量值
+- $\boldsymbol{\omega}_{l,k+\frac{1}{2}}$ 是 $t_k + \frac{h}{2}$ 时刻的角速度（通常通过线性插值得到）
+- $\boldsymbol{\omega}_{l,k+1}$ 是 $t_{k+1}$ 时刻的角速度
+
+注意：由于数值积分可能破坏四元数的单位约束，每次积分后需要进行归一化：
+
+$$
+q_{k+1} \leftarrow \frac{q_{k+1}}{\|q_{k+1}\|}
+$$
+
+在惯性导航系统中，更新姿态过程：
+
+1. 从陀螺仪获取角速度测量值 $\boldsymbol{\omega}_l$（物体坐标系下）
+2. 使用四元数微分方程更新姿态四元数：
+   $$
+   \dot{q}(t) = \frac{1}{2} q(t) \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_l(t) \end{bmatrix}
+   $$
+3. 对更新后的四元数进行归一化
+4. 重复以上步骤
+
+这种方法的优点是：
+- 计算效率高
+- 避免了欧拉角表示中的万向节锁问题
+- 直接使用物体坐标系下的角速度测量值，无需坐标转换
 
 
-refitem:
+## 6. 四元数插值
 
-- https://blog.csdn.net/weixin_37835423/article/details/109452148
+在机器人运动规划中,经常需要在两个姿态之间进行平滑插值。四元数插值主要有两种方法:
 
+### 6.1. 线性插值 (LERP)
 
+对于两个四元数 $q_0$ 和 $q_1$,线性插值定义为:
 
-- https://zhuanlan.zhihu.com/p/254888810
+$$
+q_{lerp}(t) = \frac{(1-t)q_0 + tq_1}{\|(1-t)q_0 + tq_1\|}
+$$
 
+其中 $t \in [0,1]$ 是插值参数。
+
+特点:
+- 计算简单
+- 插值路径不是最短路径
+- 插值速度不均匀
+
+### 6.2. 球面线性插值 (SLERP)
+
+球面线性插值能够保证插值路径是最短路径,且速度均匀:
+
+$$
+q_{slerp}(t) = q_0 (q_0^{-1}q_1)^t
+$$
+
+或者等价的表达式:
+
+$$
+q_{slerp}(t) = \frac{\sin((1-t)\theta)}{\sin\theta}q_0 + \frac{\sin(t\theta)}{\sin\theta}q_1
+$$
+
+其中 $\theta$ 是 $q_0$ 和 $q_1$ 之间的夹角。
+
+特点:
+- 插值路径是最短路径
+- 角速度恒定
+- 计算相对复杂
 

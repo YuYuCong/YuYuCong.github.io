@@ -364,6 +364,9 @@ $$
    - 缺点：需要两次角速度测量
 
    c) 四阶龙格库塔法（RK4）：
+
+基础理论详见[2022-05-05-Runge-Kutta](Math/2022-05-05-Runge-Kutta.md)
+
    $$
    \begin{align}
    k_1 &= [\omega_k]_\times R_k \\
