@@ -58,7 +58,7 @@ Copyleft! 2024 Cong Yu. Some rights reserved.
 
 ##### 1.1 无约束优化问题
 
-无约束优化问题：一个代价函数  cost function: $F：\mathbf{R} ^{n} \mapsto \mathbf{R}$，寻找一个$\mathbf{x}^+$ ，使得$F(\mathbf x)$最小。
+无约束优化问题：一个代价函数  cost function: $F：\mathbb{R} ^{n} \mapsto \mathbb{R}$，寻找一个$\mathbf{x}^+$ ，使得$F(\mathbf x)$最小。
 
 $F(\mathbf x)$ 称为目标函数，或者代价函数。
 
@@ -66,8 +66,8 @@ $F(\mathbf x)$ 称为目标函数，或者代价函数。
 
 $$
 \begin{align}
-& \textrm{Given   }F：\mathbf{R} ^{n} \mapsto \mathbf{R} \\ 
-& \textrm{Find } \mathbf{x}^+ = \textrm {argmin}_\mathbf{x} \{F(\mathbf x)\}. \\
+& \textrm{Given   }F：\mathbb{R} ^{n} \mapsto \mathbb{R} \\ 
+& \textrm{Find } \mathbf{x}^+ = \textrm {argmin}_\mathbf{x} F(\mathbf x) \\
 \end{align}
 $$
 
@@ -78,7 +78,7 @@ $$
 
 有约束的优化问题：对x的取值范围，或者以某种方法对x的取值有一定要求的约束问题。
 
-- 约束x的取值范围可以直接定义 $x \in \mathbf{R}$
+- 约束x的取值范围可以直接定义 $x \in \mathbb{R}$
 - 约束函数：其他约束x的取值的方法有 约束函数，$f_i(x) \leq b_i, i = 1,...,m$
 - 约束函数的具体表达形式可以和目标函数的表达形式相同，此时相当于限制因变量的可能范围
 - 约束边界：常量 $b_1,...b_m$ 称为对应约束函数的约束边界
@@ -87,8 +87,8 @@ $$
 
 $$
 \begin{align}
-& \textrm{Given   }F：\mathbf{R} ^{n} \mapsto \mathbf{R} \\ 
-& \textrm{Find } \mathbf{x}^+ = \textrm {argmin}_\mathbf{x} \{F(\mathbf x)\}. \\
+& \textrm{Given   }F：\mathbb{R} ^{n} \mapsto \mathbb{R} \\ 
+& \textrm{Find } \mathbf{x}^+ = \textrm {argmin}_\mathbf{x} F(\mathbf x) \\
 & \textrm{subject to } f_i(x) \leq b_i, i = 1,...,m. 
 \end{align}
 $$
@@ -105,8 +105,8 @@ Definition 1.2. Global Minimizer
 
 $$
 \begin{align}
-& \textrm{Given }F：\mathbf{R} ^{n} \mapsto \mathbf{R}. \\ 
-& \textrm{ Find } \mathbf{x}^+ = \textrm {argmin}_\mathbf{x} \{F(\mathbf x)\}.
+& \textrm{Given }F：\mathbb{R} ^{n} \mapsto \mathbb{R} \\ 
+& \textrm{ Find } \mathbf{x}^+ = \textrm {argmin}_\mathbf{x} F(\mathbf x)
 \end{align}
 $$
 
@@ -122,7 +122,7 @@ Definition 1.3. Local Minimizer
 
 $$
 \begin{align}
-& \textrm{Given   }F：\mathbf{R} ^{n} \mapsto \mathbf{R}. \\ 
+& \textrm{Given   }F：\mathbb{R} ^{n} \mapsto \mathbb{R} \\ 
 & \textrm{ Find } \mathbf{x}^+ \textrm{, so that } F(\mathbf{x}^+) \leq F(\mathbf{x})  \textrm{ for } \|\mathbf{x} - \mathbf{x}^+\| < \delta.
 \end{align}
 $$
@@ -133,7 +133,7 @@ $$
 
 ##### 1.5 线性优化
 
-<mark style="background: #FF5582A6;">线性函数</mark>： 对于任意的 $x,y \in \mathbf{R}^n$ 和 $\alpha, \beta \in \mathbf{R}$ ，有下述等式成立 $f(\alpha x + \beta y) = \alpha f(x) + \beta f(y)$ 。
+<mark style="background: #FF5582A6;">线性函数</mark>： 对于任意的 $x,y \in \mathbb{R}^n$ 和 $\alpha, \beta \in \mathbb{R}$ ，有下述等式成立 $f(\alpha x + \beta y) = \alpha f(x) + \beta f(y)$ 。
 
 线性优化：目标函数$F$和约束函数$f_i(x)$都是线性函数的一类优化问题。
 
@@ -151,8 +151,8 @@ $$
 
 $$
 \begin{align}
-& \textrm{Given   }F：\mathbf{R} ^{n} \mapsto \mathbf{R} \\ 
-& \textrm{Find } \mathbf{x}^+ = \text {argmin}_\mathbf{x} \{F(\mathbf x)\}. \\
+& \textrm{Given   }F：\mathbb{R} ^{n} \mapsto \mathbb{R} \\ 
+& \textrm{Find } \mathbf{x}^+ = \text {argmin}_\mathbf{x} F(\mathbf x) \\
 & \textrm{subject to } f_i(x) \leq b_i, i = 1,...,m. 
 \end{align}
 $$
@@ -169,8 +169,8 @@ $$
 
 $$
 \begin{align}
-& \textrm{Given   }F：\mathbf{R} ^{n} \mapsto \mathbf{R} \\ 
-& \textrm{Find } \mathbf{x}^+ = \text {argmin}_\mathbf{x} \{F(\mathbf x)\}. \\
+& \textrm{Given   }F：\mathbb{R} ^{n} \mapsto \mathbb{R} \\ 
+& \textrm{Find } \mathbf{x}^+ = \text {argmin}_\mathbf{x} F(\mathbf x) \\
 & \textrm{subject to } f_i(x) \leq b_i, i = 1,...,m. 
 \end{align}
 $$
@@ -178,7 +178,7 @@ $$
 且其中目标函数  $F$   和约束函数 $f_i(x)$ 都是凸函数
 
 
-<mark style="background: #FF5582A6;">凸函数</mark>： 对于任意的 $x,y \in \mathbf{R}^n$，任意 $\alpha, \beta \in \mathbf{R}$ 且满足 $\alpha + \beta = 1, \alpha \geq 0, \beta \geq 0$ ，下述不等式成立 $f(\alpha x + \beta y) \leq \alpha f(x) + \beta f(y)$ 。
+<mark style="background: #FF5582A6;">凸函数</mark>： 对于任意的 $x,y \in \mathbb{R}^n$，任意 $\alpha, \beta \in \mathbb{R}$ 且满足 $\alpha + \beta = 1, \alpha \geq 0, \beta \geq 0$ ，下述不等式成立 $f(\alpha x + \beta y) \leq \alpha f(x) + \beta f(y)$ 。
 
 比较线性函数和凸函数，可以发现凸函数仅仅需要在 $\alpha$ 和 $\beta$ 取特定数值的情况下满足不等式，而线性需要严格满足等式。
 
@@ -195,8 +195,8 @@ $$
 
 $$
 \begin{align}
-& \textrm{Given   }F：\mathbf{R} ^{n} \mapsto \mathbf{R} \\ 
-& \textrm{Find } \mathbf{x}^+ = \text {argmin}_\mathbf{x} \{F(\mathbf x)\}
+& \textrm{Given   }F：\mathbb{R} ^{n} \mapsto \mathbb{R} \\ 
+& \textrm{Find } \mathbf{x}^+ = \text {argmin}_\mathbf{x} F(\mathbf x)
 \end{align}
 $$
 
@@ -220,8 +220,8 @@ $t$即数据集中的输入，$y$ 即数据集中的拟合目标label。$f$即�
 
 $$
 \begin{align}
-& \textrm{Given   }F：\mathbf{R} ^{n} \mapsto \mathbf{R} \\ 
-& \textrm{Find } \mathbf{x}^+ = \text {argmin}_\mathbf{x} \{F(\mathbf x)\}
+& \textrm{Given   }F：\mathbb{R} ^{n} \mapsto \mathbb{R} \\ 
+& \textrm{Find } \mathbf{x}^+ = \text {argmin}_\mathbf{x} F(\mathbf x)
 \end{align}
 $$
 
