@@ -314,13 +314,16 @@ $$
 让我们逐步推导：
 
 1. 首先，对于小角度旋转，我们有以下近似：
-   - $\cos\frac{\Delta \theta}{2} \approx 1$
-   - $\sin\frac{\Delta \theta}{2} \approx \frac{\Delta \theta}{2}$
+   - 小角度近似
+	   - $\cos\frac{\Delta \theta}{2} \approx 1$
+	   - $\sin\frac{\Delta \theta}{2} \approx \frac{\Delta \theta}{2}$
+   - 旋转轴不变近似
+	   - $\mathbf{u}(t + \Delta t) \approx \mathbf{u}(t)$
 
 2. 应用旋转轴不变近似，将 $q(t + \Delta t)$ 展开：
    $$
    \begin{split}
-   q(t + \Delta t) &= \begin{bmatrix} \cos\frac{\theta(t) + \Delta \theta}{2} \\ \mathbf{u}(t)\sin\frac{\theta(t) + \Delta \theta}{2} \end{bmatrix} \\
+   q(t + \Delta t) &\approx \begin{bmatrix} \cos\frac{\theta(t) + \Delta \theta}{2} \\ \mathbf{u}(t)\sin\frac{\theta(t) + \Delta \theta}{2} \end{bmatrix} \\
    &= \begin{bmatrix} \cos\frac{\theta(t)}{2}\cos\frac{\Delta \theta}{2} - \sin\frac{\theta(t)}{2}\sin\frac{\Delta \theta}{2} \\ \mathbf{u}(t)(\sin\frac{\theta(t)}{2}\cos\frac{\Delta \theta}{2} + \cos\frac{\theta(t)}{2}\sin\frac{\Delta \theta}{2}) \end{bmatrix}
    \end{split}
    $$
@@ -356,18 +359,18 @@ $$
    \dot{q}(t) = \frac{1}{2} \begin{bmatrix} 0 \\ \boldsymbol{\omega}(t) \end{bmatrix} \otimes q(t)
    $$
 
-8. 注意：这里的角速度 $\boldsymbol{\omega}(t)$ 是在全局坐标系（世界坐标系）下表示的。在实际应用中，我们通常通过IMU等传感器获得的是物体坐标系下的角速度 $\boldsymbol{\omega}_l$。两者之间的关系为：
+8. 注意：这里的角速度 $\boldsymbol{\omega}(t)$ 是在全局坐标系（世界坐标系）下表示的。在实际应用中，我们通常通过IMU等传感器获得的是物体坐标系下的角速度 $\boldsymbol{\omega}_b$。两者之间的关系为：
 $$
-\boldsymbol{\omega}_l = q^* \otimes \boldsymbol{\omega} \otimes q
+\boldsymbol{\omega}_b = q^* \otimes \boldsymbol{\omega} \otimes q
 $$
 或
 $$
-\boldsymbol{\omega} = q \otimes \boldsymbol{\omega}_l \otimes q^*
+\boldsymbol{\omega} = q \otimes \boldsymbol{\omega}_b \otimes q^*
 $$
 
 因此，在实际应用中，我们通常使用物体坐标系下的角速度，此时四元数微分方程变为：
 $$
-\dot{q}(t) = \frac{1}{2} q(t) \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_l(t) \end{bmatrix}
+\dot{q}(t) = \frac{1}{2} q(t) \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_b(t) \end{bmatrix}
 $$
 
 ### 4.4 矩阵形式表示
@@ -389,7 +392,7 @@ $$
 \end{bmatrix}
 $$
 
-### 4.5 四元数微分的推导思路2
+### 4.5 推导思路2
 
 
  refitem:
@@ -529,19 +532,19 @@ Gyro Integration with Quaternions
 
 $$
 \begin{aligned}
-k_1 &= \frac{1}{2}q_k \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_{l,k} \end{bmatrix} \\
-k_2 &= \frac{1}{2}(q_k + \frac{h}{2}k_1) \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_{l,k+\frac{1}{2}} \end{bmatrix} \\
-k_3 &= \frac{1}{2}(q_k + \frac{h}{2}k_2) \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_{l,k+\frac{1}{2}} \end{bmatrix} \\
-k_4 &= \frac{1}{2}(q_k + hk_3) \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_{l,k+1} \end{bmatrix} \\
+k_1 &= \frac{1}{2}q_k \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_{b,k} \end{bmatrix} \\
+k_2 &= \frac{1}{2}(q_k + \frac{h}{2}k_1) \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_{b,k+\frac{1}{2}} \end{bmatrix} \\
+k_3 &= \frac{1}{2}(q_k + \frac{h}{2}k_2) \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_{b,k+\frac{1}{2}} \end{bmatrix} \\
+k_4 &= \frac{1}{2}(q_k + hk_3) \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_{b,k+1} \end{bmatrix} \\
 q_{k+1} &= q_k + \frac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4)
 \end{aligned}
 $$
 
 其中：
 - $h$ 是时间步长
-- $\boldsymbol{\omega}_{l,k}$ 是 $t_k$ 时刻物体坐标系下的角速度测量值
-- $\boldsymbol{\omega}_{l,k+\frac{1}{2}}$ 是 $t_k + \frac{h}{2}$ 时刻的角速度（通常通过线性插值得到）
-- $\boldsymbol{\omega}_{l,k+1}$ 是 $t_{k+1}$ 时刻的角速度
+- $\boldsymbol{\omega}_{b,k}$ 是 $t_k$ 时刻物体坐标系下的角速度测量值
+- $\boldsymbol{\omega}_{b,k+\frac{1}{2}}$ 是 $t_k + \frac{h}{2}$ 时刻的角速度（通常通过线性插值得到）
+- $\boldsymbol{\omega}_{b,k+1}$ 是 $t_{k+1}$ 时刻的角速度
 
 注意：由于数值积分可能破坏四元数的单位约束，每次积分后需要进行归一化：
 
@@ -551,10 +554,10 @@ $$
 
 在惯性导航系统中，更新姿态过程：
 
-1. 从陀螺仪获取角速度测量值 $\boldsymbol{\omega}_l$（物体坐标系下）
+1. 从陀螺仪获取角速度测量值 $\boldsymbol{\omega}_b$（物体坐标系下）
 2. 使用四元数微分方程更新姿态四元数：
    $$
-   \dot{q}(t) = \frac{1}{2} q(t) \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_l(t) \end{bmatrix}
+   \dot{q}(t) = \frac{1}{2} q(t) \otimes \begin{bmatrix} 0 \\ \boldsymbol{\omega}_b(t) \end{bmatrix}
    $$
 3. 对更新后的四元数进行归一化
 4. 重复以上步骤

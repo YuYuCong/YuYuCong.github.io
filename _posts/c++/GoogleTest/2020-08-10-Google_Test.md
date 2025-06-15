@@ -171,34 +171,34 @@ g++ test.cpp /usr/local/lib/libgtest.a -lpthread -o test
 ### 1. bool 值检查
 
 | **Fatal assertion**            | **Nonfatal assertion**         | **Verifies**         |
-|--------------------------------|--------------------------------|----------------------|
+| ------------------------------ | ------------------------------ | -------------------- |
 | `ASSERT_TRUE(`*condition*`)`;  | `EXPECT_TRUE(`*condition*`)`;  | *condition* is true  |
 | `ASSERT_FALSE(`*condition*`)`; | `EXPECT_FALSE(`*condition*`)`; | *condition* is false |
 
 ### 2. 数值型数据检查
 
-| **Fatal assertion**                                 | **Nonfatal assertion**                 | **Verifies**             |
-|-----------------------------------------------------|----------------------------------------|--------------------------|
+| **Fatal assertion**                                     | **Nonfatal assertion**                 | **Verifies**             |
+| ------------------------------------------------------- | -------------------------------------- | ------------------------ |
 | `ASSERT_EQ(`*expected*`, `*actual*`);` expected写在前面 | `EXPECT_EQ(`*expected*`, `*actual*`);` | *expected* `==` *actual* |
-| `ASSERT_NE(`*val1*`, `*val2*`);`                    | `EXPECT_NE(`*val1*`, `*val2*`);`       | *val1* `!=` *val2*       |
-| `ASSERT_LT(`*val1*`, `*val2*`);`                    | `EXPECT_LT(`*val1*`, `*val2*`);`       | *val1* `<` *val2*        |
-| `ASSERT_LE(`*val1*`, `*val2*`);`                    | `EXPECT_LE(`*val1*`, `*val2*`);`       | *val1* `<=` *val2*       |
-| `ASSERT_GT(`*val1*`, `*val2*`);`                    | `EXPECT_GT(`*val1*`, `*val2*`);`       | *val1* `>` *val2*        |
-| `ASSERT_GE(`*val1*`, `*val2*`);`                    | `EXPECT_GE(`*val1*`, `*val2*`);`       | *val1* `>=` *val2*       |
+| `ASSERT_NE(`*val1*`, `*val2*`);`                        | `EXPECT_NE(`*val1*`, `*val2*`);`       | *val1* `!=` *val2*       |
+| `ASSERT_LT(`*val1*`, `*val2*`);`                        | `EXPECT_LT(`*val1*`, `*val2*`);`       | *val1* `<` *val2*        |
+| `ASSERT_LE(`*val1*`, `*val2*`);`                        | `EXPECT_LE(`*val1*`, `*val2*`);`       | *val1* `<=` *val2*       |
+| `ASSERT_GT(`*val1*`, `*val2*`);`                        | `EXPECT_GT(`*val1*`, `*val2*`);`       | *val1* `>` *val2*        |
+| `ASSERT_GE(`*val1*`, `*val2*`);`                        | `EXPECT_GE(`*val1*`, `*val2*`);`       | *val1* `>=` *val2*       |
 
 ### 3. 浮点型检查（可含误差）
 
 无误差
 
 | **Fatal assertion**                       | **Nonfatal assertion**                    | **Verifies**                             |
-|-------------------------------------------|-------------------------------------------|------------------------------------------|
+| ----------------------------------------- | ----------------------------------------- | ---------------------------------------- |
 | `ASSERT_FLOAT_EQ(`*expected, actual*`);`  | `EXPECT_FLOAT_EQ(`*expected, actual*`);`  | the two `float` values are almost equal  |
 | `ASSERT_DOUBLE_EQ(`*expected, actual*`);` | `EXPECT_DOUBLE_EQ(`*expected, actual*`);` | the two `double` values are almost equal |
 
 含误差（对相近的两个数比较）：
 
 | **Fatal assertion**                       | **Nonfatal assertion**                    | **Verifies**                                                                     |
-|-------------------------------------------|-------------------------------------------|----------------------------------------------------------------------------------|
+| ----------------------------------------- | ----------------------------------------- | -------------------------------------------------------------------------------- |
 | `ASSERT_NEAR(`*val1, val2, abs_error*`);` | `EXPECT_NEAR`*(val1, val2, abs_error*`);` | the difference between *val1* and *val2* doesn't exceed the given absolute error |
 
   同时，还可以使用：
@@ -210,12 +210,12 @@ EXPECT_PRED_FORMAT2(testing::DoubleLE, val1, val2);
 
 ### 4. 字符串检查  
 
-| **Fatal assertion**                                   | **Nonfatal assertion**                                | **Verifies**                                                 |
-|-------------------------------------------------------|-------------------------------------------------------|--------------------------------------------------------------|
-| `ASSERT_STREQ(`*expected_str*`, `*actual_str*`);`     | `EXPECT_STREQ(`*expected_str*`, `*actual_str*`);`     | the two C strings have the same content                      |
-| `ASSERT_STRNE(`*str1*`, `*str2*`);`                   | `EXPECT_STRNE(`*str1*`, `*str2*`);`                   | the two C strings have different content                     |
+| **Fatal assertion**                                   | **Nonfatal assertion**                                | **Verifies**                                                      |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------- |
+| `ASSERT_STREQ(`*expected_str*`, `*actual_str*`);`     | `EXPECT_STREQ(`*expected_str*`, `*actual_str*`);`     | the two C strings have the same content                           |
+| `ASSERT_STRNE(`*str1*`, `*str2*`);`                   | `EXPECT_STRNE(`*str1*`, `*str2*`);`                   | the two C strings have different content                          |
 | `ASSERT_STRCASEEQ(`*expected_str*`, `*actual_str*`);` | `EXPECT_STRCASEEQ(`*expected_str*`, `*actual_str*`);` | the two C strings have the same content, ignoring case 忽略大小写 |
-| `ASSERT_STRCASENE(`*str1*`, `*str2*`);`               | `EXPECT_STRCASENE(`*str1*`, `*str2*`);`               | the two C strings have different content, ignoring case      |
+| `ASSERT_STRCASENE(`*str1*`, `*str2*`);`               | `EXPECT_STRCASENE(`*str1*`, `*str2*`);`               | the two C strings have different content, ignoring case           |
 
 *STREQ*和*STRNE*同时支持`char*和wchar_t*`类型
 
@@ -228,13 +228,13 @@ EXPECT_PRED_FORMAT2(testing::DoubleLE, val1, val2);
 返回失败：
 
 | **Fatal assertion** | **Nonfatal assertion** |
-|---------------------|------------------------|
+| ------------------- | ---------------------- |
 | ```FAIL();```       | ```ADD_FAILURE();```   |
 
 ### 6. 异常检查
 
-| **Fatal assertion**                              | **Nonfatal assertion**                           | **Verifies**              |
-|--------------------------------------------------|--------------------------------------------------|---------------------------------------------------|
+| **Fatal assertion**                              | **Nonfatal assertion**                           | **Verifies**                                      |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------- |
 | `ASSERT_THROW(`*statement*, *exception_type*`);` | `EXPECT_THROW(`*statement*, *exception_type*`);` | *statement* throws an exception of the given type |
 | `ASSERT_ANY_THROW(`*statement*`);`               | `EXPECT_ANY_THROW(`*statement*`);`               | *statement* throws an exception of any type       |
 | `ASSERT_NO_THROW(`*statement*`);`                | `EXPECT_NO_THROW(`*statement*`);`                | *statement* doesn't throw any exception           |
@@ -242,18 +242,18 @@ EXPECT_PRED_FORMAT2(testing::DoubleLE, val1, val2);
 ### 7. Predicate Assertions
 
 | **Fatal assertion**                    | **Nonfatal assertion**                 | **Verifies**                     |
-|----------------------------------------|----------------------------------------|----------------------------------|
+| -------------------------------------- | -------------------------------------- | -------------------------------- |
 | `ASSERT_PRED1(`*pred1, val1*`);`       | `EXPECT_PRED1(`*pred1, val1*`);`       | *pred1(val1)* returns true       |
 | `ASSERT_PRED2(`*pred2, val1, val2*`);` | `EXPECT_PRED2(`*pred2, val1, val2*`);` | *pred2(val1, val2)* returns true |
 | ...                                    | ...                                    | ...                              |
 
 还可以自定义输出格式，通过如下：
 
-| **Fatal assertion**                                  | **Nonfatal assertion**                             | **Verifies**                             |
-|------------------------------------------------------|----------------------------------------------------|------------------------------------------|
-| `ASSERT_PRED_FORMAT1(*pred_format1, val1*);`        | `EXPECT_PRED_FORMAT1(*pred_format1, val1*);`       | *pred_format1(val1)* is successful       |
+| **Fatal assertion**                                | **Nonfatal assertion**                             | **Verifies**                             |
+| -------------------------------------------------- | -------------------------------------------------- | ---------------------------------------- |
+| `ASSERT_PRED_FORMAT1(*pred_format1, val1*);`       | `EXPECT_PRED_FORMAT1(*pred_format1, val1*);`       | *pred_format1(val1)* is successful       |
 | `ASSERT_PRED_FORMAT2(*pred_format2, val1, val2*);` | `EXPECT_PRED_FORMAT2(*pred_format2, val1, val2*);` | *pred_format2(val1, val2)* is successful |
-| ...                                                  | ...                                                |                                          |
+| ...                                                | ...                                                |                                          |
 
 ### 8. 类型检查
 
@@ -379,7 +379,114 @@ gtest的事件一共有3种：
 
 \2. TearDown()方法在所有案例执行后执行
 
-// todo(congyu)
+要实现全局事件，我们需要写一个类，继承`testing::Environment`类，实现里面的`SetUp`和`TearDown`方法。
+
+1. 写一个继承自`testing::Environment`的类，实现`SetUp`和`TearDown`方法
+2. 在main函数中通过`testing::AddGlobalTestEnvironment`方法将事件挂进来，也就是说，我们可以写很多个这样的类，然后将他们的事件都挂上去。
+
+```cpp
+#include <gtest/gtest.h>
+#include <iostream>
+
+class GlobalEvent : public testing::Environment
+{
+public:
+    virtual void SetUp()
+    {
+        std::cout << "Before all cases" << std::endl;
+    }
+    virtual void TearDown()
+    {
+        std::cout << "After all cases" << std::endl;
+    }
+};
+
+TEST(GlobalEventTest, FirstTest) {
+    std::cout << "First test" << std::endl;
+}
+
+TEST(GlobalEventTest, SecondTest) {
+    std::cout << "Second test" << std::endl;
+}
+
+int main(int argc, char** argv)
+{
+    testing::AddGlobalTestEnvironment(new GlobalEvent);
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
+```
+
+### 2 TestSuite级别事件
+
+要实现TestSuite级别的事件，需要写一个类，继承`testing::Test`，然后实现两个静态方法：
+
+1. `SetUpTestCase()` 方法在第一个TestCase之前执行
+2. `TearDownTestCase()` 方法在最后一个TestCase之后执行
+
+```cpp
+#include <gtest/gtest.h>
+#include <iostream>
+
+class TestSuiteEvent : public testing::Test
+{
+public:
+    static void SetUpTestCase()
+    {
+        std::cout << "Before first test in TestSuite" << std::endl;
+    }
+    static void TearDownTestCase()
+    {
+        std::cout << "After last test in TestSuite" << std::endl;
+    }
+};
+
+TEST_F(TestSuiteEvent, FirstTest) {
+    std::cout << "First test in TestSuite" << std::endl;
+}
+
+TEST_F(TestSuiteEvent, SecondTest) {
+    std::cout << "Second test in TestSuite" << std::endl;
+}
+```
+
+### 3 TestCase级别事件
+
+TestCase级别的事件是挂在每个案例执行前后的，实现方式和TestSuite的几乎一样，不过需要实现的是`SetUp`方法和`TearDown`方法：
+
+1. `SetUp()`方法在每个TestCase之前执行
+2. `TearDown()`方法在每个TestCase之后执行
+
+```cpp
+#include <gtest/gtest.h>
+#include <iostream>
+
+class TestCaseEvent : public testing::Test
+{
+public:
+    virtual void SetUp()   // 注意这里不是静态的
+    {
+        std::cout << "Before each test case" << std::endl;
+    }
+    virtual void TearDown() // 注意这里不是静态的
+    {
+        std::cout << "After each test case" << std::endl;
+    }
+};
+
+TEST_F(TestCaseEvent, FirstTest) {
+    std::cout << "First test case" << std::endl;
+}
+
+TEST_F(TestCaseEvent, SecondTest) {
+    std::cout << "Second test case" << std::endl;
+}
+```
+
+**注意：**
+- TestSuite级别的SetUpTestCase和TearDownTestCase是静态方法
+- TestCase级别的SetUp和TearDown是非静态方法
+- 使用事件机制时，测试用例需要使用TEST_F宏，而不是TEST宏
 
 
 
@@ -431,7 +538,7 @@ class IsOdd : public::testing::TestWithParam<int>{};
 - 编写具体测试代码
 - 使用宏 TEST_P
 
-  - 这里，我们要使用一个新的宏（嗯，挺兴奋的）：**TEST_P**，关于这个"P"的含义，Google给出的答案非常幽默，就是说你可以理解为”parameterized" 或者 "pattern"。我更倾向于 ”parameterized"的解释，呵呵
+  - 这里，我们要使用一个新的宏（嗯，挺兴奋的）：**TEST_P**，关于这个"P"的含义，Google给出的答案非常幽默，就是说你可以理解为"parameterized" 或者 "pattern"。我更倾向于 "parameterized"的解释，呵呵
 - `GetParam()`获取一个参数：在TEST_P宏里，使用`GetParam()`获取当前的参数的具体值
   - 这个函数会从哪里拿数据呢，看第三步
 - 然后编写断言
@@ -461,12 +568,12 @@ INSTANTIATE_TEST_CASE_P(TrueReturn, IsOddParamTest, testing::Values(3, 5, 11, 23
 
 ##### 4. 参数产生器
 
-| 句柄                                               | 意义                                                                                                                                                                                                             |
-|--------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Range(begin, end[, step])`                      | 范围在begin~end之间，步长为step，不包括end                                                                                                                                                                                  |
-| `Values(v1, v2, ..., vN)`                        | v1,v2到vN的值                                                                                                                                                                                                     |
-| `ValuesIn(container)` and `ValuesIn(begin, end)` | 从一个C类型的数组或是STL容器，或是迭代器中取值                                                                                                                                                                                      |
-| `Bool()`                                         | 取`false` 和 `true` 两个值                                                                                                                                                                                            |
+| 句柄                                             | 意义                                                                                                                                                                                                                                                                                                                            |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Range(begin, end[, step])`                      | 范围在begin~end之间，步长为step，不包括end                                                                                                                                                                                                                                                                                      |
+| `Values(v1, v2, ..., vN)`                        | v1,v2到vN的值                                                                                                                                                                                                                                                                                                                   |
+| `ValuesIn(container)` and `ValuesIn(begin, end)` | 从一个C类型的数组或是STL容器，或是迭代器中取值                                                                                                                                                                                                                                                                                  |
+| `Bool()`                                         | 取`false` 和 `true` 两个值                                                                                                                                                                                                                                                                                                      |
 | `Combine(g1, g2, ..., gN)`                       | 这个比较强悍，它将g1,g2,...gN进行排列组合，g1,g2,...gN本身是一个参数生成器，每次分别从g1,g2,..gN中各取出一个值，组合成一个元组(Tuple)作为一个参数。说明：这个功能只在提供了`<tr1/tuple>`头的系统中有效。gtest会自动去判断是否支持tr/tuple，如果你的系统确实支持，而gtest判断错误的话，你可以重新定义宏`GTEST_HAS_TR1_TUPLE=1`。 |
 
 ### 6.2. 类型参数化 TYPED_TEST
@@ -503,7 +610,111 @@ TYPED_TEST_CASE(QueueTest, typelist);
 
 #### 6.2.2. 待测类型未知
 
-// todo(congyu)
+当我们不知道具体要测试哪些类型，或者说类型是由外部提供的时候，我们可以使用类型参数化的另一种形式：`TYPED_TEST_P`。
+
+这种方式被称为 **Type-Parameterized Tests**，它允许我们定义一个测试模板，然后在不同的地方用不同的类型来实例化这个测试。
+
+##### 使用步骤：
+
+**1. 定义测试类模板**
+
+```cpp
+template <typename T>
+class QueueTest : public testing::Test {
+ public:
+  typedef std::queue<T> Queue;
+  typedef std::list<T> List;
+};
+```
+
+**2. 使用 TYPED_TEST_SUITE_P 声明测试套件**
+
+```cpp
+TYPED_TEST_SUITE_P(QueueTest);
+```
+
+**3. 使用 TYPED_TEST_P 定义测试用例**
+
+```cpp
+TYPED_TEST_P(QueueTest, DefaultConstructor) {
+  typename TestFixture::Queue q0;
+  EXPECT_EQ(0u, q0.size());
+}
+
+TYPED_TEST_P(QueueTest, Enqueue) {
+  typename TestFixture::Queue q0;
+  typename TestFixture::List expected;
+  
+  for (int i = 0; i < 10; ++i) {
+    q0.push(i);
+    expected.push_back(i);
+  }
+  EXPECT_EQ(10u, q0.size());
+}
+```
+
+**4. 使用 REGISTER_TYPED_TEST_SUITE_P 注册测试用例**
+
+```cpp
+REGISTER_TYPED_TEST_SUITE_P(QueueTest,
+                           DefaultConstructor, Enqueue);
+```
+
+**5. 使用 INSTANTIATE_TYPED_TEST_SUITE_P 实例化测试**
+
+```cpp
+typedef testing::Types<int, char, unsigned int> MyTypes;
+INSTANTIATE_TYPED_TEST_SUITE_P(My,        // 实例化名称前缀
+                              QueueTest,  // 测试套件名称
+                              MyTypes);   // 类型列表
+```
+
+**完整示例：**
+
+```cpp
+#include <gtest/gtest.h>
+#include <queue>
+#include <list>
+
+template <typename T>
+class QueueTest : public testing::Test {
+ public:
+  typedef std::queue<T> Queue;
+  typedef std::list<T> List;
+};
+
+TYPED_TEST_SUITE_P(QueueTest);
+
+TYPED_TEST_P(QueueTest, DefaultConstructor) {
+  typename TestFixture::Queue q0;
+  EXPECT_EQ(0u, q0.size());
+}
+
+TYPED_TEST_P(QueueTest, Enqueue) {
+  typename TestFixture::Queue q0;
+  for (int i = 0; i < 10; ++i) {
+    q0.push(static_cast<TypeParam>(i));
+  }
+  EXPECT_EQ(10u, q0.size());
+}
+
+// 注册所有的测试用例
+REGISTER_TYPED_TEST_SUITE_P(QueueTest,
+                           DefaultConstructor, Enqueue);
+
+// 在一个地方实例化
+typedef testing::Types<int, char, unsigned int> MyTypes;
+INSTANTIATE_TYPED_TEST_SUITE_P(My, QueueTest, MyTypes);
+
+// 也可以在另一个地方用不同的类型再次实例化
+typedef testing::Types<float, double> FloatTypes;
+INSTANTIATE_TYPED_TEST_SUITE_P(Float, QueueTest, FloatTypes);
+```
+
+**优势：**
+- 可以在不同的源文件中用不同的类型实例化同一个测试模板
+- 测试逻辑和具体类型解耦，提高了代码复用性
+- 适合库开发者为用户提供测试模板
 
 
 
@@ -511,7 +722,191 @@ TYPED_TEST_CASE(QueueTest, typelist);
 
 > - https://www.coder.work/article/1978584
 
-// todo(congyu)
+在某些情况下，我们可能需要同时对类型和数值进行参数化测试。Google Test 提供了几种方式来实现这种混合参数化。
+
+#### 方法一：在类型参数化测试中使用数值
+
+```cpp
+#include <gtest/gtest.h>
+#include <vector>
+
+template <typename T>
+class ContainerTest : public testing::Test {
+ public:
+  typedef std::vector<T> Container;
+};
+
+typedef testing::Types<int, float, double> NumericTypes;
+TYPED_TEST_SUITE(ContainerTest, NumericTypes);
+
+TYPED_TEST(ContainerTest, PushBackMultipleValues) {
+  typename TestFixture::Container container;
+  
+  // 测试多个数值
+  std::vector<TypeParam> test_values = {
+    static_cast<TypeParam>(1),
+    static_cast<TypeParam>(2),
+    static_cast<TypeParam>(3)
+  };
+  
+  for (const auto& value : test_values) {
+    container.push_back(value);
+  }
+  
+  EXPECT_EQ(test_values.size(), container.size());
+  for (size_t i = 0; i < test_values.size(); ++i) {
+    EXPECT_EQ(test_values[i], container[i]);
+  }
+}
+```
+
+#### 方法二：使用 Combine 进行组合参数化
+
+```cpp
+#include <gtest/gtest.h>
+#include <tuple>
+
+// 定义一个测试类，同时接受类型和数值参数
+template <typename T>
+class MathTest : public testing::TestWithParam<std::tuple<T, T, T>> {
+ public:
+  T GetFirst() { return std::get<0>(this->GetParam()); }
+  T GetSecond() { return std::get<1>(this->GetParam()); }
+  T GetExpected() { return std::get<2>(this->GetParam()); }
+};
+
+// 为不同类型实例化测试
+typedef MathTest<int> MathTestInt;
+typedef MathTest<float> MathTestFloat;
+
+TEST_P(MathTestInt, Addition) {
+  EXPECT_EQ(GetExpected(), GetFirst() + GetSecond());
+}
+
+TEST_P(MathTestFloat, Addition) {
+  EXPECT_FLOAT_EQ(GetExpected(), GetFirst() + GetSecond());
+}
+
+// 为 int 类型提供测试数据
+INSTANTIATE_TEST_SUITE_P(
+  IntValues,
+  MathTestInt,
+  testing::Values(
+    std::make_tuple(1, 2, 3),
+    std::make_tuple(5, 7, 12),
+    std::make_tuple(-1, 1, 0)
+  )
+);
+
+// 为 float 类型提供测试数据
+INSTANTIATE_TEST_SUITE_P(
+  FloatValues,
+  MathTestFloat,
+  testing::Values(
+    std::make_tuple(1.1f, 2.2f, 3.3f),
+    std::make_tuple(0.5f, 0.5f, 1.0f)
+  )
+);
+```
+
+#### 方法三：使用宏简化多类型参数化
+
+```cpp
+#include <gtest/gtest.h>
+
+// 定义一个宏来简化多类型测试的定义
+#define DEFINE_TYPED_PARAM_TEST(TestName, TypeName) \
+  typedef testing::TestWithParam<std::pair<TypeName, TypeName>> TestName##TypeName; \
+  TEST_P(TestName##TypeName, Operation) { \
+    auto param = GetParam(); \
+    TypeName a = param.first; \
+    TypeName b = param.second; \
+    EXPECT_GT(a + b, a); \
+    EXPECT_GT(a + b, b); \
+  }
+
+// 为不同类型定义测试
+DEFINE_TYPED_PARAM_TEST(ArithmeticTest, int)
+DEFINE_TYPED_PARAM_TEST(ArithmeticTest, double)
+
+// 为每种类型提供测试数据
+INSTANTIATE_TEST_SUITE_P(
+  IntPairs,
+  ArithmeticTestint,
+  testing::Values(
+    std::make_pair(1, 2),
+    std::make_pair(10, 20),
+    std::make_pair(-5, 10)
+  )
+);
+
+INSTANTIATE_TEST_SUITE_P(
+  DoublePairs,
+  ArithmeticTestdouble,
+  testing::Values(
+    std::make_pair(1.5, 2.5),
+    std::make_pair(10.1, 20.2),
+    std::make_pair(-5.5, 10.5)
+  )
+);
+```
+
+#### 方法四：复杂的组合参数化
+
+```cpp
+#include <gtest/gtest.h>
+
+// 定义一个更复杂的测试场景
+class ComplexParamTest : public testing::TestWithParam<
+  std::tuple<int,           // 容器大小
+             std::string,   // 操作类型
+             bool>>         // 是否预期成功
+{
+ public:
+  int GetSize() { return std::get<0>(GetParam()); }
+  std::string GetOperation() { return std::get<1>(GetParam()); }
+  bool ShouldSucceed() { return std::get<2>(GetParam()); }
+};
+
+TEST_P(ComplexParamTest, ContainerOperations) {
+  std::vector<int> container;
+  
+  // 根据参数初始化容器
+  for (int i = 0; i < GetSize(); ++i) {
+    container.push_back(i);
+  }
+  
+  if (GetOperation() == "pop" && !container.empty()) {
+    container.pop_back();
+    EXPECT_EQ(ShouldSucceed(), container.size() == GetSize() - 1);
+  } else if (GetOperation() == "clear") {
+    container.clear();
+    EXPECT_EQ(ShouldSucceed(), container.empty());
+  }
+}
+
+INSTANTIATE_TEST_SUITE_P(
+  ComplexScenarios,
+  ComplexParamTest,
+  testing::Combine(
+    testing::Values(0, 5, 10),              // 容器大小
+    testing::Values("pop", "clear"),        // 操作类型
+    testing::Bool()                         // 预期结果
+  )
+);
+```
+
+**使用建议：**
+
+1. **简单场景**：如果只需要对少数几个类型进行相同的数值测试，使用方法一
+2. **中等复杂度**：如果需要为不同类型提供不同的测试数据，使用方法二
+3. **高度重复**：如果有很多相似的类型需要测试，考虑使用宏（方法三）
+4. **复杂组合**：对于需要多维度参数组合的场景，使用 `testing::Combine`（方法四）
+
+**注意事项：**
+- 混合参数化会增加测试用例的数量，注意控制测试规模
+- 确保参数组合的有效性，避免无意义的测试用例
+- 合理命名测试实例，便于识别失败的测试用例
 
 
 

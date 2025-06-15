@@ -97,16 +97,18 @@ $$
 拆分$x_k$ 和 $x_{k-1}$，得
 $$
 \begin{align}
-\hat x_k + \tilde x &= f(\hat x_{k-1}, \tilde x_{k-1}, u_k) + \omega_k\\
+\hat x_k + \tilde x_k &= f(\hat x_{k-1} + \tilde x_{k-1}, u_k) + \omega_k
 \end{align}
 $$
-对$\tilde x_{k}$ , 在0附近泰勒展开
+对$f(\hat x_{k-1} + \tilde x_{k-1}, u_k)$ 在 $\tilde x_{k-1} = 0$ 附近泰勒展开：
 $$
 \begin{align}
-\hat x_k + \tilde x_k &= f(\hat x_{k-1} + 0,u_k) + \frac {df} {d \tilde x_{k-1}} | _{\hat x_{k-1},0}( \tilde x_{k-1},0), u_k) + \omega_k\\
-&=\hat x_{k} + F_{k-1} \tilde x_{k-1} + \omega_k
+\hat x_k + \tilde x_k &= f(\hat x_{k-1}, u_k) + \frac{\partial f}{\partial x_{k-1}}\bigg|_{\hat x_{k-1}} \tilde x_{k-1} + \omega_k\\
+&= \hat x_{k} + F_{k-1} \tilde x_{k-1} + \omega_k
 \end{align}
 $$
+其中 $F_{k-1} = \frac{\partial f}{\partial x_{k-1}}\bigg|_{\hat x_{k-1}}$ 是状态转移雅克比矩阵。
+
 代入表达式3，两边去掉$\hat x_k$, 得
 $$
 \tilde x_k = F_{k-1} \tilde x_{k-1} + \omega_k \tag5
@@ -118,15 +120,34 @@ $$
 #### 1.3 观测方程
 
 $$
-z_k = h(x_k) + v_k \tag3
+z_k = h(x_k) + v_k \tag6
 $$
 
+对于误差状态卡尔曼滤波，我们需要推导误差状态的观测方程。
 
+将真实状态 $x_k = \hat x_k + \tilde x_k$ 代入观测方程：
 $$
-\tilde z_k = z_{k} - h(x_k) = H_{k} \tilde x_{k-1}  + v_k \tag3
+z_k = h(\hat x_k + \tilde x_k) + v_k
 $$
 
-// todo(congyu)
+对 $h(\hat x_k + \tilde x_k)$ 在 $\hat x_k$ 处进行泰勒展开：
+$$
+h(\hat x_k + \tilde x_k) \approx h(\hat x_k) + \frac{\partial h}{\partial x}\bigg|_{\hat x_k} \tilde x_k = h(\hat x_k) + H_k \tilde x_k
+$$
+
+其中 $H_k = \frac{\partial h}{\partial x}\bigg|_{\hat x_k}$ 是观测雅克比矩阵。
+
+因此观测方程变为：
+$$
+z_k = h(\hat x_k) + H_k \tilde x_k + v_k \tag7
+$$
+
+定义观测残差（innovation）：
+$$
+\tilde z_k = z_k - h(\hat x_k) = H_k \tilde x_k + v_k \tag8
+$$
+
+这就是ESKF中用于更新的观测方程形式。
 
 
 
@@ -158,17 +179,35 @@ $$
 然后，观测更新，更新 $\tilde x$ :
 $$
 \begin{align}
-\tilde x_{k} &= \tilde x_{k-1} + K_k(z_k - h(x) - H\tilde x) \tag {12}
+\tilde x_{k} &= \tilde x_{k-1} + K_k(z_k - h(\hat x_k^-)) \tag {12}
 \\
-\tilde P_k &= (I-K_kH_k)\tilde P_{k-1} \tag{13}
+\tilde P_k &= (I-K_kH_k)\tilde P_{k-1}^- \tag{13}
 \end{align}
 $$
-由于 $\tilde x_{k-1} = 0 $（为什么？答：每次将$\tilde x$叠加到 $\hat x$上面之后(即表达式15)，$\tilde x$就清0即可)，所以表达式12 可写作
+由于 $\tilde x_{k-1} = 0 $（为什么？答：每次将$\tilde x$叠加到 $\hat x$上面之后(即表达式15)，$\tilde x$就清0即可)，所以表达式12 可简化为
 $$
-\tilde x_{k} = K_k(z_k - h(x) - H\tilde x) \tag{14}
-\\
-todo(congyu)
+\tilde x_{k} = K_k(z_k - h(\hat x_k^-)) \tag{14}
 $$
+
+这里需要注意的是：
+- $z_k - h(\hat x_k^-)$ 就是观测残差（innovation），表示实际观测值与预测观测值的差异
+- 由于误差状态在每次更新后都会被重置为0，所以 $\tilde x_{k-1} = 0$
+- ESKF的核心思想是：先用nominal state进行预测，然后用error state进行修正
+
+误差状态协方差矩阵的完整更新过程包括：
+
+**预测步骤：**
+$$
+\tilde P_k^- = F_{k-1}\tilde P_{k-1}F_{k-1}^T + Q_{k-1} \tag{16}
+$$
+
+**更新步骤：**
+$$
+\tilde P_k = (I-K_kH_k)\tilde P_{k-1}^- \tag{13}
+$$
+
+这里 $F_{k-1}$ 是误差状态转移矩阵，$Q_{k-1}$ 是过程噪声协方差矩阵。
+
 最后叠加
 $$
 \hat x_k :=  \hat x_k^-  + \tilde x_k \tag{15}
@@ -178,7 +217,19 @@ $$
 
 Q1: 为什么不用计算 公式10 下面的那一条？
 
-A1：用不到
+A1：在ESKF中，我们不需要为nominal state $\hat x$ 计算协方差矩阵，原因如下：
+
+1. **分离设计思想**：ESKF将状态估计分为两部分：
+   - Nominal state $\hat x$：负责主要的状态传播，不考虑不确定性
+   - Error state $\tilde x$：专门处理所有的不确定性和误差
+
+2. **协方差只属于误差状态**：所有的不确定性信息都由误差状态的协方差矩阵 $\tilde P$ 来表征，而nominal state被视为确定性的量。
+
+3. **计算效率**：这种设计避免了对大维度nominal state协方差矩阵的计算和存储，特别是当状态包含四元数等约束量时。
+
+4. **数值稳定性**：误差状态通常保持在较小的数值范围内，避免了大数值状态可能带来的数值问题。
+
+因此，ESKF只需要计算和维护误差状态的协方差矩阵 $\tilde P$，这就是公式16所示的预测步骤。
 
 # IMU Quaternion kinematics for ESKF
 
@@ -248,11 +299,33 @@ $$
 $$
 where:
 
-- 
+- $^I_G\tilde{\boldsymbol{\theta}}(t)$ 是旋转误差状态，用3维向量表示（而不是4维四元数）
+- $^G\tilde{\mathbf{p}}_I(t)$ 是IMU在全局坐标系下的位置误差
+- $^G\tilde{\mathbf{v}}_I(t)$ 是IMU在全局坐标系下的速度误差  
+- $\tilde{\mathbf{b}}_{{g}}(t)$ 是陀螺仪偏置误差
+- $\tilde{\mathbf{b}}_{{a}}(t)$ 是加速度计偏置误差
 
+**注意：** 误差状态向量的维度是15维，而nominal状态向量是16维。这是因为四元数的误差状态用3维的旋转向量表示，而不是4维的四元数。这样做的好处是：
+1. 避免了四元数的约束问题（单位长度约束）
+2. 误差状态的协方差矩阵是满秩的
+3. 简化了雅克比矩阵的计算
 
+**状态组合关系：**
+对于旋转，真实状态与nominal状态和error状态的关系为：
+$$
+^I_G\bar{q}_{true} = ^I_G\bar{q} \otimes \delta q(\tilde{\boldsymbol{\theta}})
+$$
+其中 $\delta q(\tilde{\boldsymbol{\theta}})$ 是由旋转误差向量 $\tilde{\boldsymbol{\theta}}$ 构成的误差四元数。
 
-
+对于其他状态（位置、速度、偏置），关系为简单的加法：
+$$
+\begin{align}
+^G\mathbf{p}_{I,true} &= ^G\mathbf{p}_I + ^G\tilde{\mathbf{p}}_I \\
+^G\mathbf{v}_{I,true} &= ^G\mathbf{v}_I + ^G\tilde{\mathbf{v}}_I \\
+\mathbf{b}_{g,true} &= \mathbf{b}_g + \tilde{\mathbf{b}}_g \\
+\mathbf{b}_{a,true} &= \mathbf{b}_a + \tilde{\mathbf{b}}_a
+\end{align}
+$$
 
 refitem: [Quaternion kinematics for the error-state Kalman filter](https://www.iri.upc.edu/people/jsola/JoanSola/objectes/notes/kinematics.pdf) P52
 
