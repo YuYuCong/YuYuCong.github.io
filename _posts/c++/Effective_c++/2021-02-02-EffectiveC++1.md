@@ -144,7 +144,7 @@ class专属常量
     const int GamePlayer::NumTurns = 5;  // 定义时给初值
     ```
 
-    - 但是有个例外：class编译期间需要的常量（比如某个数组的大小由某常量给出），而旧式编译器不支持“in-class 初值设定”，如何解决？  ->    "enum hack"补偿
+    - 但是有个例外：class编译期间需要的常量（比如某个数组的大小由某常量给出），而旧式编译器不支持"in-class 初值设定"，如何解决？  ->    "enum hack"补偿
 
       ```c++
       // xxx.h
@@ -291,9 +291,71 @@ class TestClass{
 
 #### const修饰类
 
-// todo(congyu)
+const修饰类主要涉及以下几个方面：
 
+##### 1. const对象
 
+- 当一个对象被声明为const时，该对象的状态不能被修改
+- const对象只能调用const成员函数
+
+```c++
+class MyClass {
+public:
+    void normalFunction() { /* 可以修改成员变量 */ }
+    void constFunction() const { /* 不能修改成员变量 */ }
+private:
+    int value_;
+};
+
+const MyClass obj;  // const对象
+obj.constFunction();    // 正确：可以调用const成员函数
+// obj.normalFunction(); // 错误：不能调用非const成员函数
+```
+
+##### 2. const成员函数的重载
+
+- 可以基于const性质重载成员函数
+- 编译器会根据调用对象是否为const来选择合适的版本
+
+```c++
+class TextBlock {
+public:
+    const char& operator[](std::size_t position) const {  // const版本
+        return text[position];
+    }
+    
+    char& operator[](std::size_t position) {  // non-const版本
+        return const_cast<char&>(
+            static_cast<const TextBlock&>(*this)[position]  // 调用const版本
+        );
+    }
+private:
+    std::string text;
+};
+```
+
+##### 3. mutable关键字
+
+- 有时候需要在const成员函数中修改某些成员变量
+- 使用mutable关键字可以让成员变量在const成员函数中也能被修改
+
+```c++
+class CacheClass {
+public:
+    int getValue() const {
+        if (!cached_) {
+            cache_value_ = expensiveComputation();  // 可以修改mutable成员
+            cached_ = true;
+        }
+        return cache_value_;
+    }
+private:
+    mutable int cache_value_;
+    mutable bool cached_ = false;
+    
+    int expensiveComputation() const { return 42; }
+};
+```
 
 ## L4: 确定对象被使用前已经被初始化
 
@@ -369,13 +431,13 @@ Point2d::Point2d(const float x, const float y)
 
 - 这种情况下，可以在初值列中忽略一些成员变量的初始化
 - 忽略哪些呢？忽略那些c++内置的简单对象的初始化   （因为他们初始化与赋值的成本一样）
-- 对没有初始化的被忽略的成员变量改用赋值，进行“伪初始化”
+- 对没有初始化的被忽略的成员变量改用赋值，进行"伪初始化"
 - 将这些赋值操作移到某个函数内（通常为private, 命名为Init...）
 - 然后在所有的构造函数内调用
 
 Tips：
 
-- 这种操作通常发生在“成员变量的初值由参数文件或者数据库读入”的情形下
+- 这种操作通常发生在"成员变量的初值由参数文件或者数据库读入"的情形下
 
 #### 成员初始化次序
 
@@ -394,7 +456,81 @@ code: pc/sync/c++/basic/Effective_c++/L4.cpp
 
 ##### static对象的初始化次序
 
-// todo(congyu) P61 - 63
+**static对象的分类：**
+
+1. **global对象** - 在global或namespace作用域内的对象
+2. **定义在class内的static对象**
+3. **定义在函数内的static对象** - local static对象
+4. **定义在file作用域内的static对象**
+
+**初始化次序问题：**
+
+- **同一编译单元内**：static对象按照定义顺序初始化
+- **不同编译单元间**：初始化顺序是未定义的（这就是"static initialization order fiasco"）
+
+**问题示例：**
+
+```c++
+// file1.cpp
+class FileSystem {
+public:
+    std::size_t numDisks() const { return 10; }
+};
+FileSystem tfs;  // global static对象
+
+// file2.cpp  
+class Directory {
+public:
+    Directory() {
+        std::size_t disks = tfs.numDisks();  // 可能tfs还未初始化！
+    }
+};
+Directory tempDir;  // 依赖于tfs的global static对象
+```
+
+**解决方案：使用local static对象**
+
+将non-local static对象替换为local static对象：
+
+```c++
+// file1.cpp
+class FileSystem {
+public:
+    std::size_t numDisks() const { return 10; }
+};
+
+FileSystem& tfs() {  // 返回reference指向local static对象
+    static FileSystem fs;  // 定义并初始化local static对象
+    return fs;
+}
+
+// file2.cpp
+class Directory {
+public:
+    Directory() {
+        std::size_t disks = tfs().numDisks();  // 现在安全了
+    }
+};
+
+Directory& tempDir() {  // 同样使用local static
+    static Directory td;
+    return td;
+}
+```
+
+**local static对象的优点：**
+
+1. **延迟初始化**：只有在函数第一次被调用时才初始化
+2. **线程安全**：C++11开始，local static对象的初始化是线程安全的
+3. **避免初始化顺序问题**：通过函数调用控制初始化时机
+
+**注意事项：**
+
+- 这种技术的基础是：C++保证函数内的local static对象会在该函数被调用期间首次遇到该对象定义时被初始化
+- 如果从未调用该函数，就绝不会引发构造和析构成本
+- 多线程环境下需要考虑线程安全问题（C++11之前需要手动处理）
+
+**最佳实践：**
 
 - 最好使用local static对象替换non-local static对象
 

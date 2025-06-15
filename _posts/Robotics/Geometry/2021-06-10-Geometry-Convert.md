@@ -402,11 +402,185 @@ print("quaternion(w,x,y,z)", quaternion)
 
 ## 5. OpenCV中的位姿表达与转换
 
-todo(congyu
+OpenCV提供了丰富的几何变换函数，主要在`cv2`模块中。
+
+### 5.1 旋转向量(Rodrigues)与旋转矩阵
+
+```python
+import cv2
+import numpy as np
+
+# 旋转向量 -> 旋转矩阵
+rvec = np.array([0.1, 0.2, 0.3])  # 旋转向量 (轴角表示)
+rotation_matrix, _ = cv2.Rodrigues(rvec)
+print("Rotation Matrix:\n", rotation_matrix)
+
+# 旋转矩阵 -> 旋转向量
+rvec_back, _ = cv2.Rodrigues(rotation_matrix)
+print("Rotation Vector:", rvec_back.flatten())
+```
+
+### 5.2 欧拉角与旋转矩阵
+
+```python
+import cv2
+import numpy as np
+
+def euler_to_rotation_matrix(yaw, pitch, roll):
+    """欧拉角转旋转矩阵 (ZYX顺序)"""
+    # 分别计算绕各轴的旋转矩阵
+    R_z = np.array([[np.cos(yaw), -np.sin(yaw), 0],
+                    [np.sin(yaw), np.cos(yaw), 0],
+                    [0, 0, 1]])
+    
+    R_y = np.array([[np.cos(pitch), 0, np.sin(pitch)],
+                    [0, 1, 0],
+                    [-np.sin(pitch), 0, np.cos(pitch)]])
+    
+    R_x = np.array([[1, 0, 0],
+                    [0, np.cos(roll), -np.sin(roll)],
+                    [0, np.sin(roll), np.cos(roll)]])
+    
+    # 组合旋转矩阵 (ZYX顺序)
+    R = R_z @ R_y @ R_x
+    return R
+
+def rotation_matrix_to_euler(R):
+    """旋转矩阵转欧拉角 (ZYX顺序)"""
+    sy = np.sqrt(R[0,0]**2 + R[1,0]**2)
+    
+    singular = sy < 1e-6
+    
+    if not singular:
+        x = np.arctan2(R[2,1], R[2,2])  # roll
+        y = np.arctan2(-R[2,0], sy)     # pitch  
+        z = np.arctan2(R[1,0], R[0,0])  # yaw
+    else:
+        x = np.arctan2(-R[1,2], R[1,1])
+        y = np.arctan2(-R[2,0], sy)
+        z = 0
+        
+    return np.array([z, y, x])  # yaw, pitch, roll
+```
+
+### 5.3 PnP问题中的位姿估计
+
+```python
+import cv2
+import numpy as np
+
+# 3D点和对应的2D投影点
+object_points = np.array([[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1]], dtype=np.float32)
+image_points = np.array([[100, 100], [200, 100], [100, 200], [150, 80]], dtype=np.float32)
+
+# 相机内参
+camera_matrix = np.array([[800, 0, 320], [0, 800, 240], [0, 0, 1]], dtype=np.float32)
+dist_coeffs = np.zeros((4, 1))
+
+# 求解PnP问题，得到旋转向量和平移向量
+success, rvec, tvec = cv2.solvePnP(object_points, image_points, camera_matrix, dist_coeffs)
+
+if success:
+    # 旋转向量转旋转矩阵
+    rotation_matrix, _ = cv2.Rodrigues(rvec)
+    print("Rotation Matrix:\n", rotation_matrix)
+    print("Translation Vector:", tvec.flatten())
+```
 
 ## 6. PCL中的位姿表达与转换
 
-todo(congyu)
+PCL (Point Cloud Library) 提供了丰富的3D几何变换功能，主要在`pcl::common`模块中。
+
+### 6.1 基本头文件
+
+```cpp
+#include <pcl/common/transforms.h>
+#include <pcl/common/eigen.h>
+#include <pcl/common/angles.h>
+#include <Eigen/Geometry>
+```
+
+### 6.2 变换矩阵操作
+
+```cpp
+#include <pcl/common/transforms.h>
+#include <pcl/point_cloud.h>
+#include <pcl/point_types.h>
+#include <Eigen/Geometry>
+
+// 创建变换矩阵
+Eigen::Affine3f transform = Eigen::Affine3f::Identity();
+
+// 设置平移
+transform.translation() << 2.5, 0.0, 0.0;
+
+// 设置旋转 (绕Z轴旋转45度)
+transform.rotate(Eigen::AngleAxisf(M_PI/4, Eigen::Vector3f::UnitZ()));
+
+// 应用变换到点云
+pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
+pcl::PointCloud<pcl::PointXYZ>::Ptr transformed_cloud(new pcl::PointCloud<pcl::PointXYZ>);
+
+pcl::transformPointCloud(*cloud, *transformed_cloud, transform);
+```
+
+### 6.3 欧拉角与变换矩阵
+
+```cpp
+#include <pcl/common/angles.h>
+
+// 欧拉角转变换矩阵
+float roll = pcl::deg2rad(30.0f);   // 绕X轴旋转30度
+float pitch = pcl::deg2rad(45.0f);  // 绕Y轴旋转45度  
+float yaw = pcl::deg2rad(60.0f);    // 绕Z轴旋转60度
+
+Eigen::Affine3f transform = pcl::getTransformation(0, 0, 0, roll, pitch, yaw);
+
+// 提取旋转矩阵
+Eigen::Matrix3f rotation_matrix = transform.rotation();
+
+// 提取平移向量
+Eigen::Vector3f translation = transform.translation();
+```
+
+### 6.4 四元数操作
+
+```cpp
+// 四元数转变换矩阵
+Eigen::Quaternionf q(0.707, 0, 0, 0.707);  // w, x, y, z
+Eigen::Affine3f transform = Eigen::Affine3f::Identity();
+transform.rotate(q);
+
+// 变换矩阵转四元数
+Eigen::Quaternionf quaternion(transform.rotation());
+std::cout << "Quaternion (w,x,y,z): " << quaternion.w() << ", " 
+          << quaternion.x() << ", " << quaternion.y() << ", " << quaternion.z() << std::endl;
+```
+
+### 6.5 点云配准中的位姿估计
+
+```cpp
+#include <pcl/registration/icp.h>
+
+// ICP配准获得变换矩阵
+pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ> icp;
+icp.setInputSource(source_cloud);
+icp.setInputTarget(target_cloud);
+
+pcl::PointCloud<pcl::PointXYZ> Final;
+icp.align(Final);
+
+if (icp.hasConverged()) {
+    // 获得变换矩阵
+    Eigen::Matrix4f transformation = icp.getFinalTransformation();
+    
+    // 提取旋转和平移
+    Eigen::Matrix3f rotation = transformation.block<3,3>(0,0);
+    Eigen::Vector3f translation = transformation.block<3,1>(0,3);
+    
+    std::cout << "Transformation matrix:\n" << transformation << std::endl;
+}
+```
 
 ## 7. 转换公式
 
@@ -560,7 +734,168 @@ threshold = 0.5 - epsilon
 
 ##### 旋转矩阵转四元数
 
-// todo(congyu)
+旋转矩阵转四元数有多种算法，这里提供Shepperd方法，该方法数值稳定性较好。
+
+**数学公式：**
+
+对于旋转矩阵 R：
+```
+R = [r11  r12  r13]
+    [r21  r22  r23]  
+    [r31  r32  r33]
+```
+
+四元数 q = (w, x, y, z) 的计算公式：
+
+```
+trace = r11 + r22 + r33
+
+if trace > 0:
+    s = sqrt(trace + 1.0) * 2  // s = 4 * qw
+    qw = 0.25 * s
+    qx = (r32 - r23) / s
+    qy = (r13 - r31) / s  
+    qz = (r21 - r12) / s
+else if r11 > r22 && r11 > r33:
+    s = sqrt(1.0 + r11 - r22 - r33) * 2  // s = 4 * qx
+    qw = (r32 - r23) / s
+    qx = 0.25 * s
+    qy = (r12 + r21) / s
+    qz = (r13 + r31) / s
+else if r22 > r33:
+    s = sqrt(1.0 + r22 - r11 - r33) * 2  // s = 4 * qy
+    qw = (r13 - r31) / s
+    qx = (r12 + r21) / s
+    qy = 0.25 * s
+    qz = (r23 + r32) / s
+else:
+    s = sqrt(1.0 + r33 - r11 - r22) * 2  // s = 4 * qz
+    qw = (r21 - r12) / s
+    qx = (r13 + r31) / s
+    qy = (r23 + r32) / s
+    qz = 0.25 * s
+```
+
+**C++实现：**
+
+```cpp
+#include <cmath>
+
+struct Quaternion {
+    double w, x, y, z;
+};
+
+Quaternion RotationMatrixToQuaternion(const double R[3][3]) {
+    Quaternion q;
+    double trace = R[0][0] + R[1][1] + R[2][2];
+    
+    if (trace > 0.0) {
+        double s = sqrt(trace + 1.0) * 2; // s = 4 * qw
+        q.w = 0.25 * s;
+        q.x = (R[2][1] - R[1][2]) / s;
+        q.y = (R[0][2] - R[2][0]) / s;
+        q.z = (R[1][0] - R[0][1]) / s;
+    } else if (R[0][0] > R[1][1] && R[0][0] > R[2][2]) {
+        double s = sqrt(1.0 + R[0][0] - R[1][1] - R[2][2]) * 2; // s = 4 * qx
+        q.w = (R[2][1] - R[1][2]) / s;
+        q.x = 0.25 * s;
+        q.y = (R[0][1] + R[1][0]) / s;
+        q.z = (R[0][2] + R[2][0]) / s;
+    } else if (R[1][1] > R[2][2]) {
+        double s = sqrt(1.0 + R[1][1] - R[0][0] - R[2][2]) * 2; // s = 4 * qy
+        q.w = (R[0][2] - R[2][0]) / s;
+        q.x = (R[0][1] + R[1][0]) / s;
+        q.y = 0.25 * s;
+        q.z = (R[1][2] + R[2][1]) / s;
+    } else {
+        double s = sqrt(1.0 + R[2][2] - R[0][0] - R[1][1]) * 2; // s = 4 * qz
+        q.w = (R[1][0] - R[0][1]) / s;
+        q.x = (R[0][2] + R[2][0]) / s;
+        q.y = (R[1][2] + R[2][1]) / s;
+        q.z = 0.25 * s;
+    }
+    
+    return q;
+}
+
+// 使用Eigen的版本
+Eigen::Quaterniond RotationMatrixToQuaternion(const Eigen::Matrix3d& R) {
+    Eigen::Quaterniond q;
+    double trace = R.trace();
+    
+    if (trace > 0.0) {
+        double s = sqrt(trace + 1.0) * 2; // s = 4 * qw
+        q.w() = 0.25 * s;
+        q.x() = (R(2,1) - R(1,2)) / s;
+        q.y() = (R(0,2) - R(2,0)) / s;
+        q.z() = (R(1,0) - R(0,1)) / s;
+    } else if (R(0,0) > R(1,1) && R(0,0) > R(2,2)) {
+        double s = sqrt(1.0 + R(0,0) - R(1,1) - R(2,2)) * 2; // s = 4 * qx
+        q.w() = (R(2,1) - R(1,2)) / s;
+        q.x() = 0.25 * s;
+        q.y() = (R(0,1) + R(1,0)) / s;
+        q.z() = (R(0,2) + R(2,0)) / s;
+    } else if (R(1,1) > R(2,2)) {
+        double s = sqrt(1.0 + R(1,1) - R(0,0) - R(2,2)) * 2; // s = 4 * qy
+        q.w() = (R(0,2) - R(2,0)) / s;
+        q.x() = (R(0,1) + R(1,0)) / s;
+        q.y() = 0.25 * s;
+        q.z() = (R(1,2) + R(2,1)) / s;
+    } else {
+        double s = sqrt(1.0 + R(2,2) - R(0,0) - R(1,1)) * 2; // s = 4 * qz
+        q.w() = (R(1,0) - R(0,1)) / s;
+        q.x() = (R(0,2) + R(2,0)) / s;
+        q.y() = (R(1,2) + R(2,1)) / s;
+        q.z() = 0.25 * s;
+    }
+    
+    return q.normalized();
+}
+```
+
+**Python实现：**
+
+```python
+import numpy as np
+
+def rotation_matrix_to_quaternion(R):
+    """
+    旋转矩阵转四元数 (Shepperd方法)
+    输入: 3x3旋转矩阵
+    输出: 四元数 [w, x, y, z]
+    """
+    trace = np.trace(R)
+    
+    if trace > 0:
+        s = np.sqrt(trace + 1.0) * 2  # s = 4 * qw
+        qw = 0.25 * s
+        qx = (R[2, 1] - R[1, 2]) / s
+        qy = (R[0, 2] - R[2, 0]) / s
+        qz = (R[1, 0] - R[0, 1]) / s
+    elif R[0, 0] > R[1, 1] and R[0, 0] > R[2, 2]:
+        s = np.sqrt(1.0 + R[0, 0] - R[1, 1] - R[2, 2]) * 2  # s = 4 * qx
+        qw = (R[2, 1] - R[1, 2]) / s
+        qx = 0.25 * s
+        qy = (R[0, 1] + R[1, 0]) / s
+        qz = (R[0, 2] + R[2, 0]) / s
+    elif R[1, 1] > R[2, 2]:
+        s = np.sqrt(1.0 + R[1, 1] - R[0, 0] - R[2, 2]) * 2  # s = 4 * qy
+        qw = (R[0, 2] - R[2, 0]) / s
+        qx = (R[0, 1] + R[1, 0]) / s
+        qy = 0.25 * s
+        qz = (R[1, 2] + R[2, 1]) / s
+    else:
+        s = np.sqrt(1.0 + R[2, 2] - R[0, 0] - R[1, 1]) * 2  # s = 4 * qz
+        qw = (R[1, 0] - R[0, 1]) / s
+        qx = (R[0, 2] + R[2, 0]) / s
+        qy = (R[1, 2] + R[2, 1]) / s
+        qz = 0.25 * s
+    
+    # 归一化
+    norm = np.sqrt(qw*qw + qx*qx + qy*qy + qz*qz)
+    return np.array([qw/norm, qx/norm, qy/norm, qz/norm])
+```
+
 
 ##### 旋转矩阵 欧拉角
 
@@ -580,17 +915,19 @@ def CheckRotationMatrix(R):
 
 def RotationMatrixToEulerAngles(R):
     assert (CheckRotationMatrix(R))
-    sy = math.sqrt(R[0, 0] * R[0, 0] + R[1, 0] * R[1, 0])
+    sy = math.sqrt(R[0,0]**2 + R[1,0]**2)
+    
     singular = sy < 1e-6
 
     if not singular:
-        x = math.atan2(R[2, 1], R[2, 2])
-        y = math.atan2(-R[2, 0], sy)
-        z = math.atan2(R[1, 0], R[0, 0])
+        x = math.atan2(R[2,1], R[2,2])  # roll
+        y = math.atan2(-R[2,0], sy)     # pitch  
+        z = math.atan2(R[1,0], R[0,0])  # yaw
     else:
-        x = math.atan2(-R[1, 2], R[1, 1])
-        y = math.atan2(-R[2, 0], sy)
+        x = math.atan2(-R[1,2], R[1,1])
+        y = math.atan2(-R[2,0], sy)
         z = 0
+        
     return np.array([x, y, z])
 
 

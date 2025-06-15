@@ -199,8 +199,6 @@ capture.get(CV_CAP_PROP_FRAME_COUNT);//视频帧数
 
 一个平台所安装的依赖支持哪些格式的Video呢？
 
-写了code做测试 代码：todo(congyu)
-
 ## Q: 视频的大小
 
 Q1: 不同格式后缀对视频文件大小的影响
@@ -208,8 +206,6 @@ Q1: 不同格式后缀对视频文件大小的影响
 Q2: 不同编码格式对视频文件大小的影响
 
 Q3: 不同帧率对视频文件大小的影响
-
-写了code做测试 代码：todo(congyu)
 
 conclusion
 
