@@ -129,9 +129,78 @@ Copyleft! 2022 William Yu. Some rights reserved.
 
 ### 5.3 栅栏
 
-// todo(congyu)
-
 参 https://www.kancloud.cn/jxm_zn/cpp_concurrency_in_action/264956#51__12    5.3小节
+
+
+#### 5.3.1 内存栅栏的概念
+
+- 内存栅栏(Memory Fence)是一种同步原语，用于控制内存访问的顺序
+- 主要作用：
+  - 防止指令重排
+  - 确保内存操作的可见性
+  - 保证多线程间的同步
+
+#### 5.3.2 栅栏类型
+
+C++提供了三种内存栅栏：
+
+1. 获取栅栏(Acquire Fence)
+```cpp
+std::atomic_thread_fence(std::memory_order_acquire);
+```
+- 确保栅栏后的所有读操作不会被重排到栅栏之前
+- 用于读取共享数据时
+
+2. 释放栅栏(Release Fence)
+```cpp
+std::atomic_thread_fence(std::memory_order_release);
+```
+- 确保栅栏前的所有写操作不会被重排到栅栏之后
+- 用于写入共享数据时
+
+3. 全栅栏(Full Fence)
+```cpp
+std::atomic_thread_fence(std::memory_order_seq_cst);
+```
+- 最严格的内存序
+- 确保栅栏前后的所有操作都不会被重排
+- 保证所有线程看到相同的操作顺序
+
+#### 5.3.3 使用场景
+
+1. 生产者-消费者模式
+```cpp
+// 生产者
+data = new_value;
+std::atomic_thread_fence(std::memory_order_release);
+ready = true;
+
+// 消费者
+while (!ready) {
+    std::this_thread::yield();
+}
+std::atomic_thread_fence(std::memory_order_acquire);
+value = data;
+```
+
+2. 双重检查锁定模式
+```cpp
+if (!initialized) {
+    std::lock_guard<std::mutex> lock(mutex);
+    if (!initialized) {
+        // 初始化操作
+        std::atomic_thread_fence(std::memory_order_release);
+        initialized = true;
+    }
+}
+```
+
+#### 5.3.4 注意事项
+
+- 栅栏操作开销较大，应谨慎使用
+- 优先使用原子操作的内存序参数，而不是显式栅栏
+- 栅栏主要用于需要精确控制内存序的场景
+- 过度使用栅栏会影响性能
 
 
 

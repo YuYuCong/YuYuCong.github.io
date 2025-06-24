@@ -119,7 +119,7 @@ struct UrlTableProperties {
 
 - 常规函数使用大小写混合
 - 取值和设值函数则要求与变量名匹配
-- 函数名的每个单词首字母大写（“驼峰命名” 或 “帕斯卡命名”）
+- 函数名的每个单词首字母大写（"驼峰命名" 或 "帕斯卡命名"）
 - 没有下划线
 - 对于由首字母缩写构成的词汇, 更倾向于将它们视作一个单词进行首字母大写
   - 例如, 写作 `StartCpu()` 而非 `StartCPU()`
@@ -144,19 +144,263 @@ void DownloadThread(); //good
 
 ### 2. 函数
 
-// todo(congyu)
+#### 2.1 函数长度
+
+- 倾向于编写简短, 凝练的函数
+- 如果函数超过 40 行, 可以思索一下能不能在不影响程序结构的前提下对其进行分割
+- 即使一个长函数现在工作的非常好, 一旦有人对其修改, 有可能出现新的问题, 甚至导致难以发现的 bug
+- 使函数尽量简短, 以便于他人阅读和修改代码
+
+#### 2.2 参数顺序
+
+- 函数的参数顺序为: 输入参数在先, 后跟输出参数
+- 输入参数通常是值参或 `const` 引用
+- 输出参数或输入/输出参数则一般为非 `const` 指针
+- 在排列参数顺序时, 将所有的输入参数置于输出参数之前
+
+#### 2.3 引用参数
+
+- 所有按引用传递的参数必须加上 `const`
+- 输入参数是值参或 `const` 引用, 输出参数为指针
+- 输入参数可以是 `const` 指针, 但决不能是非 `const` 的引用参数, 除非用于交换, 比如 `swap()`
+
+```c++
+void Foo(const string& in, string* out);  // 好 - 输入用const引用，输出用指针
+void Foo(string& in, string& out);        // 不好 - 非const引用参数
+```
 
 ### 3. 类
 
-// todo(congyu)
+#### 3.1 构造函数的职责
+
+- 不要在构造函数中调用虚函数, 也不要在无法报出错误时进行可能失败的初始化
+- 构造函数不得调用虚函数, 或尝试报告一个非致命错误
+- 如果对象需要进行有意义的 (non-trivial) 初始化, 考虑使用明确的 Init() 方法或工厂函数
+
+#### 3.2 隐式类型转换
+
+- 不要定义隐式类型转换. 对于转换运算符和单参数构造函数, 请使用 `explicit` 关键字
+
+```c++
+class Foo {
+ public:
+  explicit Foo(int x);  // 好 - 防止隐式转换
+  explicit operator bool() const;  // 好 - 显式转换运算符
+};
+```
+
+#### 3.3 可拷贝类型和可移动类型
+
+- 如果你的类型需要, 就让它们支持拷贝 / 移动
+- 否则, 就把隐式产生的拷贝和移动函数禁用
+
+```c++
+class NonCopyable {
+ public:
+  NonCopyable() = default;
+  
+  // 禁用拷贝和移动
+  NonCopyable(const NonCopyable&) = delete;
+  NonCopyable& operator=(const NonCopyable&) = delete;
+  NonCopyable(NonCopyable&&) = delete;
+  NonCopyable& operator=(NonCopyable&&) = delete;
+};
+```
+
+#### 3.4 结构体 vs. 类
+
+- 仅当只有数据成员时使用 `struct`, 其它一概使用 `class`
+- 在 C++ 中 `struct` 和 `class` 关键字几乎含义一样
+- 我们为这两个关键字添加我们自己的语义理解, 以便为定义的数据类型选择合适的关键字
+
+```c++
+struct Point {  // 好 - 仅包含数据
+  double x, y;
+};
+
+class Calculator {  // 好 - 包含方法和数据
+ public:
+  double Add(double a, double b);
+ private:
+  double result_;
+};
+```
+
+#### 3.5 继承
+
+- 使用组合常常比使用继承更合理
+- 如果使用继承的话, 定义为 `public` 继承
+- 所有继承必须是 `public` 的
+- 如果你想使用私有继承, 你应该替换为把基类的实例作为成员对象的方式
+
+#### 3.6 多重继承
+
+- 真正需要用到多重实现继承的情况少之又少
+- 只有当最多一个基类中含有实现, 其它基类都是以 `Interface` 为后缀的纯接口类时, 才允许使用多重继承
 
 ### 4. 作用域
 
-// todo(congyu)
+#### 4.1 命名空间
+
+- 鼓励在 `.cc` 文件内使用匿名命名空间或 `static` 声明
+- 使用具名的命名空间时, 其名称可基于项目名或相对路径
+- 禁止使用 using 指示（using-directive）
+- 禁止使用内联命名空间（inline namespace）
+
+```c++
+// 好的命名空间使用
+namespace myproject {
+namespace mymodule {
+
+class MyClass {
+  // ...
+};
+
+}  // namespace mymodule
+}  // namespace myproject
+```
+
+#### 4.2 匿名命名空间和静态变量
+
+- 在 `.cc` 文件中定义一个不需要被外部引用的变量时, 可以将它们放在匿名命名空间或声明为 `static`
+- 但是不要在 `.h` 文件中这么做
+
+```c++
+// 在.cc文件中
+namespace {
+const int kInternalConstant = 42;  // 好 - 匿名命名空间
+}
+
+static const int kAnotherConstant = 24;  // 也可以 - static声明
+```
+
+#### 4.3 非成员函数、静态成员函数和全局函数
+
+- 使用静态成员函数或命名空间内的非成员函数, 尽量不要用裸的全局函数
+- 将一系列函数直接置于命名空间中, 不要用类的静态方法模拟出命名空间的效果
+
+```c++
+namespace myproject {
+namespace geometry {
+
+// 好 - 命名空间内的非成员函数
+double CalculateArea(double radius);
+double CalculateVolume(double radius, double height);
+
+}  // namespace geometry
+}  // namespace myproject
+```
+
+#### 4.4 局部变量
+
+- 将函数变量尽可能置于最小作用域内, 并在变量声明时进行初始化
+- C++ 允许在函数的任何位置声明变量
+- 我们提倡在尽可能小的作用域中声明变量, 离第一次使用越近越好
+
+```c++
+int i;
+i = f();      // 不好 - 初始化和声明分离
+
+int j = g();  // 好 - 声明时初始化
+
+for (int k = 0; k < 10; ++k) {  // 好 - 循环变量在循环内声明
+  // ...
+}
+```
 
 ### 5. 头文件
 
-// todo(congyu)
+#### 5.1 Self-contained 头文件
+
+- 头文件应该能够自给自足（self-contained,也就是可以作为第一个头文件被引入）
+- 换言之, 用户和重构工具不需要为特别场合而包含额外的头文件
+- 所有头文件都应该使用 `#define` 保护来防止头文件被多重包含
+
+```c++
+#ifndef PROJECT_PATH_FILE_H_
+#define PROJECT_PATH_FILE_H_
+
+// 头文件内容
+
+#endif  // PROJECT_PATH_FILE_H_
+```
+
+#### 5.2 #define 保护
+
+- 所有头文件都应该使用 `#define` 保护来防止头文件被多重包含
+- 命名格式当是: `<PROJECT>_<PATH>_<FILE>_H_`
+
+```c++
+// 文件 foo/src/bar/baz.h
+#ifndef FOO_BAR_BAZ_H_
+#define FOO_BAZ_H_
+
+// ...
+
+#endif  // FOO_BAR_BAZ_H_
+```
+
+#### 5.3 前置声明
+
+- 尽可能地避免使用前置声明
+- 使用 `#include` 包含需要的头文件即可
+- 前置声明是不提供定义的情况下声明一个类, 函数或者模板
+
+```c++
+// 不推荐的前置声明
+class MyClass;
+void MyFunction(const MyClass& obj);
+
+// 推荐直接包含头文件
+#include "my_class.h"
+void MyFunction(const MyClass& obj);
+```
+
+#### 5.4 内联函数
+
+- 只有当函数只有 10 行甚至更少时才将其定义为内联函数
+- 当函数被声明为内联函数之后, 编译器会将其内联展开, 而不是按通常的函数调用机制进行调用
+
+```c++
+class MyClass {
+ public:
+  // 好 - 简短的内联函数
+  int GetValue() const { return value_; }
+  
+  // 不好 - 复杂函数不应该内联
+  void ComplexFunction();  // 在.cc文件中实现
+  
+ private:
+  int value_;
+};
+```
+
+#### 5.5 #include 的路径及顺序
+
+- 使用标准的头文件包含顺序可增强可读性, 避免隐藏依赖
+- 项目内头文件应按照项目源代码目录树结构排列
+
+包含顺序如下:
+1. 相关头文件
+2. C 库
+3. C++ 库  
+4. 其他库的头文件
+5. 本项目内的头文件
+
+```c++
+// 在 foo.cc 中
+#include "foo/public/fooserver.h"  // 优先包含对应的.h文件
+
+#include <sys/types.h>             // C系统文件
+#include <unistd.h>
+
+#include <hash_map>                // C++系统文件
+#include <vector>
+
+#include "base/basictypes.h"       // 其他库的头文件
+#include "base/commandlineflags.h"
+#include "foo/server/bar.h"        // 本项目内的头文件
+```
 
 ### 6. 格式
 

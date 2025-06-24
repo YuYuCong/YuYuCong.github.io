@@ -34,10 +34,72 @@ Copyleft! 2022 Cong Yu. Some rights reserved.
 
 ## 1. 使用单个ArUco Marker的姿态估计
 
-单个ChArUco Marker的姿态估计
+单个ArUco Marker的姿态估计过程如下：
 
-// todo(congyu)
+```cpp
+// 1. 检测marker
+cv::Mat image;  // 输入图像
+std::vector<int> markerIds;  // 存储检测到的marker的ID
+std::vector<std::vector<cv::Point2f>> markerCorners;  // 存储检测到的marker的四个角点
+cv::aruco::detectMarkers(image, dictionary, markerCorners, markerIds);
 
+// 2. 如果检测到marker，进行位姿估计
+if (markerIds.size() > 0) {
+    std::vector<cv::Vec3d> rvecs, tvecs;  // 存储输出的旋转和平移向量
+    cv::aruco::estimatePoseSingleMarkers(markerCorners,     // 检测到的marker角点
+                                        markerLength,        // marker的实际物理尺寸(米)
+                                        cameraMatrix,        // 相机内参矩阵
+                                        distCoeffs,          // 相机畸变系数
+                                        rvecs,               // 输出：旋转向量
+                                        tvecs);              // 输出：平移向量
+    
+    // 在图像上绘制坐标轴显示位姿（可选）
+    for(int i=0; i<markerIds.size(); i++) {
+        cv::drawFrameAxes(image, cameraMatrix, distCoeffs, 
+                         rvecs[i], tvecs[i], markerLength * 0.5f);
+    }
+}
+```
+
+### 重要参数说明：
+
+1. **dictionary（字典）**：
+   - ArUco字典，定义了marker的编码方式
+   - 可以使用预定义字典，如：`cv::aruco::DICT_6X6_250`
+
+2. **markerLength（标记尺寸）**：
+   - marker的实际物理尺寸，单位通常是米
+   - 这个参数对于准确的位姿估计非常重要
+
+3. **cameraMatrix（相机内参）**：
+   - 相机的内参矩阵，包含焦距和光心参数
+   - 格式：$\begin{bmatrix} f_x & 0 & c_x \\  0 & f_y & c_y \\ 0 & 0 & 1 \end{bmatrix}$
+
+4. **distCoeffs（畸变参数）**：
+   - 相机的畸变系数
+   - 包含径向畸变和切向畸变参数
+
+### 输出结果说明：
+
+- **rvec（旋转向量）**：
+  - 使用Rodrigues旋转向量表示的旋转
+  - 表示从相机坐标系到marker坐标系的旋转
+
+- **tvec（平移向量）**：
+  - marker中心在相机坐标系下的三维位置
+  - 单位与markerLength相同（通常是米）
+
+### 注意事项：
+
+1. 位姿是在相机坐标系下表示的
+2. 检测和位姿估计的精度受以下因素影响：
+   - 图像分辨率
+   - marker在图像中的大小
+   - 相机标定的精度
+   - 光照条件
+   - marker相对于相机的角度
+
+这种单marker的方法优点是实现简单，计算快速。但精度可能不如使用多个marker的方法（如ChArUco标定板）。如果需要更高的精度，建议使用多marker方案。
 
 ## 2. 使用ChArUco标定板的姿态估计
 

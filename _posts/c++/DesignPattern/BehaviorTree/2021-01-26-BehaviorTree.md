@@ -137,7 +137,31 @@ Example
 
 ### 1. 根节点 root
 
-// todo
+根节点是行为树的入口点，具有以下特点：
+
+1. 作用
+   - 作为行为树的起始点
+   - 负责初始化和管理行为树的执行
+   - 控制整个行为树的生命周期
+
+2. 特性
+   - 每个行为树有且仅有一个根节点
+   - 根节点通常是一个控制节点（如 Sequence 或 Fallback）
+   - 根节点的状态决定整个行为树的执行状态
+
+3. XML 表示
+```xml
+<root main_tree_to_execute="MainTree">
+    <BehaviorTree ID="MainTree">
+        <!-- 树的内容 -->
+    </BehaviorTree>
+</root>
+```
+
+4. 执行方式
+   - 通过调用 `tickRoot()` 方法触发行为树的执行
+   - 根节点会依次调用其子节点的 tick() 方法
+   - 子节点的执行结果会向上传递给根节点
 
 
 
@@ -375,7 +399,7 @@ e.g.
 - 用于处理具有以下特性的任务：
   - 花很长时间才能得出结论的任务
   - 可以停止
-  - 可以返回“running”
+  - 可以返回"running"
 
 ##### 4.1.2 SyncActionNode  同步节点
 
@@ -415,9 +439,78 @@ e.g.
 ### 8. XML格式
 
 - [https://www.behaviortree.dev/xml_format/](https://www.behaviortree.dev/xml_format/)
-- todo(congyu)
 
+行为树使用 XML 格式来描述树的结构。XML 格式具有以下特点：
 
+##### 8.1 基本结构
+
+```xml
+<root main_tree_to_execute="MainTree">
+    <BehaviorTree ID="MainTree">
+        <!-- 树的内容 -->
+    </BehaviorTree>
+</root>
+```
+
+- `<root>` 是最外层标签，必须指定 `main_tree_to_execute` 属性
+- `<BehaviorTree>` 定义一个行为树，必须指定唯一的 `ID` 属性
+- 每个节点都可以有 `name` 属性，用于调试和可视化
+
+##### 8.2 节点格式
+
+节点的基本格式为：
+
+```xml
+<NodeType name="node_name" param1="value1" param2="value2">
+    <!-- 子节点 -->
+</NodeType>
+```
+
+- 控制节点（如 Sequence、Fallback）可以包含多个子节点
+- 装饰节点只能包含一个子节点
+- 动作节点和条件节点是叶子节点，不能包含子节点
+
+##### 8.3 参数传递
+
+XML 支持两种方式传递参数：
+
+1. 静态值：直接在属性中指定
+```xml
+<SaySomething message="hello world" />
+```
+
+2. 黑板值：使用 `{key}` 语法引用黑板中的值
+```xml
+<SaySomething message="{blackboard_key}" />
+```
+
+##### 8.4 子树
+
+可以在一个 XML 文件中定义多个树，并通过 `SubTree` 节点引用：
+
+```xml
+<root main_tree_to_execute="MainTree">
+    <BehaviorTree ID="SubTree">
+        <!-- 子树内容 -->
+    </BehaviorTree>
+    
+    <BehaviorTree ID="MainTree">
+        <Sequence>
+            <SubTree ID="SubTree"/>
+            <!-- 其他节点 -->
+        </Sequence>
+    </BehaviorTree>
+</root>
+```
+
+##### 8.5 常见属性
+
+- `name`: 节点名称，用于调试
+- `ID`: 树或节点的唯一标识符
+- `message`: 消息内容（用于 SaySomething 等节点）
+- `output_key`: 输出到黑板的键名
+- `input_key`: 从黑板读取的键名
+- `num_attempts`: 重试次数（用于 RetryUntilSuccessful 等节点）
 
 
 
@@ -630,7 +723,7 @@ int main() {
 ```
 
 - 前一种从xml里面读取string， 只能创建静态的信息
-- 后一种回去blackboard里面查找键’greetings‘，支持动态信息
+- 后一种回去blackboard里面查找键'greetings'，支持动态信息
 
 ##### Node创建
 
@@ -793,7 +886,7 @@ struct Position2D {
 ##### 为该类型创建解析方法
 
 - 可以定义任何解析规则，只要是完备表达的即可
-- 例如此处定义字符串规则为“x;y” “-1;3”, 以；作为分割
+- 例如此处定义字符串规则为"x;y" "-1;3", 以;作为分割
 
 ```c++
 // Template specialization to converts a string to Position2D.
@@ -802,7 +895,7 @@ namespace BT
     template <> inline Position2D convertFromString(StringView str)
     {
         // The next line should be removed...
-        printf("Converting string: \"%s\"\n", str.data() );
+        printf("Converting string: "%s"\n", str.data() );
 
         // We expect real numbers separated by semicolons
         auto parts = splitString(str, ';');
