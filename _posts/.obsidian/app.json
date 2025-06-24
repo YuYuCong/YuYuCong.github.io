@@ -20,5 +20,6 @@
     "project_list.md"
   ],
   "promptDelete": true,
-  "showUnsupportedFiles": true
+  "showUnsupportedFiles": true,
+  "readableLineLength": false
 }
