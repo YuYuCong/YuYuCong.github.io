@@ -1,16 +1,17 @@
 ---
 layout: post
-title: "优化理论"
-subtitle: "详细解读常用的数值优化方法，如：梯度下降，高速牛顿，以及LevenbergMarquardt等"
-categories: [Math]
-tags: [SLAM, Optimal, Math]
-header-img: "img/in-post/post-optimal/post-bg-1.png"
+title: 优化理论基础
+subtitle: 介绍优化问题的常见类型，凸集，凸函数等相关数理
+categories:
+  - Math
+tags:
+  - Optimal
+  - Math
+header-img: img/in-post/post-optimal/post-bg-1.png
 header-style: img
 date: 2022.01.01
-author: "CongYu"
+author: CongYu
 ---
-
->  优化相关笔记。非线性优化方法的原理与公式推导，另有python代码示例。梯度下降，(批量，全量，随机)梯度下降，牛顿法。以及适用于最小二乘优化问题的高斯牛顿法，LevenbergMarquardt等方法。
 
 * Kramdown table of contents
 {:toc .toc}
@@ -250,10 +251,10 @@ $$f_i(\mathbf{x}) = h(\mathbf x,t_i) - y_i = t_i \mathbf x -y_i$$
 在介绍仿射集合和凸集之前，我们先回顾直线和线段的概念：
 
 - **直线**：通过两点 $x_1, x_2 \in \mathbb{R}^n$ 的直线可以表示为：
-  $$\{x | x = \theta x_1 + (1-\theta) x_2, \theta \in \mathbb{R}\}$$
+  $$\{x \mid x = \theta x_1 + (1-\theta) x_2, \theta \in \mathbb{R}\}$$
 
 - **线段**：连接两点 $x_1, x_2 \in \mathbb{R}^n$ 的线段可以表示为：
-  $$\{x | x = \theta x_1 + (1-\theta) x_2, \theta \in [0,1]\}$$
+  $$\{x \mid x = \theta x_1 + (1-\theta) x_2, \theta \in [0,1]\}$$
 
 #### 仿射集合
 
@@ -275,8 +276,8 @@ $$\theta_1 x_1 + \theta_2 x_2 + ... + \theta_k x_k$$
 
 **常见例子**：
 1. **空集** $\emptyset$ 和 **单点集** $\{x_0\}$
-2. **直线**：$\{x | x = x_0 + t v, t \in \mathbb{R}\}$，其中 $v \neq 0$
-3. **超平面**：$\{x | a^T x = b\}$，其中 $a \neq 0$
+2. **直线**：$\{x \mid x = x_0 + t v, t \in \mathbb{R}\}$，其中 $v \neq 0$
+3. **超平面**：$\{x \mid a^T x = b\}$，其中 $a \neq 0$
 4. **子空间**：通过原点的仿射集合
 5. **整个空间** $\mathbb{R}^n$
 
@@ -301,11 +302,11 @@ $$\theta_1 x_1 + \theta_2 x_2 + ... + \theta_k x_k$$
 
 **常见例子**：
 1. **空集** $\emptyset$、**单点集** $\{x_0\}$ 和 **整个空间** $\mathbb{R}^n$
-2. **范数球**：$\{x | \|x - x_c\| \leq r\}$
-3. **椭球**：$\{x | (x-x_c)^T P^{-1} (x-x_c) \leq 1\}$，其中 $P \succ 0$
-4. **多面体**：$\{x | Ax \leq b, Cx = d\}$
-5. **半空间**：$\{x | a^T x \leq b\}$
-6. **单纯形**：$\{x | x \geq 0, \mathbf{1}^T x = 1\}$
+2. **范数球**：$\{x \mid \|x - x_c\| \leq r\}$
+3. **椭球**：$\{x \mid (x-x_c)^T P^{-1} (x-x_c) \leq 1\}$，其中 $P \succ 0$
+4. **多面体**：$\{x \mid Ax \leq b, Cx = d\}$
+5. **半空间**：$\{x \mid a^T x \leq b\}$
+6. **单纯形**：$\{x \mid x \geq 0, \mathbf{1}^T x = 1\}$
 
 #### 仿射集合与凸集的关系
 
@@ -327,9 +328,9 @@ $$\text{仿射集合} \subseteq \text{凸集}$$
 $$\theta_1 x_1 + \theta_2 x_2 \in C$$
 
 **常见例子**：
-1. **非负象限**：$\mathbb{R}_+^n = \{x | x_i \geq 0, i = 1,...,n\}$
-2. **二阶锥**：$\{(x,t) | \|x\| \leq t\}$
-3. **半正定锥**：$S_+^n = \{X \in S^n | X \succeq 0\}$
+1. **非负象限**：$\mathbb{R}_+^n = \{x \mid x_i \geq 0, i = 1,...,n\}$
+2. **二阶锥**：$\{(x,t) \mid \|x\| \leq t\}$
+3. **半正定锥**：$S_+^n = \{X \in S^n \mid X \succeq 0\}$
 
 
 
@@ -347,7 +348,7 @@ $$\bigcap_{i \in I} C_i \text{ 是凸集}$$
 **证明思路**：设 $x, y \in \bigcap_{i \in I} C_i$，则对所有 $i$，都有 $x, y \in C_i$。由于每个 $C_i$ 都是凸集，所以对任意 $\theta \in [0,1]$，都有 $\theta x + (1-\theta) y \in C_i$，因此 $\theta x + (1-\theta) y \in \bigcap_{i \in I} C_i$。
 
 **重要应用**：
-- **多面体**：$\{x | Ax \leq b\} = \bigcap_{i=1}^m \{x | a_i^T x \leq b_i\}$
+- **多面体**：$\{x \mid id Ax \leq b\} = \bigcap_{i=1}^m \{x \mid a_i^T x \leq b_i\}$
 - **椭球交集**：多个椭球的交集
 - **约束集合**：优化问题中的可行域通常是多个约束集合的交集
 
@@ -362,8 +363,8 @@ $$f(x) = Ax + b$$
 其中 $A \in \mathbb{R}^{m \times n}$，$b \in \mathbb{R}^m$。
 
 **保凸性质**：
-1. **像集**：如果 $C \subseteq \mathbb{R}^n$ 是凸集，那么 $f(C) = \{f(x) | x \in C\}$ 是凸集
-2. **原像集**：如果 $D \subseteq \mathbb{R}^m$ 是凸集，那么 $f^{-1}(D) = \{x | f(x) \in D\}$ 是凸集
+1. **像集**：如果 $C \subseteq \mathbb{R}^n$ 是凸集，那么 $f(C) = \{f(x) \mid x \in C\}$ 是凸集
+2. **原像集**：如果 $D \subseteq \mathbb{R}^m$ 是凸集，那么 $f^{-1}(D) = \{x \mid f(x) \in D\}$ 是凸集
 
 **常见例子**：
 - **缩放和平移**：$f(x) = ax + b$
@@ -380,7 +381,7 @@ $$f(x) = Ax + b$$
 
 **定义**：函数 $f: \mathbb{R}^n \to \mathbb{R}^m$ 是线性分式的，如果它具有形式：
 $$f(x) = \frac{Ax + b}{c^T x + d}$$
-其中 $A \in \mathbb{R}^{m \times n}$，$b \in \mathbb{R}^m$，$c \in \mathbb{R}^n$，$d \in \mathbb{R}$，且定义域为 $\{x | c^T x + d > 0\}$。
+其中 $A \in \mathbb{R}^{m \times n}$，$b \in \mathbb{R}^m$，$c \in \mathbb{R}^n$，$d \in \mathbb{R}$，且定义域为 $\{x \mid id c^T x + d > 0\}$。
 
 **保凸性质**：线性分式函数保持凸性（在其定义域内）。
 
@@ -388,11 +389,11 @@ $$f(x) = \frac{Ax + b}{c^T x + d}$$
 
 **定义**：透视函数 $P: \mathbb{R}^{n+1} \to \mathbb{R}^n$ 定义为：
 $$P(x, t) = \frac{x}{t}$$
-其中定义域为 $\{(x, t) | t > 0\}$。
+其中定义域为 $\{(x, t) \mid t > 0\}$。
 
 **保凸性质**：
 - 如果 $C \subseteq \mathbb{R}^{n+1}$ 是凸集，那么其透视像 $P(C)$ 是凸集
-- 如果 $D \subseteq \mathbb{R}^n$ 是凸集，那么其透视原像 $P^{-1}(D) = \{(x, t) | x/t \in D, t > 0\}$ 是凸集
+- 如果 $D \subseteq \mathbb{R}^n$ 是凸集，那么其透视原像 $P^{-1}(D) = \{(x, t) \mid x/t \in D, t > 0\}$ 是凸集
 
 **几何意义**：透视函数相当于从原点向超平面 $t = 1$ 进行中心投影。
 
@@ -400,21 +401,21 @@ $$P(x, t) = \frac{x}{t}$$
 
 **1. 笛卡尔积**：
 如果 $C_1, C_2, ..., C_m$ 都是凸集，那么它们的笛卡尔积：
-$$C_1 \times C_2 \times ... \times C_m = \{(x_1, x_2, ..., x_m) | x_i \in C_i, i = 1,...,m\}$$
+$$C_1 \times C_2 \times ... \times C_m = \{(x_1, x_2, ..., x_m) \mid x_i \in C_i, i = 1,...,m\}$$
 也是凸集。
 
 **2. 部分和**：
 如果 $C_1 \subseteq \mathbb{R}^{n \times m}$ 和 $C_2 \subseteq \mathbb{R}^{n \times m}$ 是凸集，那么：
-$$C_1 + C_2 = \{x + y | x \in C_1, y \in C_2\}$$
+$$C_1 + C_2 = \{x + y \mid x \in C_1, y \in C_2\}$$
 （Minkowski 和）也是凸集。
 
 **3. 凸包**：
 集合 $S$ 的凸包是包含 $S$ 的最小凸集：
-$$\text{conv}(S) = \{\theta_1 x_1 + ... + \theta_k x_k | x_i \in S, \theta_i \geq 0, \sum_{i=1}^k \theta_i = 1\}$$
+$$\text{conv}(S) = \{\theta_1 x_1 + ... + \theta_k x_k \mid x_i \in S, \theta_i \geq 0, \sum_{i=1}^k \theta_i = 1\}$$
 
 **4. 锥包**：
 集合 $S$ 的锥包是包含 $S$ 的最小凸锥：
-$$\text{cone}(S) = \{\theta_1 x_1 + ... + \theta_k x_k | x_i \in S, \theta_i \geq 0\}$$
+$$\text{cone}(S) = \{\theta_1 x_1 + ... + \theta_k x_k \mid x_i \in S, \theta_i \geq 0\}$$
 
 #### 保凸运算的重要性
 
@@ -463,13 +464,13 @@ $$\text{cone}(S) = \{\theta_1 x_1 + ... + \theta_k x_k | x_i \in S, \theta_i \ge
 
 **常见的正常锥和广义不等式**
 
-1. **非负象限**：$\mathbb{R}_+^n = \{x \in \mathbb{R}^n | x_i \geq 0, i = 1,...,n\}$
+1. **非负象限**：$\mathbb{R}_+^n = \{x \in \mathbb{R}^n \mid x_i \geq 0, i = 1,...,n\}$
    - 对应的广义不等式：$x \preceq y \Leftrightarrow x_i \leq y_i, \forall i$（分量不等式）
 
-2. **半正定锥**：$S_+^n = \{X \in S^n | X \succeq 0\}$
+2. **半正定锥**：$S_+^n = \{X \in S^n \mid X \succeq 0\}$
    - 对应的广义不等式：$X \preceq Y \Leftrightarrow Y - X \succeq 0$（矩阵不等式）
 
-3. **二阶锥**：$\{(x, t) \in \mathbb{R}^{n+1} | \|x\| \leq t\}$
+3. **二阶锥**：$\{(x, t) \in \mathbb{R}^{n+1} \mid \|x\| \leq t\}$
    - 对应的广义不等式：$(x_1, t_1) \preceq (x_2, t_2) \Leftrightarrow \|x_2 - x_1\| \leq t_2 - t_1$
 
 #### 最小与极小元
@@ -669,7 +670,7 @@ $$g(x) = f(Ax + b)$$
 
 **定义**：函数 $f: \mathbb{R}^n \to \mathbb{R}$ 的透视函数定义为：
 $$g(x, t) = t f(x/t)$$
-其中定义域为 $\{(x, t) | x/t \in \text{dom}\ f, t > 0\}$。
+其中定义域为 $\{(x, t) \mid x/t \in \text{dom}\ f, t > 0\}$。
 
 **定理**：如果 $f$ 是凸函数，则其透视函数 $g$ 也是凸函数。
 
