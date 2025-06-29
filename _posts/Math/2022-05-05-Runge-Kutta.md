@@ -1,3 +1,32 @@
+---
+layout: post
+title: Runge-Kutta方法求解微分方程
+subtitle: Runge-Kutta方法求解微分方程
+categories:
+  - Math
+tags:
+  - Optimal
+  - Math
+header-img: 
+header-style: text
+date: 2022.05.05
+author: CongYu
+---
+
+* Kramdown table of contents
+{:toc .toc}
+
+----
+
+Created 2021.03.22 by Cong Yu; Last modified: 2024.06.22-v4.3.2
+
+Contact: [windmillyucong@163.com](mailto:windmillyucong@163.com)
+
+Copyleft! 2024 Cong Yu. Some rights reserved.
+
+----
+
+
 # Runge-Kutta 方法
 
 ## 1. 基本概念
