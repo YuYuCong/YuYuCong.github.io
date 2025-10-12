@@ -150,6 +150,7 @@ Example
    - 根节点的状态决定整个行为树的执行状态
 
 3. XML 表示
+
 ```xml
 <root main_tree_to_execute="MainTree">
     <BehaviorTree ID="MainTree">
@@ -175,7 +176,7 @@ Example
 
 e.g.
 
-![ç®åçåºåï¼å°ç®±](https://behaviortree.github.io/BehaviorTree.CPP/images/SequenceBasic.png)
+![SequenceBasic](https://behaviortree.github.io/BehaviorTree.CPP/images/SequenceBasic.png)
 
 - 三种序列节点
 
