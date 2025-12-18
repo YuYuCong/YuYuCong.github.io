@@ -3,10 +3,9 @@ layout: post
 title: c++ coding style
 subtitle: c++代码风格规范，以及一些良好的代码习惯建议
 categories:
-  - c++
+  - cpp
 tags:
   - cpp
-  - cplusplus
 header-img: img/in-post/post-cpp/bg_code_style.png
 redirect_from:
   - /20220/07/27/
@@ -325,7 +324,7 @@ for (int k = 0; k < 10; ++k) {  // 好 - 循环变量在循环内声明
 #endif  // PROJECT_PATH_FILE_H_
 ```
 
-#### 5.2 #define 保护
+#### 5.2 `#define` 保护
 
 - 所有头文件都应该使用 `#define` 保护来防止头文件被多重包含
 - 命名格式当是: `<PROJECT>_<PATH>_<FILE>_H_`
@@ -375,7 +374,7 @@ class MyClass {
 };
 ```
 
-#### 5.5 #include 的路径及顺序
+#### 5.5 include 的路径及顺序
 
 - 使用标准的头文件包含顺序可增强可读性, 避免隐藏依赖
 - 项目内头文件应按照项目源代码目录树结构排列

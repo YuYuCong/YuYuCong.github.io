@@ -1,13 +1,16 @@
 ---
 layout: post
-title: "三维刚体运动基础系列 之 IMU运动学总结!"
+title: 三维刚体运动基础系列 之 IMU运动学总结!
 subtitle: ""
-categories: [Robotics]
-tags: [pose]
-header-img: "img/in-post/"
+categories:
+  - Robotics
+tags:
+  - pose
+  - IMU
+header-img: img/in-post/
 header-style: text
 date: 2021.06.11
-author: "CongYu"
+author: CongYu
 ---
 
 

@@ -1,9 +1,13 @@
 ---
 layout: post
-title: "Kalman Filter"
-description: "Kalman Filter"
-categories: [Kalman-Filter, filter, Math]
-tags: [Kalman-Filter, filter, Math]
+title: Kalman Filter
+description: Kalman Filter
+categories:
+  - Robotics
+tags:
+  - Kalman-Filter
+  - filter
+  - Math
 redirect_from:
   - /2021/05/16/
 ---

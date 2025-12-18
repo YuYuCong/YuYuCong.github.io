@@ -3,7 +3,7 @@ layout: post
 title: BehaviorTree(行为树)入门
 subtitle: 使用行为树模式，让机器人实现复杂任务决策
 categories:
-  - Design-Pattern
+  - cpp
 tags:
   - BehaviorTree
   - Design-Pattern

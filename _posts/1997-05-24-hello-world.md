@@ -79,7 +79,7 @@ int main(){
 1.5 test table
 
 | **Fatal assertion**            | **Nonfatal assertion**         | **Verifies**         |
-|--------------------------------|--------------------------------|----------------------|
+| ------------------------------ | ------------------------------ | -------------------- |
 | `ASSERT_TRUE(`*condition*`)`;  | `EXPECT_TRUE(`*condition*`)`;  | *condition* is true  |
 | `ASSERT_FALSE(`*condition*`)`; | `EXPECT_FALSE(`*condition*`)`; | *condition* is false |
 
