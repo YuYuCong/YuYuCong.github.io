@@ -1,9 +1,12 @@
 ---
 layout: post
-title: "Effective C++系列笔记18-25"
-description: "Effective C++系列笔记，第四章，第18-25小节"
-categories: [c++]
-tags: [c++]
+title: Effective C++系列笔记18-25
+description: Effective C++系列笔记，第四章，第18-25小节
+categories:
+  - cpp
+tags:
+  - cpp
+  - effective-cpp
 redirect_from:
   - /2021/02/20/
 ---

@@ -1,9 +1,12 @@
 ---
 layout: post
-title: "Tmux教程——打造完美的Linux shell终端"
-subtitle: "shell优化工具：功能强大的工具有很多。但是只有自己亲手打造的，才是最适合自己的。"
-categories: [Linux]
-tags: [Linux, tmux]
+title: Tmux教程——打造完美的Linux shell终端
+subtitle: shell优化工具：功能强大的工具有很多。但是只有自己亲手打造的，才是最适合自己的。
+categories:
+  - Linux
+tags:
+  - Linux
+  - tmux
 redirect_from:
   - /2018/02/07/
 ---

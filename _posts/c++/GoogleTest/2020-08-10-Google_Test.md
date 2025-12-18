@@ -3,12 +3,11 @@ layout: post
 title: Google Test使用方法总结
 description: 写代码不测试，bug满天飞。
 categories:
-  - c++
+  - cpp
 tags:
   - gtest
   - unit-test
   - cpp
-  - cplusplus
 redirect_from:
   - /2020/08/10/
 ---

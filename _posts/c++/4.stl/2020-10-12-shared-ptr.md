@@ -3,11 +3,11 @@ layout: post
 title: Smart Pointer
 description: Smart Pointer
 categories:
-  - c++
+  - cpp
 tags:
   - shared_ptr
   - cpp
-  - cplusplus
+  - 指针
 redirect_from:
   - /2020/10/12/
 ---

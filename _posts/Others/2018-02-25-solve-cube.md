@@ -1,10 +1,11 @@
 ---
 layout: post
-title: "Rubik's Cube program solver"
-subtitle: "三阶魔方复原算法"
+title: Rubik's Cube program solver
+subtitle: 三阶魔方复原算法
 description: ""
-categories: [code]
-tags: [cube, ]
+categories:
+tags:
+  - cube
 redirect_from:
   - /2018/02/25/
 ---
