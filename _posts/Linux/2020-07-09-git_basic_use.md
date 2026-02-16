@@ -1,9 +1,12 @@
 ---
 layout: post
-title: "git 笔记"
-description: "git 使用笔记"
-categories: [Linux]
-tags: [git,Linux]
+title: git 笔记
+description: git 使用笔记
+categories:
+  - Linux
+tags:
+  - git
+  - Linux
 redirect_from:
   - /2020/07/09/
 ---

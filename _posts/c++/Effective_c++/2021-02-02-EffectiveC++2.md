@@ -1,9 +1,12 @@
 ---
 layout: post
-title: "Effective C++系列笔记5-12"
-description: "Effective C++系列笔记，第二章，第5-12小节"
-categories: [c++]
-tags: [c++]
+title: Effective C++系列笔记5-12
+description: Effective C++系列笔记，第二章，第5-12小节
+categories:
+  - cpp
+tags:
+  - cpp
+  - effective-cpp
 redirect_from:
   - /2021/02/20/
 ---

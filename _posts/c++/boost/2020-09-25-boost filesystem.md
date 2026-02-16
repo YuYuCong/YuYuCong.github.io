@@ -3,11 +3,10 @@ layout: post
 title: Boost filesystem
 description: boost filesystem
 categories:
-  - c++
+  - cpp
 tags:
   - boost
   - cpp
-  - cplusplus
 redirect_from:
   - /2020/09/25/
 ---

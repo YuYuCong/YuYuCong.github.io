@@ -1,10 +1,13 @@
 ---
 layout: post
-title: "Camera Calibrate"
-subtitle: "相机畸变校准原理与工具代码"
-categories: [OpenCV]
-tags: [OpenCV, camera, calibrate]
-header-img: "img/in-post/post-cv/bg_marker2.png"
+title: Camera Calibrate
+subtitle: 相机畸变校准原理与工具代码
+categories:
+  - OpenCV
+tags:
+  - OpenCV
+  - camera
+header-img: img/in-post/post-cv/bg_marker2.png
 header-style: img
 date: 2020.07.13
 ---

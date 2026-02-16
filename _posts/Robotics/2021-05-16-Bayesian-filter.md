@@ -1,9 +1,12 @@
 ---
 layout: post
-title: "Bayesian Filter"
-description: "Bayesian Filter"
-categories: [Math, filter]
-tags: [Math, filter]
+title: Bayesian Filter
+description: Bayesian Filter
+categories:
+  - Robotics
+tags:
+  - Math
+  - filter
 redirect_from:
   - /2021/05/16/
 ---

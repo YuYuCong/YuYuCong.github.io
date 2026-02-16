@@ -3,12 +3,11 @@ layout: post
 title: C++并发编程系列3-数据共享与同步
 subtitle: C++并发编程系列笔记，ch3笔记
 categories:
-  - c++
+  - cpp
 tags:
   - 多线程
   - thread
   - cpp
-  - cplusplus
 header-img: img/in-post/post-cpp/
 header-style: text
 redirect_from:
@@ -323,6 +322,27 @@ void TestSolveDeadLock() {
 
 参 https://www.kancloud.cn/jxm_zn/cpp_concurrency_in_action/264954#31__12    3.2.4 和 3.2.5
 
+
+#### 活锁
+
+**活锁**是另一种线程同步问题，与死锁不同的是：
+
+- **死锁**：线程被永远阻塞，互相等待对方释放资源，无法继续执行
+- **活锁**：线程并没有被阻塞，但是不断地尝试执行操作却总是失败，从而无法取得进展
+
+**产生原因：**
+- 两个或多个线程同时尝试解决冲突，但它们的"避让"操作反而造成了新的冲突
+- 线程会不断重试操作，消耗CPU资源，但永远无法成功完成任务
+
+**举例：**
+- 两个人在狭窄走廊相遇，都试图礼让对方：A向左让，B也向左让，发现还是会撞上；然后A向右让，B也向右让，又会撞上。如此反复，虽然都在"努力避让"，但永远无法通过。
+
+**解决方案：**
+- 引入随机性：让冲突的线程等待随机时间后再重试
+- 使用优先级机制：让某个线程优先执行
+- 重新设计算法，避免产生活锁的条件
+
+
 ### 3.10 锁的粒度
 
 参 https://www.kancloud.cn/jxm_zn/cpp_concurrency_in_action/264954#31__12    3.2.8
@@ -344,7 +364,7 @@ void TestSolveDeadLock() {
 - 只有在更新发生时，即有线程写入数据时，才上锁
 - 在没有写操作发生时，允许多个线程同时读取数据
 
-详见 shared_mutex 章节 [2021-03-08-lock](c++/thread/2021-03-08-lock.md)
+详见 shared_mutex 章节 [2021-03-08-lock总结](c++/thread/2021-03-08-lock总结.md)
 
 ### 3.13 嵌套锁
 

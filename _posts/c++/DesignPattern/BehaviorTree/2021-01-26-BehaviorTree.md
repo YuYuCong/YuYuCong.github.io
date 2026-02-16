@@ -3,7 +3,7 @@ layout: post
 title: BehaviorTree(行为树)入门
 subtitle: 使用行为树模式，让机器人实现复杂任务决策
 categories:
-  - Design-Pattern
+  - cpp
 tags:
   - BehaviorTree
   - Design-Pattern
@@ -59,33 +59,44 @@ Copyleft! 2022 William Yu. Some rights reserved.
 
 所有节点汇总
 
-- ControlNode 控制节点
-  - SequenceNode 序列节点
-    - SequenceNode 普通顺序节点
-    - SequenceStarNode
-    - ReactiveSequence
-  - Selector 选择节点
-    - FallbackNode
-    - ReactiveFallback
-    - IfThenElseNode
-    - ManualSelectorNode
-    - SwitchNode
-    - WhileDoElseNode
-  - ParallelNode 并行节点
-
-- ConditionNode 条件节点
-
-- ActionNode 行为节点
-  - 同步节点 SyncActionNode
-    - AlwaysFailureNode
-    - AlwaysSuccessNode
-    - PopFromQueue
-    - SetBlackboard
-  - 异步节点 AsyncActionNode
-  - 协程节点 CoroActionNode
-
-- 装饰节点
-  - ...
+TreeNode（行为树节点基类）
+├─ 装饰器节点 DecoratorNode
+│   ├─ InverterNode（反转节点，成功变失败，失败变成功）
+│   ├─ ForceSuccessNode（强制成功）
+│   ├─ ForceFailureNode（强制失败）
+│   ├─ RepeatNode（重复执行N次）
+│   ├─ RetryNode（失败时重试N次）
+│   ├─ TimeoutNode（超时装饰器）
+│   ├─ DelayNode（延迟执行）
+│   ├─ KeepRunningUntilFailureNode（持续运行直到失败）
+│   └─ RunOnceNode（只运行一次）
+│
+├─ 控制节点 ControlNode
+│   ├─ 序列节点 Sequence（顺序执行，遇到失败则停止）
+│   │   ├─ SequenceNode（标准序列节点）
+│   │   ├─ SequenceStarNode（带记忆的序列节点）
+│   │   └─ ReactiveSequenceNode（响应式序列节点）
+│   │
+│   ├─ 选择节点 Fallback/Selector（顺序执行，遇到成功则停止）
+│   │   ├─ FallbackNode（标准回退节点）
+│   │   ├─ ReactiveFallbackNode（响应式回退节点）
+│   │   ├─ IfThenElseNode（条件分支节点）
+│   │   ├─ ManualSelectorNode（手动选择器）
+│   │   ├─ SwitchNode（开关节点）
+│   │   └─ WhileDoElseNode（循环节点）
+│   │
+│   └─ 并行节点 Parallel（同时执行所有子节点）
+│       └─ ParallelNode（并行节点，可设置成功/失败阈值）
+│
+└─ 叶子节点 LeafNode
+    ├─ 行为节点 ActionNode
+    │   ├─ 同步节点 SyncActionNode（在当前线程执行，会阻塞）
+    │   │   ├─ SetBlackboard（设置黑板变量）
+    │   │   └─ PopFromQueue（从队列弹出）
+    │   ├─ 异步节点 AsyncActionNode（在独立线程执行，不阻塞）
+    │   └─ 协程节点 CoroActionNode（协程方式执行）
+    │
+    └─ 条件节点 ConditionNode（检查条件，返回成功或失败）
 
 
 
@@ -150,6 +161,7 @@ Example
    - 根节点的状态决定整个行为树的执行状态
 
 3. XML 表示
+
 ```xml
 <root main_tree_to_execute="MainTree">
     <BehaviorTree ID="MainTree">
@@ -175,7 +187,7 @@ Example
 
 e.g.
 
-![ç®åçåºåï¼å°ç®±](https://behaviortree.github.io/BehaviorTree.CPP/images/SequenceBasic.png)
+![SequenceBasic](https://behaviortree.github.io/BehaviorTree.CPP/images/SequenceBasic.png)
 
 - 三种序列节点
 

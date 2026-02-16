@@ -1,9 +1,11 @@
 ---
 layout: post
-title: "Visual SLAM算法相关库介绍以及安装"
-description: "vslam"
-categories: [SLAM]
-tags: [SLAM]
+title: Visual SLAM算法相关库介绍以及安装
+description: vslam
+categories:
+  - SLAM
+tags:
+  - SLAM
 redirect_from:
   - /2018/05/25/
 ---

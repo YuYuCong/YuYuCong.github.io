@@ -1,0 +1,20 @@
+views:
+  - type: table
+    name: 表格
+    filters:
+      and:
+        - file.ext == "md"
+    order:
+      - file.path
+      - file.name
+      - file.ext
+      - categories
+      - tags
+      - file.tags
+      - author
+    sort:
+      - property: file.path
+        direction: ASC
+    columnSize:
+      note.categories: 212
+      note.tags: 418
