@@ -1,7 +1,7 @@
 ---
 layout: post
 title: git 笔记
-description: git 使用笔记
+subtitle: git 使用笔记
 categories:
   - Linux
 tags:

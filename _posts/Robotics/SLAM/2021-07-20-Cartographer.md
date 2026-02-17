@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Cartographer Overview"
-description: "Cartographer Overview"
+subtitle: "Cartographer Overview"
 categories: [SLAM]
 tags: [SLAM, cartographer,paper]
 redirect_from:

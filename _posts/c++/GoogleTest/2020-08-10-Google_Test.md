@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Google Test使用方法总结
-description: 写代码不测试，bug满天飞。
+subtitle: 写代码不测试，bug满天飞。
 categories:
   - cpp
 tags:

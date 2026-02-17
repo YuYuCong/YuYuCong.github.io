@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Boost filesystem
-description: boost filesystem
+subtitle: boost filesystem
 categories:
   - cpp
 tags:

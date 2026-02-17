@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Error-State Kalman Filter
-description: Error-State Kalman Filter
+subtitle: Error-State Kalman Filter
 categories:
   - Robotics
 tags:

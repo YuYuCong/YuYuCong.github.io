@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Effective C++系列笔记13-17
-description: Effective C++系列笔记，第三章，第13-17小节
+subtitle: Effective C++系列笔记，第三章，第13-17小节
 categories:
   - cpp
 tags:

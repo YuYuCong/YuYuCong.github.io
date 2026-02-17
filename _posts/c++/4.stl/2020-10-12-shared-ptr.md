@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Smart Pointer
-description: Smart Pointer
+subtitle: Smart Pointer
 categories:
   - cpp
 tags:

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Effective C++系列笔记1-4
-description: Effective C++系列笔记，第一章，第1-4小节
+subtitle: Effective C++系列笔记，第一章，第1-4小节
 categories:
   - cpp
 tags:

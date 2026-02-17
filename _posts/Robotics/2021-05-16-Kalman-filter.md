@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Kalman Filter
-description: Kalman Filter
+subtitle: Kalman Filter
 categories:
   - Robotics
 tags:

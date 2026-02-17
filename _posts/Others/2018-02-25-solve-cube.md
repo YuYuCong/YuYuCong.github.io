@@ -2,7 +2,7 @@
 layout: post
 title: Rubik's Cube program solver
 subtitle: 三阶魔方复原算法
-description: ""
+subtitle: ""
 categories:
 tags:
   - cube

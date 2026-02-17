@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Effective C++系列笔记5-12
-description: Effective C++系列笔记，第二章，第5-12小节
+subtitle: Effective C++系列笔记，第二章，第5-12小节
 categories:
   - cpp
 tags:

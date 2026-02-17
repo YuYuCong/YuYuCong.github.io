@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Bayesian Filter
-description: Bayesian Filter
+subtitle: Bayesian Filter
 categories:
   - Robotics
 tags:
