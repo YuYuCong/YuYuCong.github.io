@@ -20,6 +20,7 @@
     </div>
 </footer>
 
+<script>window.Jekyll = window.Jekyll || {}; window.Jekyll.baseurl = {{ site.baseurl | jsonify }};</script>
 <!-- jQuery -->
 <script src="{{ "/js/jquery.min.js " | prepend: site.baseurl }}"></script>
 
@@ -27,6 +28,8 @@
 <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
 <script src="{{ "/js/bootstrap.min.js " | prepend: site.baseurl }}"></script>
 
+<!-- Rewrite relative .md links to Jekyll permalinks (fixes wrong redirect in nested paths) -->
+<script src="{{ "/js/rewrite-internal-links.js" | prepend: site.baseurl }}"></script>
 <!-- Custom Theme JavaScript -->
 <script src="{{ "/js/hux-blog.min.js " | prepend: site.baseurl }}"></script>
 
