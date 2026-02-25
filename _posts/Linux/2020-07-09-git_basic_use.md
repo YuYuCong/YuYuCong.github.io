@@ -9,7 +9,7 @@ tags:
   - Linux
 header-img:
 header-style:
-date:
+date: 2020-07-09
 author:
 ---
 

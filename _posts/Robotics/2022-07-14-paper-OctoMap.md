@@ -12,7 +12,7 @@ tags:
   - paper
 header-img:
 header-style:
-date:
+date: 2022-07-14
 author:
 ---
 

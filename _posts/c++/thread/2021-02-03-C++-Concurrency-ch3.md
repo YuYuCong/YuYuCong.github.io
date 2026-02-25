@@ -10,7 +10,7 @@ tags:
   - cpp
 header-img: img/in-post/post-cpp/
 header-style: text
-date:
+date: 2021-02-03
 author:
 ---
 

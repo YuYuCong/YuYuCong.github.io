@@ -10,7 +10,7 @@ tags:
   - tracker
 header-img: img/in-post/post-cv/
 header-style:
-date:
+date: 2020-11-11
 author:
 ---
 

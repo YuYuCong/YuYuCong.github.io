@@ -11,7 +11,7 @@ tags:
   - autonomously-fly
 header-img:
 header-style:
-date:
+date: 2021-10-26
 author:
 ---
 

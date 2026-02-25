@@ -9,7 +9,7 @@ tags:
   - effective-cpp
 header-img:
 header-style:
-date:
+date: 2021-02-02
 author:
 ---
 

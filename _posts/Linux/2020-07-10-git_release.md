@@ -9,7 +9,7 @@ tags:
   - Linux
 header-img: img/in-post/post-git/branching-illustration@2x.png
 header-style:
-date:
+date: 2020-07-10
 author:
 ---
 

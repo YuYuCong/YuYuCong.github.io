@@ -7,7 +7,7 @@ tags:
   - excalidraw
 header-img:
 header-style:
-date:
+date: 2020-01-01
 author:
 ---
 

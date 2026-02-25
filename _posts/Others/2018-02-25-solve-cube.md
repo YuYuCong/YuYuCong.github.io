@@ -7,7 +7,7 @@ tags:
   - cube
 header-img:
 header-style:
-date:
+date: 2018-02-25
 author:
 ---
 

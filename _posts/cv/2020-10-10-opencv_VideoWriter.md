@@ -9,7 +9,7 @@ tags:
   - video
 header-img: img/in-post/post-cv/bg_opencv_video.png
 header-style:
-date:
+date: 2020-10-10
 author:
 ---
 

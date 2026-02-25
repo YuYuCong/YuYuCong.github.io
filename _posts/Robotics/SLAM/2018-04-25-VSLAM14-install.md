@@ -8,7 +8,7 @@ tags:
   - SLAM
 header-img:
 header-style:
-date:
+date: 2018-04-25
 author:
 ---
 

@@ -8,7 +8,7 @@ tags:
   - OpenCV
 header-img: img/in-post/post-cv/
 header-style:
-date:
+date: 2021-01-12
 author:
 ---
 

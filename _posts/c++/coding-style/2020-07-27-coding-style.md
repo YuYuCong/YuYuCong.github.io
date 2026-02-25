@@ -8,7 +8,7 @@ tags:
   - cpp
 header-img: img/in-post/post-cpp/bg_code_style.png
 header-style:
-date:
+date: 2020-07-27
 author:
 ---
 
