@@ -8,7 +8,7 @@ tags:
   - life
 header-img: img/in-post/
 header-style: text
-date: 1997.05.24
+date: 1997-05-24
 author: CongYu
 ---
 

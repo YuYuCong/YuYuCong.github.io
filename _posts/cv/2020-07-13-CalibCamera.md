@@ -9,7 +9,7 @@ tags:
   - camera
 header-img: img/in-post/post-cv/bg_marker2.png
 header-style: img
-date: 2020.07.13
+date: 2020-07-13
 author:
 ---
 

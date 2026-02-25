@@ -9,7 +9,7 @@ tags:
   - camera
 header-img: img/in-post/post-cv/pose_aruco_bg.png
 header-style: img
-date: 2020.07.14
+date: 2020-07-14
 author:
 ---
 

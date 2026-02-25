@@ -11,7 +11,7 @@ tags:
   - ros
 header-img: img/in-post/post-cpp/bg_behavior_tree.drawio.png
 header-style:
-date: 2021.01.26
+date: 2021-01-26
 author:
 ---
 

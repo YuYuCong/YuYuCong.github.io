@@ -9,7 +9,7 @@ tags:
   - Math
 header-img: img/in-post/post-optimal/post-bg-1.png
 header-style: img
-date: 2022.01.01
+date: 2022-01-01
 author: CongYu
 ---
 

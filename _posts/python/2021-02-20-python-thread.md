@@ -10,7 +10,7 @@ tags:
   - python
 header-img: img/in-post/post-python/
 header-style: text
-date: 2021.02.22
+date: 2021-02-22
 author:
 ---
 

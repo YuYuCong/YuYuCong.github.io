@@ -9,7 +9,7 @@ tags:
   - IMU
 header-img: img/in-post/
 header-style: text
-date: 2021.06.11
+date: 2021-06-11
 author: CongYu
 ---
 

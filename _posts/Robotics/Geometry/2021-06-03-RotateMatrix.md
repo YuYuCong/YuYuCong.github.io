@@ -8,7 +8,7 @@ tags:
   - pose
 header-img: img/in-post/
 header-style: text
-date: 2021.06.03
+date: 2021-06-03
 author: CongYu
 ---
 
