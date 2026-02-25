@@ -9,8 +9,10 @@ tags:
   - filter
   - Math
   - ESKF
-redirect_from:
-  - /2021/05/16/
+header-img:
+header-style:
+date:
+author:
 ---
 
 >  Error-State Kalman Filter

@@ -1,14 +1,16 @@
 ---
 layout: post
-title: "WeChatQRCode二维码识别"
-subtitle: "关于OpenCV中cv::wechat_qrcode的一些简单笔记"
-categories: [OpenCV]
-tags: [OpenCV]
-header-img: "img/in-post/post-cv/"
-redirect_from:
-  - /2020/10/10/
+title: WeChatQRCode二维码识别
+subtitle: 关于OpenCV中cv::wechat_qrcode的一些简单笔记
+categories:
+  - OpenCV
+tags:
+  - OpenCV
+header-img: img/in-post/post-cv/
+header-style:
+date:
+author:
 ---
-
 
 >  OpenCV Wechat QR Class, 一条函数搞定二维码识别！
 

@@ -7,8 +7,10 @@ categories:
 tags:
   - Math
   - filter
-redirect_from:
-  - /2021/05/16/
+header-img:
+header-style:
+date:
+author:
 ---
 
 >  Bayesian Filter

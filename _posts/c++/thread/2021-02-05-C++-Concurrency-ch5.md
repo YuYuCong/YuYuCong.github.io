@@ -10,8 +10,8 @@ tags:
   - cpp
 header-img: img/in-post/post-cpp/
 header-style: text
-redirect_from:
-  - /2021/02/05/
+date:
+author:
 ---
 
 >  C++ 并发编程系列笔记，ch5笔记

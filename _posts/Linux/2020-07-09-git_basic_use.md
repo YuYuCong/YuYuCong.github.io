@@ -7,8 +7,10 @@ categories:
 tags:
   - git
   - Linux
-redirect_from:
-  - /2020/07/09/
+header-img:
+header-style:
+date:
+author:
 ---
 
 [TOC]

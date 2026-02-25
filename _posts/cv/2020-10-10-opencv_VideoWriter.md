@@ -1,12 +1,16 @@
 ---
 layout: post
-title: "Video IO"
-subtitle: "OpenCV 视频文件读写的一些方法与细节"
-categories: [OpenCV]
-tags: [OpenCV, video]
-header-img: "img/in-post/post-cv/bg_opencv_video.png"
-redirect_from:
-  - /2020/10/10/
+title: Video IO
+subtitle: OpenCV 视频文件读写的一些方法与细节
+categories:
+  - OpenCV
+tags:
+  - OpenCV
+  - video
+header-img: img/in-post/post-cv/bg_opencv_video.png
+header-style:
+date:
+author:
 ---
 
 >  本文简单记录OpenCV库提供的视频文件读写的一些细节

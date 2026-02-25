@@ -7,8 +7,10 @@ categories:
 tags:
   - cpp
   - effective-cpp
-redirect_from:
-  - /2021/02/20/
+header-img:
+header-style:
+date:
+author:
 ---
 
 >  Effective C++

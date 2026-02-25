@@ -1,7 +1,7 @@
 ---
 layout: post
 title: paper:OctoMap
-subtitle: "OctoMap: An Efficient Probabilistic 3D Mapping Framework Based on Octrees"
+subtitle: OctoMap: An Efficient Probabilistic 3D Mapping Framework Based on Octrees
 categories:
   - Robotics
 tags:
@@ -10,8 +10,10 @@ tags:
   - octomap
   - tree
   - paper
-redirect_from:
-  - /2022/07/14/
+header-img:
+header-style:
+date:
+author:
 ---
 
 >  OctoMap: An Efficient Probabilistic 3D Mapping Framework Based on Octrees

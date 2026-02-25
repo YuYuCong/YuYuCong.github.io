@@ -1,13 +1,15 @@
 ---
 layout: post
-title: "OpenCV笔记卡片!"
-subtitle: "关于opencv库的一些小卡片笔记"
-categories: [OpenCV]
-tags: [OpenCV]
-header-img: "img/in-post/"
+title: OpenCV笔记卡片!
+subtitle: 关于opencv库的一些小卡片笔记
+categories:
+  - OpenCV
+tags:
+  - OpenCV
+header-img: img/in-post/
 header-style: text
 date: 2021.01.31
-author: "CongYu"
+author: CongYu
 ---
 
 >  opencv使用过程中的一些小卡片笔记，包括常用代码片段，常见代码错误

@@ -1,15 +1,16 @@
 ---
 layout: post
-title: "三维刚体运动基础系列 之 轴角!"
-subtitle: "轴角姿态表达，以及轴角微分推导"
-categories: [Robotics]
-tags: [pose]
-header-img: "img/in-post/"
+title: 三维刚体运动基础系列 之 轴角!
+subtitle: 轴角姿态表达，以及轴角微分推导
+categories:
+  - Robotics
+tags:
+  - pose
+header-img: img/in-post/
 header-style: text
 date: 2021.06.04
-author: "CongYu"
+author: CongYu
 ---
-
 
 >  DEMO
 

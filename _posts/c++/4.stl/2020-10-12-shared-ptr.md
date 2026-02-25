@@ -8,8 +8,10 @@ tags:
   - shared_ptr
   - cpp
   - 指针
-redirect_from:
-  - /2020/10/12/
+header-img:
+header-style:
+date:
+author:
 ---
 
 > 

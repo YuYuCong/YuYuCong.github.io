@@ -1,13 +1,18 @@
 ---
 layout: post
-title: "各种三维姿态表达方式之间的变换"
-subtitle: "四元数，欧拉角，轴角，旋转矩阵之间的相互转换"
-categories: [Robotics]
-tags: [pose,Eigen,OpenCV,PCL]
-header-img: "img/in-post/"
+title: 各种三维姿态表达方式之间的变换
+subtitle: 四元数，欧拉角，轴角，旋转矩阵之间的相互转换
+categories:
+  - Robotics
+tags:
+  - pose
+  - Eigen
+  - OpenCV
+  - PCL
+header-img: img/in-post/
 header-style: text
 date: 2021.06.10
-author: "CongYu"
+author: CongYu
 ---
 
 >  本文主要整理总结 空间位姿表达方式之间的相互转换，包括原理与数学公式，以及代码实现，以及几何库的使用。

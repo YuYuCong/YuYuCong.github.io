@@ -1,15 +1,16 @@
 ---
 layout: post
-title: "三维刚体运动基础系列 之 四元数!"
-subtitle: "四元数姿态表达，以及四元数微分推导"
-categories: [Robotics]
-tags: [pose]
-header-img: "img/in-post/"
+title: 三维刚体运动基础系列 之 四元数!
+subtitle: 四元数姿态表达，以及四元数微分推导
+categories:
+  - Robotics
+tags:
+  - pose
+header-img: img/in-post/
 header-style: text
 date: 2021.06.05
-author: "CongYu"
+author: CongYu
 ---
-
 
 >  DEMO
 

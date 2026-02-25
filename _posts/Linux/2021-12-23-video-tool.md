@@ -1,13 +1,17 @@
 ---
 layout: post
-title: "Video Tool"
-subtitle: "视频文件相关的小工具"
-categories: [Linux]
-tags: [tool, Linux, video]
-header-img: "img/"
+title: Video Tool
+subtitle: 视频文件相关的小工具
+categories:
+  - Linux
+tags:
+  - tool
+  - Linux
+  - video
+header-img: img/
 header-style: text
-redirect_from:
-  - /2021/12/23/
+date:
+author:
 ---
 
 >  Linux平台下与视频文件相关的小工具

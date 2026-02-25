@@ -6,8 +6,10 @@ categories:
   - SLAM
 tags:
   - SLAM
-redirect_from:
-  - /2018/05/25/
+header-img:
+header-style:
+date:
+author:
 ---
 
 > 视觉SLAM十四讲（2017年3月第一版）中提及的库安装使用记录

@@ -8,8 +8,10 @@ tags:
   - gtest
   - unit-test
   - cpp
-redirect_from:
-  - /2020/08/10/
+header-img:
+header-style:
+date:
+author:
 ---
 
 > Gtest 使用方法总结。写代码不测试，bug满天飞。

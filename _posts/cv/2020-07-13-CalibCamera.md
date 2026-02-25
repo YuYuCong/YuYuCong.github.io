@@ -10,6 +10,7 @@ tags:
 header-img: img/in-post/post-cv/bg_marker2.png
 header-style: img
 date: 2020.07.13
+author:
 ---
 
 >  相机的内外参标定原理，与棋盘格标定方法，以及OpenCV提供库方法的简单笔记。 Camera internal and external parameter calibration.

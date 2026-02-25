@@ -1,7 +1,7 @@
 /**
- * 将文章内相对路径的 .md 链接及 redirect_from 路径重写为 Jekyll 的绝对 URL，
+ * 将文章内相对路径的 .md 链接重写为 Jekyll 的绝对 URL，
  * 避免在子路径页面下点击时解析成错误路径（如 .../最小二乘优化/Math/xxx.md）。
- * 优先使用构建时注入的 internalLinkMap（含 post 路径与 redirect_from，与 Jekyll 一致）。
+ * 优先使用构建时注入的 internalLinkMap（与 Jekyll 一致）。
  */
 (function () {
   var BASE = (window.Jekyll && window.Jekyll.baseurl) || '';
@@ -15,18 +15,13 @@
     path = path.replace(/#.*$/, '').trim();
     if (!path || /^https?:\/\//i.test(path)) return null;
     if (linkMap[path]) return linkMap[path];
-    if (path.charAt(0) === '/' && linkMap[path.slice(1)]) return linkMap[path.slice(1)];
-    if (path.charAt(0) !== '/' && linkMap['/' + path]) return linkMap['/' + path];
     if (path.indexOf('.md') === -1) return null;
     var parts = path.split('/');
     var last = parts[parts.length - 1];
     if (linkMap[last]) return linkMap[last];
-    var match = last.match(/^(\d{4})-(\d{2})-(\d{2})-(.+)\.md$/);
-    if (!match) return null;
-    var year = match[1], month = match[2], day = match[3], title = match[4];
-    var categories = parts.slice(0, -1).map(function (p) { return p.toLowerCase(); });
-    var pathSegs = categories.length ? categories.concat([year, month, day, title]) : [year, month, day, title];
-    return (BASE + '/' + pathSegs.join('/') + '/').replace(/\/+/g, '/');
+    // 不再从路径/文件名推测 URL：front matter 的 date 可能和文件名日期不同，
+    // 推测会生成错误链接（如 lock总结.md 实际 URL 用 date:2021-02-06 而非文件名 2021-03-08）
+    return null;
   }
 
   function run() {

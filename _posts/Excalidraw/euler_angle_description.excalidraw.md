@@ -1,9 +1,16 @@
 ---
-
-excalidraw-plugin: parsed
-tags: [excalidraw]
-
+layout:
+title:
+subtitle:
+categories:
+tags:
+  - excalidraw
+header-img:
+header-style:
+date:
+author:
 ---
+
 ==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==
 
 

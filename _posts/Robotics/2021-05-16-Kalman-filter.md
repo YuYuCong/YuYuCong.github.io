@@ -8,8 +8,10 @@ tags:
   - Kalman-Filter
   - filter
   - Math
-redirect_from:
-  - /2021/05/16/
+header-img:
+header-style:
+date:
+author:
 ---
 
 >  Bayesian Filter

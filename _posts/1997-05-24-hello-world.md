@@ -1,13 +1,15 @@
 ---
 layout: post
-title: "Hello World!"
-subtitle: "Hello world!Hello blog!"
-categories: [life]
-tags: [life]
-header-img: "img/in-post/"
+title: Hello World!
+subtitle: Hello world!Hello blog!
+categories:
+  - life
+tags:
+  - life
+header-img: img/in-post/
 header-style: text
 date: 1997.05.24
-author: "CongYu"
+author: CongYu
 ---
 
 >  DEMO

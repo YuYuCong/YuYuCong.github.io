@@ -10,6 +10,7 @@ tags:
 header-img: img/in-post/post-cv/pose_aruco_bg.png
 header-style: img
 date: 2020.07.14
+author:
 ---
 
 >  本文主要包括两部分内容：1. 基于单个Marker的位姿估计；2. 基于标定板的位姿估计。

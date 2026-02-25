@@ -10,7 +10,9 @@ tags:
   - state-machine
   - ros
 header-img: img/in-post/post-cpp/bg_behavior_tree.drawio.png
+header-style:
 date: 2021.01.26
+author:
 ---
 
 >  Behavior Tree 与有限状态机是两种常用于游戏以及机器人复杂任务决策的框架，而行为树有着有限状态机所不具备的扩展性，ROS2的`Navigation2`中也引入了行为树来组织机器人的工作流程和动作执行。本文主要介绍行为树的基本概念与抽象模型，并记录BehaviorTree.CPP API的学习与笔记。
@@ -59,6 +61,7 @@ Copyleft! 2022 William Yu. Some rights reserved.
 
 所有节点汇总
 
+```shell
 TreeNode（行为树节点基类）
 ├─ 装饰器节点 DecoratorNode
 │   ├─ InverterNode（反转节点，成功变失败，失败变成功）
@@ -97,7 +100,7 @@ TreeNode（行为树节点基类）
     │   └─ 协程节点 CoroActionNode（协程方式执行）
     │
     └─ 条件节点 ConditionNode（检查条件，返回成功或失败）
-
+```
 
 
 ##### sentence

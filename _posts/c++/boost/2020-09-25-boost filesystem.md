@@ -7,10 +7,11 @@ categories:
 tags:
   - boost
   - cpp
-redirect_from:
-  - /2020/09/25/
+header-img:
+header-style:
+date:
+author:
 ---
-
 
 [TOC]
 

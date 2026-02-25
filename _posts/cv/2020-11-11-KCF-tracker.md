@@ -1,14 +1,18 @@
 ---
 layout: post
-title: "KCF Tracker"
-subtitle: "KCF Tracker原理简析"
-categories: [OpenCV]
-tags: [OpenCV, KCF, tracker]
-header-img: "img/in-post/post-cv/"
-redirect_from:
-  - /2020/11/11/
+title: KCF Tracker
+subtitle: KCF Tracker原理简析
+categories:
+  - OpenCV
+tags:
+  - OpenCV
+  - KCF
+  - tracker
+header-img: img/in-post/post-cv/
+header-style:
+date:
+author:
 ---
-
 
 >  本文主要记录KCF tracker算法原理
 

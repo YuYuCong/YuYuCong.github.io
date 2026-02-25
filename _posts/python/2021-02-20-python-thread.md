@@ -11,6 +11,7 @@ tags:
 header-img: img/in-post/post-python/
 header-style: text
 date: 2021.02.22
+author:
 ---
 
 >  本文主要记录Python多线程编程相关的一些笔记。包括threading模块，Thread类，以及5种线程锁（互斥锁，重入锁，信号，事件，条件）等。

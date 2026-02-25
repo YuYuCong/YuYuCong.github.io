@@ -10,8 +10,8 @@ tags:
   - cpp
 header-img: img/in-post/post-cpp/
 header-style: text
-redirect_from:
 date: 2021.02.08
+author:
 ---
 
 >  线程池

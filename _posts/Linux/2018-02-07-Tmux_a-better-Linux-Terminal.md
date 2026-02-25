@@ -7,8 +7,10 @@ categories:
 tags:
   - Linux
   - tmux
-redirect_from:
-  - /2018/02/07/
+header-img:
+header-style:
+date:
+author:
 ---
 
 > 功能强大的工具有很多。但是只有自己亲手打造的，才是最适合自己的。

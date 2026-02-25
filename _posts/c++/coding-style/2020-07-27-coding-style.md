@@ -7,8 +7,9 @@ categories:
 tags:
   - cpp
 header-img: img/in-post/post-cpp/bg_code_style.png
-redirect_from:
-  - /20220/07/27/
+header-style:
+date:
+author:
 ---
 
 >  本文主要记录c++ coding style相关的一些笔记，以及一些常用的代码建议与小技巧。尽力将自己写的代码视作一件艺术品，是技术与艺术的结合体。

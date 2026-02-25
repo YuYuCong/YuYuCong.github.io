@@ -9,8 +9,10 @@ tags:
   - path-plan
   - quadrotor
   - autonomously-fly
-redirect_from:
-  - /2021/10/26/
+header-img:
+header-style:
+date:
+author:
 ---
 
 > Learning High-Speed Flight in the Wild.

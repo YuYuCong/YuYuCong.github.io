@@ -1,13 +1,15 @@
 ---
 layout: post
-title: "三维刚体运动基础系列 之 欧拉角!"
-subtitle: "欧拉角姿态表达，以及欧拉角微分推导"
-categories: [Robotics]
-tags: [pose]
-header-img: "img/in-post/"
+title: 三维刚体运动基础系列 之 欧拉角!
+subtitle: 欧拉角姿态表达，以及欧拉角微分推导
+categories:
+  - Robotics
+tags:
+  - pose
+header-img: img/in-post/
 header-style: text
 date: 2021.06.02
-author: "CongYu"
+author: CongYu
 ---
 
 >  DEMO

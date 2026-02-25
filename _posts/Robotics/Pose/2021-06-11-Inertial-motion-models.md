@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 三维刚体运动基础系列 之 IMU运动学总结!
-subtitle: ""
+subtitle:
 categories:
   - Robotics
 tags:
@@ -12,7 +12,6 @@ header-style: text
 date: 2021.06.11
 author: CongYu
 ---
-
 
 >  DEMO
 

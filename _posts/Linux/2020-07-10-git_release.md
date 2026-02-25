@@ -8,8 +8,9 @@ tags:
   - git
   - Linux
 header-img: img/in-post/post-git/branching-illustration@2x.png
-redirect_from:
-  - /2020/07/10/
+header-style:
+date:
+author:
 ---
 
 >  本文简单记录 Git 项目开发流程，包含新feature的开发，bugfix，Release版本发布，以及hotfix流程等。

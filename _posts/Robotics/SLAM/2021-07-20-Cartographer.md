@@ -1,11 +1,17 @@
 ---
 layout: post
-title: "Cartographer Overview"
-subtitle: "Cartographer Overview"
-categories: [SLAM]
-tags: [SLAM, cartographer,paper]
-redirect_from:
-  - /2021/07/20/
+title: Cartographer Overview
+subtitle: Cartographer Overview
+categories:
+  - SLAM
+tags:
+  - SLAM
+  - cartographer
+  - paper
+header-img:
+header-style:
+date:
+author:
 ---
 
 >  Cartographer Overview

@@ -1,13 +1,14 @@
 ---
 layout: post
 title: Rubik's Cube program solver
-subtitle: 三阶魔方复原算法
-subtitle: ""
+subtitle:
 categories:
 tags:
   - cube
-redirect_from:
-  - /2018/02/25/
+header-img:
+header-style:
+date:
+author:
 ---
 
 > 
