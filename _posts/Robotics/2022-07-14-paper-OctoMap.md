@@ -1,7 +1,7 @@
 ---
 layout: post
-title: paper:OctoMap
-subtitle: OctoMap: An Efficient Probabilistic 3D Mapping Framework Based on Octrees
+title: "paper: OctoMap"
+subtitle: "OctoMap: An Efficient Probabilistic 3D Mapping Framework Based on Octrees"
 categories:
   - Robotics
 tags:
