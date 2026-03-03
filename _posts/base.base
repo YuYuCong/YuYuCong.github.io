@@ -10,8 +10,9 @@ views:
       - file.ext
       - categories
       - tags
-      - file.tags
       - author
+      - date
+      - file.links
     sort:
       - property: file.path
         direction: ASC
