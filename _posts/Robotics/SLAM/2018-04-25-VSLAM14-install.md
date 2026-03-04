@@ -3,7 +3,7 @@ layout: post
 title: Visual SLAM算法相关库介绍以及安装
 subtitle: vslam
 categories:
-  - Robotics
+  - SLAM
 tags:
   - SLAM
   - vSLAM

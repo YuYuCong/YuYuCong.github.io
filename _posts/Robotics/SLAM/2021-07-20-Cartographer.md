@@ -3,7 +3,7 @@ layout: post
 title: Cartographer Overview
 subtitle: Cartographer Overview
 categories:
-  - Robotics
+  - SLAM
 tags:
   - SLAM
   - Cartographer
