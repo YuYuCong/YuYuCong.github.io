@@ -3,12 +3,13 @@ layout: post
 title: Rubik's Cube program solver
 subtitle:
 categories:
+  - Others
 tags:
   - cube
 header-img:
 header-style:
 date: 2018-02-25
-author:
+author: CongYu
 ---
 
 > 

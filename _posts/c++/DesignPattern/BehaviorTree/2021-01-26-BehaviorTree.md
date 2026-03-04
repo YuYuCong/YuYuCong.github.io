@@ -6,13 +6,16 @@ categories:
   - cpp
 tags:
   - BehaviorTree
-  - Design-Pattern
-  - state-machine
-  - ros
+  - DesignPattern
+  - 行为树
+  - 状态机
+  - ROS2
+  - Navigation2
+  - 机器人决策
 header-img: img/in-post/post-cpp/bg_behavior_tree.drawio.png
 header-style:
 date: 2021-01-26
-author:
+author: CongYu
 ---
 
 >  Behavior Tree 与有限状态机是两种常用于游戏以及机器人复杂任务决策的框架，而行为树有着有限状态机所不具备的扩展性，ROS2的`Navigation2`中也引入了行为树来组织机器人的工作流程和动作执行。本文主要介绍行为树的基本概念与抽象模型，并记录BehaviorTree.CPP API的学习与笔记。

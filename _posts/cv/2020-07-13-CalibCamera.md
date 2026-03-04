@@ -3,14 +3,14 @@ layout: post
 title: Camera Calibrate
 subtitle: 相机畸变校准原理与工具代码
 categories:
-  - OpenCV
+  - CV
 tags:
   - OpenCV
   - camera
 header-img: img/in-post/post-cv/bg_marker2.png
 header-style: img
 date: 2020-07-13
-author:
+author: CongYu
 ---
 
 >  相机的内外参标定原理，与棋盘格标定方法，以及OpenCV提供库方法的简单笔记。 Camera internal and external parameter calibration.

@@ -5,7 +5,12 @@ subtitle: Hello world!Hello blog!
 categories:
   - life
 tags:
-  - life
+  - LaTeX
+  - 排版
+  - 数学公式
+  - Markdown
+  - git
+  - 文档
 header-img: img/in-post/
 header-style: text
 date: 1997-05-24

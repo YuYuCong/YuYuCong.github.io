@@ -3,9 +3,12 @@ layout: post
 title: OpenCV笔记卡片!
 subtitle: 关于opencv库的一些小卡片笔记
 categories:
-  - OpenCV
+  - CV
 tags:
-  - OpenCV
+  - 计算机视觉
+  - 图像处理
+  - 笔记
+  - 代码片段
 header-img: img/in-post/
 header-style: text
 date: 2021-01-31

@@ -3,14 +3,14 @@ layout: post
 title: Marker based pose estimate
 subtitle: 使用ArUco Marker估计相机的外参，或者估计标定板的位姿
 categories:
-  - OpenCV
+  - CV
 tags:
   - OpenCV
   - camera
 header-img: img/in-post/post-cv/pose_aruco_bg.png
 header-style: img
 date: 2020-07-14
-author:
+author: CongYu
 ---
 
 >  本文主要包括两部分内容：1. 基于单个Marker的位姿估计；2. 基于标定板的位姿估计。

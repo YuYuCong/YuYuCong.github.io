@@ -3,13 +3,19 @@ layout: post
 title: Visual SLAM算法相关库介绍以及安装
 subtitle: vslam
 categories:
-  - SLAM
+  - Robotics
 tags:
   - SLAM
+  - vSLAM
+  - Eigen
+  - OpenCV
+  - g2o
+  - Ceres
+  - 环境配置
 header-img:
 header-style:
 date: 2018-04-25
-author:
+author: CongYu
 ---
 
 > 视觉SLAM十四讲（2017年3月第一版）中提及的库安装使用记录

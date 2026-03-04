@@ -5,12 +5,14 @@ subtitle: Bayesian Filter
 categories:
   - Robotics
 tags:
-  - Math
+  - 贝叶斯滤波
+  - Bayesian-filter
   - filter
+  - 概率估计
 header-img:
 header-style:
 date: 2021-05-16
-author:
+author: CongYu
 ---
 
 >  Bayesian Filter

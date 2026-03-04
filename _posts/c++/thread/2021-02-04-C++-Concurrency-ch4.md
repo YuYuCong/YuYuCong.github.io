@@ -5,13 +5,17 @@ subtitle: C++并发编程系列笔记，ch4笔记
 categories:
   - cpp
 tags:
+  - 并发
   - 多线程
-  - thread
-  - cpp
+  - condition_variable
+  - future
+  - promise
+  - async
+  - 条件变量
 header-img: img/in-post/post-cpp/
 header-style: text
 date: 2021-02-04
-author:
+author: CongYu
 ---
 
 >  C++ 并发编程系列笔记，ch4笔记

@@ -6,12 +6,14 @@ categories:
   - cpp
 tags:
   - shared_ptr
-  - cpp
-  - 指针
+  - 智能指针
+  - unique_ptr
+  - weak_ptr
+  - 内存管理
 header-img:
 header-style:
 date: 2020-10-12
-author:
+author: CongYu
 ---
 
 > 

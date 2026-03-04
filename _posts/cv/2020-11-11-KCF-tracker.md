@@ -3,7 +3,7 @@ layout: post
 title: KCF Tracker
 subtitle: KCF Tracker原理简析
 categories:
-  - OpenCV
+  - CV
 tags:
   - OpenCV
   - KCF
@@ -11,7 +11,7 @@ tags:
 header-img: img/in-post/post-cv/
 header-style:
 date: 2020-11-11
-author:
+author: CongYu
 ---
 
 >  本文主要记录KCF tracker算法原理

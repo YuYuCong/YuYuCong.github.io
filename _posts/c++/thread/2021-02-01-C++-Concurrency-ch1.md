@@ -5,13 +5,15 @@ subtitle: C++并发编程系列笔记，ch1笔记
 categories:
   - cpp
 tags:
+  - 并发
   - 多线程
-  - thread
-  - cpp
+  - 并发编程
+  - 多进程
+  - 硬件并发
 header-img: img/in-post/post-cpp/
 header-style: text
 date: 2021-02-01
-author:
+author: CongYu
 ---
 
 >  C++ 并发编程系列笔记，ch1笔记

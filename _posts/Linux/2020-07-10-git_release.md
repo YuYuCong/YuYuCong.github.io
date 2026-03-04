@@ -10,7 +10,7 @@ tags:
 header-img: img/in-post/post-git/branching-illustration@2x.png
 header-style:
 date: 2020-07-10
-author:
+author: CongYu
 ---
 
 >  本文简单记录 Git 项目开发流程，包含新feature的开发，bugfix，Release版本发布，以及hotfix流程等。

@@ -6,12 +6,13 @@ categories:
   - Robotics
 tags:
   - Kalman-Filter
+  - 卡尔曼滤波
   - filter
-  - Math
+  - 状态估计
 header-img:
 header-style:
 date: 2021-05-16
-author:
+author: CongYu
 ---
 
 >  Bayesian Filter

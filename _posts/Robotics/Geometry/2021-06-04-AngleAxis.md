@@ -6,6 +6,10 @@ categories:
   - Robotics
 tags:
   - pose
+  - 轴角
+  - Angle-Axis
+  - 姿态表达
+  - 旋转
 header-img: img/in-post/
 header-style: text
 date: 2021-06-04

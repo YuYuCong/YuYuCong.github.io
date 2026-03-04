@@ -6,6 +6,10 @@ categories:
   - Robotics
 tags:
   - pose
+  - 欧拉角
+  - Euler-Angles
+  - 姿态表达
+  - 万向节锁
 header-img: img/in-post/
 header-style: text
 date: 2021-06-02

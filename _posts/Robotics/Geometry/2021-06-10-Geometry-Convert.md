@@ -6,9 +6,15 @@ categories:
   - Robotics
 tags:
   - pose
+  - 四元数
+  - 欧拉角
+  - 轴角
+  - 旋转矩阵
   - Eigen
   - OpenCV
   - PCL
+  - transforms3d
+  - 姿态转换
 header-img: img/in-post/
 header-style: text
 date: 2021-06-10

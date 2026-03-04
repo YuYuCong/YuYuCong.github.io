@@ -14,8 +14,15 @@ views:
       - date
       - file.links
     sort:
+      - property: categories
+        direction: ASC
       - property: file.path
         direction: ASC
     columnSize:
       note.categories: 212
-      note.tags: 418
+      note.tags: 784
+  - type: cards
+    name: 视图
+    cardSize: 310
+    image: note.header-img
+    imageAspectRatio: 0.45

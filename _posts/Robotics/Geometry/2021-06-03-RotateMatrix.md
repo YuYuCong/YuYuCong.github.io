@@ -6,6 +6,11 @@ categories:
   - Robotics
 tags:
   - pose
+  - 旋转矩阵
+  - Rotation-Matrix
+  - SO3
+  - 姿态表达
+  - 刚体运动
 header-img: img/in-post/
 header-style: text
 date: 2021-06-03

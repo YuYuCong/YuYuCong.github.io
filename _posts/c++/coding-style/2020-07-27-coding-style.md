@@ -5,11 +5,13 @@ subtitle: c++代码风格规范，以及一些良好的代码习惯建议
 categories:
   - cpp
 tags:
-  - cpp
+  - 代码风格
+  - 命名规范
+  - 代码规范
 header-img: img/in-post/post-cpp/bg_code_style.png
 header-style:
 date: 2020-07-27
-author:
+author: CongYu
 ---
 
 >  本文主要记录c++ coding style相关的一些笔记，以及一些常用的代码建议与小技巧。尽力将自己写的代码视作一件艺术品，是技术与艺术的结合体。

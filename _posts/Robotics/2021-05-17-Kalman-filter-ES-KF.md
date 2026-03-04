@@ -6,13 +6,14 @@ categories:
   - Robotics
 tags:
   - Kalman-Filter
-  - filter
-  - Math
   - ESKF
+  - Error-State-Kalman-Filter
+  - 误差状态卡尔曼滤波
+  - filter
 header-img:
 header-style:
 date: 2021-05-17
-author:
+author: CongYu
 ---
 
 >  Error-State Kalman Filter

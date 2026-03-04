@@ -6,12 +6,14 @@ categories:
   - cpp
 tags:
   - gtest
-  - unit-test
-  - cpp
+  - GoogleTest
+  - 单元测试
+  - unittest
+  - 测试框架
 header-img:
 header-style:
 date: 2020-08-10
-author:
+author: CongYu
 ---
 
 > Gtest 使用方法总结。写代码不测试，bug满天飞。

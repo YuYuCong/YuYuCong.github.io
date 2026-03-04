@@ -6,14 +6,15 @@ categories:
   - Robotics
 tags:
   - SLAM
+  - OctoMap
   - mapping
-  - octomap
-  - tree
+  - 八叉树
+  - 概率地图
   - paper
 header-img:
 header-style:
 date: 2022-07-14
-author:
+author: CongYu
 ---
 
 >  OctoMap: An Efficient Probabilistic 3D Mapping Framework Based on Octrees
