@@ -1515,7 +1515,7 @@ img::-moz-selection {
   line-height: 28px;
   margin: 0 2px;
   margin-bottom: 8px;
-  background: #f3f5f5;
+  /* background color will be set by tagcloud plugin */
 }
 #tag_cloud a:hover,
 #tag_cloud .tag:hover,
@@ -1523,24 +1523,38 @@ img::-moz-selection {
 #tag_cloud .tag:active,
 #tag_cloud a.focus,
 #tag_cloud .tag.focus {
-  background-color: #0085a1 !important;
+  background-color: #ff6b35 !important;
 }
 #tag_cloud a.focus,
 #tag_cloud .tag.focus {
   box-shadow: rgba(0, 0, 0, 0.117647) 0 1px 6px, rgba(0, 0, 0, 0.239216) 0 1px 4px;
 }
-#tag_cloud a.tag-button--all,
-#tag_cloud .tag.tag-button--all {
-  font-weight: 700;
-  color: #0085a1 !important;
+#category_cloud {
+  margin: 20px 0 15px 0;
 }
-#tag_cloud a.tag-button--all:hover,
-#tag_cloud .tag.tag-button--all:hover,
-#tag_cloud a.tag-button--all:active,
-#tag_cloud .tag.tag-button--all:active,
-#tag_cloud a.tag-button--all.focus,
-#tag_cloud .tag.tag-button--all.focus {
-  background-color: #e4e4e4 !important;
+#category_cloud a,
+#category_cloud .tag {
+  transition-property: all;
+  transition-duration: 0.4s;
+  transition-timing-function: ease;
+  font-size: 14px;
+  border: none;
+  line-height: 28px;
+  margin: 0 2px;
+  margin-bottom: 8px;
+  /* background color will be set by tagcloud plugin */
+}
+#category_cloud a:hover,
+#category_cloud .tag:hover,
+#category_cloud a:active,
+#category_cloud .tag:active,
+#category_cloud a.focus,
+#category_cloud .tag.focus {
+  background-color: #f77f00 !important;
+}
+#category_cloud a.focus,
+#category_cloud .tag.focus {
+  box-shadow: rgba(0, 0, 0, 0.117647) 0 1px 6px, rgba(0, 0, 0, 0.239216) 0 1px 4px;
 }
 @media only screen and (min-width: 768px) {
   #tag_cloud {

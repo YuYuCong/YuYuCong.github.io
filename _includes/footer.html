@@ -104,6 +104,74 @@
             color: { start: '#bbbbee', end: '#2f93b4' },
         };
         $('#tag_cloud a').tagcloud();
+        
+        // Apply tagcloud to category_cloud with same colors as tags
+        $.fn.tagcloud.defaults = {
+            color: { start: '#bbbbee', end: '#2f93b4' },
+        };
+        $('#category_cloud a').tagcloud();
+        
+        // Make "Show All" buttons darker based on max count * 1.5
+        window.setShowAllColor = function() {
+            // Get all tag weights
+            var tagWeights = $('#tag_cloud a[rel]:not(.d-none)').map(function(){
+                return parseInt($(this).attr("rel"));
+            }).get().sort(function(a, b){return a - b;});
+            var maxTagWeight = tagWeights[tagWeights.length - 1] || 0;
+            var showAllTagWeight = maxTagWeight * 1.5;
+            
+            // Calculate color for Show All in tag cloud
+            var range = maxTagWeight - (tagWeights[0] || 0);
+            if(range === 0) range = 1;
+            var weighting = showAllTagWeight - (tagWeights[0] || 0);
+            var startColor = [187, 187, 238]; // #bbbbee
+            var endColor = [47, 147, 180];    // #2f93b4
+            var colorIncr = [
+                (endColor[0] - startColor[0]) / range,
+                (endColor[1] - startColor[1]) / range,
+                (endColor[2] - startColor[2]) / range
+            ];
+            var rgb = startColor.map(function(n, i) {
+                var ref = Math.round(n + (colorIncr[i] * weighting));
+                return Math.max(0, Math.min(255, ref));
+            });
+            var hexColor = '#' + rgb.map(function(i) {
+                var hex = i.toString(16);
+                return hex.length == 1 ? '0' + hex : hex;
+            }).join('');
+            $('#tag_cloud a.tag-button--all').css('backgroundColor', hexColor);
+            
+            // Get all category weights
+            var catWeights = $('#category_cloud a[rel]:not(.d-none)').map(function(){
+                return parseInt($(this).attr("rel"));
+            }).get().sort(function(a, b){return a - b;});
+            var maxCatWeight = catWeights[catWeights.length - 1] || 0;
+            var showAllCatWeight = maxCatWeight * 1.5;
+            
+            // Calculate color for Show All in category cloud
+            var catRange = maxCatWeight - (catWeights[0] || 0);
+            if(catRange === 0) catRange = 1;
+            var catWeighting = showAllCatWeight - (catWeights[0] || 0);
+            var catStartColor = [187, 187, 238]; // #bbbbee (same as tags)
+            var catEndColor = [47, 147, 180];     // #2f93b4 (same as tags)
+            var catColorIncr = [
+                (catEndColor[0] - catStartColor[0]) / catRange,
+                (catEndColor[1] - catStartColor[1]) / catRange,
+                (catEndColor[2] - catStartColor[2]) / catRange
+            ];
+            var catRgb = catStartColor.map(function(n, i) {
+                var ref = Math.round(n + (catColorIncr[i] * catWeighting));
+                return Math.max(0, Math.min(255, ref));
+            });
+            var catHexColor = '#' + catRgb.map(function(i) {
+                var hex = i.toString(16);
+                return hex.length == 1 ? '0' + hex : hex;
+            }).join('');
+            $('#category_cloud a.category-button--all').css('backgroundColor', catHexColor);
+        }
+        
+        // Set Show All colors after tagcloud is applied
+        setTimeout(window.setShowAllColor, 100);
     })
 </script>
 <script src='{{ "/js/archive.js " | prepend: site.baseurl }}'></script>
