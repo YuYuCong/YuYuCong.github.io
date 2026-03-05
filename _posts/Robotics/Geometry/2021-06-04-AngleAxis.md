@@ -7,9 +7,8 @@ categories:
 tags:
   - pose
   - 轴角
-  - Angle-Axis
-  - 姿态表达
-  - 旋转
+  - 三维姿态
+  - 刚体运动
 header-img: img/in-post/
 header-style: text
 date: 2021-06-04

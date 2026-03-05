@@ -7,9 +7,6 @@ categories:
 tags:
   - 并发
   - 多线程
-  - 线程管理
-  - join
-  - detach
 header-img: img/in-post/post-cpp/
 header-style: text
 date: 2021-02-02

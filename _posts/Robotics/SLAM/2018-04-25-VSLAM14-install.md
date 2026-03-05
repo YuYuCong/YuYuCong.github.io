@@ -6,9 +6,6 @@ categories:
   - SLAM
 tags:
   - SLAM
-  - vSLAM
-  - Eigen
-  - OpenCV
   - g2o
   - Ceres
   - 环境配置

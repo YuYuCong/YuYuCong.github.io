@@ -7,11 +7,7 @@ categories:
 tags:
   - SLAM
   - Cartographer
-  - 2D-LiDAR
-  - 回环检测
   - ROS
-  - Google
-  - paper
 header-img:
 header-style:
 date: 2021-07-20

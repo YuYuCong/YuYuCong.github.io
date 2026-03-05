@@ -6,11 +6,7 @@ categories:
   - python
 tags:
   - 多线程
-  - threading
   - Thread
-  - Lock
-  - 线程锁
-  - 互斥锁
 header-img: img/in-post/post-python/
 header-style: text
 date: 2021-02-22

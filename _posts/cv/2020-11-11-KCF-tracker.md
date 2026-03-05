@@ -7,7 +7,7 @@ categories:
 tags:
   - OpenCV
   - KCF
-  - tracker
+  - 目标跟踪
 header-img: img/in-post/post-cv/
 header-style:
 date: 2020-11-11

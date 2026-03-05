@@ -5,9 +5,8 @@ subtitle: 视频文件相关的小工具
 categories:
   - Linux
 tags:
-  - tool
   - Linux
-  - video
+  - 工具
 header-img: img/
 header-style: text
 date: 2021-12-23

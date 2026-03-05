@@ -8,8 +8,6 @@ tags:
   - 并发
   - 多线程
   - 线程池
-  - 生产者消费者
-  - 任务队列
 header-img: img/in-post/post-cpp/
 header-style: text
 date: 2021-02-08

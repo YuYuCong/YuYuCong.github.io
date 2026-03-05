@@ -5,10 +5,8 @@ subtitle: Learning High-Speed Flight in the Wild - University of Zurich and Inte
 categories:
   - Robotics
 tags:
-  - paper
   - path-plan
   - quadrotor
-  - autonomously-fly
 header-img:
 header-style:
 date: 2021-10-26

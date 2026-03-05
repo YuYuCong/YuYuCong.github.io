@@ -7,10 +7,7 @@ categories:
 tags:
   - 并发
   - 多线程
-  - 数据共享
   - mutex
-  - lock_guard
-  - 条件竞争
 header-img: img/in-post/post-cpp/
 header-style: text
 date: 2021-02-03

@@ -7,9 +7,8 @@ categories:
 tags:
   - pose
   - IMU
-  - 运动学
-  - 预积分
   - 惯性导航
+  - VIO
 header-img: img/in-post/
 header-style: text
 date: 2021-06-11

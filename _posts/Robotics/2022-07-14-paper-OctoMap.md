@@ -7,10 +7,8 @@ categories:
 tags:
   - SLAM
   - OctoMap
-  - mapping
   - 八叉树
   - 概率地图
-  - paper
 header-img:
 header-style:
 date: 2022-07-14

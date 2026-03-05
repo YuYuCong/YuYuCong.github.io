@@ -11,7 +11,6 @@ tags:
   - future
   - promise
   - async
-  - 条件变量
 header-img: img/in-post/post-cpp/
 header-style: text
 date: 2021-02-04

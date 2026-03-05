@@ -6,7 +6,6 @@ categories:
   - Linux
 tags:
   - git
-  - Linux
 header-img: img/in-post/post-git/branching-illustration@2x.png
 header-style:
 date: 2020-07-10

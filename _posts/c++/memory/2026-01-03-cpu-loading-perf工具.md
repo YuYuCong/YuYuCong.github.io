@@ -7,9 +7,6 @@ categories:
 tags:
   - perf
   - 性能分析
-  - profiling
-  - 火焰图
-  - 调试工具
 header-img:
 header-style: text
 date: 2026-01-03

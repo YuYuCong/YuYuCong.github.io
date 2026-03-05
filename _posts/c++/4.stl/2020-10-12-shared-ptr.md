@@ -7,8 +7,6 @@ categories:
 tags:
   - shared_ptr
   - 智能指针
-  - unique_ptr
-  - weak_ptr
   - 内存管理
 header-img:
 header-style:

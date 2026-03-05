@@ -5,7 +5,6 @@ subtitle: Runge-Kutta方法求解微分方程
 categories:
   - Math
 tags:
-  - Optimal
   - Math
 header-img:
 header-style: text

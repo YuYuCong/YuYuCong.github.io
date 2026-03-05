@@ -7,9 +7,8 @@ categories:
 tags:
   - pose
   - 欧拉角
-  - Euler-Angles
-  - 姿态表达
-  - 万向节锁
+  - 三维姿态
+  - 刚体运动
 header-img: img/in-post/
 header-style: text
 date: 2021-06-02

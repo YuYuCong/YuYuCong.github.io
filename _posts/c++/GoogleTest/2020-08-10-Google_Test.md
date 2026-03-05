@@ -6,10 +6,7 @@ categories:
   - cpp
 tags:
   - gtest
-  - GoogleTest
-  - 单元测试
   - unittest
-  - 测试框架
 header-img:
 header-style:
 date: 2020-08-10

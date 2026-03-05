@@ -7,6 +7,8 @@ categories:
 tags:
   - Linux
   - tmux
+  - shell
+  - zsh
 header-img:
 header-style:
 date: 2018-02-07

@@ -6,8 +6,6 @@ categories:
   - Robotics
 tags:
   - Kalman-Filter
-  - 卡尔曼滤波
-  - filter
   - 状态估计
 header-img:
 header-style:

@@ -5,13 +5,11 @@ subtitle: 介绍优化问题的常见类型，凸集，凸函数等相关数理
 categories:
   - Math
 tags:
-  - 优化
   - Optimal
-  - 凸集
-  - 凸函数
   - 梯度下降
   - 牛顿法
   - LBFGS
+  - 凸优化
 header-img: img/in-post/post-optimal/post-bg-1.png
 header-style: img
 date: 2022-01-01

@@ -9,7 +9,6 @@ tags:
   - 多线程
   - 并发编程
   - 多进程
-  - 硬件并发
 header-img: img/in-post/post-cpp/
 header-style: text
 date: 2021-02-01

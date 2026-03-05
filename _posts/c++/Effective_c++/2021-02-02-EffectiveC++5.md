@@ -5,7 +5,6 @@ subtitle: Effective C++系列笔记，第五章，第26-小节
 categories:
   - cpp
 tags:
-  - cpp
   - effective-cpp
 header-img:
 header-style:

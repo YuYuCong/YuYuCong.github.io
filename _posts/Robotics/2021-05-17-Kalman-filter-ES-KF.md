@@ -6,10 +6,7 @@ categories:
   - Robotics
 tags:
   - Kalman-Filter
-  - ESKF
-  - Error-State-Kalman-Filter
-  - 误差状态卡尔曼滤波
-  - filter
+  - 状态估计
 header-img:
 header-style:
 date: 2021-05-17

@@ -5,8 +5,6 @@ subtitle: c++代码风格规范，以及一些良好的代码习惯建议
 categories:
   - cpp
 tags:
-  - 代码风格
-  - 命名规范
   - 代码规范
 header-img: img/in-post/post-cpp/bg_code_style.png
 header-style:

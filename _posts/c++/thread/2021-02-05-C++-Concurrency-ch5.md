@@ -7,7 +7,6 @@ categories:
 tags:
   - 并发
   - 多线程
-  - atomic
   - 内存模型
   - 原子操作
   - memory_order

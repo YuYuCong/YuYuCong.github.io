@@ -5,10 +5,8 @@ subtitle: Bayesian Filter
 categories:
   - Robotics
 tags:
-  - 贝叶斯滤波
   - Bayesian-filter
-  - filter
-  - 概率估计
+  - 状态估计
 header-img:
 header-style:
 date: 2021-05-16

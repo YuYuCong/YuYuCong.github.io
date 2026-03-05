@@ -7,10 +7,8 @@ categories:
 tags:
   - pose
   - 四元数
-  - Quaternion
-  - 姿态表达
-  - 旋转
-  - 陀螺仪积分
+  - 三维姿态
+  - 刚体运动
 header-img: img/in-post/
 header-style: text
 date: 2021-06-05

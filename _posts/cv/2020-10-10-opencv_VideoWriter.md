@@ -5,7 +5,6 @@ subtitle: OpenCV 视频文件读写的一些方法与细节
 categories:
   - CV
 tags:
-  - video
   - OpenCV
 header-img: img/in-post/post-cv/bg_opencv_video.png
 header-style:

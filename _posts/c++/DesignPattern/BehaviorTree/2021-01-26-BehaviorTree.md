@@ -6,12 +6,10 @@ categories:
   - cpp
 tags:
   - BehaviorTree
-  - DesignPattern
   - 行为树
   - 状态机
   - ROS2
-  - Navigation2
-  - 机器人决策
+  - DesignPattern
 header-img: img/in-post/post-cpp/bg_behavior_tree.drawio.png
 header-style:
 date: 2021-01-26

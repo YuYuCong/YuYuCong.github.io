@@ -5,11 +5,9 @@ subtitle: 关于OpenCV中cv::wechat_qrcode的一些简单笔记
 categories:
   - CV
 tags:
-  - qrcode
-  - wechat
   - OpenCV
-  - 二维码识别
-  - 计算机视觉
+  - QR-code
+  - 二维码
 header-img: img/in-post/post-cv/
 header-style:
 date: 2021-01-12

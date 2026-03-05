@@ -5,10 +5,7 @@ subtitle: 关于opencv库的一些小卡片笔记
 categories:
   - CV
 tags:
-  - 计算机视觉
-  - 图像处理
-  - 笔记
-  - 代码片段
+  - OpenCV
 header-img: img/in-post/
 header-style: text
 date: 2021-01-31
