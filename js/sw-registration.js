@@ -47,11 +47,8 @@ if(navigator.serviceWorker){
     
     if(data.command == "UPDATE_FOUND"){
       console.log("UPDATE_FOUND_BY_SW", data);
-      createSnackbar({
-        message: "Content updated.",
-        actionText:"refresh",
-        action: function(e){location.reload()}
-      })
+      // 自动刷新，不显示提示
+      location.reload();
     }
   }
 }
