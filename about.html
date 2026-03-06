@@ -21,6 +21,20 @@ multilingual: true
 </div>
 
 
+{% if site.utterances %}
+<!-- Utterances 评论框 start -->
+<div class="comment">
+    <script src="https://utteranc.es/client.js"
+            repo="{{ site.utterances.repo }}"
+            issue-term="{{ site.utterances.issue_term }}"
+            theme="{{ site.utterances.theme }}"
+            crossorigin="anonymous"
+            async>
+    </script>
+</div>
+<!-- Utterances 评论框 end -->
+{% endif %}
+
 {% if site.disqus_username %}
 <!-- disqus 评论框 start -->
 <div class="comment">
