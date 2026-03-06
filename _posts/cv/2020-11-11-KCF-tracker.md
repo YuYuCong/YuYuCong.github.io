@@ -183,15 +183,15 @@ $$X = C(x) = [x, P x, P^2 x, \ldots, P^{n-1} x]$$
 $$w = (X^T X + \lambda I)^{-1} X^T y$$
 
 由于 $X = C(x) = F^H \text{diag}(\hat{x}) F$，我们有：
-$$X^T X = F^H \text{diag}(\hat{x}^*) F \cdot F^H \text{diag}(\hat{x}) F = F^H \text{diag}(|\hat{x}|^2) F$$
+$$X^T X = F^H \text{diag}(\hat{x}^*) F \cdot F^H \text{diag}(\hat{x}) F = F^H \text{diag}(\lvert \hat{x} \rvert^2) F$$
 
-其中 $\hat{x}^*$ 是 $\hat{x}$ 的复共轭，$|\hat{x}|^2$ 表示逐元素的模长平方。
+其中 $\hat{x}^*$ 是 $\hat{x}$ 的复共轭，$\lvert \hat{x} \rvert^2$ 表示逐元素的模长平方。
 
 因此：
-$$X^T X + \lambda I = F^H \text{diag}(|\hat{x}|^2 + \lambda) F$$
+$$X^T X + \lambda I = F^H \text{diag}(\lvert \hat{x} \rvert^2 + \lambda) F$$
 
 最终解为：
-$$w = F^H \text{diag}\left(\frac{\hat{x}^* \odot \hat{y}}{|\hat{x}|^2 + \lambda}\right)$$
+$$w = F^H \text{diag}\left(\frac{\hat{x}^* \odot \hat{y}}{\lvert \hat{x} \rvert^2 + \lambda}\right)$$
 
 其中 $\odot$ 表示逐元素乘积（Hadamard积）。
 

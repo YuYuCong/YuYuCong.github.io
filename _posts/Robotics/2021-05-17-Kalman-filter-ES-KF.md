@@ -112,7 +112,7 @@ $$
 &= \hat x_{k} + F_{k-1} \tilde x_{k-1} + \omega_k
 \end{align}
 $$
-其中 $F_{k-1} = \frac{\partial f}{\partial x_{k-1}}\bigg|_{\hat x_{k-1}}$ 是状态转移雅克比矩阵。
+其中 $F_{k-1} = \frac{\partial f}{\partial x_{k-1}}\bigg\rvert_{\hat x_{k-1}}$ 是状态转移雅克比矩阵。
 
 代入表达式3，两边去掉$\hat x_k$, 得
 $$
@@ -140,7 +140,7 @@ $$
 h(\hat x_k + \tilde x_k) \approx h(\hat x_k) + \frac{\partial h}{\partial x}\bigg|_{\hat x_k} \tilde x_k = h(\hat x_k) + H_k \tilde x_k
 $$
 
-其中 $H_k = \frac{\partial h}{\partial x}\bigg|_{\hat x_k}$ 是观测雅克比矩阵。
+其中 $H_k = \frac{\partial h}{\partial x}\bigg\rvert_{\hat x_k}$ 是观测雅克比矩阵。
 
 因此观测方程变为：
 $$

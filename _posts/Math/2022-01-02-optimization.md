@@ -351,7 +351,7 @@ $$\bigcap_{i \in I} C_i \text{ 是凸集}$$
 **证明思路**：设 $x, y \in \bigcap_{i \in I} C_i$，则对所有 $i$，都有 $x, y \in C_i$。由于每个 $C_i$ 都是凸集，所以对任意 $\theta \in [0,1]$，都有 $\theta x + (1-\theta) y \in C_i$，因此 $\theta x + (1-\theta) y \in \bigcap_{i \in I} C_i$。
 
 **重要应用**：
-- **多面体**：$\{x \mid id Ax \leq b\} = \bigcap_{i=1}^m \{x \mid a_i^T x \leq b_i\}$
+- **多面体**：$\{x \mid Ax \leq b\} = \bigcap_{i=1}^m \{x \mid a_i^T x \leq b_i\}$
 - **椭球交集**：多个椭球的交集
 - **约束集合**：优化问题中的可行域通常是多个约束集合的交集
 
@@ -384,7 +384,7 @@ $$f(x) = Ax + b$$
 
 **定义**：函数 $f: \mathbb{R}^n \to \mathbb{R}^m$ 是线性分式的，如果它具有形式：
 $$f(x) = \frac{Ax + b}{c^T x + d}$$
-其中 $A \in \mathbb{R}^{m \times n}$，$b \in \mathbb{R}^m$，$c \in \mathbb{R}^n$，$d \in \mathbb{R}$，且定义域为 $\{x \mid id c^T x + d > 0\}$。
+其中 $A \in \mathbb{R}^{m \times n}$，$b \in \mathbb{R}^m$，$c \in \mathbb{R}^n$，$d \in \mathbb{R}$，且定义域为 $\{x \mid c^T x + d > 0\}$。
 
 **保凸性质**：线性分式函数保持凸性（在其定义域内）。
 
@@ -604,7 +604,7 @@ $$f(y) > f(x) + \nabla f(x)^T (y - x)$$
 
 **例子**：
 - $f(x) = x^2$：$f''(x) = 2 > 0$，严格凸
-- $f(x) = |x|$：在 $x = 0$ 处不可微，但仍是凸函数
+- $f(x) = \lvert x \rvert$：在 $x = 0$ 处不可微，但仍是凸函数
 - $f(x) = x^4$：$f''(x) = 12x^2 \geq 0$，凸函数
 
 #### 凸函数的重要性质

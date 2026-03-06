@@ -137,7 +137,7 @@ Quadrotors, Autonomously fly
 
 - To do so, it samples from a probability distribution P that encodes <u>1.distance from obstacles</u> and <u>2.proximity to the reference trajectory</u>.  如何生成？两方面1.与障碍物的距离；2. 与设定参考轨迹的接近程度。
 
-- Specifically, the distribution of collision-free trajectories $P(τ \| τ_{ref}, C)$ is conditioned on the reference trajectory $τ_{ref}$ and the structure of the environment in the form of a point cloud $C ∈ R^{n×3}$.    输入：参考轨迹，环境点云。
+- Specifically, the distribution of collision-free trajectories $P(τ \mid τ_{ref}, C)$ is conditioned on the reference trajectory $τ_{ref}$ and the structure of the environment in the form of a point cloud $C ∈ R^{n×3}$.    输入：参考轨迹，环境点云。
 
 - According to $P$, the probability of a trajectory τ is large if far from obstacles and close to the reference $τ_{ref}$.    设计思路：越贴合目标轨迹P越大，越远离障碍物P越大。
 
@@ -177,7 +177,7 @@ Quadrotors, Autonomously fly
 
       - [https://www.youtube.com/watch?v=0lpT-yveuIA](https://www.youtube.com/watch?v=0lpT-yveuIA)
     
-  - To approximate the density P, the expert uses random sampling. We generate samples with the M-H algorithm [41] as it provides asymptotic convergence guarantees to the true distribution. To estimate P, the M-H algorithm requires a target score function $ s(τ) ∝ P(τ \| τref, C) $. We define s(τ) = exp(−c(τ, τref, C)), where c(·) is the cost of the trajectory τ. It is easy to show that this definition satisfies the conditions for the M-H algorithm to asymptotically estimate the target distribution P. Hence, the trajectories sampled with M-H will asymptotically cover all of the different modes of P. We point the interested reader to the Supplementary Materials (section S6), for an overview of the M-H algorithm and its convergence criteria.
+  - To approximate the density P, the expert uses random sampling. We generate samples with the M-H algorithm [41] as it provides asymptotic convergence guarantees to the true distribution. To estimate P, the M-H algorithm requires a target score function $ s(τ) ∝ P(τ \mid τ_{ref}, C) $. We define s(τ) = exp(−c(τ, τref, C)), where c(·) is the cost of the trajectory τ. It is easy to show that this definition satisfies the conditions for the M-H algorithm to asymptotically estimate the target distribution P. Hence, the trajectories sampled with M-H will asymptotically cover all of the different modes of P. We point the interested reader to the Supplementary Materials (section S6), for an overview of the M-H algorithm and its convergence criteria.
   
 - 对应的代码详见函数`TrajSampler::computeLabelBSplineSamplin()` 里面关键字 `main loop for Metropolis-Hastings`.
 
