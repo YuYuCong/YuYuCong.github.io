@@ -6,7 +6,7 @@ categories:
   - CV
 tags:
   - OpenCV
-header-img: img/in-post/
+header-img:
 header-style: text
 date: 2021-01-31
 author: CongYu

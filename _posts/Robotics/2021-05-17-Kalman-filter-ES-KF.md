@@ -8,7 +8,7 @@ tags:
   - Kalman-Filter
   - 状态估计
 header-img:
-header-style:
+header-style: text
 date: 2021-05-17
 author: CongYu
 ---

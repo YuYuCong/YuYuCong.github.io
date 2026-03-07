@@ -8,7 +8,7 @@ tags:
   - Bayesian-filter
   - 状态估计
 header-img:
-header-style:
+header-style: text
 date: 2021-05-16
 author: CongYu
 ---

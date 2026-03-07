@@ -7,7 +7,7 @@ categories:
 tags:
   - cube
 header-img:
-header-style:
+header-style: text
 date: 2018-02-25
 author: CongYu
 ---

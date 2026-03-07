@@ -8,7 +8,7 @@ tags:
   - 并发
   - 多线程
   - 线程池
-header-img: img/in-post/post-cpp/
+header-img:
 header-style: text
 date: 2021-02-08
 author: CongYu

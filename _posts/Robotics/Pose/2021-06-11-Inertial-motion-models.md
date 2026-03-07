@@ -9,7 +9,7 @@ tags:
   - IMU
   - 惯性导航
   - VIO
-header-img: img/in-post/
+header-img:
 header-style: text
 date: 2021-06-11
 author: CongYu

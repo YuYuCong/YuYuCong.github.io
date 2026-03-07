@@ -7,7 +7,7 @@ categories:
 tags:
   - 多线程
   - Thread
-header-img: img/in-post/post-python/
+header-img:
 header-style: text
 date: 2021-02-22
 author: CongYu

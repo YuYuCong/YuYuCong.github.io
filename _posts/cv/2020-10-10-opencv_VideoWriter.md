@@ -7,7 +7,7 @@ categories:
 tags:
   - OpenCV
 header-img: img/in-post/post-cv/bg_opencv_video.png
-header-style:
+header-style: img
 date: 2020-10-10
 author: CongYu
 ---

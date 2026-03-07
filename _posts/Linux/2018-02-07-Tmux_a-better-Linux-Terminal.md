@@ -10,7 +10,7 @@ tags:
   - shell
   - zsh
 header-img:
-header-style:
+header-style: text
 date: 2018-02-07
 author: CongYu
 ---

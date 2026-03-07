@@ -9,7 +9,7 @@ tags:
   - 智能指针
   - 内存管理
 header-img:
-header-style:
+header-style: text
 date: 2020-10-12
 author: CongYu
 ---

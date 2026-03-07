@@ -11,7 +11,7 @@ tags:
   - future
   - promise
   - async
-header-img: img/in-post/post-cpp/
+header-img:
 header-style: text
 date: 2021-02-04
 author: CongYu

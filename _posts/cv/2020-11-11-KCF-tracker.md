@@ -8,8 +8,8 @@ tags:
   - OpenCV
   - KCF
   - 目标跟踪
-header-img: img/in-post/post-cv/
-header-style:
+header-img:
+header-style: text
 date: 2020-11-11
 author: CongYu
 ---

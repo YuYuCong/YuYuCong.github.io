@@ -1,3 +1,6 @@
+filters:
+  and:
+    - file.ext == "md"
 views:
   - type: table
     name: 表格
@@ -10,6 +13,8 @@ views:
       - author
       - date
       - file.links
+      - header-style
+      - header-img
     sort:
       - property: categories
         direction: ASC
@@ -17,7 +22,8 @@ views:
         direction: ASC
     columnSize:
       note.categories: 155
-      note.tags: 784
+      note.tags: 537
+      file.links: 262
   - type: cards
     name: 视图
     cardSize: 310

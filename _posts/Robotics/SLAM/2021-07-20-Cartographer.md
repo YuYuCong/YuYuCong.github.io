@@ -9,7 +9,7 @@ tags:
   - Cartographer
   - ROS
 header-img:
-header-style:
+header-style: text
 date: 2021-07-20
 author: CongYu
 ---

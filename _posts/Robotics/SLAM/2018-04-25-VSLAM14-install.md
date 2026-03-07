@@ -10,7 +10,7 @@ tags:
   - Ceres
   - 环境配置
 header-img:
-header-style:
+header-style: text
 date: 2018-04-25
 author: CongYu
 ---

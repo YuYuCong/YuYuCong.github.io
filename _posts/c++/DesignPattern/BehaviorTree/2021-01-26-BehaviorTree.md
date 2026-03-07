@@ -11,7 +11,7 @@ tags:
   - ROS2
   - DesignPattern
 header-img: img/in-post/post-cpp/bg_behavior_tree.drawio.png
-header-style:
+header-style: img
 date: 2021-01-26
 author: CongYu
 ---

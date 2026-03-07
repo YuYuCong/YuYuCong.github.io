@@ -10,7 +10,7 @@ tags:
   - 内存模型
   - 原子操作
   - memory_order
-header-img: img/in-post/post-cpp/
+header-img:
 header-style: text
 date: 2021-02-05
 author: CongYu

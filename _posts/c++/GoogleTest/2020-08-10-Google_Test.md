@@ -8,7 +8,7 @@ tags:
   - gtest
   - unittest
 header-img:
-header-style:
+header-style: text
 date: 2020-08-10
 author: CongYu
 ---

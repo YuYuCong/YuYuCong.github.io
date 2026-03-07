@@ -6,8 +6,8 @@ categories:
   - Linux
 tags:
   - git
-header-img: img/in-post/post-git/branching-illustration@2x.png
-header-style:
+header-img: img/in-post/post-git/branching-illustration.png
+header-style: img
 date: 2020-07-10
 author: CongYu
 ---

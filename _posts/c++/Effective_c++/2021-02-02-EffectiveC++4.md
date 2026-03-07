@@ -7,7 +7,7 @@ categories:
 tags:
   - effective-cpp
 header-img:
-header-style:
+header-style: text
 date: 2021-02-02
 author: CongYu
 ---

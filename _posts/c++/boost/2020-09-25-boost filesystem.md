@@ -7,7 +7,7 @@ categories:
 tags:
   - boost
 header-img:
-header-style:
+header-style: text
 date: 2020-09-25
 author: CongYu
 ---

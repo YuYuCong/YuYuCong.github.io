@@ -6,7 +6,7 @@ categories:
   - life
 tags:
   - Markdown
-header-img: img/in-post/
+header-img:
 header-style: text
 date: 1997-05-24
 author: CongYu

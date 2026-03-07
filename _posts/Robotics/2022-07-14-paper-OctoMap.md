@@ -10,7 +10,7 @@ tags:
   - 八叉树
   - 概率地图
 header-img:
-header-style:
+header-style: text
 date: 2022-07-14
 author: CongYu
 ---

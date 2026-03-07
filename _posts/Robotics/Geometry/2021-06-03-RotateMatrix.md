@@ -10,7 +10,7 @@ tags:
   - SO3
   - 刚体运动
   - 三维姿态
-header-img: img/in-post/
+header-img:
 header-style: text
 date: 2021-06-03
 author: CongYu

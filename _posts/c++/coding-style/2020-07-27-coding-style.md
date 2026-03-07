@@ -7,7 +7,7 @@ categories:
 tags:
   - 代码规范
 header-img: img/in-post/post-cpp/bg_code_style.png
-header-style:
+header-style: img
 date: 2020-07-27
 author: CongYu
 ---

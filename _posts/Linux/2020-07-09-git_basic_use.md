@@ -7,7 +7,7 @@ categories:
 tags:
   - git
 header-img:
-header-style:
+header-style: text
 date: 2020-07-09
 author: CongYu
 ---

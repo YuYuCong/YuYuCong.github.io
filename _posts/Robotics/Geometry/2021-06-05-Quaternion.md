@@ -9,7 +9,7 @@ tags:
   - 四元数
   - 三维姿态
   - 刚体运动
-header-img: img/in-post/
+header-img:
 header-style: text
 date: 2021-06-05
 author: CongYu

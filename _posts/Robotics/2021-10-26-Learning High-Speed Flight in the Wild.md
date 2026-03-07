@@ -8,7 +8,7 @@ tags:
   - path-plan
   - quadrotor
 header-img:
-header-style:
+header-style: text
 date: 2021-10-26
 author: CongYu
 ---
