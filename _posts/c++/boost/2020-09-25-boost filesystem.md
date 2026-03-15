@@ -6,14 +6,15 @@ categories:
   - cpp
 tags:
   - boost
+  - cpp
 header-img:
 header-style: text
 date: 2020-09-25
 author: CongYu
 ---
 
-[TOC]
-
+* Kramdown table of contents
+{:toc .toc}
 
 
 # Boost filesystem

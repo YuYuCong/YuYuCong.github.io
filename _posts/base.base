@@ -22,7 +22,7 @@ views:
         direction: ASC
     columnSize:
       note.categories: 155
-      note.tags: 537
+      note.tags: 584
       file.links: 262
   - type: cards
     name: 视图
