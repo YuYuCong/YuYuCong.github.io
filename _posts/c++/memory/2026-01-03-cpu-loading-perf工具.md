@@ -13,6 +13,10 @@ date: 2026-01-03
 author: CongYu
 ---
 
+* Kramdown table of contents
+{:toc .toc}
+
+
 # cpu-loading-perf工具
 
 
