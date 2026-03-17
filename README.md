@@ -1,6 +1,6 @@
-# www.windmillyu.top
+# https://yuyucong.github.io
 
-This repository hosts the source code of my personal website and blog [www.windmillyu.top](https://www.windmillyu.top).
+This repository hosts the source code of my personal website and blog [https://yuyucong.github.io](https://yuyucong.github.io).
 
 The site is built with [Jekyll](http://jekyllrb.com/) using [open source theme](https://github.com/huxpro/huxblog-boilerplate) created by [Hux](https://github.com/Huxpro).
 
