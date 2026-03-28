@@ -254,6 +254,9 @@ function revalidateContent(cachedResp, fetchedResp) {
   // revalidate when both promise resolved
   return Promise.all([cachedResp, fetchedResp])
     .then(([cached, fetched]) => {
+      // If there was no cached version (first visit), skip revalidation
+      // to avoid triggering an unnecessary reload on new pages
+      if (!cached) return;
       const cachedVer = cached.headers.get('last-modified')
       const fetchedVer = fetched.headers.get('last-modified')
       console.log(`"${cachedVer}" vs. "${fetchedVer}"`);

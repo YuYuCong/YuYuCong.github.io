@@ -47,8 +47,11 @@ if(navigator.serviceWorker){
     
     if(data.command == "UPDATE_FOUND"){
       console.log("UPDATE_FOUND_BY_SW", data);
-      // 自动刷新，不显示提示
-      location.reload();
+      // Guard: only reload once per session to avoid infinite refresh loop
+      if (!sessionStorage.getItem('sw_reloaded')) {
+        sessionStorage.setItem('sw_reloaded', '1');
+        location.reload();
+      }
     }
   }
 }
