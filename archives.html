@@ -1,0 +1,115 @@
+---
+title: Archives
+layout: default
+description: "「所有文章」"
+header-img: "img/tag-bg.jpg"
+---
+
+<!-- Page Header -->
+{% include intro-header.html type='page' short=true %}
+
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <div class="archives-container">
+        {%- assign _sorted_posts = site.posts | sort: 'date' | reverse -%}
+        {%- assign _current_year = '' -%}
+
+        {%- for post in _sorted_posts -%}
+          {%- assign _post_year = post.date | date: '%Y' -%}
+
+          {%- if _post_year != _current_year -%}
+            {%- unless forloop.first -%}
+              </ul>
+            {%- endunless -%}
+            <h2 class="archives-year">
+              <i class="fa fa-calendar-o" aria-hidden="true"></i>
+              &nbsp;{{ _post_year }}
+            </h2>
+            <ul class="archives-list">
+            {%- assign _current_year = _post_year -%}
+          {%- endif -%}
+
+          <li class="archives-item">
+            <span class="archives-date">{{ post.date | date: "%m-%d" }}</span>
+            <span class="archives-separator">&raquo;</span>
+            <a class="archives-title" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+          </li>
+
+          {%- if forloop.last -%}
+            </ul>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+.archives-container {
+  margin-top: 20px;
+}
+
+.archives-year {
+  font-size: 1.6em;
+  font-weight: 700;
+  color: #337ab7;
+  margin-top: 40px;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #e8e8e8;
+}
+
+.archives-year:first-child {
+  margin-top: 10px;
+}
+
+.archives-year .fa {
+  font-size: 0.9em;
+}
+
+.archives-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+
+.archives-item {
+  padding: 4px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  border-bottom: 1px dashed #f0f0f0;
+}
+
+.archives-item:last-child {
+  border-bottom: none;
+}
+
+.archives-date {
+  display: inline-block;
+  width: 42px;
+  color: #999;
+  font-family: monospace;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.archives-separator {
+  color: #aaa;
+  margin: 0 6px;
+}
+
+.archives-title {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.archives-title:hover {
+  color: #337ab7;
+  text-decoration: none;
+}
+</style>
