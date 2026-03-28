@@ -2,11 +2,11 @@
 title: YuCong
 SEOTitle: 风车车的博客 | Windmill Blog
 header-img: img/home-bg.jpg
-email: williamyu.top@gmail.com
-description: "关于读书与写代码 | 余聪，Mobile Robot Software Engineer | 这里是 @Windmill 余聪 的个人博客。"
-keyword: "风车车, Windmill, YuYuCong, windmillyu.top, yucong, cong.yu, windmill blog, 博客, 个人网站, 互联网, SLAM, 移动机器人, Robot"
-url: "https://yuyucong.github.io"          # your host, for absolute URL
-baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
+email: windmillyucong@163.com
+description: "关于读书与写代码 | 我是余聪，移动机器人算法工程师 | 这里是 @YuYuCong 余聪 的个人博客。About reading and coding | I'm YuCong, a Mobile Robotics Algorithm Engineer | This is @YuYuCong YuCong's personal blog."
+keyword: "风车车, Windmill, YuYuCong, yucong, cong.yu, windmill blog, 博客, 个人网站, 互联网, SLAM, 移动机器人, Robot"
+url: "https://yuyucong.github.io" # your host, for absolute URL
+baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 
 # Publish posts or collection documents with a future date.
 future: true
@@ -20,27 +20,30 @@ github_username: YuYuCong
 #facebook_username:  windmill
 #linkedin_username:  firstname-lastname-idxxxx
 
-
-
 # Build settings
 # from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
 highlighter: rouge
 permalink: pretty
 paginate: 30
-exclude: [ "less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md","SECURITY.md" ]
-anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+exclude:
+  [
+    "less",
+    "node_modules",
+    "Gruntfile.js",
+    "package.json",
+    "README.md",
+    "README.zh.md",
+    "SECURITY.md",
+  ]
+anchorjs: true # if you want to customize anchor. check out line:181 of `post.html`
 # If you have timezone issue (e.g. #68) in China, uncomment to use this:
-#timezone: CN  
-
-
+#timezone: CN
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
 # make sure you have this gem installed
 # `$ gem install jekyll-paginate`
-plugins: [ jekyll-paginate ]
-
-
+plugins: [jekyll-paginate]
 
 # Markdown settings
 # replace redcarpet to kramdown,
@@ -48,15 +51,13 @@ plugins: [ jekyll-paginate ]
 # document: http://jekyllrb.com/docs/configuration/#kramdown
 markdown: kramdown
 kramdown:
-  input: GFM                            # use Github Flavored Markdown !important
+  input: GFM # use Github Flavored Markdown !important
   syntax_highlighter_opts:
     span:
       line_numbers: false
     block:
       line_numbers: true
       start_line: 1
-
-
 
 # Disqus settings (已弃用，改用 Utterances)
 disqus_username: false
@@ -66,66 +67,49 @@ utterances:
   repo: YuYuCong/YuYuCong.github.io
   issue_term: pathname
   theme: github-light
-  # 可选主题: github-light, github-dark, github-dark-orange, 
+  # 可选主题: github-light, github-dark, github-dark-orange,
   #          icy-dark, dark-blue, photon-dark, boxy-light
 
 # Netease settings
 netease_comment: false
 
-
-
 # Analytics settings
-# Baidu Analytics 
+# Baidu Analytics
 # ba_track_id: [your track id]
 
 # Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
+ga_track_id: "UA-49627206-1" # Format: UA-xxxxxx-xx
 ga_domain: yuyucong.github.io
 
-
-
 # Sidebar settings
-sidebar: true                           # whether or not using Sidebar.
+sidebar: true # whether or not using Sidebar.
 sidebar-about-description: "风车车的个人小站 <br> Windmill`s blog."
-sidebar-avatar: /img/home-congyu.png    # use absolute URL, seeing it's used in both `/` and `/about/`
-
-
+sidebar-avatar: /img/home-congyu.png # use absolute URL, seeing it's used in both `/` and `/about/`
 
 # Featured Tags
-featured-tags: true                     # whether or not using Feature-Tags
-featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
-
-
+featured-tags: true # whether or not using Feature-Tags
+featured-condition-size: 1 # A tag will be featured if the size of it is more than this condition value
 
 # Progressive Web Apps
 chrome-tab-theme-color: "#000000"
 service-worker: true
 
-
-
 # MathJax rendering for layout:page (e.g. post preview)
 page-mathjax: true
 
-
-
 # Friends
-friends: [
-  {
-    title: "HUST Robot",
-    href: "https://hustrobot.github.io/"
-  },{
-    title: "Example Friends",
-    href: "#"
-  }
-]
+friends:
+  [
+    { title: "HUST Robot", href: "https://hustrobot.github.io/" },
+    { title: "Example Friends", href: "#" },
+  ]
 
 # Sub_blogs
-sub_blogs: [
-  {
-    title: "Lofter",
-    href: "https://windmill-book.lofter.com/"
-  },{
-    title: "EasyNet",
-    href: "https://music.163.com/#/user/home?id=274166156"
-  }
-]
+sub_blogs:
+  [
+    { title: "Lofter", href: "https://windmill-book.lofter.com/" },
+    {
+      title: "EasyNet",
+      href: "https://music.163.com/#/user/home?id=274166156",
+    },
+  ]

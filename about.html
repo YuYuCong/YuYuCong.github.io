@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "About"
-description: "《None》"
+description: "《cong.yu》"
 header-img: "img/about-bg.jpg"
 multilingual: true
 ---
@@ -24,13 +24,9 @@ multilingual: true
 {% if site.utterances %}
 <!-- Utterances 评论框 start -->
 <div class="comment">
-    <script src="https://utteranc.es/client.js"
-            repo="{{ site.utterances.repo }}"
-            issue-term="{{ site.utterances.issue_term }}"
-            theme="{{ site.utterances.theme }}"
-            crossorigin="anonymous"
-            async>
-    </script>
+    <script src="https://utteranc.es/client.js" repo="{{ site.utterances.repo }}"
+        issue-term="{{ site.utterances.issue_term }}" theme="{{ site.utterances.theme }}" crossorigin="anonymous" async>
+        </script>
 </div>
 <!-- Utterances 评论框 end -->
 {% endif %}
@@ -51,7 +47,7 @@ multilingual: true
     var disqus_identifier = "{{site.disqus_username}}/{{page.url}}";
     var disqus_url = "{{site.url}}{{page.url}}";
 
-    (function() {
+    (function () {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
