@@ -44,14 +44,28 @@ Hello World! <mark style="background: #ADCCFFA6;">This is the beginning of this 
 
 1.2 test image:
 
-<img src="/img/home-congyu2.png" alt="img" style="zoom:40%;" align='center' text ="home-congyu2.png"/>
+locl img using md link（推荐使用）
+
+![cost_space_l1|300](img/in-post/post-optimal/cost_space_l1.png)
+
 <small class="img-hint">Fig1. test_img</small>
 
-<img src="https://raw.githubusercontent.com/YuYuCong/BlogImg/develop/post_SLAM/ba.png" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
-<small class="img-hint">Fig2. test_img_github</small>
+local img using html link （不建议使用，无法自动更新内部链接）
 
-<img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/develop/img/in-post/post-optimal/solve_levenberg_marquardt_mu_is_1e3.png" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
+<img src="/img/in-post/post-optimal/cost_space_1.png" alt="img" style="zoom:40%;" align='center' text ="cost_space_1.png"/>
+
+<small class="img-hint">Fig2. test_img</small>
+
+test img using githubusercontent html link （不建议使用，无法自动更新内部链接）
+
+<img src="https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/master/_posts/img/in-post/post-optimal/solve_levenberg_marquardt_mu_is_1e3.png" alt="img" style="zoom:40%;" align='center' text ="test_img_github.png"/>
 <small class="img-hint">Fig3. test_img_github</small>
+
+test img using githubusercontent mk link （不建议使用，无法自动更新内部链接）
+
+![test_img_github.png|300](https://raw.githubusercontent.com/YuYuCong/YuYuCong.github.io/master/_posts/img/in-post/post-optimal/solve_levenberg_marquardt_mu_is_1e1.png)
+
+<small class="img-hint">Fig4. test_img_github</small>
 
 1.3 test math block
 
