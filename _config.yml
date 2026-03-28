@@ -5,7 +5,7 @@ header-img: img/home-bg.jpg
 email: williamyu.top@gmail.com
 description: "关于读书与写代码 | 余聪，Mobile Robot Software Engineer | 这里是 @Windmill 余聪 的个人博客。"
 keyword: "风车车, Windmill, YuYuCong, windmillyu.top, yucong, cong.yu, windmill blog, 博客, 个人网站, 互联网, SLAM, 移动机器人, Robot"
-url: "https://windmillyu.top"              # your host, for absolute URL
+url: "https://yuyucong.github.io"          # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 # Publish posts or collection documents with a future date.
@@ -80,7 +80,7 @@ netease_comment: false
 
 # Google Analytics
 ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: windmill.top
+ga_domain: yuyucong.github.io
 
 
 

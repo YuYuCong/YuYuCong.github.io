@@ -78,10 +78,13 @@ header-img: "img/tag-bg.jpg"
 }
 
 .archives-item {
+  display: flex;
+  align-items: baseline;
   padding: 4px 0;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.6;
   border-bottom: 1px dashed #f0f0f0;
+  white-space: nowrap;
 }
 
 .archives-item:last-child {
@@ -89,27 +92,28 @@ header-img: "img/tag-bg.jpg"
 }
 
 .archives-date {
-  display: inline-block;
-  width: 42px;
+  flex-shrink: 0;
+  width: 48px;
   color: #999;
   font-family: monospace;
-  font-size: 13px;
-  flex-shrink: 0;
+  font-size: 15px;
 }
 
 .archives-separator {
+  flex-shrink: 0;
   color: #aaa;
   margin: 0 6px;
 }
 
 .archives-title {
+  white-space: normal;
   color: #333;
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .archives-title:hover {
-  color: #337ab7;
+  color: #0085a1;
   text-decoration: none;
 }
 </style>
